@@ -1,0 +1,10 @@
+#include "MoleculeContainer.h"
+
+using namespace Simulation;
+
+MoleculeContainer::MoleculeContainer(char* filename)
+{
+	FileReader fileReader;
+	fileReader.readFile(particles, filename);
+}
+
