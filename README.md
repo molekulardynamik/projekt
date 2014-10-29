@@ -1,4 +1,4 @@
-projekt
+PSE Molekulardynamik WS14 - Implementation
 =======
 
-Main
+Git
