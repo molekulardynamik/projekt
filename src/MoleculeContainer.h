@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "Particle.h"
+#include "ParticleHandler.h"
 #include "FileReader.h"
 
 namespace Simulation
@@ -25,6 +26,9 @@ namespace Simulation
 			return particles[i];
 		}
 
+
+		void iterateParticles(ParticleHandler& handler);
+		void iterateParticlePairs(ParticleHandler& handler);
 
 	private:
 		std::vector<Particle> particles;
