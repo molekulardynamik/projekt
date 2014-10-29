@@ -2,6 +2,7 @@
 #include "outputWriter/XYZWriter.h"
 #include "outputWriter/VTKWriter.h"
 #include "MoleculeContainer.h"
+#include "ParticleHandler.h"
 
 #include <cstring>
 #include <cstdlib>
@@ -20,12 +21,12 @@ void calculateF();
 /**
  * calculate the position for all particles
  */
-void calculateX(double current_time);
+void calculateX();
 
 /**
  * calculate the position for all particles
  */
-void calculateV(double current_time);
+void calculateV();
 
 /**
  * plot the particles to a xyz-file
@@ -52,8 +53,13 @@ int main(int argc, char* argsv[]) {
 
 	molecules = MoleculeContainer(argsv[1]);
 
+	PositionHandler ph = PositionHandler(delta_t);
+	VelocityHandler vh = VelocityHandler(delta_t);
+	ForceHandler fh = ForceHandler(delta_t);
+
 	// the forces are needed to calculate x, but are not given in the input file.
-	calculateF();
+	molecules.iterateParticles(fh);
+	molecules.iterateParticlePairs(fh);
 
 	double current_time = start_time;
 
@@ -65,12 +71,13 @@ int main(int argc, char* argsv[]) {
 	 // for this loop, we assume: current x, current f and current v are known
 	while (current_time < end_time) {
 		// calculate new x
-		calculateX(current_time);
-
+		molecules.iterateParticles(ph);
 		// calculate new f
-		calculateF();
+		molecules.iterateParticles(fh);
+		molecules.iterateParticlePairs(fh);
+
 		// calculate new v
-		calculateV(current_time);
+		molecules.iterateParticles(vh);
 
 		iteration++;
 		if (iteration % 10 == 0) {
@@ -81,7 +88,7 @@ int main(int argc, char* argsv[]) {
 		current_time += delta_t;
 	}
 
-	cout << "output written. Terminating..." << endl;
+	cout << "output written. Terminating now..." << endl;
 	return 0;
 }
 
@@ -92,8 +99,8 @@ void calculateF()
 	{
 		Particle& p1 = molecules[i];
 		p1.getOldF() = p1.getF();
-                double zeros[3] = {0,0,0};
-                p1.getF() = utils::Vector<double, 3>(zeros);
+        double zeros[3] = {0,0,0};
+        p1.getF() = utils::Vector<double, 3>(zeros);
 
 		for(int j=0; j<molecules.count(); j++)
 		{
@@ -110,7 +117,7 @@ void calculateF()
 }
 
 
-void calculateX(double current_time) 
+void calculateX() 
 {
 	for(int i=0; i<molecules.count(); i++)
 	{
@@ -124,7 +131,7 @@ void calculateX(double current_time)
 }
 
 
-void calculateV(double current_time) 
+void calculateV() 
 {
 	for(int i=0; i<molecules.count(); i++)
 	{
