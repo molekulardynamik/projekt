@@ -25,6 +25,7 @@ void ParticleContainerTest::setUp()
 	testFilename = "testData.txt";
 	ofstream file(testFilename);
 
+	file << "Planets" << endl;
 	file << testParticles.size() << endl;
 	for (int i = 0; i < (int)testParticles.size(); i++)
 	{
