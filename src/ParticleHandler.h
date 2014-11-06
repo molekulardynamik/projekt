@@ -1,5 +1,10 @@
 #pragma once
 #include "Particle.h"
+#include <math.h>
+
+
+#include <sstream>
+#include <iostream>
 
 namespace Simulation
 {
@@ -58,10 +63,10 @@ namespace Simulation
 		};
 	};
 
-	class ForceHandler : public ParticleHandlerTimeAware
+	class GravityHandler : public ParticleHandlerTimeAware
 	{
 	public:
-		ForceHandler(double dt) : ParticleHandlerTimeAware(dt)
+		GravityHandler(double dt) : ParticleHandlerTimeAware(dt)
 		{};
 
 		void compute(Particle& p)
@@ -78,5 +83,32 @@ namespace Simulation
 
 			p1.getF() = p1.getF() + force;
 		}
+	};
+
+	class LennardJonesHandler : public ParticleHandlerTimeAware
+	{
+	public:
+		LennardJonesHandler(double dt) : ParticleHandlerTimeAware(dt)
+		{};
+
+		void compute(Particle& p)
+		{
+			p.getOldF() = p.getF();
+			double zeros[3] = { 0, 0, 0 };
+			p.getF() = utils::Vector<double, 3>(zeros);
+		}
+
+		void compute(Particle& p1, Particle& p2)
+		{
+			double e = 5, o = 1;
+
+			double dist = (p1.getX() - p2.getX()).L2Norm();
+			double sqrtDist = dist * dist;
+
+			double scalar = 24 * e / sqrtDist * (pow(o / dist, 6) - 2 * pow(o / dist, 12));
+
+			p1.getF() = p1.getF() + (scalar * (p2.getX() - p1.getX()));
+		}
+
 	};
 }

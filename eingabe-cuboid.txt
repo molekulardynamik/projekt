@@ -7,13 +7,14 @@
 #
 # Molecule data consists of 
 # * xyz-coordinates (3 double values)
-# * velocities (2 or 3 double values)
+# * velocities (3 double values)
+# * number of molecules (3 double values)
+# * space between molecues (1 double value)
 # * mass (1 double value)
+# * mean Value (1 double value)
 #
-# xyz-coord      velocity        mass
-Planets
-4
-0.0 0.0 0.0      0.0 0.0 0.0     1.0
-0.0 1.0 0.0     -1.0 0.0 0.0     3.0e-6
-0.0 5.36 0.0    -0.425 0.0 0.0   9.55e-4
-34.75 0.0 0.0    0.0 0.0296 0.0  1.0e-14
+# x      	 v	         n	  h	  m	mean
+Cuboids
+2
+0.0 0.0 0.0      0.0 0.0 0.0     40 8 1   1.1225  1	0.1
+15.0 15.0 0.0    0.0 -10.0 0.0   8  8 1   1.1225  1	0.1

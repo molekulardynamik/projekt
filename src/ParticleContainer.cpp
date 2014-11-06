@@ -1,9 +1,11 @@
 #include "ParticleContainer.h"
+#include "FileReader.h"
 
 using namespace Simulation;
+using namespace utils;
 using namespace std;
 
-ParticleContainer::ParticleContainer(char* filename)
+void ParticleContainer::init(char* filename)
 {
 	FileReader fileReader;
 	fileReader.readFile(particles, filename);
@@ -28,7 +30,9 @@ void ParticleContainer::iterateParticlePairs(ParticleHandler& handler)
 		{
 			Particle& p2 = particles[j];
 			if (i != j)
+			{
 				handler.compute(p1, p2);
+			}
 		}
 	}
 }

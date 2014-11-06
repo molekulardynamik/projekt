@@ -3,7 +3,6 @@
 
 #include "Particle.h"
 #include "ParticleHandler.h"
-#include "FileReader.h"
 
 namespace Simulation
 {
@@ -11,8 +10,9 @@ namespace Simulation
 	class ParticleContainer
 	{
 	public:
-		ParticleContainer(){}
-		ParticleContainer(char* filename);
+		ParticleContainer(){};
+		void init(char* filename);
+		void init();
 		
 		/// <returns> Number of Particles; 
 		int count()

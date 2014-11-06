@@ -1,3 +1,5 @@
+#include <cppunit/ui/text/TestRunner.h>
+#include "UnitTests.h"
 
 #include "outputWriter/XYZWriter.h"
 #include "outputWriter/VTKWriter.h"
@@ -10,6 +12,7 @@
 
 using namespace std;
 using namespace Simulation;
+
 
 /**** forward declaration of the calculation functions ****/
 
@@ -40,31 +43,42 @@ double end_time = 1000;
 double delta_t = 0.014;
 
 
-int main(int argc, char* argsv[]) {
 
+int main(int argc, char* argsv[]) 
+{
 	cout << "Hello from MolSim for PSE!" << endl;
-	if (argc != 4) {
-		cout << "Errounous programme call! " << endl;
-		cout << "./molsym filename t_end t_delta" << endl;
+
+	if (argc == 2)
+	{
+
+		CppUnit::TextUi::TestRunner runner;
+		runner.addTest(ParticleContainerTest::suite());
+		runner.run();
+		return 0;
 	}
 
-	/*FileReader fileReader;
-	fileReader.readFile(particles, argsv[1]);*/
+	if (argc != 4) {
+		cout << "Errounous programme call! " << endl;
+		cout << "./molsym filename t_end t_delta" << endl; 
+	}
 
-	container = ParticleContainer(argsv[1]);
 
-	PositionHandler ph = PositionHandler(delta_t);
-	VelocityHandler vh = VelocityHandler(delta_t);
-	ForceHandler fh = ForceHandler(delta_t);
-
-	// the forces are needed to calculate x, but are not given in the input file.
-	container.iterateParticles(fh);
-	container.iterateParticlePairs(fh);
 
 	double current_time = start_time;
 
 	end_time = atof(argsv[2]);
-	delta_t = atof(argsv[3]);
+	delta_t = atof(argsv[3]);	
+
+	container.init(argsv[1]);
+
+	PositionHandler ph = PositionHandler(delta_t);
+	VelocityHandler vh = VelocityHandler(delta_t);
+	GravityHandler gh = GravityHandler(delta_t);
+	LennardJonesHandler ljh = LennardJonesHandler(delta_t);
+
+	// the forces are needed to calculate x, but are not given in the input file.
+	container.iterateParticles(ljh);
+	container.iterateParticlePairs(ljh);
 
 	int iteration = 0;
 
@@ -74,9 +88,10 @@ int main(int argc, char* argsv[]) {
 		container.iterateParticles(ph);
 
 		// store old f
-		container.iterateParticles(fh);
+		container.iterateParticles(ljh);
+
 		// calculate new f
-		container.iterateParticlePairs(fh);
+		container.iterateParticlePairs(ljh);
 
 		// calculate new v
 		container.iterateParticles(vh);
@@ -91,13 +106,16 @@ int main(int argc, char* argsv[]) {
 	}
 
 	cout << "output written. Terminating now..." << endl;
+
+
+	cout << "NumParticles: " << container.count() << endl;
 	return 0;
 }
 
 
 void plotParticles(int iteration) {
 
-	string out_name("/media/sf_Shared/MD_vtk");
+	string out_name("/media/sf_Shared/vtkOutput/MD_vtk");
 
 	outputWriter::VTKWriter writer;
 	writer.initializeOutput(container.count());
@@ -106,8 +124,7 @@ void plotParticles(int iteration) {
 	{
 		Particle& p = container[i];
 		writer.plotParticle(p);
-	}
-	
+	}	
 	writer.writeFile(out_name, iteration);
 	
 }

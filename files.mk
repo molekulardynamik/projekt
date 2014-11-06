@@ -1,11 +1,14 @@
 SOURCES=\
 src/FileReader.cpp\
-src/MoleculeContainer.cpp\
+src/MaxwellBoltzmannDistribution.cpp\
 src/MolSim.cpp\
 src/outputWriter/vtk-unstructured.cpp\
 src/outputWriter/VTKWriter.cpp\
 src/outputWriter/XYZWriter.cpp\
 src/Particle.cpp\
+src/ParticleContainer.cpp\
+src/ParticleGenerator.cpp\
+src/UnitTests.cpp\
 src/xerces-c-3.1.1/src/xercesc/dom/DOMException.cpp\
 src/xerces-c-3.1.1/src/xercesc/dom/DOMLSException.cpp\
 src/xerces-c-3.1.1/src/xercesc/dom/DOMRangeException.cpp\
