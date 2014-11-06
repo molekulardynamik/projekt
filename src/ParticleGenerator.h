@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 
-#include "utils\Vector.h"
+#include "utils/Vector.h"
 #include "Particle.h"
 
 namespace Simulation

@@ -56,7 +56,6 @@ int main(int argc, char* argsv[])
 		runner.run();
 		return 0;
 	}
-
 	if (argc != 4) {
 		cout << "Errounous programme call! " << endl;
 		cout << "./molsym filename t_end t_delta" << endl; 
