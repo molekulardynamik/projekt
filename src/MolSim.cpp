@@ -10,9 +10,18 @@
 #include <cstdlib>
 #include <iostream>
 
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
+
 using namespace std;
 using namespace Simulation;
 
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
+
+// Define static logger variable
+LoggerPtr loggerMyMain(Logger::getLogger("main"));
 
 /**** forward declaration of the calculation functions ****/
 
