@@ -19,4 +19,4 @@ override XSDFLAGS += --xml-parser $(XML_PARSER)
 .PRECIOUS: %-pskel.hxx %-pskel.ixx %-pskel.cxx
 
 %-pskel.hxx %-pskel.ixx %-pskel.cxx: %.xsd
-	$(XSD) cxx-parser $(XSDFLAGS) $<
+	$(XSD) cxx-parser $(XSDFLAGS) ../src/cuboid.xml

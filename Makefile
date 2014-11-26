@@ -1,13 +1,22 @@
 # This is a makefile template
 
+include files.mk
+
+root := /home/penguin/Desktop/MolSim/src
+
+include $(root)/build/cxx/rules.make
+include $(root)/build/xsd/tree-rules.make
 
 # Compiler
 # --------
 CC=g++
 #CC=icpc
 
-include files.mk
+# Build.
+#
+#hello.cpp hello.h: hello.xsd
 
+# xy
 
 # Compiler flags
 # -------------------------------------------------------------------------

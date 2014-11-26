@@ -16,8 +16,7 @@
 #include <iostream>
 #include <cstdlib>
 
-//#include "../cuboid-pskel.hxx"
-
+#include "../cuboid.h"
 
 using namespace std;
 using namespace Simulation;

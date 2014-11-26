@@ -8,7 +8,9 @@ override LIBS := -lxerces-c $(LIBS)
 
 # Rules.
 #
-.PRECIOUS: %.cxx %.hxx %.ixx
+.PRECIOUS: %.cpp %.h %.ixx
 
-%.cxx %.hxx %.ixx: %.xsd
-	$(XSD) cxx-tree $(XSDFLAGS) $<
+%.cpp %.h %.ixx: %.xsd
+	$(XSD) cxx-tree --hxx-suffix .h --cxx-suffix .cpp $(XSDFLAGS) cuboid.xsd
+
+# original: $(XSD) cxx-tree --hxx-suffix .h --cxx-suffix .cpp $(XSDFLAGS) $<
