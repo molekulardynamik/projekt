@@ -8,6 +8,9 @@
 #include "FileReader.h"
 #include "ParticleGenerator.h"
 
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
+
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -16,6 +19,14 @@
 using namespace std;
 using namespace Simulation;
 using namespace utils;
+
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
+
+
+// Define static logger variable
+LoggerPtr fileReaderLogger(Logger::getLogger("FileReader"));
 
 FileReader::FileReader() {
 }
@@ -31,11 +42,11 @@ void FileReader::readFile(std::vector<Simulation::Particle>& particles, char* fi
     if (input_file.is_open()) {
 
     	getline(input_file, tmp_string);
-    	cout << "Read line: " << tmp_string << endl;
+		LOG4CXX_INFO(fileReaderLogger, "Read line: " << tmp_string);
 
     	while (tmp_string.size() == 0 || tmp_string[0] == '#') {
     		getline(input_file, tmp_string);
-    		cout << "Read line: " << tmp_string << endl;
+			LOG4CXX_INFO(fileReaderLogger, "Read line: " << tmp_string);
     	}
 
 		if (tmp_string == "Planets")
@@ -49,9 +60,10 @@ void FileReader::readFile(std::vector<Simulation::Particle>& particles, char* fi
 
 			istringstream numstream(tmp_string);
 			numstream >> num_particles;
-			cout << "Reading " << num_particles << "." << endl;
+			LOG4CXX_INFO(fileReaderLogger, "Reading " << num_particles);
+
 			getline(input_file, tmp_string);
-			cout << "Read line: " << tmp_string << endl;
+			LOG4CXX_INFO(fileReaderLogger, "Read line: " << tmp_string);
 
 			for (int i = 0; i < num_particles; i++) {
 				istringstream datastream(tmp_string);
@@ -63,8 +75,9 @@ void FileReader::readFile(std::vector<Simulation::Particle>& particles, char* fi
 				for (int j = 0; j < 3; j++) {
 					datastream >> v[j];
 				}
-				if (datastream.eof()) {
-					cout << "Error reading file: eof reached unexpectedly reading from line " << i << endl;
+				if (datastream.eof()) 
+				{
+					LOG4CXX_ERROR(fileReaderLogger, "Error reading file: eof reached unexpectedly reading from line " << i);
 					exit(-1);
 				}
 				datastream >> m;
@@ -72,7 +85,7 @@ void FileReader::readFile(std::vector<Simulation::Particle>& particles, char* fi
 				particles.push_back(p);
 
 				getline(input_file, tmp_string);
-				cout << "Read line: " << tmp_string << endl;
+				LOG4CXX_INFO(fileReaderLogger, "Read line: " << tmp_string);
 			}
 		}
 		else if (tmp_string == "Cuboids")
@@ -87,9 +100,9 @@ void FileReader::readFile(std::vector<Simulation::Particle>& particles, char* fi
 
 			istringstream numstream(tmp_string);
 			numstream >> num_cuboids;
-			cout << "Reading " << num_cuboids << "." << endl;
+			LOG4CXX_INFO(fileReaderLogger, "Reading " << num_cuboids);
 			getline(input_file, tmp_string);
-			cout << "Read line: " << tmp_string << endl;
+			LOG4CXX_INFO(fileReaderLogger, "Read line: " << tmp_string);
 
 			for (int i = 0; i < num_cuboids; i++) {
 				istringstream datastream(tmp_string);
@@ -111,11 +124,11 @@ void FileReader::readFile(std::vector<Simulation::Particle>& particles, char* fi
 				ParticleGenerator::generateCuboid(Vector<double,3>(x), Vector<int, 3>(n), h, m, Vector<double, 3>(v), mean, particles);
 
 				getline(input_file, tmp_string);
-				cout << "Read line: " << tmp_string << endl;
+				LOG4CXX_INFO(fileReaderLogger, "Read line: " << tmp_string);
 			}
 		}
     } else {
-    	std::cout << "Error: could not open file " << filename << std::endl;
+		LOG4CXX_ERROR(fileReaderLogger, "Error: could not open file " << filename);
     	exit(-1);
     }
 

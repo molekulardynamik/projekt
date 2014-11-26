@@ -39,8 +39,6 @@ void ParticleContainerTest::setUp()
 	}
 
 	file.close();
-
-	cout << "\nTest set up\n";
 }
 
 void ParticleContainerTest::tearDown()
@@ -85,8 +83,6 @@ void ParticleContainerTest::testParticleFunction()
 		TestParticle& tp = testParticles[i];
 		utils::Vector<double, 3> pos = p.getX(), vel = p.getV();
 		double m = p.getM();
-
-		cout << "Mass: "<< m << endl;
 
 		CPPUNIT_ASSERT(pos[0] == tp.x * 100);
 		CPPUNIT_ASSERT(pos[1] == tp.y * 200);

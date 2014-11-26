@@ -9,27 +9,9 @@
     </layout>
   </appender>
 
-  <!-- Output the log message to log file
-    -->
-  <appender name="appxNormalAppender" class="org.apache.log4j.FileAppender">
-    <param name="file" value="appxLogFile.log" />
-    <param name="append" value="true" />
-    <layout class="org.apache.log4j.PatternLayout">
-      <param name="ConversionPattern" value="%d %-5p %C{2} (%F:%L) - %m%n" />
-    </layout>
-  </appender>
-
   <root>
-    <priority value="all" />
-    <appender-ref ref="appxNormalAppender"/>
+    <priority value="INFO" />
     <appender-ref ref="appxConsoleAppender"/>
   </root>
-
-  <!-- Specify the level for some specific categories -->
-  <category name="functionA" >
-    <priority value ="info" />
-    <appender-ref ref="appxNormalAppender"/>
-    <appender-ref ref="appxConsoleAppender"/>
-  </category>
 
 </log4j:configuration>
