@@ -21,24 +21,9 @@ using namespace log4cxx::xml;
 using namespace log4cxx::helpers;
 
 // Define static logger variable
-LoggerPtr loggerMyMain(Logger::getLogger("main"));
+LoggerPtr logger(Logger::getLogger("main"));
 
-/**** forward declaration of the calculation functions ****/
 
-/**
- * calculate the force for all particles
- */
-void calculateF();
-
-/**
- * calculate the position for all particles
- */
-void calculateX();
-
-/**
- * calculate the position for all particles
- */
-void calculateV();
 
 /**
  * plot the particles to a xyz-file
@@ -55,19 +40,23 @@ double delta_t = 0.014;
 
 int main(int argc, char* argsv[]) 
 {
-	cout << "Hello from MolSim for PSE!" << endl;
+	DOMConfigurator::configure("Log4cxxConfig.xml");
+	LOG4CXX_INFO(logger, "Hello from MolSim for PSE!");
 
-	if (argc == 2)
+	if (argc == 2 && strcmp(argsv[1], "-test") == 0)
 	{
-
+		LOG4CXX_INFO(logger, "Running test suit...");
 		CppUnit::TextUi::TestRunner runner;
 		runner.addTest(ParticleContainerTest::suite());
 		runner.run();
-		return 0;
+		return 0;		
 	}
-	if (argc != 4) {
-		cout << "Errounous programme call! " << endl;
-		cout << "./molsym filename t_end t_delta" << endl; 
+	else if (argc != 4) 
+	{
+		LOG4CXX_ERROR(logger, "Errounous programme call!");
+		LOG4CXX_ERROR(logger, "use /MolSim <filename> <t_end> <t_delta>");
+		LOG4CXX_ERROR(logger, "or /MolSim -test");
+		return 0;
 	}
 
 
@@ -108,15 +97,12 @@ int main(int argc, char* argsv[])
 		if (iteration % 10 == 0) {
 			plotParticles(iteration);
 		}
-		cout << "Iteration " << iteration << " finished." << endl;
+		LOG4CXX_INFO(logger, "Finished iteration " << iteration);
 
 		current_time += delta_t;
 	}
 
-	cout << "output written. Terminating now..." << endl;
-
-
-	cout << "NumParticles: " << container.count() << endl;
+	LOG4CXX_INFO(logger, "output written. Terminating now...");
 	return 0;
 }
 
