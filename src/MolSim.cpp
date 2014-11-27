@@ -83,6 +83,7 @@ int main(int argc, char* argsv[])
 
 	container.init(argsv[1]);
 
+
 	PositionHandler ph = PositionHandler(delta_t);
 	VelocityHandler vh = VelocityHandler(delta_t);
 	GravityHandler gh = GravityHandler(delta_t);
@@ -90,7 +91,7 @@ int main(int argc, char* argsv[])
 
 	// the forces are needed to calculate x, but are not given in the input file.
 	container.iterateParticles(ljh);
-	container.iterateParticlePairs(ljh);
+	container.iterateParticlePairsExclusive(ljh);
 
 	int iteration = 0;
 	int lastTrace = 0;
@@ -99,7 +100,7 @@ int main(int argc, char* argsv[])
 	 // for this loop, we assume: current x, current f and current v are known
 	while (current_time < end_time) {
 
-		container.emptyBoundryCells();
+		container.iterateBoundryCells();
 
 		container.updateCells();
 
@@ -157,5 +158,4 @@ void plotParticles(int iteration) {
 		writer.plotParticle(p);
 	}	
 	writer.writeFile(out_name, iteration);
-	
 }

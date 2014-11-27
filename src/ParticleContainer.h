@@ -53,7 +53,7 @@ namespace Simulation
 		void iterateParticlePairsExclusive(ParticleHandler& handler);
 
 		void iterateBoundryParticles(ParticleHandler& handler);
-		void emptyBoundryCells();
+		void iterateBoundryCells();
 
 		void updateCells();
 
@@ -65,14 +65,18 @@ namespace Simulation
 		bool isBoundry(int x, int y);
 		bool isBoundry(int c);
 
+		int getReflectingCell(int boundrycell);
+
 	private:
 		double rCutOff;
 		int numCellsX, numCellsY;
+		bool reflective;
 
 		int liveParticles;
+		int numDummies;
 
 		std::vector<ParticleCell> cells;
 		std::vector<int> boundryCells;
-		std::list<Particle> particles;
+		std::vector<Particle> particles;
 	};
 };

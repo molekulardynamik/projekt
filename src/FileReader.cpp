@@ -36,7 +36,7 @@ FileReader::~FileReader() {
 }
 
 
-void FileReader::readFile(std::list<Simulation::Particle>& particles, char* filename, double* domainX, double* domainY, double* rCutOff) {
+void FileReader::readFile(std::vector<Simulation::Particle>& particles, char* filename, bool* reflective, double* domainX, double* domainY, double* rCutOff) {
 
 	LOG4CXX_INFO(fileReaderLogger, "Reading file: " << filename);
 	
@@ -96,6 +96,9 @@ void FileReader::readFile(std::list<Simulation::Particle>& particles, char* file
 			double v[] = { 0, 0, 0 };
 			int n[] = { 0, 0, 0 };
 
+			getline(input_file, tmp_string);
+			(*reflective) = (tmp_string == "reflective");
+
 
 			getline(input_file, tmp_string);
 			istringstream domainstream(tmp_string);
@@ -126,7 +129,6 @@ void FileReader::readFile(std::list<Simulation::Particle>& particles, char* file
 				datastream >> h;
 				datastream >> m;
 				datastream >> mean;
-
 
 				ParticleGenerator::generateCuboid(Vector<double,3>(x), Vector<int, 3>(n), h, m, Vector<double, 3>(v), mean, particles);
 

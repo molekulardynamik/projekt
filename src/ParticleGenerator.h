@@ -17,6 +17,6 @@ namespace Simulation
 			double mass, 
 			utils::Vector<double, 3 > initialVelocity, 
 			double meanValue,
-			std::list<Particle>& particles);
+			std::vector<Particle>& particles);
 	};
 }
