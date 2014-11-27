@@ -2,10 +2,10 @@
 
 include files.mk
 
-root := /home/penguin/Desktop/MolSim/src
+#root := /home/penguin/Desktop/MolSim/src
 
-include $(root)/build/cxx/rules.make
-include $(root)/build/xsd/tree-rules.make
+#include $(root)/build/cxx/rules.make
+#include $(root)/build/xsd/tree-rules.make
 
 # Compiler
 # --------

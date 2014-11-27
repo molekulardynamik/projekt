@@ -16,7 +16,6 @@
 #include <iostream>
 #include <cstdlib>
 
-#include "../cuboid.h"
 
 using namespace std;
 using namespace Simulation;
