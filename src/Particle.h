@@ -37,6 +37,11 @@ namespace Simulation
 		 */
 		int type;
 
+		/** cell in wich holds the particle*/
+		int cell;
+
+		bool dead;
+
 	public:
 		Particle(int type = 0);
 
@@ -64,6 +69,13 @@ namespace Simulation
 		double getM();
 
 		int getType();
+		void setType(int t);
+
+		int getCell();
+		void setCell(int c);
+
+		bool isDead();
+		void setDead(bool d);
 
 		bool operator==(Particle& other);
 

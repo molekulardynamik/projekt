@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <list>
 
 #include "utils/Vector.h"
 #include "Particle.h"
@@ -16,6 +17,6 @@ namespace Simulation
 			double mass, 
 			utils::Vector<double, 3 > initialVelocity, 
 			double meanValue,
-			std::vector<Particle>& particles);
+			std::list<Particle>& particles);
 	};
 }

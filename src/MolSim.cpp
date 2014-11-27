@@ -9,9 +9,12 @@
 #include <cstring>
 #include <cstdlib>
 #include <iostream>
+#include <ctime>
 
 #include <log4cxx/logger.h>
 #include <log4cxx/xml/domconfigurator.h>
+
+
 
 using namespace std;
 using namespace Simulation;
@@ -40,6 +43,9 @@ double delta_t = 0.014;
 
 int main(int argc, char* argsv[]) 
 {
+	time_t start, end;
+	time(&start);
+
 	DOMConfigurator::configure("Log4cxxConfig.xml");
 	LOG4CXX_INFO(logger, "Hello from MolSim for PSE!");
 
@@ -50,6 +56,15 @@ int main(int argc, char* argsv[])
 		runner.addTest(ParticleContainerTest::suite());
 		runner.run();
 		return 0;		
+	}
+	else if (argc == 3 && strcmp(argsv[1], "-single") == 0)
+	{
+		container.init(argsv[2]);
+
+		plotParticles(0);
+
+		LOG4CXX_INFO(logger, "BYE");
+		return 0;
 	}
 	else if (argc != 4) 
 	{
@@ -78,9 +93,17 @@ int main(int argc, char* argsv[])
 	container.iterateParticlePairs(ljh);
 
 	int iteration = 0;
+	int lastTrace = 0;
 
+	LOG4CXX_INFO(logger, "start iterating, " << end_time / delta_t << " iterations in total");
 	 // for this loop, we assume: current x, current f and current v are known
 	while (current_time < end_time) {
+
+		container.emptyBoundryCells();
+
+		container.updateCells();
+
+
 		// calculate new x
 		container.iterateParticles(ph);
 
@@ -88,7 +111,7 @@ int main(int argc, char* argsv[])
 		container.iterateParticles(ljh);
 
 		// calculate new f
-		container.iterateParticlePairs(ljh);
+		container.iterateParticlePairsExclusive(ljh);
 
 		// calculate new v
 		container.iterateParticles(vh);
@@ -97,12 +120,23 @@ int main(int argc, char* argsv[])
 		if (iteration % 10 == 0) {
 			plotParticles(iteration);
 		}
-		LOG4CXX_INFO(logger, "Finished iteration " << iteration);
+		lastTrace++;
+		if (lastTrace >= (end_time / delta_t / 100.0))
+		{
+			LOG4CXX_INFO(logger, (100.0 * iteration * delta_t / end_time) << " %");
+			lastTrace = 0;
+		}
 
 		current_time += delta_t;
+
 	}
 
+
 	LOG4CXX_INFO(logger, "output written. Terminating now...");
+
+	time(&end);
+	LOG4CXX_INFO(logger, "Simulation took " << end - start << " seconds");
+
 	return 0;
 }
 
@@ -112,11 +146,14 @@ void plotParticles(int iteration) {
 	string out_name("/media/sf_Shared/vtkOutput/MD_vtk");
 
 	outputWriter::VTKWriter writer;
-	writer.initializeOutput(container.count());
+	writer.initializeOutput(container.live());
 
 	for(int i=0; i<container.count(); i++)
 	{
 		Particle& p = container[i];
+		if (p.isDead())
+			continue;
+
 		writer.plotParticle(p);
 	}	
 	writer.writeFile(out_name, iteration);

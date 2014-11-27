@@ -15,7 +15,7 @@ CFLAGS=-g -O3
 
 # Linker flags
 # ------------
-LDFLAGS= -lxerces-c -lcppunit -L/usr/local/apr/lib -L/usr/local/lib -lapr-1 -laprutil-1 -llog4cxx
+LDFLAGS= -L/usr/local/apr/lib -L/usr/local/lib -lxerces-c -lcppunit -lapr-1 -laprutil-1 -llog4cxx
 
 INCLUDES= -I./src -I./libxsd 
 

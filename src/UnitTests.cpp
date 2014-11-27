@@ -77,6 +77,7 @@ void ParticleContainerTest::testParticleFunction()
 	TestHandler th;
 	container.iterateParticles(th);
 
+
 	for (int i = 0; i < container.count(); i++)
 	{
 		Simulation::Particle& p = container[i];

@@ -15,6 +15,8 @@ namespace Simulation
 		{};
 		virtual void compute(Particle& p1, Particle& p2)
 		{};
+		virtual void computeExclusive(Particle& p1, Particle& p2)
+		{};
 	};
 
 
@@ -83,6 +85,15 @@ namespace Simulation
 
 			p1.getF() = p1.getF() + force;
 		}
+
+		void computeExclusive(Particle& p1, Particle& p2)
+		{
+			double scalar = p1.getM() * p2.getM() / pow((p1.getX() - p2.getX()).L2Norm(), 3);
+			utils::Vector<double, 3> force = scalar * (p2.getX() - p1.getX());
+
+			p1.getF() = p1.getF() + force;
+			p2.getF() = p2.getF() - force;
+		}
 	};
 
 	class LennardJonesHandler : public ParticleHandlerTimeAware
@@ -108,6 +119,20 @@ namespace Simulation
 			double scalar = 24 * e / sqrtDist * (pow(o / dist, 6) - 2 * pow(o / dist, 12));
 
 			p1.getF() = p1.getF() + (scalar * (p2.getX() - p1.getX()));
+		}
+
+		void computeExclusive(Particle& p1, Particle& p2)
+		{
+			double e = 5, o = 1;
+
+			double dist = (p1.getX() - p2.getX()).L2Norm();
+			double sqrtDist = dist * dist;
+
+			double scalar = 24 * e / sqrtDist * (pow(o / dist, 6) - 2 * pow(o / dist, 12));
+
+			utils::Vector<double, 3> force = (scalar * (p2.getX() - p1.getX()));
+			p1.getF() = p1.getF() + force;
+			p2.getF() = p2.getF() - force;
 		}
 
 	};
