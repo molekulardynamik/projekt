@@ -24,9 +24,9 @@ CFLAGS=-g -O3
 
 # Linker flags
 # ------------
-LDFLAGS= -L/usr/local/apr/lib -L/usr/local/lib -lxerces-c -lcppunit -lapr-1 -laprutil-1 -llog4cxx
+LDFLAGS= -L/usr/local/apr/lib -L/usr/local/lib -lxerces-c -lcppunit -lapr-1 -laprutil-1 -llog4cxx -lxerces-c
 
-INCLUDES= -I./src -I./libxsd 
+INCLUDES= -I./src -I./libxsd
 
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=MolSim
