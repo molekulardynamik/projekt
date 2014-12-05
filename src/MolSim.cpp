@@ -155,7 +155,6 @@ void plotParticles(int iteration) {
 		Particle& p = container[i];
 		if (p.isDead())
 			continue;
-
 		writer.plotParticle(p);
 	}	
 	writer.writeFile(out_name, iteration);
