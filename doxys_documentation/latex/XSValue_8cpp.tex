@@ -1,0 +1,65 @@
+\hypertarget{XSValue_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/framework/psvi/\-X\-S\-Value.cpp File Reference}
+\label{XSValue_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/framework/psvi/\-X\-S\-Value.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/framework/psvi/\-X\-S\-Value.\-cpp}}
+}
+{\ttfamily \#include $<$limits.\-h$>$}\\*
+{\ttfamily \#include $<$errno.\-h$>$}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+{\ttfamily \#include $<$ctype.\-h$>$}\\*
+{\ttfamily \#include $<$math.\-h$>$}\\*
+{\ttfamily \#include $<$float.\-h$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Value.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-String.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-String\-Tokenizer.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Big\-Decimal.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Big\-Integer.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Float.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Double.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Date\-Time.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Hex\-Bin.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Base64.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Uri.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Char.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Janitor.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Initializer.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/regx/\-Regular\-Expression.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Schema\-Symbols.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Out\-Of\-Memory\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Trans\-Service.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Number\-Format\-Exception.\-hpp$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{XSValue_8cpp_a74d9489fb8f539a30c4544d2c07648d8}{check\-Time\-Zone\-Error} (X\-S\-Value\-::\-Data\-Type const \&datatype, Schema\-Date\-Time\-Exception const \&e)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static Regular\-Expression $\ast$ \hyperlink{XSValue_8cpp_ae65f8b0257381906778beaf9cdafeece}{s\-X\-S\-Value\-Reg\-Ex} = 0
+\item 
+static const X\-M\-L\-Ch \hyperlink{XSValue_8cpp_a4f9b689b46d84f15e136906283510fe4}{Separator\-\_\-20} \mbox{[}$\,$\mbox{]} = \{ch\-Space, ch\-Null\}
+\item 
+static const X\-M\-L\-Ch \hyperlink{XSValue_8cpp_af9d1478b1c995d469a1aeca86e9bc126}{Separator\-\_\-ws} \mbox{[}$\,$\mbox{]} = \{ch\-Space, ch\-L\-F, ch\-C\-R, ch\-H\-Tab, ch\-Null\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{XSValue_8cpp_a74d9489fb8f539a30c4544d2c07648d8}{\index{X\-S\-Value.\-cpp@{X\-S\-Value.\-cpp}!check\-Time\-Zone\-Error@{check\-Time\-Zone\-Error}}
+\index{check\-Time\-Zone\-Error@{check\-Time\-Zone\-Error}!XSValue.cpp@{X\-S\-Value.\-cpp}}
+\subsubsection[{check\-Time\-Zone\-Error}]{\setlength{\rightskip}{0pt plus 5cm}static bool check\-Time\-Zone\-Error (
+\begin{DoxyParamCaption}
+\item[{X\-S\-Value\-::\-Data\-Type const \&}]{datatype, }
+\item[{Schema\-Date\-Time\-Exception const \&}]{e}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{XSValue_8cpp_a74d9489fb8f539a30c4544d2c07648d8}
+
+
+\subsection{Variable Documentation}
+\hypertarget{XSValue_8cpp_a4f9b689b46d84f15e136906283510fe4}{\index{X\-S\-Value.\-cpp@{X\-S\-Value.\-cpp}!Separator\-\_\-20@{Separator\-\_\-20}}
+\index{Separator\-\_\-20@{Separator\-\_\-20}!XSValue.cpp@{X\-S\-Value.\-cpp}}
+\subsubsection[{Separator\-\_\-20}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch Separator\-\_\-20\mbox{[}$\,$\mbox{]} = \{ch\-Space, ch\-Null\}\hspace{0.3cm}{\ttfamily [static]}}}\label{XSValue_8cpp_a4f9b689b46d84f15e136906283510fe4}
+\hypertarget{XSValue_8cpp_af9d1478b1c995d469a1aeca86e9bc126}{\index{X\-S\-Value.\-cpp@{X\-S\-Value.\-cpp}!Separator\-\_\-ws@{Separator\-\_\-ws}}
+\index{Separator\-\_\-ws@{Separator\-\_\-ws}!XSValue.cpp@{X\-S\-Value.\-cpp}}
+\subsubsection[{Separator\-\_\-ws}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch Separator\-\_\-ws\mbox{[}$\,$\mbox{]} = \{ch\-Space, ch\-L\-F, ch\-C\-R, ch\-H\-Tab, ch\-Null\}\hspace{0.3cm}{\ttfamily [static]}}}\label{XSValue_8cpp_af9d1478b1c995d469a1aeca86e9bc126}
+\hypertarget{XSValue_8cpp_ae65f8b0257381906778beaf9cdafeece}{\index{X\-S\-Value.\-cpp@{X\-S\-Value.\-cpp}!s\-X\-S\-Value\-Reg\-Ex@{s\-X\-S\-Value\-Reg\-Ex}}
+\index{s\-X\-S\-Value\-Reg\-Ex@{s\-X\-S\-Value\-Reg\-Ex}!XSValue.cpp@{X\-S\-Value.\-cpp}}
+\subsubsection[{s\-X\-S\-Value\-Reg\-Ex}]{\setlength{\rightskip}{0pt plus 5cm}Regular\-Expression$\ast$ s\-X\-S\-Value\-Reg\-Ex = 0\hspace{0.3cm}{\ttfamily [static]}}}\label{XSValue_8cpp_ae65f8b0257381906778beaf9cdafeece}

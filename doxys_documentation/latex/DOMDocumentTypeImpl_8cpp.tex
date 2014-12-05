@@ -1,0 +1,34 @@
+\hypertarget{DOMDocumentTypeImpl_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/dom/impl/\-D\-O\-M\-Document\-Type\-Impl.cpp File Reference}
+\label{DOMDocumentTypeImpl_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/dom/impl/\-D\-O\-M\-Document\-Type\-Impl.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/dom/impl/\-D\-O\-M\-Document\-Type\-Impl.\-cpp}}
+}
+{\ttfamily \#include \char`\"{}D\-O\-M\-Document\-Type\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Node.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Implementation\-Registry.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Implementation.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Uni\-Defs.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Char.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Mutexes.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Platform\-Utils.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Initializer.\-hpp$>$}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Named\-Node\-Map\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Document\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Casts.\-hpp\char`\"{}}\\*
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \\*
+X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N \\*
+D\-O\-M\-Document $\ast$ \hyperlink{DOMDocumentTypeImpl_8cpp_add78d70f6cefc51346621cc06e470c51}{s\-Document} = 0
+\item 
+static X\-M\-L\-Mutex $\ast$ \hyperlink{DOMDocumentTypeImpl_8cpp_a8c235c1fa6ce02148463cfd768f966e7}{s\-Document\-Mutex} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\hypertarget{DOMDocumentTypeImpl_8cpp_add78d70f6cefc51346621cc06e470c51}{\index{D\-O\-M\-Document\-Type\-Impl.\-cpp@{D\-O\-M\-Document\-Type\-Impl.\-cpp}!s\-Document@{s\-Document}}
+\index{s\-Document@{s\-Document}!DOMDocumentTypeImpl.cpp@{D\-O\-M\-Document\-Type\-Impl.\-cpp}}
+\subsubsection[{s\-Document}]{\setlength{\rightskip}{0pt plus 5cm}X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N D\-O\-M\-Document$\ast$ s\-Document = 0\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMDocumentTypeImpl_8cpp_add78d70f6cefc51346621cc06e470c51}
+\hypertarget{DOMDocumentTypeImpl_8cpp_a8c235c1fa6ce02148463cfd768f966e7}{\index{D\-O\-M\-Document\-Type\-Impl.\-cpp@{D\-O\-M\-Document\-Type\-Impl.\-cpp}!s\-Document\-Mutex@{s\-Document\-Mutex}}
+\index{s\-Document\-Mutex@{s\-Document\-Mutex}!DOMDocumentTypeImpl.cpp@{D\-O\-M\-Document\-Type\-Impl.\-cpp}}
+\subsubsection[{s\-Document\-Mutex}]{\setlength{\rightskip}{0pt plus 5cm}X\-M\-L\-Mutex$\ast$ s\-Document\-Mutex = 0\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMDocumentTypeImpl_8cpp_a8c235c1fa6ce02148463cfd768f966e7}

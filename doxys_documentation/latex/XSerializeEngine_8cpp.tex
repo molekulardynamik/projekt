@@ -1,0 +1,108 @@
+\hypertarget{XSerializeEngine_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/internal/\-X\-Serialize\-Engine.cpp File Reference}
+\label{XSerializeEngine_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/internal/\-X\-Serialize\-Engine.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/internal/\-X\-Serialize\-Engine.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/internal/\-X\-Serialize\-Engine.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/internal/\-X\-Serializable.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/internal/\-X\-Proto\-Type.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Grammar\-Pool.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-Bin\-Output\-Stream.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Bin\-Input\-Stream.\-hpp$>$}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$assert.\-h$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{XSerializeEngine_8cpp_a19df8ac1d183edd540891a2498f5a719}{T\-E\-S\-T\-\_\-\-T\-H\-R\-O\-W\-\_\-\-A\-R\-G1}(condition, data, err\-\_\-msg)
+\item 
+\#define \hyperlink{XSerializeEngine_8cpp_adcd4def22761fbca4e4209d3c491ed45}{T\-E\-S\-T\-\_\-\-T\-H\-R\-O\-W\-\_\-\-A\-R\-G2}(condition, data1, data2, err\-\_\-msg)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const unsigned long \hyperlink{XSerializeEngine_8cpp_a145aeef6bbc29b6a6510d1f33325b284}{no\-Data\-Followed} = (unsigned long)-\/1
+\item 
+static const \\*
+X\-Serialize\-Engine\-::\-X\-Serialized\-Object\-Id\-\_\-t \hyperlink{XSerializeEngine_8cpp_a9ee86632260b712b258387a5d130400a}{fg\-Null\-Object\-Tag} = 0
+\item 
+static const \\*
+X\-Serialize\-Engine\-::\-X\-Serialized\-Object\-Id\-\_\-t \hyperlink{XSerializeEngine_8cpp_a28a6621102030310edd383bc5a321d4f}{fg\-New\-Class\-Tag} = 0x\-F\-F\-F\-F\-F\-F\-F\-F
+\item 
+static const \\*
+X\-Serialize\-Engine\-::\-X\-Serialized\-Object\-Id\-\_\-t \hyperlink{XSerializeEngine_8cpp_af446769440da8501944c641b9c8d8cac}{fg\-Template\-Obj\-Tag} = 0x\-F\-F\-F\-F\-F\-F\-F\-E
+\item 
+static const \\*
+X\-Serialize\-Engine\-::\-X\-Serialized\-Object\-Id\-\_\-t \hyperlink{XSerializeEngine_8cpp_a0b0fef70c2a95f211fec773a6a0e1d39}{fg\-Class\-Mask} = 0x80000000
+\item 
+static const \\*
+X\-Serialize\-Engine\-::\-X\-Serialized\-Object\-Id\-\_\-t \hyperlink{XSerializeEngine_8cpp_a642a928b97e57523b745192df239b543}{fg\-Max\-Object\-Count} = 0x3\-F\-F\-F\-F\-F\-F\-D
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{XSerializeEngine_8cpp_a19df8ac1d183edd540891a2498f5a719}{\index{X\-Serialize\-Engine.\-cpp@{X\-Serialize\-Engine.\-cpp}!T\-E\-S\-T\-\_\-\-T\-H\-R\-O\-W\-\_\-\-A\-R\-G1@{T\-E\-S\-T\-\_\-\-T\-H\-R\-O\-W\-\_\-\-A\-R\-G1}}
+\index{T\-E\-S\-T\-\_\-\-T\-H\-R\-O\-W\-\_\-\-A\-R\-G1@{T\-E\-S\-T\-\_\-\-T\-H\-R\-O\-W\-\_\-\-A\-R\-G1}!XSerializeEngine.cpp@{X\-Serialize\-Engine.\-cpp}}
+\subsubsection[{T\-E\-S\-T\-\_\-\-T\-H\-R\-O\-W\-\_\-\-A\-R\-G1}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-E\-S\-T\-\_\-\-T\-H\-R\-O\-W\-\_\-\-A\-R\-G1(
+\begin{DoxyParamCaption}
+\item[{}]{condition, }
+\item[{}]{data, }
+\item[{}]{err\-\_\-msg}
+\end{DoxyParamCaption}
+)}}\label{XSerializeEngine_8cpp_a19df8ac1d183edd540891a2498f5a719}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (condition) \(\backslash\)
+\{ \(\backslash\)
+    XMLCh value1[64]; \(\backslash\)
+    XMLString::sizeToText(data, value1, 65, 10, getMemoryManager()); \(\backslash\)
+    ThrowXMLwithMemMgr1(XSerializationException \(\backslash\)
+            , err\_msg  \(\backslash\)
+            , value1 \(\backslash\)
+            , getMemoryManager()); \(\backslash\)
+\}
+\end{DoxyCode}
+\hypertarget{XSerializeEngine_8cpp_adcd4def22761fbca4e4209d3c491ed45}{\index{X\-Serialize\-Engine.\-cpp@{X\-Serialize\-Engine.\-cpp}!T\-E\-S\-T\-\_\-\-T\-H\-R\-O\-W\-\_\-\-A\-R\-G2@{T\-E\-S\-T\-\_\-\-T\-H\-R\-O\-W\-\_\-\-A\-R\-G2}}
+\index{T\-E\-S\-T\-\_\-\-T\-H\-R\-O\-W\-\_\-\-A\-R\-G2@{T\-E\-S\-T\-\_\-\-T\-H\-R\-O\-W\-\_\-\-A\-R\-G2}!XSerializeEngine.cpp@{X\-Serialize\-Engine.\-cpp}}
+\subsubsection[{T\-E\-S\-T\-\_\-\-T\-H\-R\-O\-W\-\_\-\-A\-R\-G2}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-E\-S\-T\-\_\-\-T\-H\-R\-O\-W\-\_\-\-A\-R\-G2(
+\begin{DoxyParamCaption}
+\item[{}]{condition, }
+\item[{}]{data1, }
+\item[{}]{data2, }
+\item[{}]{err\-\_\-msg}
+\end{DoxyParamCaption}
+)}}\label{XSerializeEngine_8cpp_adcd4def22761fbca4e4209d3c491ed45}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (condition) \(\backslash\)
+\{ \(\backslash\)
+    XMLCh value1[64]; \(\backslash\)
+    XMLCh value2[64]; \(\backslash\)
+    XMLString::sizeToText(data1, value1, 65, 10, getMemoryManager()); \(\backslash\)
+    XMLString::sizeToText(data2, value2, 65, 10, getMemoryManager()); \(\backslash\)
+    ThrowXMLwithMemMgr2(XSerializationException \(\backslash\)
+            , err\_msg  \(\backslash\)
+            , value1   \(\backslash\)
+            , value2 \(\backslash\)
+            , getMemoryManager()); \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{XSerializeEngine_8cpp_a0b0fef70c2a95f211fec773a6a0e1d39}{\index{X\-Serialize\-Engine.\-cpp@{X\-Serialize\-Engine.\-cpp}!fg\-Class\-Mask@{fg\-Class\-Mask}}
+\index{fg\-Class\-Mask@{fg\-Class\-Mask}!XSerializeEngine.cpp@{X\-Serialize\-Engine.\-cpp}}
+\subsubsection[{fg\-Class\-Mask}]{\setlength{\rightskip}{0pt plus 5cm}const X\-Serialize\-Engine\-::\-X\-Serialized\-Object\-Id\-\_\-t fg\-Class\-Mask = 0x80000000\hspace{0.3cm}{\ttfamily [static]}}}\label{XSerializeEngine_8cpp_a0b0fef70c2a95f211fec773a6a0e1d39}
+\hypertarget{XSerializeEngine_8cpp_a642a928b97e57523b745192df239b543}{\index{X\-Serialize\-Engine.\-cpp@{X\-Serialize\-Engine.\-cpp}!fg\-Max\-Object\-Count@{fg\-Max\-Object\-Count}}
+\index{fg\-Max\-Object\-Count@{fg\-Max\-Object\-Count}!XSerializeEngine.cpp@{X\-Serialize\-Engine.\-cpp}}
+\subsubsection[{fg\-Max\-Object\-Count}]{\setlength{\rightskip}{0pt plus 5cm}const X\-Serialize\-Engine\-::\-X\-Serialized\-Object\-Id\-\_\-t fg\-Max\-Object\-Count = 0x3\-F\-F\-F\-F\-F\-F\-D\hspace{0.3cm}{\ttfamily [static]}}}\label{XSerializeEngine_8cpp_a642a928b97e57523b745192df239b543}
+\hypertarget{XSerializeEngine_8cpp_a28a6621102030310edd383bc5a321d4f}{\index{X\-Serialize\-Engine.\-cpp@{X\-Serialize\-Engine.\-cpp}!fg\-New\-Class\-Tag@{fg\-New\-Class\-Tag}}
+\index{fg\-New\-Class\-Tag@{fg\-New\-Class\-Tag}!XSerializeEngine.cpp@{X\-Serialize\-Engine.\-cpp}}
+\subsubsection[{fg\-New\-Class\-Tag}]{\setlength{\rightskip}{0pt plus 5cm}const X\-Serialize\-Engine\-::\-X\-Serialized\-Object\-Id\-\_\-t fg\-New\-Class\-Tag = 0x\-F\-F\-F\-F\-F\-F\-F\-F\hspace{0.3cm}{\ttfamily [static]}}}\label{XSerializeEngine_8cpp_a28a6621102030310edd383bc5a321d4f}
+\hypertarget{XSerializeEngine_8cpp_a9ee86632260b712b258387a5d130400a}{\index{X\-Serialize\-Engine.\-cpp@{X\-Serialize\-Engine.\-cpp}!fg\-Null\-Object\-Tag@{fg\-Null\-Object\-Tag}}
+\index{fg\-Null\-Object\-Tag@{fg\-Null\-Object\-Tag}!XSerializeEngine.cpp@{X\-Serialize\-Engine.\-cpp}}
+\subsubsection[{fg\-Null\-Object\-Tag}]{\setlength{\rightskip}{0pt plus 5cm}const X\-Serialize\-Engine\-::\-X\-Serialized\-Object\-Id\-\_\-t fg\-Null\-Object\-Tag = 0\hspace{0.3cm}{\ttfamily [static]}}}\label{XSerializeEngine_8cpp_a9ee86632260b712b258387a5d130400a}
+\hypertarget{XSerializeEngine_8cpp_af446769440da8501944c641b9c8d8cac}{\index{X\-Serialize\-Engine.\-cpp@{X\-Serialize\-Engine.\-cpp}!fg\-Template\-Obj\-Tag@{fg\-Template\-Obj\-Tag}}
+\index{fg\-Template\-Obj\-Tag@{fg\-Template\-Obj\-Tag}!XSerializeEngine.cpp@{X\-Serialize\-Engine.\-cpp}}
+\subsubsection[{fg\-Template\-Obj\-Tag}]{\setlength{\rightskip}{0pt plus 5cm}const X\-Serialize\-Engine\-::\-X\-Serialized\-Object\-Id\-\_\-t fg\-Template\-Obj\-Tag = 0x\-F\-F\-F\-F\-F\-F\-F\-E\hspace{0.3cm}{\ttfamily [static]}}}\label{XSerializeEngine_8cpp_af446769440da8501944c641b9c8d8cac}
+\hypertarget{XSerializeEngine_8cpp_a145aeef6bbc29b6a6510d1f33325b284}{\index{X\-Serialize\-Engine.\-cpp@{X\-Serialize\-Engine.\-cpp}!no\-Data\-Followed@{no\-Data\-Followed}}
+\index{no\-Data\-Followed@{no\-Data\-Followed}!XSerializeEngine.cpp@{X\-Serialize\-Engine.\-cpp}}
+\subsubsection[{no\-Data\-Followed}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned long no\-Data\-Followed = (unsigned long)-\/1\hspace{0.3cm}{\ttfamily [static]}}}\label{XSerializeEngine_8cpp_a145aeef6bbc29b6a6510d1f33325b284}

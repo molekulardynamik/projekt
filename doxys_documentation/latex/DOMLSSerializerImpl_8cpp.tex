@@ -1,0 +1,414 @@
+\hypertarget{DOMLSSerializerImpl_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/dom/impl/\-D\-O\-M\-L\-S\-Serializer\-Impl.cpp File Reference}
+\label{DOMLSSerializerImpl_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/dom/impl/\-D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/dom/impl/\-D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+}
+{\ttfamily \#include \char`\"{}D\-O\-M\-L\-S\-Serializer\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-L\-S\-Output\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Error\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Locator\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Implementation\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-String\-List\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include $<$xercesc/framework/\-Mem\-Buf\-Format\-Target.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-Local\-File\-Format\-Target.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Trans\-Service.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Transcoding\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Janitor.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-String.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Uni\-Defs.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Msg\-Loader.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-St\-D\-O\-M\-Node.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Out\-Of\-Memory\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Char.\-hpp$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{DOMLSSerializerImpl_8cpp_aed724dd33cd3d9a26c923d60261e0a76}{T\-R\-Y\-\_\-\-C\-A\-T\-C\-H\-\_\-\-T\-H\-R\-O\-W}(action)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \\*
+X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N \\*
+const int \hyperlink{DOMLSSerializerImpl_8cpp_afe7fd127e98502f3b54acf2fed2bdd95}{I\-N\-V\-A\-L\-I\-D\-\_\-\-F\-E\-A\-T\-U\-R\-E\-\_\-\-I\-D} = -\/1
+\item 
+static const int \hyperlink{DOMLSSerializerImpl_8cpp_a593c69ff849c14cb7490e85f8dc8542e}{C\-A\-N\-O\-N\-I\-C\-A\-L\-\_\-\-F\-O\-R\-M\-\_\-\-I\-D} = 0x0
+\item 
+static const int \hyperlink{DOMLSSerializerImpl_8cpp_a5dc0ef5a4c10af8d79239f9c94de302f}{D\-I\-S\-C\-A\-R\-D\-\_\-\-D\-E\-F\-A\-U\-L\-T\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-I\-D} = 0x1
+\item 
+static const int \hyperlink{DOMLSSerializerImpl_8cpp_a1c7e9e69b6daad1298e990f461fb5773}{E\-N\-T\-I\-T\-I\-E\-S\-\_\-\-I\-D} = 0x2
+\item 
+static const int \hyperlink{DOMLSSerializerImpl_8cpp_a52b59aacd571f2934429940c65238c58}{F\-O\-R\-M\-A\-T\-\_\-\-P\-R\-E\-T\-T\-Y\-\_\-\-P\-R\-I\-N\-T\-\_\-\-I\-D} = 0x3
+\item 
+static const int \hyperlink{DOMLSSerializerImpl_8cpp_a23b469e417f475ceca1a56d86a4a0653}{N\-O\-R\-M\-A\-L\-I\-Z\-E\-\_\-\-C\-H\-A\-R\-A\-C\-T\-E\-R\-S\-\_\-\-I\-D} = 0x4
+\item 
+static const int \hyperlink{DOMLSSerializerImpl_8cpp_a2c72f8b2f1dd43c42f7c2b241aad0ad5}{S\-P\-L\-I\-T\-\_\-\-C\-D\-A\-T\-A\-\_\-\-S\-E\-C\-T\-I\-O\-N\-S\-\_\-\-I\-D} = 0x5
+\item 
+static const int \hyperlink{DOMLSSerializerImpl_8cpp_aebc2437f6ce806c8d2a632b1bdd6b1ac}{V\-A\-L\-I\-D\-A\-T\-I\-O\-N\-\_\-\-I\-D} = 0x6
+\item 
+static const int \hyperlink{DOMLSSerializerImpl_8cpp_a2c8aea0277a7d024f3e109e67f310f30}{W\-H\-I\-T\-E\-S\-P\-A\-C\-E\-\_\-\-I\-N\-\_\-\-E\-L\-E\-M\-E\-N\-T\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-I\-D} = 0x7
+\item 
+static const int \hyperlink{DOMLSSerializerImpl_8cpp_af3f720f761947ff5cf361a59ce2124b7}{B\-Y\-T\-E\-\_\-\-O\-R\-D\-E\-R\-\_\-\-M\-A\-R\-K\-\_\-\-I\-D} = 0x8
+\item 
+static const int \hyperlink{DOMLSSerializerImpl_8cpp_a649865479c445c1e4d67bd3776ebe399}{X\-M\-L\-\_\-\-D\-E\-C\-L\-A\-R\-A\-T\-I\-O\-N} = 0x9
+\item 
+static const int \hyperlink{DOMLSSerializerImpl_8cpp_abc7c8b439f877f7aef89246d32252c2e}{F\-O\-R\-M\-A\-T\-\_\-\-P\-R\-E\-T\-T\-Y\-\_\-\-P\-R\-I\-N\-T\-\_\-1\-S\-T\-\_\-\-L\-E\-V\-E\-L\-\_\-\-I\-D} = 0x\-A
+\item 
+static const bool \hyperlink{DOMLSSerializerImpl_8cpp_a11750df372b37d8a2f53fe19491b0859}{features\-Supported} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_a1e3ec7a84ae7a91439ab8b2504ad82b1}{g\-E\-O\-L\-Seq} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_a6292fd3217602ec5724b7a0daa2aea14}{g\-U\-T\-F8} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_a25f9da6c20e50c089c655a7e02f9c64d}{g\-End\-Element} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_a201d52283a483eb3db9b089f6d588f0d}{g\-End\-P\-I} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_a7e0a510e385bc945c0bcd555c2fb85d6}{g\-Start\-P\-I} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_ac5b0b4e4cb9f9148e537ac2d9a12c66c}{g\-X\-M\-L\-Decl\-\_\-\-Version\-Info} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_a19962e8a061fa83ab35f160d6949afd2}{g\-X\-M\-L\-Decl\-\_\-ver10} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_aa86734b8fa16f8d38707817ad4e028c7}{g\-X\-M\-L\-Decl\-\_\-\-Encoding\-Decl} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_a7ac464c3ed81f775e5852ae45babbd34}{g\-X\-M\-L\-Decl\-\_\-\-S\-D\-Decl} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_aae9c5b8f896a7acb07be0698a9eee95c}{g\-X\-M\-L\-Decl\-\_\-separator} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_a5583a95524792d499b0eb697d654ab0d}{g\-X\-M\-L\-Decl\-\_\-endtag} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_ab4e06350ff69e57c0e2f3a8b86808e1d}{g\-Start\-C\-D\-A\-T\-A} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_ac963402186f2ca8f42c832cdaad94ef4}{g\-End\-C\-D\-A\-T\-A} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_ae4960ffb4bf0b9b95c09dd7767ea7771}{g\-Start\-Comment} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_a4fa9732ceabe3654be8a2533836ea8e0}{g\-End\-Comment} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_a35745ac12b6fac940a9c98f20b38b6b5}{g\-Start\-Doctype} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_acdc27d7ec09fbe4eb30929bf7a5ec068}{g\-Public} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_a107cb5bbd67540f7b2e65e425d51d10b}{g\-System} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_a7381a7357ede9af25cf3582695c149ce}{g\-Start\-Entity} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMLSSerializerImpl_8cpp_aa089bbd3d669a46875f4682119e1a18e}{g\-Notation} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Byte \hyperlink{DOMLSSerializerImpl_8cpp_abc1e3d3dbc16cda3e31a9b3771fd5bd0}{B\-O\-M\-\_\-utf8} \mbox{[}$\,$\mbox{]} = \{(X\-M\-L\-Byte)0x\-E\-F, (\-X\-M\-L\-Byte)0x\-B\-B, (\-X\-M\-L\-Byte)0x\-B\-F, (\-X\-M\-L\-Byte) 0\}
+\item 
+static const X\-M\-L\-Byte \hyperlink{DOMLSSerializerImpl_8cpp_a85f4949c8938c80d76ac18ae8049c33f}{B\-O\-M\-\_\-utf16be} \mbox{[}$\,$\mbox{]} = \{(X\-M\-L\-Byte)0x\-F\-E, (\-X\-M\-L\-Byte)0x\-F\-F, (\-X\-M\-L\-Byte) 0\}
+\item 
+static const X\-M\-L\-Byte \hyperlink{DOMLSSerializerImpl_8cpp_a4f5394f1bd8591e8ebfb0dd569d5dcb7}{B\-O\-M\-\_\-utf16le} \mbox{[}$\,$\mbox{]} = \{(X\-M\-L\-Byte)0x\-F\-F, (\-X\-M\-L\-Byte)0x\-F\-E, (\-X\-M\-L\-Byte) 0\}
+\item 
+static const X\-M\-L\-Byte \hyperlink{DOMLSSerializerImpl_8cpp_af37e64da42f8b4fc475bf5ec2b3a414a}{B\-O\-M\-\_\-ucs4be} \mbox{[}$\,$\mbox{]} = \{(X\-M\-L\-Byte)0x00, (\-X\-M\-L\-Byte)0x00, (\-X\-M\-L\-Byte)0x\-F\-E, (\-X\-M\-L\-Byte)0x\-F\-F, (\-X\-M\-L\-Byte) 0\}
+\item 
+static const X\-M\-L\-Byte \hyperlink{DOMLSSerializerImpl_8cpp_aa57ad71cc27cbafd37640440da9ee21c}{B\-O\-M\-\_\-ucs4le} \mbox{[}$\,$\mbox{]} = \{(X\-M\-L\-Byte)0x\-F\-F, (\-X\-M\-L\-Byte)0x\-F\-E, (\-X\-M\-L\-Byte)0x00, (\-X\-M\-L\-Byte)0x00, (\-X\-M\-L\-Byte) 0\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{DOMLSSerializerImpl_8cpp_aed724dd33cd3d9a26c923d60261e0a76}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!T\-R\-Y\-\_\-\-C\-A\-T\-C\-H\-\_\-\-T\-H\-R\-O\-W@{T\-R\-Y\-\_\-\-C\-A\-T\-C\-H\-\_\-\-T\-H\-R\-O\-W}}
+\index{T\-R\-Y\-\_\-\-C\-A\-T\-C\-H\-\_\-\-T\-H\-R\-O\-W@{T\-R\-Y\-\_\-\-C\-A\-T\-C\-H\-\_\-\-T\-H\-R\-O\-W}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{T\-R\-Y\-\_\-\-C\-A\-T\-C\-H\-\_\-\-T\-H\-R\-O\-W}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-R\-Y\-\_\-\-C\-A\-T\-C\-H\-\_\-\-T\-H\-R\-O\-W(
+\begin{DoxyParamCaption}
+\item[{}]{action}
+\end{DoxyParamCaption}
+)}}\label{DOMLSSerializerImpl_8cpp_aed724dd33cd3d9a26c923d60261e0a76}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+fFormatter->setUnRepFlags(XMLFormatter::UnRep\_Fail);                 \(\backslash\)
+try                                                                  \(\backslash\)
+\{                                                                    \(\backslash\)
+    action;                                                          \(\backslash\)
+\}                                                                    \(\backslash\)
+catch(TranscodingException \textcolor{keyword}{const} &e)                                 \(\backslash\)
+\{                                                                    \(\backslash\)
+    reportError(nodeToWrite, DOMError::DOM\_SEVERITY\_FATAL\_ERROR, e.getMessage());  \(\backslash\)
+    throw e;                                                         \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{DOMLSSerializerImpl_8cpp_af37e64da42f8b4fc475bf5ec2b3a414a}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!B\-O\-M\-\_\-ucs4be@{B\-O\-M\-\_\-ucs4be}}
+\index{B\-O\-M\-\_\-ucs4be@{B\-O\-M\-\_\-ucs4be}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{B\-O\-M\-\_\-ucs4be}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Byte B\-O\-M\-\_\-ucs4be\mbox{[}$\,$\mbox{]} = \{(X\-M\-L\-Byte)0x00, (\-X\-M\-L\-Byte)0x00, (\-X\-M\-L\-Byte)0x\-F\-E, (\-X\-M\-L\-Byte)0x\-F\-F, (\-X\-M\-L\-Byte) 0\}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_af37e64da42f8b4fc475bf5ec2b3a414a}
+\hypertarget{DOMLSSerializerImpl_8cpp_aa57ad71cc27cbafd37640440da9ee21c}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!B\-O\-M\-\_\-ucs4le@{B\-O\-M\-\_\-ucs4le}}
+\index{B\-O\-M\-\_\-ucs4le@{B\-O\-M\-\_\-ucs4le}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{B\-O\-M\-\_\-ucs4le}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Byte B\-O\-M\-\_\-ucs4le\mbox{[}$\,$\mbox{]} = \{(X\-M\-L\-Byte)0x\-F\-F, (\-X\-M\-L\-Byte)0x\-F\-E, (\-X\-M\-L\-Byte)0x00, (\-X\-M\-L\-Byte)0x00, (\-X\-M\-L\-Byte) 0\}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_aa57ad71cc27cbafd37640440da9ee21c}
+\hypertarget{DOMLSSerializerImpl_8cpp_a85f4949c8938c80d76ac18ae8049c33f}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!B\-O\-M\-\_\-utf16be@{B\-O\-M\-\_\-utf16be}}
+\index{B\-O\-M\-\_\-utf16be@{B\-O\-M\-\_\-utf16be}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{B\-O\-M\-\_\-utf16be}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Byte B\-O\-M\-\_\-utf16be\mbox{[}$\,$\mbox{]} = \{(X\-M\-L\-Byte)0x\-F\-E, (\-X\-M\-L\-Byte)0x\-F\-F, (\-X\-M\-L\-Byte) 0\}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a85f4949c8938c80d76ac18ae8049c33f}
+\hypertarget{DOMLSSerializerImpl_8cpp_a4f5394f1bd8591e8ebfb0dd569d5dcb7}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!B\-O\-M\-\_\-utf16le@{B\-O\-M\-\_\-utf16le}}
+\index{B\-O\-M\-\_\-utf16le@{B\-O\-M\-\_\-utf16le}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{B\-O\-M\-\_\-utf16le}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Byte B\-O\-M\-\_\-utf16le\mbox{[}$\,$\mbox{]} = \{(X\-M\-L\-Byte)0x\-F\-F, (\-X\-M\-L\-Byte)0x\-F\-E, (\-X\-M\-L\-Byte) 0\}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a4f5394f1bd8591e8ebfb0dd569d5dcb7}
+\hypertarget{DOMLSSerializerImpl_8cpp_abc1e3d3dbc16cda3e31a9b3771fd5bd0}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!B\-O\-M\-\_\-utf8@{B\-O\-M\-\_\-utf8}}
+\index{B\-O\-M\-\_\-utf8@{B\-O\-M\-\_\-utf8}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{B\-O\-M\-\_\-utf8}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Byte B\-O\-M\-\_\-utf8\mbox{[}$\,$\mbox{]} = \{(X\-M\-L\-Byte)0x\-E\-F, (\-X\-M\-L\-Byte)0x\-B\-B, (\-X\-M\-L\-Byte)0x\-B\-F, (\-X\-M\-L\-Byte) 0\}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_abc1e3d3dbc16cda3e31a9b3771fd5bd0}
+\hypertarget{DOMLSSerializerImpl_8cpp_af3f720f761947ff5cf361a59ce2124b7}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!B\-Y\-T\-E\-\_\-\-O\-R\-D\-E\-R\-\_\-\-M\-A\-R\-K\-\_\-\-I\-D@{B\-Y\-T\-E\-\_\-\-O\-R\-D\-E\-R\-\_\-\-M\-A\-R\-K\-\_\-\-I\-D}}
+\index{B\-Y\-T\-E\-\_\-\-O\-R\-D\-E\-R\-\_\-\-M\-A\-R\-K\-\_\-\-I\-D@{B\-Y\-T\-E\-\_\-\-O\-R\-D\-E\-R\-\_\-\-M\-A\-R\-K\-\_\-\-I\-D}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{B\-Y\-T\-E\-\_\-\-O\-R\-D\-E\-R\-\_\-\-M\-A\-R\-K\-\_\-\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}const int B\-Y\-T\-E\-\_\-\-O\-R\-D\-E\-R\-\_\-\-M\-A\-R\-K\-\_\-\-I\-D = 0x8\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_af3f720f761947ff5cf361a59ce2124b7}
+\hypertarget{DOMLSSerializerImpl_8cpp_a593c69ff849c14cb7490e85f8dc8542e}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!C\-A\-N\-O\-N\-I\-C\-A\-L\-\_\-\-F\-O\-R\-M\-\_\-\-I\-D@{C\-A\-N\-O\-N\-I\-C\-A\-L\-\_\-\-F\-O\-R\-M\-\_\-\-I\-D}}
+\index{C\-A\-N\-O\-N\-I\-C\-A\-L\-\_\-\-F\-O\-R\-M\-\_\-\-I\-D@{C\-A\-N\-O\-N\-I\-C\-A\-L\-\_\-\-F\-O\-R\-M\-\_\-\-I\-D}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{C\-A\-N\-O\-N\-I\-C\-A\-L\-\_\-\-F\-O\-R\-M\-\_\-\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}const int C\-A\-N\-O\-N\-I\-C\-A\-L\-\_\-\-F\-O\-R\-M\-\_\-\-I\-D = 0x0\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a593c69ff849c14cb7490e85f8dc8542e}
+\hypertarget{DOMLSSerializerImpl_8cpp_a5dc0ef5a4c10af8d79239f9c94de302f}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!D\-I\-S\-C\-A\-R\-D\-\_\-\-D\-E\-F\-A\-U\-L\-T\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-I\-D@{D\-I\-S\-C\-A\-R\-D\-\_\-\-D\-E\-F\-A\-U\-L\-T\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-I\-D}}
+\index{D\-I\-S\-C\-A\-R\-D\-\_\-\-D\-E\-F\-A\-U\-L\-T\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-I\-D@{D\-I\-S\-C\-A\-R\-D\-\_\-\-D\-E\-F\-A\-U\-L\-T\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-I\-D}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{D\-I\-S\-C\-A\-R\-D\-\_\-\-D\-E\-F\-A\-U\-L\-T\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}const int D\-I\-S\-C\-A\-R\-D\-\_\-\-D\-E\-F\-A\-U\-L\-T\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-I\-D = 0x1\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a5dc0ef5a4c10af8d79239f9c94de302f}
+\hypertarget{DOMLSSerializerImpl_8cpp_a1c7e9e69b6daad1298e990f461fb5773}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!E\-N\-T\-I\-T\-I\-E\-S\-\_\-\-I\-D@{E\-N\-T\-I\-T\-I\-E\-S\-\_\-\-I\-D}}
+\index{E\-N\-T\-I\-T\-I\-E\-S\-\_\-\-I\-D@{E\-N\-T\-I\-T\-I\-E\-S\-\_\-\-I\-D}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{E\-N\-T\-I\-T\-I\-E\-S\-\_\-\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}const int E\-N\-T\-I\-T\-I\-E\-S\-\_\-\-I\-D = 0x2\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a1c7e9e69b6daad1298e990f461fb5773}
+\hypertarget{DOMLSSerializerImpl_8cpp_a11750df372b37d8a2f53fe19491b0859}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!features\-Supported@{features\-Supported}}
+\index{features\-Supported@{features\-Supported}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{features\-Supported}]{\setlength{\rightskip}{0pt plus 5cm}const bool features\-Supported\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a11750df372b37d8a2f53fe19491b0859}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+= \{
+    \textcolor{keyword}{false}, \textcolor{keyword}{true},  
+    \textcolor{keyword}{true},  \textcolor{keyword}{true},  
+    \textcolor{keyword}{true},  \textcolor{keyword}{true},  
+    \textcolor{keyword}{true},  \textcolor{keyword}{true},  
+    \textcolor{keyword}{false}, \textcolor{keyword}{true},  
+    \textcolor{keyword}{true},  \textcolor{keyword}{true},  
+    \textcolor{keyword}{false}, \textcolor{keyword}{true},  
+    \textcolor{keyword}{true},  \textcolor{keyword}{false}, 
+    \textcolor{keyword}{true},  \textcolor{keyword}{true},  
+    \textcolor{keyword}{true},  \textcolor{keyword}{true},  
+    \textcolor{keyword}{true},  \textcolor{keyword}{true}   
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_abc7c8b439f877f7aef89246d32252c2e}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!F\-O\-R\-M\-A\-T\-\_\-\-P\-R\-E\-T\-T\-Y\-\_\-\-P\-R\-I\-N\-T\-\_\-1\-S\-T\-\_\-\-L\-E\-V\-E\-L\-\_\-\-I\-D@{F\-O\-R\-M\-A\-T\-\_\-\-P\-R\-E\-T\-T\-Y\-\_\-\-P\-R\-I\-N\-T\-\_\-1\-S\-T\-\_\-\-L\-E\-V\-E\-L\-\_\-\-I\-D}}
+\index{F\-O\-R\-M\-A\-T\-\_\-\-P\-R\-E\-T\-T\-Y\-\_\-\-P\-R\-I\-N\-T\-\_\-1\-S\-T\-\_\-\-L\-E\-V\-E\-L\-\_\-\-I\-D@{F\-O\-R\-M\-A\-T\-\_\-\-P\-R\-E\-T\-T\-Y\-\_\-\-P\-R\-I\-N\-T\-\_\-1\-S\-T\-\_\-\-L\-E\-V\-E\-L\-\_\-\-I\-D}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{F\-O\-R\-M\-A\-T\-\_\-\-P\-R\-E\-T\-T\-Y\-\_\-\-P\-R\-I\-N\-T\-\_\-1\-S\-T\-\_\-\-L\-E\-V\-E\-L\-\_\-\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}const int F\-O\-R\-M\-A\-T\-\_\-\-P\-R\-E\-T\-T\-Y\-\_\-\-P\-R\-I\-N\-T\-\_\-1\-S\-T\-\_\-\-L\-E\-V\-E\-L\-\_\-\-I\-D = 0x\-A\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_abc7c8b439f877f7aef89246d32252c2e}
+\hypertarget{DOMLSSerializerImpl_8cpp_a52b59aacd571f2934429940c65238c58}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!F\-O\-R\-M\-A\-T\-\_\-\-P\-R\-E\-T\-T\-Y\-\_\-\-P\-R\-I\-N\-T\-\_\-\-I\-D@{F\-O\-R\-M\-A\-T\-\_\-\-P\-R\-E\-T\-T\-Y\-\_\-\-P\-R\-I\-N\-T\-\_\-\-I\-D}}
+\index{F\-O\-R\-M\-A\-T\-\_\-\-P\-R\-E\-T\-T\-Y\-\_\-\-P\-R\-I\-N\-T\-\_\-\-I\-D@{F\-O\-R\-M\-A\-T\-\_\-\-P\-R\-E\-T\-T\-Y\-\_\-\-P\-R\-I\-N\-T\-\_\-\-I\-D}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{F\-O\-R\-M\-A\-T\-\_\-\-P\-R\-E\-T\-T\-Y\-\_\-\-P\-R\-I\-N\-T\-\_\-\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}const int F\-O\-R\-M\-A\-T\-\_\-\-P\-R\-E\-T\-T\-Y\-\_\-\-P\-R\-I\-N\-T\-\_\-\-I\-D = 0x3\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a52b59aacd571f2934429940c65238c58}
+\hypertarget{DOMLSSerializerImpl_8cpp_ac963402186f2ca8f42c832cdaad94ef4}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-End\-C\-D\-A\-T\-A@{g\-End\-C\-D\-A\-T\-A}}
+\index{g\-End\-C\-D\-A\-T\-A@{g\-End\-C\-D\-A\-T\-A}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-End\-C\-D\-A\-T\-A}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-End\-C\-D\-A\-T\-A\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_ac963402186f2ca8f42c832cdaad94ef4}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+
+      chCloseSquare, chCloseSquare, chCloseAngle, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_a4fa9732ceabe3654be8a2533836ea8e0}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-End\-Comment@{g\-End\-Comment}}
+\index{g\-End\-Comment@{g\-End\-Comment}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-End\-Comment}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-End\-Comment\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a4fa9732ceabe3654be8a2533836ea8e0}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chDash, chDash, chCloseAngle, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_a25f9da6c20e50c089c655a7e02f9c64d}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-End\-Element@{g\-End\-Element}}
+\index{g\-End\-Element@{g\-End\-Element}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-End\-Element}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-End\-Element\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a25f9da6c20e50c089c655a7e02f9c64d}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chOpenAngle, chForwardSlash, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_a201d52283a483eb3db9b089f6d588f0d}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-End\-P\-I@{g\-End\-P\-I}}
+\index{g\-End\-P\-I@{g\-End\-P\-I}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-End\-P\-I}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-End\-P\-I\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a201d52283a483eb3db9b089f6d588f0d}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chQuestion, chCloseAngle, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_a1e3ec7a84ae7a91439ab8b2504ad82b1}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-E\-O\-L\-Seq@{g\-E\-O\-L\-Seq}}
+\index{g\-E\-O\-L\-Seq@{g\-E\-O\-L\-Seq}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-E\-O\-L\-Seq}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-E\-O\-L\-Seq\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a1e3ec7a84ae7a91439ab8b2504ad82b1}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chLF, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_aa089bbd3d669a46875f4682119e1a18e}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-Notation@{g\-Notation}}
+\index{g\-Notation@{g\-Notation}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-Notation}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-Notation\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_aa089bbd3d669a46875f4682119e1a18e}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chLatin\_N, chLatin\_D,     chLatin\_A, chLatin\_T, chLatin\_A,
+    chSpace,   chDoubleQuote, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_acdc27d7ec09fbe4eb30929bf7a5ec068}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-Public@{g\-Public}}
+\index{g\-Public@{g\-Public}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-Public}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-Public\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_acdc27d7ec09fbe4eb30929bf7a5ec068}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chLatin\_P, chLatin\_U, chLatin\_B,     chLatin\_L, chLatin\_I,
+    chLatin\_C, chSpace,   chDoubleQuote, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_ab4e06350ff69e57c0e2f3a8b86808e1d}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-Start\-C\-D\-A\-T\-A@{g\-Start\-C\-D\-A\-T\-A}}
+\index{g\-Start\-C\-D\-A\-T\-A@{g\-Start\-C\-D\-A\-T\-A}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-Start\-C\-D\-A\-T\-A}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-Start\-C\-D\-A\-T\-A\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_ab4e06350ff69e57c0e2f3a8b86808e1d}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chOpenAngle, chBang,    chOpenSquare, chLatin\_C, chLatin\_D,
+    chLatin\_A,   chLatin\_T, chLatin\_A,    chOpenSquare, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_ae4960ffb4bf0b9b95c09dd7767ea7771}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-Start\-Comment@{g\-Start\-Comment}}
+\index{g\-Start\-Comment@{g\-Start\-Comment}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-Start\-Comment}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-Start\-Comment\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_ae4960ffb4bf0b9b95c09dd7767ea7771}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chOpenAngle, chBang, chDash, chDash, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_a35745ac12b6fac940a9c98f20b38b6b5}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-Start\-Doctype@{g\-Start\-Doctype}}
+\index{g\-Start\-Doctype@{g\-Start\-Doctype}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-Start\-Doctype}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-Start\-Doctype\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a35745ac12b6fac940a9c98f20b38b6b5}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chOpenAngle, chBang,    chLatin\_D, chLatin\_O, chLatin\_C, chLatin\_T,
+    chLatin\_Y,   chLatin\_P, chLatin\_E, chSpace,   chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_a7381a7357ede9af25cf3582695c149ce}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-Start\-Entity@{g\-Start\-Entity}}
+\index{g\-Start\-Entity@{g\-Start\-Entity}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-Start\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-Start\-Entity\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a7381a7357ede9af25cf3582695c149ce}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chOpenAngle, chBang,    chLatin\_E, chLatin\_N, chLatin\_T, chLatin\_I,
+    chLatin\_T,   chLatin\_Y, chSpace,   chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_a7e0a510e385bc945c0bcd555c2fb85d6}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-Start\-P\-I@{g\-Start\-P\-I}}
+\index{g\-Start\-P\-I@{g\-Start\-P\-I}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-Start\-P\-I}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-Start\-P\-I\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a7e0a510e385bc945c0bcd555c2fb85d6}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chOpenAngle, chQuestion, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_a107cb5bbd67540f7b2e65e425d51d10b}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-System@{g\-System}}
+\index{g\-System@{g\-System}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-System}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-System\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a107cb5bbd67540f7b2e65e425d51d10b}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chLatin\_S, chLatin\_Y, chLatin\_S,     chLatin\_T, chLatin\_E,
+    chLatin\_M, chSpace,   chDoubleQuote, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_a6292fd3217602ec5724b7a0daa2aea14}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-U\-T\-F8@{g\-U\-T\-F8}}
+\index{g\-U\-T\-F8@{g\-U\-T\-F8}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-U\-T\-F8}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-U\-T\-F8\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a6292fd3217602ec5724b7a0daa2aea14}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chLatin\_U, chLatin\_T, chLatin\_F, chDash, chDigit\_8, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_aa86734b8fa16f8d38707817ad4e028c7}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-X\-M\-L\-Decl\-\_\-\-Encoding\-Decl@{g\-X\-M\-L\-Decl\-\_\-\-Encoding\-Decl}}
+\index{g\-X\-M\-L\-Decl\-\_\-\-Encoding\-Decl@{g\-X\-M\-L\-Decl\-\_\-\-Encoding\-Decl}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-X\-M\-L\-Decl\-\_\-\-Encoding\-Decl}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-X\-M\-L\-Decl\-\_\-\-Encoding\-Decl\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_aa86734b8fa16f8d38707817ad4e028c7}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chLatin\_e,  chLatin\_n,  chLatin\_c,  chLatin\_o,      chLatin\_d, chLatin\_i,
+    chLatin\_n,  chLatin\_g,  chEqual,    chDoubleQuote,  chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_a5583a95524792d499b0eb697d654ab0d}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-X\-M\-L\-Decl\-\_\-endtag@{g\-X\-M\-L\-Decl\-\_\-endtag}}
+\index{g\-X\-M\-L\-Decl\-\_\-endtag@{g\-X\-M\-L\-Decl\-\_\-endtag}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-X\-M\-L\-Decl\-\_\-endtag}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-X\-M\-L\-Decl\-\_\-endtag\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a5583a95524792d499b0eb697d654ab0d}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chQuestion, chCloseAngle,  chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_a7ac464c3ed81f775e5852ae45babbd34}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-X\-M\-L\-Decl\-\_\-\-S\-D\-Decl@{g\-X\-M\-L\-Decl\-\_\-\-S\-D\-Decl}}
+\index{g\-X\-M\-L\-Decl\-\_\-\-S\-D\-Decl@{g\-X\-M\-L\-Decl\-\_\-\-S\-D\-Decl}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-X\-M\-L\-Decl\-\_\-\-S\-D\-Decl}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-X\-M\-L\-Decl\-\_\-\-S\-D\-Decl\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a7ac464c3ed81f775e5852ae45babbd34}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chLatin\_s, chLatin\_t, chLatin\_a,   chLatin\_n,    chLatin\_d,   chLatin\_a,
+    chLatin\_l, chLatin\_o, chLatin\_n,   chLatin\_e,    chEqual,     chDoubleQuote,
+    chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_aae9c5b8f896a7acb07be0698a9eee95c}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-X\-M\-L\-Decl\-\_\-separator@{g\-X\-M\-L\-Decl\-\_\-separator}}
+\index{g\-X\-M\-L\-Decl\-\_\-separator@{g\-X\-M\-L\-Decl\-\_\-separator}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-X\-M\-L\-Decl\-\_\-separator}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-X\-M\-L\-Decl\-\_\-separator\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_aae9c5b8f896a7acb07be0698a9eee95c}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chDoubleQuote, chSpace, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_a19962e8a061fa83ab35f160d6949afd2}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-X\-M\-L\-Decl\-\_\-ver10@{g\-X\-M\-L\-Decl\-\_\-ver10}}
+\index{g\-X\-M\-L\-Decl\-\_\-ver10@{g\-X\-M\-L\-Decl\-\_\-ver10}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-X\-M\-L\-Decl\-\_\-ver10}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-X\-M\-L\-Decl\-\_\-ver10\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a19962e8a061fa83ab35f160d6949afd2}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chDigit\_1, chPeriod, chDigit\_0, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_ac5b0b4e4cb9f9148e537ac2d9a12c66c}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!g\-X\-M\-L\-Decl\-\_\-\-Version\-Info@{g\-X\-M\-L\-Decl\-\_\-\-Version\-Info}}
+\index{g\-X\-M\-L\-Decl\-\_\-\-Version\-Info@{g\-X\-M\-L\-Decl\-\_\-\-Version\-Info}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{g\-X\-M\-L\-Decl\-\_\-\-Version\-Info}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-X\-M\-L\-Decl\-\_\-\-Version\-Info\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_ac5b0b4e4cb9f9148e537ac2d9a12c66c}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chOpenAngle, chQuestion, chLatin\_x,     chLatin\_m,  chLatin\_l,  chSpace,
+    chLatin\_v,   chLatin\_e,  chLatin\_r,     chLatin\_s,  chLatin\_i,  chLatin\_o,
+    chLatin\_n,   chEqual,    chDoubleQuote, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DOMLSSerializerImpl_8cpp_afe7fd127e98502f3b54acf2fed2bdd95}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!I\-N\-V\-A\-L\-I\-D\-\_\-\-F\-E\-A\-T\-U\-R\-E\-\_\-\-I\-D@{I\-N\-V\-A\-L\-I\-D\-\_\-\-F\-E\-A\-T\-U\-R\-E\-\_\-\-I\-D}}
+\index{I\-N\-V\-A\-L\-I\-D\-\_\-\-F\-E\-A\-T\-U\-R\-E\-\_\-\-I\-D@{I\-N\-V\-A\-L\-I\-D\-\_\-\-F\-E\-A\-T\-U\-R\-E\-\_\-\-I\-D}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{I\-N\-V\-A\-L\-I\-D\-\_\-\-F\-E\-A\-T\-U\-R\-E\-\_\-\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N const int I\-N\-V\-A\-L\-I\-D\-\_\-\-F\-E\-A\-T\-U\-R\-E\-\_\-\-I\-D = -\/1\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_afe7fd127e98502f3b54acf2fed2bdd95}
+\hypertarget{DOMLSSerializerImpl_8cpp_a23b469e417f475ceca1a56d86a4a0653}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!N\-O\-R\-M\-A\-L\-I\-Z\-E\-\_\-\-C\-H\-A\-R\-A\-C\-T\-E\-R\-S\-\_\-\-I\-D@{N\-O\-R\-M\-A\-L\-I\-Z\-E\-\_\-\-C\-H\-A\-R\-A\-C\-T\-E\-R\-S\-\_\-\-I\-D}}
+\index{N\-O\-R\-M\-A\-L\-I\-Z\-E\-\_\-\-C\-H\-A\-R\-A\-C\-T\-E\-R\-S\-\_\-\-I\-D@{N\-O\-R\-M\-A\-L\-I\-Z\-E\-\_\-\-C\-H\-A\-R\-A\-C\-T\-E\-R\-S\-\_\-\-I\-D}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{N\-O\-R\-M\-A\-L\-I\-Z\-E\-\_\-\-C\-H\-A\-R\-A\-C\-T\-E\-R\-S\-\_\-\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}const int N\-O\-R\-M\-A\-L\-I\-Z\-E\-\_\-\-C\-H\-A\-R\-A\-C\-T\-E\-R\-S\-\_\-\-I\-D = 0x4\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a23b469e417f475ceca1a56d86a4a0653}
+\hypertarget{DOMLSSerializerImpl_8cpp_a2c72f8b2f1dd43c42f7c2b241aad0ad5}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!S\-P\-L\-I\-T\-\_\-\-C\-D\-A\-T\-A\-\_\-\-S\-E\-C\-T\-I\-O\-N\-S\-\_\-\-I\-D@{S\-P\-L\-I\-T\-\_\-\-C\-D\-A\-T\-A\-\_\-\-S\-E\-C\-T\-I\-O\-N\-S\-\_\-\-I\-D}}
+\index{S\-P\-L\-I\-T\-\_\-\-C\-D\-A\-T\-A\-\_\-\-S\-E\-C\-T\-I\-O\-N\-S\-\_\-\-I\-D@{S\-P\-L\-I\-T\-\_\-\-C\-D\-A\-T\-A\-\_\-\-S\-E\-C\-T\-I\-O\-N\-S\-\_\-\-I\-D}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{S\-P\-L\-I\-T\-\_\-\-C\-D\-A\-T\-A\-\_\-\-S\-E\-C\-T\-I\-O\-N\-S\-\_\-\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}const int S\-P\-L\-I\-T\-\_\-\-C\-D\-A\-T\-A\-\_\-\-S\-E\-C\-T\-I\-O\-N\-S\-\_\-\-I\-D = 0x5\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a2c72f8b2f1dd43c42f7c2b241aad0ad5}
+\hypertarget{DOMLSSerializerImpl_8cpp_aebc2437f6ce806c8d2a632b1bdd6b1ac}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!V\-A\-L\-I\-D\-A\-T\-I\-O\-N\-\_\-\-I\-D@{V\-A\-L\-I\-D\-A\-T\-I\-O\-N\-\_\-\-I\-D}}
+\index{V\-A\-L\-I\-D\-A\-T\-I\-O\-N\-\_\-\-I\-D@{V\-A\-L\-I\-D\-A\-T\-I\-O\-N\-\_\-\-I\-D}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{V\-A\-L\-I\-D\-A\-T\-I\-O\-N\-\_\-\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}const int V\-A\-L\-I\-D\-A\-T\-I\-O\-N\-\_\-\-I\-D = 0x6\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_aebc2437f6ce806c8d2a632b1bdd6b1ac}
+\hypertarget{DOMLSSerializerImpl_8cpp_a2c8aea0277a7d024f3e109e67f310f30}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!W\-H\-I\-T\-E\-S\-P\-A\-C\-E\-\_\-\-I\-N\-\_\-\-E\-L\-E\-M\-E\-N\-T\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-I\-D@{W\-H\-I\-T\-E\-S\-P\-A\-C\-E\-\_\-\-I\-N\-\_\-\-E\-L\-E\-M\-E\-N\-T\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-I\-D}}
+\index{W\-H\-I\-T\-E\-S\-P\-A\-C\-E\-\_\-\-I\-N\-\_\-\-E\-L\-E\-M\-E\-N\-T\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-I\-D@{W\-H\-I\-T\-E\-S\-P\-A\-C\-E\-\_\-\-I\-N\-\_\-\-E\-L\-E\-M\-E\-N\-T\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-I\-D}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{W\-H\-I\-T\-E\-S\-P\-A\-C\-E\-\_\-\-I\-N\-\_\-\-E\-L\-E\-M\-E\-N\-T\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}const int W\-H\-I\-T\-E\-S\-P\-A\-C\-E\-\_\-\-I\-N\-\_\-\-E\-L\-E\-M\-E\-N\-T\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-I\-D = 0x7\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a2c8aea0277a7d024f3e109e67f310f30}
+\hypertarget{DOMLSSerializerImpl_8cpp_a649865479c445c1e4d67bd3776ebe399}{\index{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}!X\-M\-L\-\_\-\-D\-E\-C\-L\-A\-R\-A\-T\-I\-O\-N@{X\-M\-L\-\_\-\-D\-E\-C\-L\-A\-R\-A\-T\-I\-O\-N}}
+\index{X\-M\-L\-\_\-\-D\-E\-C\-L\-A\-R\-A\-T\-I\-O\-N@{X\-M\-L\-\_\-\-D\-E\-C\-L\-A\-R\-A\-T\-I\-O\-N}!DOMLSSerializerImpl.cpp@{D\-O\-M\-L\-S\-Serializer\-Impl.\-cpp}}
+\subsubsection[{X\-M\-L\-\_\-\-D\-E\-C\-L\-A\-R\-A\-T\-I\-O\-N}]{\setlength{\rightskip}{0pt plus 5cm}const int X\-M\-L\-\_\-\-D\-E\-C\-L\-A\-R\-A\-T\-I\-O\-N = 0x9\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSSerializerImpl_8cpp_a649865479c445c1e4d67bd3776ebe399}

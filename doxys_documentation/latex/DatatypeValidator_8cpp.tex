@@ -1,0 +1,71 @@
+\hypertarget{DatatypeValidator_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/validators/datatype/\-Datatype\-Validator.cpp File Reference}
+\label{DatatypeValidator_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/datatype/\-Datatype\-Validator.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/datatype/\-Datatype\-Validator.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-Memory\-Manager.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-String\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Any\-U\-R\-I\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Q\-Name\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Name\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-N\-C\-Name\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Boolean\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Float\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Double\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Decimal\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Hex\-Binary\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Base64\-Binary\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Duration\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Date\-Time\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Date\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Time\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Month\-Day\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Year\-Month\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Year\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Month\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Day\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-I\-D\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-I\-D\-R\-E\-F\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-E\-N\-T\-I\-T\-Y\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-N\-O\-T\-A\-T\-I\-O\-N\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-List\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Union\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Any\-Simple\-Type\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/internal/\-X\-Template\-Serializer.\-hpp$>$}\\*
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \\*
+X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N \\*
+const int \hyperlink{DatatypeValidator_8cpp_af7ffb2786bf73734f390d1f3ddb46215}{D\-V\-\_\-\-B\-U\-I\-L\-T\-I\-N} = -\/1
+\item 
+static const int \hyperlink{DatatypeValidator_8cpp_ac8c98b8eae2c804406a9f95cbd47cb45}{D\-V\-\_\-\-N\-O\-R\-M\-A\-L} = -\/2
+\item 
+static const int \hyperlink{DatatypeValidator_8cpp_aebc03ef7a83578ec0f6787d1701e6468}{D\-V\-\_\-\-Z\-E\-R\-O} = -\/3
+\item 
+static const int \hyperlink{DatatypeValidator_8cpp_a1daad31eece07cbb4f3e96a5084f3381}{T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-Z\-E\-R\-O} = -\/1
+\item 
+static const int \hyperlink{DatatypeValidator_8cpp_a876122295f6e386552d420f14b10c0de}{T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-S4\-S} = -\/2
+\item 
+static const int \hyperlink{DatatypeValidator_8cpp_a77feb1455c9e266021be9d883bc1c56b}{T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-N\-O\-R\-M\-A\-L} = -\/3
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\hypertarget{DatatypeValidator_8cpp_af7ffb2786bf73734f390d1f3ddb46215}{\index{Datatype\-Validator.\-cpp@{Datatype\-Validator.\-cpp}!D\-V\-\_\-\-B\-U\-I\-L\-T\-I\-N@{D\-V\-\_\-\-B\-U\-I\-L\-T\-I\-N}}
+\index{D\-V\-\_\-\-B\-U\-I\-L\-T\-I\-N@{D\-V\-\_\-\-B\-U\-I\-L\-T\-I\-N}!DatatypeValidator.cpp@{Datatype\-Validator.\-cpp}}
+\subsubsection[{D\-V\-\_\-\-B\-U\-I\-L\-T\-I\-N}]{\setlength{\rightskip}{0pt plus 5cm}X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N const int D\-V\-\_\-\-B\-U\-I\-L\-T\-I\-N = -\/1\hspace{0.3cm}{\ttfamily [static]}}}\label{DatatypeValidator_8cpp_af7ffb2786bf73734f390d1f3ddb46215}
+\hypertarget{DatatypeValidator_8cpp_ac8c98b8eae2c804406a9f95cbd47cb45}{\index{Datatype\-Validator.\-cpp@{Datatype\-Validator.\-cpp}!D\-V\-\_\-\-N\-O\-R\-M\-A\-L@{D\-V\-\_\-\-N\-O\-R\-M\-A\-L}}
+\index{D\-V\-\_\-\-N\-O\-R\-M\-A\-L@{D\-V\-\_\-\-N\-O\-R\-M\-A\-L}!DatatypeValidator.cpp@{Datatype\-Validator.\-cpp}}
+\subsubsection[{D\-V\-\_\-\-N\-O\-R\-M\-A\-L}]{\setlength{\rightskip}{0pt plus 5cm}const int D\-V\-\_\-\-N\-O\-R\-M\-A\-L = -\/2\hspace{0.3cm}{\ttfamily [static]}}}\label{DatatypeValidator_8cpp_ac8c98b8eae2c804406a9f95cbd47cb45}
+\hypertarget{DatatypeValidator_8cpp_aebc03ef7a83578ec0f6787d1701e6468}{\index{Datatype\-Validator.\-cpp@{Datatype\-Validator.\-cpp}!D\-V\-\_\-\-Z\-E\-R\-O@{D\-V\-\_\-\-Z\-E\-R\-O}}
+\index{D\-V\-\_\-\-Z\-E\-R\-O@{D\-V\-\_\-\-Z\-E\-R\-O}!DatatypeValidator.cpp@{Datatype\-Validator.\-cpp}}
+\subsubsection[{D\-V\-\_\-\-Z\-E\-R\-O}]{\setlength{\rightskip}{0pt plus 5cm}const int D\-V\-\_\-\-Z\-E\-R\-O = -\/3\hspace{0.3cm}{\ttfamily [static]}}}\label{DatatypeValidator_8cpp_aebc03ef7a83578ec0f6787d1701e6468}
+\hypertarget{DatatypeValidator_8cpp_a77feb1455c9e266021be9d883bc1c56b}{\index{Datatype\-Validator.\-cpp@{Datatype\-Validator.\-cpp}!T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-N\-O\-R\-M\-A\-L@{T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-N\-O\-R\-M\-A\-L}}
+\index{T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-N\-O\-R\-M\-A\-L@{T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-N\-O\-R\-M\-A\-L}!DatatypeValidator.cpp@{Datatype\-Validator.\-cpp}}
+\subsubsection[{T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-N\-O\-R\-M\-A\-L}]{\setlength{\rightskip}{0pt plus 5cm}const int T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-N\-O\-R\-M\-A\-L = -\/3\hspace{0.3cm}{\ttfamily [static]}}}\label{DatatypeValidator_8cpp_a77feb1455c9e266021be9d883bc1c56b}
+\hypertarget{DatatypeValidator_8cpp_a876122295f6e386552d420f14b10c0de}{\index{Datatype\-Validator.\-cpp@{Datatype\-Validator.\-cpp}!T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-S4\-S@{T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-S4\-S}}
+\index{T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-S4\-S@{T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-S4\-S}!DatatypeValidator.cpp@{Datatype\-Validator.\-cpp}}
+\subsubsection[{T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-S4\-S}]{\setlength{\rightskip}{0pt plus 5cm}const int T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-S4\-S = -\/2\hspace{0.3cm}{\ttfamily [static]}}}\label{DatatypeValidator_8cpp_a876122295f6e386552d420f14b10c0de}
+\hypertarget{DatatypeValidator_8cpp_a1daad31eece07cbb4f3e96a5084f3381}{\index{Datatype\-Validator.\-cpp@{Datatype\-Validator.\-cpp}!T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-Z\-E\-R\-O@{T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-Z\-E\-R\-O}}
+\index{T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-Z\-E\-R\-O@{T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-Z\-E\-R\-O}!DatatypeValidator.cpp@{Datatype\-Validator.\-cpp}}
+\subsubsection[{T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-Z\-E\-R\-O}]{\setlength{\rightskip}{0pt plus 5cm}const int T\-Y\-P\-E\-N\-A\-M\-E\-\_\-\-Z\-E\-R\-O = -\/1\hspace{0.3cm}{\ttfamily [static]}}}\label{DatatypeValidator_8cpp_a1daad31eece07cbb4f3e96a5084f3381}

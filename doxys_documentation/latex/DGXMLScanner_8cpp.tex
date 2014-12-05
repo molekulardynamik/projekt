@@ -1,0 +1,47 @@
+\hypertarget{DGXMLScanner_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/internal/\-D\-G\-X\-M\-L\-Scanner.cpp File Reference}
+\label{DGXMLScanner_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/internal/\-D\-G\-X\-M\-L\-Scanner.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/internal/\-D\-G\-X\-M\-L\-Scanner.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/internal/\-D\-G\-X\-M\-L\-Scanner.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Janitor.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Runtime\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Unexpected\-E\-O\-F\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Uri.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-U\-R\-L\-Input\-Source.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-Local\-File\-Input\-Source.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Document\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Entity\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-P\-Scan\-Token.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Grammar\-Pool.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-D\-T\-D\-Description.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/internal/\-End\-Of\-Entity\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/common/\-Grammar\-Resolver.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/\-D\-T\-D/\-Doc\-Type\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/\-D\-T\-D/\-D\-T\-D\-Scanner.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/\-D\-T\-D/\-D\-T\-D\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Out\-Of\-Memory\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Resource\-Identifier.\-hpp$>$}\\*
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Janitor\-Mem\-Fun\-Call\\*
+$<$ Reader\-Mgr $>$ \hyperlink{DGXMLScanner_8cpp_a4fb422e5d6ce0196c4562573a8cd245d}{Reader\-Mgr\-Reset\-Type}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N \\*
+typedef Janitor\-Mem\-Fun\-Call\\*
+$<$ D\-G\-X\-M\-L\-Scanner $>$ \hyperlink{DGXMLScanner_8cpp_a4a8438a68cdce2cc3713d31cfac94168}{Cleanup\-Type}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{DGXMLScanner_8cpp_a4fb422e5d6ce0196c4562573a8cd245d}{\index{D\-G\-X\-M\-L\-Scanner.\-cpp@{D\-G\-X\-M\-L\-Scanner.\-cpp}!Reader\-Mgr\-Reset\-Type@{Reader\-Mgr\-Reset\-Type}}
+\index{Reader\-Mgr\-Reset\-Type@{Reader\-Mgr\-Reset\-Type}!DGXMLScanner.cpp@{D\-G\-X\-M\-L\-Scanner.\-cpp}}
+\subsubsection[{Reader\-Mgr\-Reset\-Type}]{\setlength{\rightskip}{0pt plus 5cm}typedef Janitor\-Mem\-Fun\-Call$<$Reader\-Mgr$>$ {\bf Reader\-Mgr\-Reset\-Type}}}\label{DGXMLScanner_8cpp_a4fb422e5d6ce0196c4562573a8cd245d}
+
+
+\subsection{Variable Documentation}
+\hypertarget{DGXMLScanner_8cpp_a4a8438a68cdce2cc3713d31cfac94168}{\index{D\-G\-X\-M\-L\-Scanner.\-cpp@{D\-G\-X\-M\-L\-Scanner.\-cpp}!Cleanup\-Type@{Cleanup\-Type}}
+\index{Cleanup\-Type@{Cleanup\-Type}!DGXMLScanner.cpp@{D\-G\-X\-M\-L\-Scanner.\-cpp}}
+\subsubsection[{Cleanup\-Type}]{\setlength{\rightskip}{0pt plus 5cm}X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N typedef Janitor\-Mem\-Fun\-Call$<$D\-G\-X\-M\-L\-Scanner$>$ {\bf Cleanup\-Type}}}\label{DGXMLScanner_8cpp_a4a8438a68cdce2cc3713d31cfac94168}

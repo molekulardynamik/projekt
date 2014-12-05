@@ -1,0 +1,36 @@
+\hypertarget{DOMNormalizer_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/dom/impl/\-D\-O\-M\-Normalizer.cpp File Reference}
+\label{DOMNormalizer_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/dom/impl/\-D\-O\-M\-Normalizer.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/dom/impl/\-D\-O\-M\-Normalizer.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Attr.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Node.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Error\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Error.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Text.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Buffer.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Mutexes.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Platform\-Utils.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Initializer.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Msg\-Loader.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-String.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Uni.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Uni\-Defs.\-hpp$>$}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Configuration\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Document\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Element\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Error\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Entity\-Reference\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Normalizer.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Text\-Impl.\-hpp\char`\"{}}\\*
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \\*
+X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N \\*
+X\-M\-L\-Msg\-Loader $\ast$ \hyperlink{DOMNormalizer_8cpp_ac627c04531cfc59aee2c4da51d816068}{g\-Msg\-Loader} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\hypertarget{DOMNormalizer_8cpp_ac627c04531cfc59aee2c4da51d816068}{\index{D\-O\-M\-Normalizer.\-cpp@{D\-O\-M\-Normalizer.\-cpp}!g\-Msg\-Loader@{g\-Msg\-Loader}}
+\index{g\-Msg\-Loader@{g\-Msg\-Loader}!DOMNormalizer.cpp@{D\-O\-M\-Normalizer.\-cpp}}
+\subsubsection[{g\-Msg\-Loader}]{\setlength{\rightskip}{0pt plus 5cm}X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N X\-M\-L\-Msg\-Loader$\ast$ g\-Msg\-Loader = 0\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMNormalizer_8cpp_ac627c04531cfc59aee2c4da51d816068}

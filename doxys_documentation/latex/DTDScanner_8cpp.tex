@@ -1,0 +1,40 @@
+\hypertarget{DTDScanner_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/validators/\-D\-T\-D/\-D\-T\-D\-Scanner.cpp File Reference}
+\label{DTDScanner_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/\-D\-T\-D/\-D\-T\-D\-Scanner.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/\-D\-T\-D/\-D\-T\-D\-Scanner.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/util/\-Bin\-Mem\-Input\-Stream.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Flag\-Janitor.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Janitor.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Uni\-Defs.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Value\-Stack\-Of.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Unexpected\-E\-O\-F\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Out\-Of\-Memory\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/sax/\-Input\-Source.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Document\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Entity\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/internal/\-End\-Of\-Entity\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/internal/\-X\-M\-L\-Scanner.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/common/\-Content\-Spec\-Node.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/common/\-Mixed\-Content\-Model.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/\-D\-T\-D/\-D\-T\-D\-Entity\-Decl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/\-D\-T\-D/\-Doc\-Type\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/\-D\-T\-D/\-D\-T\-D\-Scanner.\-hpp$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \\*
+X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N \\*
+Content\-Spec\-Node $\ast$ \hyperlink{DTDScanner_8cpp_a25af423f0f7fc760d18bf6699bfd2c01}{make\-Rep\-Node} (const X\-M\-L\-Ch test\-Ch, Content\-Spec\-Node $\ast$const prev\-Node, Memory\-Manager $\ast$const manager)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{DTDScanner_8cpp_a25af423f0f7fc760d18bf6699bfd2c01}{\index{D\-T\-D\-Scanner.\-cpp@{D\-T\-D\-Scanner.\-cpp}!make\-Rep\-Node@{make\-Rep\-Node}}
+\index{make\-Rep\-Node@{make\-Rep\-Node}!DTDScanner.cpp@{D\-T\-D\-Scanner.\-cpp}}
+\subsubsection[{make\-Rep\-Node}]{\setlength{\rightskip}{0pt plus 5cm}static X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N Content\-Spec\-Node$\ast$ make\-Rep\-Node (
+\begin{DoxyParamCaption}
+\item[{const X\-M\-L\-Ch}]{test\-Ch, }
+\item[{Content\-Spec\-Node $\ast$const}]{prev\-Node, }
+\item[{Memory\-Manager $\ast$const}]{manager}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{DTDScanner_8cpp_a25af423f0f7fc760d18bf6699bfd2c01}

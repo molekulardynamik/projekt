@@ -1,0 +1,34 @@
+\hypertarget{DateTimeValidator_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/validators/datatype/\-Date\-Time\-Validator.cpp File Reference}
+\label{DateTimeValidator_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/datatype/\-Date\-Time\-Validator.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/datatype/\-Date\-Time\-Validator.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Date\-Time\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Invalid\-Datatype\-Facet\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Invalid\-Datatype\-Value\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Schema\-Symbols.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Out\-Of\-Memory\-Exception.\-hpp$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{DateTimeValidator_8cpp_abf0e0e334aa021abc2f718e9bc2f1410}{R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R}(val1, val2, except\-\_\-code, manager)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{DateTimeValidator_8cpp_abf0e0e334aa021abc2f718e9bc2f1410}{\index{Date\-Time\-Validator.\-cpp@{Date\-Time\-Validator.\-cpp}!R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R@{R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R}}
+\index{R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R@{R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R}!DateTimeValidator.cpp@{Date\-Time\-Validator.\-cpp}}
+\subsubsection[{R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R(
+\begin{DoxyParamCaption}
+\item[{}]{val1, }
+\item[{}]{val2, }
+\item[{}]{except\-\_\-code, }
+\item[{}]{manager}
+\end{DoxyParamCaption}
+)}}\label{DateTimeValidator_8cpp_abf0e0e334aa021abc2f718e9bc2f1410}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+ThrowXMLwithMemMgr2(InvalidDatatypeValueException               \(\backslash\)
+          , except\_code                                 \(\backslash\)
+          , val1->getRawData()                          \(\backslash\)
+          , val2->getRawData()                          \(\backslash\)
+          , manager);
+\end{DoxyCode}

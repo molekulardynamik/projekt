@@ -1,0 +1,65 @@
+\hypertarget{SGXMLScanner_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/internal/\-S\-G\-X\-M\-L\-Scanner.cpp File Reference}
+\label{SGXMLScanner_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/internal/\-S\-G\-X\-M\-L\-Scanner.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/internal/\-S\-G\-X\-M\-L\-Scanner.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/internal/\-S\-G\-X\-M\-L\-Scanner.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Runtime\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Unexpected\-E\-O\-F\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Uri.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-Local\-File\-Input\-Source.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-U\-R\-L\-Input\-Source.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Document\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Entity\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-P\-Scan\-Token.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-Memory\-Manager.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Grammar\-Pool.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-P\-S\-V\-I\-Element.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-P\-S\-V\-I\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-P\-S\-V\-I\-Attribute\-List.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Annotation.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/internal/\-End\-Of\-Entity\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/common/\-Content\-Leaf\-Name\-Type\-Vector.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Schema\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Traverse\-Schema.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-X\-S\-D\-D\-O\-M\-Parser.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Substitution\-Group\-Comparator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-X\-M\-L\-Schema\-Description\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/identity/\-Identity\-Constraint\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/identity/\-I\-C\-\_\-\-Selector.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/identity/\-Value\-Store.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Out\-Of\-Memory\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-String\-Tokenizer.\-hpp$>$}\\*
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Janitor\-Mem\-Fun\-Call\\*
+$<$ S\-G\-X\-M\-L\-Scanner $>$ \hyperlink{SGXMLScanner_8cpp_a396ba958ec4460ce9456a7d02a74c95c}{Cleanup\-Type}
+\item 
+typedef Janitor\-Mem\-Fun\-Call\\*
+$<$ Reader\-Mgr $>$ \hyperlink{SGXMLScanner_8cpp_a4fb422e5d6ce0196c4562573a8cd245d}{Reader\-Mgr\-Reset\-Type}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N \\*
+X\-M\-L\-Att\-Def\-List \& \hyperlink{SGXMLScanner_8cpp_a39e9ac9e18029b9a23f5ed9605127e78}{get\-Att\-Def\-List} (Complex\-Type\-Info $\ast$curr\-Type, X\-M\-L\-Element\-Decl $\ast$elem\-Decl)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{SGXMLScanner_8cpp_a396ba958ec4460ce9456a7d02a74c95c}{\index{S\-G\-X\-M\-L\-Scanner.\-cpp@{S\-G\-X\-M\-L\-Scanner.\-cpp}!Cleanup\-Type@{Cleanup\-Type}}
+\index{Cleanup\-Type@{Cleanup\-Type}!SGXMLScanner.cpp@{S\-G\-X\-M\-L\-Scanner.\-cpp}}
+\subsubsection[{Cleanup\-Type}]{\setlength{\rightskip}{0pt plus 5cm}typedef Janitor\-Mem\-Fun\-Call$<$S\-G\-X\-M\-L\-Scanner$>$ {\bf Cleanup\-Type}}}\label{SGXMLScanner_8cpp_a396ba958ec4460ce9456a7d02a74c95c}
+\hypertarget{SGXMLScanner_8cpp_a4fb422e5d6ce0196c4562573a8cd245d}{\index{S\-G\-X\-M\-L\-Scanner.\-cpp@{S\-G\-X\-M\-L\-Scanner.\-cpp}!Reader\-Mgr\-Reset\-Type@{Reader\-Mgr\-Reset\-Type}}
+\index{Reader\-Mgr\-Reset\-Type@{Reader\-Mgr\-Reset\-Type}!SGXMLScanner.cpp@{S\-G\-X\-M\-L\-Scanner.\-cpp}}
+\subsubsection[{Reader\-Mgr\-Reset\-Type}]{\setlength{\rightskip}{0pt plus 5cm}typedef Janitor\-Mem\-Fun\-Call$<$Reader\-Mgr$>$ {\bf Reader\-Mgr\-Reset\-Type}}}\label{SGXMLScanner_8cpp_a4fb422e5d6ce0196c4562573a8cd245d}
+
+
+\subsection{Function Documentation}
+\hypertarget{SGXMLScanner_8cpp_a39e9ac9e18029b9a23f5ed9605127e78}{\index{S\-G\-X\-M\-L\-Scanner.\-cpp@{S\-G\-X\-M\-L\-Scanner.\-cpp}!get\-Att\-Def\-List@{get\-Att\-Def\-List}}
+\index{get\-Att\-Def\-List@{get\-Att\-Def\-List}!SGXMLScanner.cpp@{S\-G\-X\-M\-L\-Scanner.\-cpp}}
+\subsubsection[{get\-Att\-Def\-List}]{\setlength{\rightskip}{0pt plus 5cm}X\-M\-L\-Att\-Def\-List \& get\-Att\-Def\-List (
+\begin{DoxyParamCaption}
+\item[{Complex\-Type\-Info $\ast$}]{curr\-Type, }
+\item[{X\-M\-L\-Element\-Decl $\ast$}]{elem\-Decl}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{SGXMLScanner_8cpp_a39e9ac9e18029b9a23f5ed9605127e78}

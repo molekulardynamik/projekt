@@ -1,0 +1,171 @@
+\hypertarget{DatatypeValidatorFactory_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/validators/datatype/\-Datatype\-Validator\-Factory.cpp File Reference}
+\label{DatatypeValidatorFactory_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/datatype/\-Datatype\-Validator\-Factory.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/datatype/\-Datatype\-Validator\-Factory.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Datatype\-Validator\-Factory.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Schema\-Symbols.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Uni\-Defs.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Janitor.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-String\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Boolean\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Decimal\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Hex\-Binary\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Base64\-Binary\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-I\-D\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-I\-D\-R\-E\-F\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-N\-O\-T\-A\-T\-I\-O\-N\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-E\-N\-T\-I\-T\-Y\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Q\-Name\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Name\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-N\-C\-Name\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-List\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Union\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Double\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Float\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Any\-U\-R\-I\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Any\-Simple\-Type\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Date\-Time\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Date\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Time\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Day\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Month\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Month\-Day\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Year\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Year\-Month\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Duration\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Platform\-Utils.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Initializer.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/internal/\-X\-Template\-Serializer.\-hpp$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \\*
+Datatype\-Validator\-::\-Validator\-Type \hyperlink{DatatypeValidatorFactory_8cpp_af20bb2d28b51f2e4aebc7076c2bbb5b8}{get\-Primitive\-D\-V} (Datatype\-Validator\-::\-Validator\-Type validation\-D\-V)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N \\*
+const X\-M\-L\-Ch \hyperlink{DatatypeValidatorFactory_8cpp_a4db11fedd3a0e43ce9593579b463fa75}{fg\-Tok\-Pattern} \mbox{[}$\,$\mbox{]}
+\item 
+const X\-M\-L\-Ch \hyperlink{DatatypeValidatorFactory_8cpp_abf11aab58148e4743552332c1ee9eeee}{fg\-Integer\-Pattern} \mbox{[}$\,$\mbox{]}
+\item 
+const X\-M\-L\-Ch \hyperlink{DatatypeValidatorFactory_8cpp_ab5587498916afedb67d7d336b25af334}{fg\-Name\-Pattern} \mbox{[}$\,$\mbox{]}
+\item 
+const X\-M\-L\-Ch \hyperlink{DatatypeValidatorFactory_8cpp_a1fb081d1a622452af6001ed22ba1b17c}{fg\-N\-C\-Name\-Pattern} \mbox{[}$\,$\mbox{]}
+\item 
+const X\-M\-L\-Ch \hyperlink{DatatypeValidatorFactory_8cpp_a8cdbc39d9ee57c3acda624796979d4ec}{fg\-P0\-Y} \mbox{[}$\,$\mbox{]}
+\item 
+const X\-M\-L\-Ch \hyperlink{DatatypeValidatorFactory_8cpp_a2d3bdc59a21045fa5d19662ecd465070}{fg\-P1\-Y} \mbox{[}$\,$\mbox{]}
+\item 
+const X\-M\-L\-Ch \hyperlink{DatatypeValidatorFactory_8cpp_a0dd1674661b7d6209dce423d09428ead}{fg\-P100\-Y} \mbox{[}$\,$\mbox{]}
+\item 
+const X\-M\-L\-Ch \hyperlink{DatatypeValidatorFactory_8cpp_a7fab24f2d66968e26c311b5079ae1ca0}{fg\-P\-T24\-H} \mbox{[}$\,$\mbox{]}
+\item 
+const X\-M\-L\-Ch \hyperlink{DatatypeValidatorFactory_8cpp_a011cb1ffe628ed0a18fabc9646684ae8}{fg\-P1\-M} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{DatatypeValidatorFactory_8cpp_af20bb2d28b51f2e4aebc7076c2bbb5b8}{\index{Datatype\-Validator\-Factory.\-cpp@{Datatype\-Validator\-Factory.\-cpp}!get\-Primitive\-D\-V@{get\-Primitive\-D\-V}}
+\index{get\-Primitive\-D\-V@{get\-Primitive\-D\-V}!DatatypeValidatorFactory.cpp@{Datatype\-Validator\-Factory.\-cpp}}
+\subsubsection[{get\-Primitive\-D\-V}]{\setlength{\rightskip}{0pt plus 5cm}static Datatype\-Validator\-::\-Validator\-Type get\-Primitive\-D\-V (
+\begin{DoxyParamCaption}
+\item[{Datatype\-Validator\-::\-Validator\-Type}]{validation\-D\-V}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{DatatypeValidatorFactory_8cpp_af20bb2d28b51f2e4aebc7076c2bbb5b8}
+
+
+\subsection{Variable Documentation}
+\hypertarget{DatatypeValidatorFactory_8cpp_abf11aab58148e4743552332c1ee9eeee}{\index{Datatype\-Validator\-Factory.\-cpp@{Datatype\-Validator\-Factory.\-cpp}!fg\-Integer\-Pattern@{fg\-Integer\-Pattern}}
+\index{fg\-Integer\-Pattern@{fg\-Integer\-Pattern}!DatatypeValidatorFactory.cpp@{Datatype\-Validator\-Factory.\-cpp}}
+\subsubsection[{fg\-Integer\-Pattern}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch fg\-Integer\-Pattern\mbox{[}$\,$\mbox{]}}}\label{DatatypeValidatorFactory_8cpp_abf11aab58148e4743552332c1ee9eeee}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chOpenSquare, chPlus, chBackSlash, chDash, chCloseSquare, chQuestion,
+    chOpenSquare, chDigit\_0, chDash, chDigit\_9, chCloseSquare, chPlus, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DatatypeValidatorFactory_8cpp_ab5587498916afedb67d7d336b25af334}{\index{Datatype\-Validator\-Factory.\-cpp@{Datatype\-Validator\-Factory.\-cpp}!fg\-Name\-Pattern@{fg\-Name\-Pattern}}
+\index{fg\-Name\-Pattern@{fg\-Name\-Pattern}!DatatypeValidatorFactory.cpp@{Datatype\-Validator\-Factory.\-cpp}}
+\subsubsection[{fg\-Name\-Pattern}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch fg\-Name\-Pattern\mbox{[}$\,$\mbox{]}}}\label{DatatypeValidatorFactory_8cpp_ab5587498916afedb67d7d336b25af334}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chBackSlash, chLatin\_i, chBackSlash, chLatin\_c, chAsterisk, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DatatypeValidatorFactory_8cpp_a1fb081d1a622452af6001ed22ba1b17c}{\index{Datatype\-Validator\-Factory.\-cpp@{Datatype\-Validator\-Factory.\-cpp}!fg\-N\-C\-Name\-Pattern@{fg\-N\-C\-Name\-Pattern}}
+\index{fg\-N\-C\-Name\-Pattern@{fg\-N\-C\-Name\-Pattern}!DatatypeValidatorFactory.cpp@{Datatype\-Validator\-Factory.\-cpp}}
+\subsubsection[{fg\-N\-C\-Name\-Pattern}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch fg\-N\-C\-Name\-Pattern\mbox{[}$\,$\mbox{]}}}\label{DatatypeValidatorFactory_8cpp_a1fb081d1a622452af6001ed22ba1b17c}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chOpenSquare, chBackSlash, chLatin\_i, chDash, chOpenSquare, chColon, chCloseSquare,
+    chCloseSquare, chOpenSquare, chBackSlash, chLatin\_c, chDash, chOpenSquare,
+    chColon, chCloseSquare, chCloseSquare, chAsterisk, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DatatypeValidatorFactory_8cpp_a8cdbc39d9ee57c3acda624796979d4ec}{\index{Datatype\-Validator\-Factory.\-cpp@{Datatype\-Validator\-Factory.\-cpp}!fg\-P0\-Y@{fg\-P0\-Y}}
+\index{fg\-P0\-Y@{fg\-P0\-Y}!DatatypeValidatorFactory.cpp@{Datatype\-Validator\-Factory.\-cpp}}
+\subsubsection[{fg\-P0\-Y}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch fg\-P0\-Y\mbox{[}$\,$\mbox{]}}}\label{DatatypeValidatorFactory_8cpp_a8cdbc39d9ee57c3acda624796979d4ec}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chLatin\_P, chDigit\_0, chLatin\_Y, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DatatypeValidatorFactory_8cpp_a0dd1674661b7d6209dce423d09428ead}{\index{Datatype\-Validator\-Factory.\-cpp@{Datatype\-Validator\-Factory.\-cpp}!fg\-P100\-Y@{fg\-P100\-Y}}
+\index{fg\-P100\-Y@{fg\-P100\-Y}!DatatypeValidatorFactory.cpp@{Datatype\-Validator\-Factory.\-cpp}}
+\subsubsection[{fg\-P100\-Y}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch fg\-P100\-Y\mbox{[}$\,$\mbox{]}}}\label{DatatypeValidatorFactory_8cpp_a0dd1674661b7d6209dce423d09428ead}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chLatin\_P, chDigit\_1, chDigit\_0, chDigit\_0, chLatin\_Y, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DatatypeValidatorFactory_8cpp_a011cb1ffe628ed0a18fabc9646684ae8}{\index{Datatype\-Validator\-Factory.\-cpp@{Datatype\-Validator\-Factory.\-cpp}!fg\-P1\-M@{fg\-P1\-M}}
+\index{fg\-P1\-M@{fg\-P1\-M}!DatatypeValidatorFactory.cpp@{Datatype\-Validator\-Factory.\-cpp}}
+\subsubsection[{fg\-P1\-M}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch fg\-P1\-M\mbox{[}$\,$\mbox{]}}}\label{DatatypeValidatorFactory_8cpp_a011cb1ffe628ed0a18fabc9646684ae8}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chLatin\_P, chDigit\_1, chLatin\_M, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DatatypeValidatorFactory_8cpp_a2d3bdc59a21045fa5d19662ecd465070}{\index{Datatype\-Validator\-Factory.\-cpp@{Datatype\-Validator\-Factory.\-cpp}!fg\-P1\-Y@{fg\-P1\-Y}}
+\index{fg\-P1\-Y@{fg\-P1\-Y}!DatatypeValidatorFactory.cpp@{Datatype\-Validator\-Factory.\-cpp}}
+\subsubsection[{fg\-P1\-Y}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch fg\-P1\-Y\mbox{[}$\,$\mbox{]}}}\label{DatatypeValidatorFactory_8cpp_a2d3bdc59a21045fa5d19662ecd465070}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chLatin\_P, chDigit\_1, chLatin\_Y, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DatatypeValidatorFactory_8cpp_a7fab24f2d66968e26c311b5079ae1ca0}{\index{Datatype\-Validator\-Factory.\-cpp@{Datatype\-Validator\-Factory.\-cpp}!fg\-P\-T24\-H@{fg\-P\-T24\-H}}
+\index{fg\-P\-T24\-H@{fg\-P\-T24\-H}!DatatypeValidatorFactory.cpp@{Datatype\-Validator\-Factory.\-cpp}}
+\subsubsection[{fg\-P\-T24\-H}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch fg\-P\-T24\-H\mbox{[}$\,$\mbox{]}}}\label{DatatypeValidatorFactory_8cpp_a7fab24f2d66968e26c311b5079ae1ca0}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chLatin\_P, chLatin\_T, chDigit\_2, chDigit\_4, chLatin\_H, chNull
+\}
+\end{DoxyCode}
+\hypertarget{DatatypeValidatorFactory_8cpp_a4db11fedd3a0e43ce9593579b463fa75}{\index{Datatype\-Validator\-Factory.\-cpp@{Datatype\-Validator\-Factory.\-cpp}!fg\-Tok\-Pattern@{fg\-Tok\-Pattern}}
+\index{fg\-Tok\-Pattern@{fg\-Tok\-Pattern}!DatatypeValidatorFactory.cpp@{Datatype\-Validator\-Factory.\-cpp}}
+\subsubsection[{fg\-Tok\-Pattern}]{\setlength{\rightskip}{0pt plus 5cm}X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N const X\-M\-L\-Ch fg\-Tok\-Pattern\mbox{[}$\,$\mbox{]}}}\label{DatatypeValidatorFactory_8cpp_a4db11fedd3a0e43ce9593579b463fa75}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chBackSlash, chLatin\_c, chPlus, chNull
+\}
+\end{DoxyCode}

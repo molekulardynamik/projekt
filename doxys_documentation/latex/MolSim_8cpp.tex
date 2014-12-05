@@ -1,0 +1,75 @@
+\hypertarget{MolSim_8cpp}{\section{src/\-Mol\-Sim.cpp File Reference}
+\label{MolSim_8cpp}\index{src/\-Mol\-Sim.\-cpp@{src/\-Mol\-Sim.\-cpp}}
+}
+{\ttfamily \#include $<$cppunit/ui/text/\-Test\-Runner.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}Unit\-Tests.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}output\-Writer/\-X\-Y\-Z\-Writer.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}output\-Writer/\-V\-T\-K\-Writer.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Particle\-Container.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Particle\-Handler.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$cstring$>$}\\*
+{\ttfamily \#include $<$cstdlib$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$ctime$>$}\\*
+{\ttfamily \#include $<$log4cxx/logger.\-h$>$}\\*
+{\ttfamily \#include $<$log4cxx/xml/domconfigurator.\-h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Logger\-Ptr \hyperlink{MolSim_8cpp_a98a9be9d9593b38bab661922890e115f}{logger} (Logger\-::get\-Logger(\char`\"{}main\char`\"{}))
+\item 
+void \hyperlink{MolSim_8cpp_af4d25832793b65abf538fab0474a8e51}{plot\-Particles} (int iteration)
+\item 
+int \hyperlink{MolSim_8cpp_a329c95e85f063f49b0daaed5c5b56335}{main} (int argc, char $\ast$argsv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSimulation_1_1ParticleContainer}{Particle\-Container} \hyperlink{MolSim_8cpp_ab06a8478b206d59f33b5b4a630c3804e}{container}
+\item 
+double \hyperlink{MolSim_8cpp_a00b0c9b1c3ea8bb73a7fc8b53a3961fd}{start\-\_\-time} = 0
+\item 
+double \hyperlink{MolSim_8cpp_a8c7ea5e69ce954c1d81db1732f9f426a}{end\-\_\-time} = 1000
+\item 
+double \hyperlink{MolSim_8cpp_a4cfc079302fe9a34fe24637c4e44303a}{delta\-\_\-t} = 0.\-014
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{MolSim_8cpp_a98a9be9d9593b38bab661922890e115f}{\index{Mol\-Sim.\-cpp@{Mol\-Sim.\-cpp}!logger@{logger}}
+\index{logger@{logger}!MolSim.cpp@{Mol\-Sim.\-cpp}}
+\subsubsection[{logger}]{\setlength{\rightskip}{0pt plus 5cm}Logger\-Ptr logger (
+\begin{DoxyParamCaption}
+\item[{Logger\-::}]{get\-Logger\char`\"{}main\char`\"{}}
+\end{DoxyParamCaption}
+)}}\label{MolSim_8cpp_a98a9be9d9593b38bab661922890e115f}
+\hypertarget{MolSim_8cpp_a329c95e85f063f49b0daaed5c5b56335}{\index{Mol\-Sim.\-cpp@{Mol\-Sim.\-cpp}!main@{main}}
+\index{main@{main}!MolSim.cpp@{Mol\-Sim.\-cpp}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argsv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{MolSim_8cpp_a329c95e85f063f49b0daaed5c5b56335}
+\hypertarget{MolSim_8cpp_af4d25832793b65abf538fab0474a8e51}{\index{Mol\-Sim.\-cpp@{Mol\-Sim.\-cpp}!plot\-Particles@{plot\-Particles}}
+\index{plot\-Particles@{plot\-Particles}!MolSim.cpp@{Mol\-Sim.\-cpp}}
+\subsubsection[{plot\-Particles}]{\setlength{\rightskip}{0pt plus 5cm}void plot\-Particles (
+\begin{DoxyParamCaption}
+\item[{int}]{iteration}
+\end{DoxyParamCaption}
+)}}\label{MolSim_8cpp_af4d25832793b65abf538fab0474a8e51}
+plot the particles to a xyz-\/file 
+
+\subsection{Variable Documentation}
+\hypertarget{MolSim_8cpp_ab06a8478b206d59f33b5b4a630c3804e}{\index{Mol\-Sim.\-cpp@{Mol\-Sim.\-cpp}!container@{container}}
+\index{container@{container}!MolSim.cpp@{Mol\-Sim.\-cpp}}
+\subsubsection[{container}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Particle\-Container} container}}\label{MolSim_8cpp_ab06a8478b206d59f33b5b4a630c3804e}
+\hypertarget{MolSim_8cpp_a4cfc079302fe9a34fe24637c4e44303a}{\index{Mol\-Sim.\-cpp@{Mol\-Sim.\-cpp}!delta\-\_\-t@{delta\-\_\-t}}
+\index{delta\-\_\-t@{delta\-\_\-t}!MolSim.cpp@{Mol\-Sim.\-cpp}}
+\subsubsection[{delta\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}double delta\-\_\-t = 0.\-014}}\label{MolSim_8cpp_a4cfc079302fe9a34fe24637c4e44303a}
+\hypertarget{MolSim_8cpp_a8c7ea5e69ce954c1d81db1732f9f426a}{\index{Mol\-Sim.\-cpp@{Mol\-Sim.\-cpp}!end\-\_\-time@{end\-\_\-time}}
+\index{end\-\_\-time@{end\-\_\-time}!MolSim.cpp@{Mol\-Sim.\-cpp}}
+\subsubsection[{end\-\_\-time}]{\setlength{\rightskip}{0pt plus 5cm}double end\-\_\-time = 1000}}\label{MolSim_8cpp_a8c7ea5e69ce954c1d81db1732f9f426a}
+\hypertarget{MolSim_8cpp_a00b0c9b1c3ea8bb73a7fc8b53a3961fd}{\index{Mol\-Sim.\-cpp@{Mol\-Sim.\-cpp}!start\-\_\-time@{start\-\_\-time}}
+\index{start\-\_\-time@{start\-\_\-time}!MolSim.cpp@{Mol\-Sim.\-cpp}}
+\subsubsection[{start\-\_\-time}]{\setlength{\rightskip}{0pt plus 5cm}double start\-\_\-time = 0}}\label{MolSim_8cpp_a00b0c9b1c3ea8bb73a7fc8b53a3961fd}

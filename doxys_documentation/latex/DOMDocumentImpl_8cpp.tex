@@ -1,0 +1,56 @@
+\hypertarget{DOMDocumentImpl_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/dom/impl/\-D\-O\-M\-Document\-Impl.cpp File Reference}
+\label{DOMDocumentImpl_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/dom/impl/\-D\-O\-M\-Document\-Impl.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/dom/impl/\-D\-O\-M\-Document\-Impl.\-cpp}}
+}
+{\ttfamily \#include \char`\"{}D\-O\-M\-Document\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Casts.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Configuration\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Document\-Type\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Attr\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Attr\-N\-S\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-C\-D\-A\-T\-A\-Section\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Comment\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Deep\-Node\-List\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Document\-Fragment\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Element\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}X\-S\-D\-Element\-N\-S\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Entity\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Entity\-Reference\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Normalizer.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Notation\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Processing\-Instruction\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Text\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Tree\-Walker\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Node\-Iterator\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Node\-I\-D\-Map.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Range\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Type\-Info\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-X\-Path\-Expression\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-X\-Path\-N\-S\-Resolver\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Implementation.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-Memory\-Manager.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Out\-Of\-Memory\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Initializer.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Janitor.\-hpp$>$}\\*
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \\*
+X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N \\*
+X\-M\-L\-Size\-\_\-t \hyperlink{DOMDocumentImpl_8cpp_aa303558b0c861773d0a4f6b6576c296e}{k\-Initial\-Heap\-Alloc\-Size} = 0x4000
+\item 
+static X\-M\-L\-Size\-\_\-t \hyperlink{DOMDocumentImpl_8cpp_abfabd89ca169bf2cb4123324f2f248d3}{k\-Max\-Heap\-Alloc\-Size} = 0x80000
+\item 
+static X\-M\-L\-Size\-\_\-t \hyperlink{DOMDocumentImpl_8cpp_aad41ee6977bf89d566d14bd27e3c2f8c}{k\-Max\-Sub\-Allocation\-Size} = 0x0100
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\hypertarget{DOMDocumentImpl_8cpp_aa303558b0c861773d0a4f6b6576c296e}{\index{D\-O\-M\-Document\-Impl.\-cpp@{D\-O\-M\-Document\-Impl.\-cpp}!k\-Initial\-Heap\-Alloc\-Size@{k\-Initial\-Heap\-Alloc\-Size}}
+\index{k\-Initial\-Heap\-Alloc\-Size@{k\-Initial\-Heap\-Alloc\-Size}!DOMDocumentImpl.cpp@{D\-O\-M\-Document\-Impl.\-cpp}}
+\subsubsection[{k\-Initial\-Heap\-Alloc\-Size}]{\setlength{\rightskip}{0pt plus 5cm}X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N X\-M\-L\-Size\-\_\-t k\-Initial\-Heap\-Alloc\-Size = 0x4000\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMDocumentImpl_8cpp_aa303558b0c861773d0a4f6b6576c296e}
+\hypertarget{DOMDocumentImpl_8cpp_abfabd89ca169bf2cb4123324f2f248d3}{\index{D\-O\-M\-Document\-Impl.\-cpp@{D\-O\-M\-Document\-Impl.\-cpp}!k\-Max\-Heap\-Alloc\-Size@{k\-Max\-Heap\-Alloc\-Size}}
+\index{k\-Max\-Heap\-Alloc\-Size@{k\-Max\-Heap\-Alloc\-Size}!DOMDocumentImpl.cpp@{D\-O\-M\-Document\-Impl.\-cpp}}
+\subsubsection[{k\-Max\-Heap\-Alloc\-Size}]{\setlength{\rightskip}{0pt plus 5cm}X\-M\-L\-Size\-\_\-t k\-Max\-Heap\-Alloc\-Size = 0x80000\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMDocumentImpl_8cpp_abfabd89ca169bf2cb4123324f2f248d3}
+\hypertarget{DOMDocumentImpl_8cpp_aad41ee6977bf89d566d14bd27e3c2f8c}{\index{D\-O\-M\-Document\-Impl.\-cpp@{D\-O\-M\-Document\-Impl.\-cpp}!k\-Max\-Sub\-Allocation\-Size@{k\-Max\-Sub\-Allocation\-Size}}
+\index{k\-Max\-Sub\-Allocation\-Size@{k\-Max\-Sub\-Allocation\-Size}!DOMDocumentImpl.cpp@{D\-O\-M\-Document\-Impl.\-cpp}}
+\subsubsection[{k\-Max\-Sub\-Allocation\-Size}]{\setlength{\rightskip}{0pt plus 5cm}X\-M\-L\-Size\-\_\-t k\-Max\-Sub\-Allocation\-Size = 0x0100\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMDocumentImpl_8cpp_aad41ee6977bf89d566d14bd27e3c2f8c}

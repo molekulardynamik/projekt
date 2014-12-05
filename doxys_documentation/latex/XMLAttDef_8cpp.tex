@@ -1,0 +1,75 @@
+\hypertarget{XMLAttDef_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/framework/\-X\-M\-L\-Att\-Def.cpp File Reference}
+\label{XMLAttDef_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/framework/\-X\-M\-L\-Att\-Def.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/framework/\-X\-M\-L\-Att\-Def.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Att\-Def.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Array\-Index\-Out\-Of\-Bounds\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Uni.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Out\-Of\-Memory\-Exception.\-hpp$>$}\\*
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Janitor\-Mem\-Fun\-Call\\*
+$<$ X\-M\-L\-Att\-Def $>$ \hyperlink{XMLAttDef_8cpp_aa92b0726afc63ca80cdba73221e3da4b}{Cleanup\-Type}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N \\*
+const X\-M\-L\-Ch $\ast$const \hyperlink{XMLAttDef_8cpp_a43e90b8892d38734880e9003b3108890}{g\-Att\-Type\-Strings} \mbox{[}X\-M\-L\-Att\-Def\-::\-Att\-Types\-\_\-\-Count\mbox{]}
+\item 
+const X\-M\-L\-Ch $\ast$const \hyperlink{XMLAttDef_8cpp_a6cb2c6b659e39b67800b7cf48b44d5b6}{g\-Def\-Att\-Type\-Strings} \mbox{[}X\-M\-L\-Att\-Def\-::\-Def\-Att\-Types\-\_\-\-Count\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{XMLAttDef_8cpp_aa92b0726afc63ca80cdba73221e3da4b}{\index{X\-M\-L\-Att\-Def.\-cpp@{X\-M\-L\-Att\-Def.\-cpp}!Cleanup\-Type@{Cleanup\-Type}}
+\index{Cleanup\-Type@{Cleanup\-Type}!XMLAttDef.cpp@{X\-M\-L\-Att\-Def.\-cpp}}
+\subsubsection[{Cleanup\-Type}]{\setlength{\rightskip}{0pt plus 5cm}typedef Janitor\-Mem\-Fun\-Call$<$X\-M\-L\-Att\-Def$>$ {\bf Cleanup\-Type}}}\label{XMLAttDef_8cpp_aa92b0726afc63ca80cdba73221e3da4b}
+
+
+\subsection{Variable Documentation}
+\hypertarget{XMLAttDef_8cpp_a43e90b8892d38734880e9003b3108890}{\index{X\-M\-L\-Att\-Def.\-cpp@{X\-M\-L\-Att\-Def.\-cpp}!g\-Att\-Type\-Strings@{g\-Att\-Type\-Strings}}
+\index{g\-Att\-Type\-Strings@{g\-Att\-Type\-Strings}!XMLAttDef.cpp@{X\-M\-L\-Att\-Def.\-cpp}}
+\subsubsection[{g\-Att\-Type\-Strings}]{\setlength{\rightskip}{0pt plus 5cm}X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N const X\-M\-L\-Ch$\ast$ const g\-Att\-Type\-Strings\mbox{[}X\-M\-L\-Att\-Def\-::\-Att\-Types\-\_\-\-Count\mbox{]}}}\label{XMLAttDef_8cpp_a43e90b8892d38734880e9003b3108890}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    XMLUni::fgCDATAString
+    , XMLUni::fgIDString
+    , XMLUni::fgIDRefString
+    , XMLUni::fgIDRefsString
+    , XMLUni::fgEntityString
+    , XMLUni::fgEntitiesString
+    , XMLUni::fgNmTokenString
+    , XMLUni::fgNmTokensString
+    , XMLUni::fgNotationString
+    , XMLUni::fgEnumerationString
+    , XMLUni::fgCDATAString
+    , XMLUni::fgCDATAString
+    , XMLUni::fgCDATAString
+    , XMLUni::fgCDATAString
+
+\}
+\end{DoxyCode}
+\begin{DoxyParagraph}{Id\-:}
+\hyperlink{XMLAttDef_8cpp}{X\-M\-L\-Att\-Def.\-cpp} 679359 2008-\/07-\/24 11\-:15\-:19\-Z borisk 
+\end{DoxyParagraph}
+\hypertarget{XMLAttDef_8cpp_a6cb2c6b659e39b67800b7cf48b44d5b6}{\index{X\-M\-L\-Att\-Def.\-cpp@{X\-M\-L\-Att\-Def.\-cpp}!g\-Def\-Att\-Type\-Strings@{g\-Def\-Att\-Type\-Strings}}
+\index{g\-Def\-Att\-Type\-Strings@{g\-Def\-Att\-Type\-Strings}!XMLAttDef.cpp@{X\-M\-L\-Att\-Def.\-cpp}}
+\subsubsection[{g\-Def\-Att\-Type\-Strings}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch$\ast$ const g\-Def\-Att\-Type\-Strings\mbox{[}X\-M\-L\-Att\-Def\-::\-Def\-Att\-Types\-\_\-\-Count\mbox{]}}}\label{XMLAttDef_8cpp_a6cb2c6b659e39b67800b7cf48b44d5b6}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    XMLUni::fgDefaultString
+    , XMLUni::fgFixedString
+    , XMLUni::fgRequiredString
+    , XMLUni::fgImpliedString
+    , XMLUni::fgImpliedString
+    , XMLUni::fgImpliedString
+    , XMLUni::fgImpliedString
+    , XMLUni::fgImpliedString
+    , XMLUni::fgImpliedString
+\}
+\end{DoxyCode}

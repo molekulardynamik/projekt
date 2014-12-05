@@ -1,0 +1,55 @@
+\hypertarget{DOMLSParserImpl_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/parsers/\-D\-O\-M\-L\-S\-Parser\-Impl.cpp File Reference}
+\label{DOMLSParserImpl_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/parsers/\-D\-O\-M\-L\-S\-Parser\-Impl.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/parsers/\-D\-O\-M\-L\-S\-Parser\-Impl.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/parsers/\-D\-O\-M\-L\-S\-Parser\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-L\-S\-Resource\-Resolver.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Error\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-L\-S\-Parser\-Filter.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Node\-Filter.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-Error\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-Locator\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-Configuration\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-String\-List\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-Document\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-L\-S\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Document\-Fragment.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Named\-Node\-Map.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/internal/\-X\-M\-L\-Scanner.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-Wrapper4\-D\-O\-M\-L\-S\-Input.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Grammar\-Pool.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Schema\-Description.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Janitor.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/common/\-Grammar\-Resolver.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Out\-Of\-Memory\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Entity\-Resolver.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Runtime\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-D\-O\-M\-Msg.\-hpp$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class____AbortFilter}{\-\_\-\-\_\-\-Abort\-Filter}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Janitor\-Mem\-Fun\-Call\\*
+$<$ D\-O\-M\-L\-S\-Parser\-Impl $>$ \hyperlink{DOMLSParserImpl_8cpp_ae499b5178db59bf5cbbd7a7b8c9066ca}{Reset\-Parse\-Type}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class____AbortFilter}{\-\_\-\-\_\-\-Abort\-Filter} \hyperlink{DOMLSParserImpl_8cpp_a644d52e299f6039b6e50971c73104ba6}{g\-\_\-\-Abort\-Filter}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{DOMLSParserImpl_8cpp_ae499b5178db59bf5cbbd7a7b8c9066ca}{\index{D\-O\-M\-L\-S\-Parser\-Impl.\-cpp@{D\-O\-M\-L\-S\-Parser\-Impl.\-cpp}!Reset\-Parse\-Type@{Reset\-Parse\-Type}}
+\index{Reset\-Parse\-Type@{Reset\-Parse\-Type}!DOMLSParserImpl.cpp@{D\-O\-M\-L\-S\-Parser\-Impl.\-cpp}}
+\subsubsection[{Reset\-Parse\-Type}]{\setlength{\rightskip}{0pt plus 5cm}typedef Janitor\-Mem\-Fun\-Call$<$D\-O\-M\-L\-S\-Parser\-Impl$>$ {\bf Reset\-Parse\-Type}}}\label{DOMLSParserImpl_8cpp_ae499b5178db59bf5cbbd7a7b8c9066ca}
+
+
+\subsection{Variable Documentation}
+\hypertarget{DOMLSParserImpl_8cpp_a644d52e299f6039b6e50971c73104ba6}{\index{D\-O\-M\-L\-S\-Parser\-Impl.\-cpp@{D\-O\-M\-L\-S\-Parser\-Impl.\-cpp}!g\-\_\-\-Abort\-Filter@{g\-\_\-\-Abort\-Filter}}
+\index{g\-\_\-\-Abort\-Filter@{g\-\_\-\-Abort\-Filter}!DOMLSParserImpl.cpp@{D\-O\-M\-L\-S\-Parser\-Impl.\-cpp}}
+\subsubsection[{g\-\_\-\-Abort\-Filter}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-\_\-\-\_\-\-Abort\-Filter} g\-\_\-\-Abort\-Filter\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMLSParserImpl_8cpp_a644d52e299f6039b6e50971c73104ba6}

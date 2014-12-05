@@ -1,0 +1,130 @@
+\hypertarget{classSimulation_1_1ParticleContainer_1_1ParticleCell}{\section{Simulation\-:\-:Particle\-Container\-:\-:Particle\-Cell Class Reference}
+\label{classSimulation_1_1ParticleContainer_1_1ParticleCell}\index{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}}
+}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\-::list$<$ \hyperlink{classSimulation_1_1Particle}{Particle} $\ast$ $>$\\*
+\-::iterator \hyperlink{classSimulation_1_1ParticleContainer_1_1ParticleCell_a7ed11e6bad14d516721e3d21adfa5da6}{P\-Particle\-Iterator}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classSimulation_1_1ParticleContainer_1_1ParticleCell_a6e23daa21b4a6ff7d88dd4bc8f22ff8b}{insert} (\hyperlink{classSimulation_1_1Particle}{Particle} $\ast$p)
+\item 
+void \hyperlink{classSimulation_1_1ParticleContainer_1_1ParticleCell_a14d1bf2b7b613d94f01ef5f54d16a4f2}{remove} (\hyperlink{classSimulation_1_1Particle}{Particle} $\ast$p)
+\item 
+\hyperlink{classSimulation_1_1Particle}{Particle} $\ast$ \hyperlink{classSimulation_1_1ParticleContainer_1_1ParticleCell_a601627c38a7b73b91727dc8409b7f951}{operator\mbox{[}$\,$\mbox{]}} (int i)
+\item 
+int \hyperlink{classSimulation_1_1ParticleContainer_1_1ParticleCell_a7e1b285d4c96a14bd1ace77114714630}{count} ()
+\item 
+void \hyperlink{classSimulation_1_1ParticleContainer_1_1ParticleCell_af31f427d33ccc9186e5a48ee852e6957}{empty} ()
+\item 
+void \hyperlink{classSimulation_1_1ParticleContainer_1_1ParticleCell_a051c06f107fa079acfbdd25ec26fa5db}{iterate\-Particles} (\hyperlink{classSimulation_1_1ParticleHandler}{Particle\-Handler} \&handler)
+\item 
+void \hyperlink{classSimulation_1_1ParticleContainer_1_1ParticleCell_aac30d823530dad6b959421e8370ef376}{iterate\-Particle\-Pairs} (\hyperlink{classSimulation_1_1ParticleHandler}{Particle\-Handler} \&handler)
+\item 
+void \hyperlink{classSimulation_1_1ParticleContainer_1_1ParticleCell_a173182caabbd931a12a58b450c11ea4d}{iterate\-Particle\-Pairs\-Exclusive} (\hyperlink{classSimulation_1_1ParticleHandler}{Particle\-Handler} \&handler)
+\item 
+void \hyperlink{classSimulation_1_1ParticleContainer_1_1ParticleCell_a38f5e6f69ff7c87fbf598977f4fc1071}{combine\-Particle\-Pairs} (\hyperlink{classSimulation_1_1ParticleContainer_1_1ParticleCell}{Particle\-Cell} \&other, \hyperlink{classSimulation_1_1ParticleHandler}{Particle\-Handler} \&handler)
+\item 
+void \hyperlink{classSimulation_1_1ParticleContainer_1_1ParticleCell_aa4726b1a94a339dc0a9c15bacdc4296a}{combine\-Particle\-Pairs\-Exclusive} (\hyperlink{classSimulation_1_1ParticleContainer_1_1ParticleCell}{Particle\-Cell} \&other, \hyperlink{classSimulation_1_1ParticleHandler}{Particle\-Handler} \&handler)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::list$<$ \hyperlink{classSimulation_1_1Particle}{Particle} $\ast$ $>$ \hyperlink{classSimulation_1_1ParticleContainer_1_1ParticleCell_aadee3b53c58700f80e99db9e97849aff}{particles}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\hypertarget{classSimulation_1_1ParticleContainer_1_1ParticleCell_a7ed11e6bad14d516721e3d21adfa5da6}{\index{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}!P\-Particle\-Iterator@{P\-Particle\-Iterator}}
+\index{P\-Particle\-Iterator@{P\-Particle\-Iterator}!Simulation::ParticleContainer::ParticleCell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}}
+\subsubsection[{P\-Particle\-Iterator}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::list$<${\bf Particle}$\ast$$>$\-::iterator {\bf Simulation\-::\-Particle\-Container\-::\-Particle\-Cell\-::\-P\-Particle\-Iterator}}}\label{classSimulation_1_1ParticleContainer_1_1ParticleCell_a7ed11e6bad14d516721e3d21adfa5da6}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSimulation_1_1ParticleContainer_1_1ParticleCell_a38f5e6f69ff7c87fbf598977f4fc1071}{\index{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}!combine\-Particle\-Pairs@{combine\-Particle\-Pairs}}
+\index{combine\-Particle\-Pairs@{combine\-Particle\-Pairs}!Simulation::ParticleContainer::ParticleCell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}}
+\subsubsection[{combine\-Particle\-Pairs}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::\-Particle\-Cell\-::combine\-Particle\-Pairs (
+\begin{DoxyParamCaption}
+\item[{{\bf Particle\-Container\-::\-Particle\-Cell} \&}]{other, }
+\item[{{\bf Particle\-Handler} \&}]{handler}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleContainer_1_1ParticleCell_a38f5e6f69ff7c87fbf598977f4fc1071}
+\hypertarget{classSimulation_1_1ParticleContainer_1_1ParticleCell_aa4726b1a94a339dc0a9c15bacdc4296a}{\index{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}!combine\-Particle\-Pairs\-Exclusive@{combine\-Particle\-Pairs\-Exclusive}}
+\index{combine\-Particle\-Pairs\-Exclusive@{combine\-Particle\-Pairs\-Exclusive}!Simulation::ParticleContainer::ParticleCell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}}
+\subsubsection[{combine\-Particle\-Pairs\-Exclusive}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::\-Particle\-Cell\-::combine\-Particle\-Pairs\-Exclusive (
+\begin{DoxyParamCaption}
+\item[{{\bf Particle\-Container\-::\-Particle\-Cell} \&}]{other, }
+\item[{{\bf Particle\-Handler} \&}]{handler}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleContainer_1_1ParticleCell_aa4726b1a94a339dc0a9c15bacdc4296a}
+\hypertarget{classSimulation_1_1ParticleContainer_1_1ParticleCell_a7e1b285d4c96a14bd1ace77114714630}{\index{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}!count@{count}}
+\index{count@{count}!Simulation::ParticleContainer::ParticleCell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}}
+\subsubsection[{count}]{\setlength{\rightskip}{0pt plus 5cm}int Particle\-Container\-::\-Particle\-Cell\-::count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleContainer_1_1ParticleCell_a7e1b285d4c96a14bd1ace77114714630}
+\hypertarget{classSimulation_1_1ParticleContainer_1_1ParticleCell_af31f427d33ccc9186e5a48ee852e6957}{\index{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}!empty@{empty}}
+\index{empty@{empty}!Simulation::ParticleContainer::ParticleCell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}}
+\subsubsection[{empty}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::\-Particle\-Cell\-::empty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleContainer_1_1ParticleCell_af31f427d33ccc9186e5a48ee852e6957}
+\hypertarget{classSimulation_1_1ParticleContainer_1_1ParticleCell_a6e23daa21b4a6ff7d88dd4bc8f22ff8b}{\index{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}!insert@{insert}}
+\index{insert@{insert}!Simulation::ParticleContainer::ParticleCell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}}
+\subsubsection[{insert}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::\-Particle\-Cell\-::insert (
+\begin{DoxyParamCaption}
+\item[{{\bf Particle} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleContainer_1_1ParticleCell_a6e23daa21b4a6ff7d88dd4bc8f22ff8b}
+\hypertarget{classSimulation_1_1ParticleContainer_1_1ParticleCell_aac30d823530dad6b959421e8370ef376}{\index{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}!iterate\-Particle\-Pairs@{iterate\-Particle\-Pairs}}
+\index{iterate\-Particle\-Pairs@{iterate\-Particle\-Pairs}!Simulation::ParticleContainer::ParticleCell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}}
+\subsubsection[{iterate\-Particle\-Pairs}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::\-Particle\-Cell\-::iterate\-Particle\-Pairs (
+\begin{DoxyParamCaption}
+\item[{{\bf Particle\-Handler} \&}]{handler}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleContainer_1_1ParticleCell_aac30d823530dad6b959421e8370ef376}
+\hypertarget{classSimulation_1_1ParticleContainer_1_1ParticleCell_a173182caabbd931a12a58b450c11ea4d}{\index{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}!iterate\-Particle\-Pairs\-Exclusive@{iterate\-Particle\-Pairs\-Exclusive}}
+\index{iterate\-Particle\-Pairs\-Exclusive@{iterate\-Particle\-Pairs\-Exclusive}!Simulation::ParticleContainer::ParticleCell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}}
+\subsubsection[{iterate\-Particle\-Pairs\-Exclusive}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::\-Particle\-Cell\-::iterate\-Particle\-Pairs\-Exclusive (
+\begin{DoxyParamCaption}
+\item[{{\bf Particle\-Handler} \&}]{handler}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleContainer_1_1ParticleCell_a173182caabbd931a12a58b450c11ea4d}
+\hypertarget{classSimulation_1_1ParticleContainer_1_1ParticleCell_a051c06f107fa079acfbdd25ec26fa5db}{\index{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}!iterate\-Particles@{iterate\-Particles}}
+\index{iterate\-Particles@{iterate\-Particles}!Simulation::ParticleContainer::ParticleCell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}}
+\subsubsection[{iterate\-Particles}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::\-Particle\-Cell\-::iterate\-Particles (
+\begin{DoxyParamCaption}
+\item[{{\bf Particle\-Handler} \&}]{handler}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleContainer_1_1ParticleCell_a051c06f107fa079acfbdd25ec26fa5db}
+\hypertarget{classSimulation_1_1ParticleContainer_1_1ParticleCell_a601627c38a7b73b91727dc8409b7f951}{\index{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!Simulation::ParticleContainer::ParticleCell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}}
+\subsubsection[{operator[]}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Particle} $\ast$ Particle\-Container\-::\-Particle\-Cell\-::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleContainer_1_1ParticleCell_a601627c38a7b73b91727dc8409b7f951}
+\hypertarget{classSimulation_1_1ParticleContainer_1_1ParticleCell_a14d1bf2b7b613d94f01ef5f54d16a4f2}{\index{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}!remove@{remove}}
+\index{remove@{remove}!Simulation::ParticleContainer::ParticleCell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}}
+\subsubsection[{remove}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::\-Particle\-Cell\-::remove (
+\begin{DoxyParamCaption}
+\item[{{\bf Particle} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleContainer_1_1ParticleCell_a14d1bf2b7b613d94f01ef5f54d16a4f2}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classSimulation_1_1ParticleContainer_1_1ParticleCell_aadee3b53c58700f80e99db9e97849aff}{\index{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}!particles@{particles}}
+\index{particles@{particles}!Simulation::ParticleContainer::ParticleCell@{Simulation\-::\-Particle\-Container\-::\-Particle\-Cell}}
+\subsubsection[{particles}]{\setlength{\rightskip}{0pt plus 5cm}std\-::list$<${\bf Particle}$\ast$$>$ Simulation\-::\-Particle\-Container\-::\-Particle\-Cell\-::particles\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_1_1ParticleCell_aadee3b53c58700f80e99db9e97849aff}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{ParticleContainer_8h}{Particle\-Container.\-h}\item 
+src/\hyperlink{ParticleContainer_8cpp}{Particle\-Container.\-cpp}\end{DoxyCompactItemize}

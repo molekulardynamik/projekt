@@ -1,0 +1,104 @@
+\hypertarget{XMLFormatter_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/framework/\-X\-M\-L\-Formatter.cpp File Reference}
+\label{XMLFormatter_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/framework/\-X\-M\-L\-Formatter.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/framework/\-X\-M\-L\-Formatter.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/util/\-Platform\-Utils.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Uni\-Defs.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-String.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Trans\-Service.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Transcoding\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Except\-Msgs.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Formatter.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Janitor.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Char.\-hpp$>$}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \\*
+X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N \\*
+const X\-M\-L\-Ch \hyperlink{XMLFormatter_8cpp_a9ece19eaaf4f58fca9f1837e53be2b16}{g\-Amp\-Ref} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{XMLFormatter_8cpp_a314243637ad5a3ec6e6ebc3d2a0e0396}{g\-Apos\-Ref} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{XMLFormatter_8cpp_acb712a30de74bfc8021f8be48c6e9e6f}{g\-G\-T\-Ref} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{XMLFormatter_8cpp_ae839a31aa3eec8c4fd1ec2f61675e2ce}{g\-L\-T\-Ref} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{XMLFormatter_8cpp_ab6f8ba8f0416d06c53bbb5be96eff153}{g\-Quote\-Ref} \mbox{[}$\,$\mbox{]}
+\item 
+static const unsigned int \hyperlink{XMLFormatter_8cpp_a851c6920b23374836bcb96382d27bb46}{k\-Escape\-Count} = 7
+\item 
+static const X\-M\-L\-Ch \hyperlink{XMLFormatter_8cpp_a375d95192c10067364b7fb76e4a7f067}{g\-Escape\-Chars} \mbox{[}X\-M\-L\-Formatter\-::\-Escape\-Flags\-\_\-\-Count\mbox{]}\mbox{[}\hyperlink{XMLFormatter_8cpp_a851c6920b23374836bcb96382d27bb46}{k\-Escape\-Count}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\hypertarget{XMLFormatter_8cpp_a9ece19eaaf4f58fca9f1837e53be2b16}{\index{X\-M\-L\-Formatter.\-cpp@{X\-M\-L\-Formatter.\-cpp}!g\-Amp\-Ref@{g\-Amp\-Ref}}
+\index{g\-Amp\-Ref@{g\-Amp\-Ref}!XMLFormatter.cpp@{X\-M\-L\-Formatter.\-cpp}}
+\subsubsection[{g\-Amp\-Ref}]{\setlength{\rightskip}{0pt plus 5cm}X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N const X\-M\-L\-Ch g\-Amp\-Ref\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{XMLFormatter_8cpp_a9ece19eaaf4f58fca9f1837e53be2b16}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chAmpersand, chLatin\_a, chLatin\_m, chLatin\_p, chSemiColon, chNull
+\}
+\end{DoxyCode}
+\begin{DoxyParagraph}{Id\-:}
+\hyperlink{XMLFormatter_8cpp}{X\-M\-L\-Formatter.\-cpp} 901107 2010-\/01-\/20 08\-:45\-:02\-Z borisk 
+\end{DoxyParagraph}
+\hypertarget{XMLFormatter_8cpp_a314243637ad5a3ec6e6ebc3d2a0e0396}{\index{X\-M\-L\-Formatter.\-cpp@{X\-M\-L\-Formatter.\-cpp}!g\-Apos\-Ref@{g\-Apos\-Ref}}
+\index{g\-Apos\-Ref@{g\-Apos\-Ref}!XMLFormatter.cpp@{X\-M\-L\-Formatter.\-cpp}}
+\subsubsection[{g\-Apos\-Ref}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-Apos\-Ref\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{XMLFormatter_8cpp_a314243637ad5a3ec6e6ebc3d2a0e0396}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chAmpersand, chLatin\_a, chLatin\_p, chLatin\_o, chLatin\_s, chSemiColon, chNull
+\}
+\end{DoxyCode}
+\hypertarget{XMLFormatter_8cpp_a375d95192c10067364b7fb76e4a7f067}{\index{X\-M\-L\-Formatter.\-cpp@{X\-M\-L\-Formatter.\-cpp}!g\-Escape\-Chars@{g\-Escape\-Chars}}
+\index{g\-Escape\-Chars@{g\-Escape\-Chars}!XMLFormatter.cpp@{X\-M\-L\-Formatter.\-cpp}}
+\subsubsection[{g\-Escape\-Chars}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-Escape\-Chars\mbox{[}X\-M\-L\-Formatter\-::\-Escape\-Flags\-\_\-\-Count\mbox{]}\mbox{[}{\bf k\-Escape\-Count}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{XMLFormatter_8cpp_a375d95192c10067364b7fb76e4a7f067}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+        \{ chNull      , chNull       , chNull        , chNull       , chNull        , chNull    , chNull \}
+    ,   \{ chAmpersand , chCloseAngle , chDoubleQuote , chOpenAngle  , chSingleQuote , chNull    , chNull \}
+    ,   \{ chAmpersand , chOpenAngle  , chDoubleQuote , chLF         , chCR          , chHTab    , chNull \}
+    ,   \{ chAmpersand , chOpenAngle  , chCloseAngle  , chNull       , chNull        , chNull    , chNull \}
+\}
+\end{DoxyCode}
+\hypertarget{XMLFormatter_8cpp_acb712a30de74bfc8021f8be48c6e9e6f}{\index{X\-M\-L\-Formatter.\-cpp@{X\-M\-L\-Formatter.\-cpp}!g\-G\-T\-Ref@{g\-G\-T\-Ref}}
+\index{g\-G\-T\-Ref@{g\-G\-T\-Ref}!XMLFormatter.cpp@{X\-M\-L\-Formatter.\-cpp}}
+\subsubsection[{g\-G\-T\-Ref}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-G\-T\-Ref\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{XMLFormatter_8cpp_acb712a30de74bfc8021f8be48c6e9e6f}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chAmpersand, chLatin\_g, chLatin\_t, chSemiColon, chNull
+\}
+\end{DoxyCode}
+\hypertarget{XMLFormatter_8cpp_ae839a31aa3eec8c4fd1ec2f61675e2ce}{\index{X\-M\-L\-Formatter.\-cpp@{X\-M\-L\-Formatter.\-cpp}!g\-L\-T\-Ref@{g\-L\-T\-Ref}}
+\index{g\-L\-T\-Ref@{g\-L\-T\-Ref}!XMLFormatter.cpp@{X\-M\-L\-Formatter.\-cpp}}
+\subsubsection[{g\-L\-T\-Ref}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-L\-T\-Ref\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{XMLFormatter_8cpp_ae839a31aa3eec8c4fd1ec2f61675e2ce}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chAmpersand, chLatin\_l, chLatin\_t, chSemiColon, chNull
+\}
+\end{DoxyCode}
+\hypertarget{XMLFormatter_8cpp_ab6f8ba8f0416d06c53bbb5be96eff153}{\index{X\-M\-L\-Formatter.\-cpp@{X\-M\-L\-Formatter.\-cpp}!g\-Quote\-Ref@{g\-Quote\-Ref}}
+\index{g\-Quote\-Ref@{g\-Quote\-Ref}!XMLFormatter.cpp@{X\-M\-L\-Formatter.\-cpp}}
+\subsubsection[{g\-Quote\-Ref}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-Quote\-Ref\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{XMLFormatter_8cpp_ab6f8ba8f0416d06c53bbb5be96eff153}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chAmpersand, chLatin\_q, chLatin\_u, chLatin\_o, chLatin\_t, chSemiColon, chNull
+\}
+\end{DoxyCode}
+\hypertarget{XMLFormatter_8cpp_a851c6920b23374836bcb96382d27bb46}{\index{X\-M\-L\-Formatter.\-cpp@{X\-M\-L\-Formatter.\-cpp}!k\-Escape\-Count@{k\-Escape\-Count}}
+\index{k\-Escape\-Count@{k\-Escape\-Count}!XMLFormatter.cpp@{X\-M\-L\-Formatter.\-cpp}}
+\subsubsection[{k\-Escape\-Count}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned int k\-Escape\-Count = 7\hspace{0.3cm}{\ttfamily [static]}}}\label{XMLFormatter_8cpp_a851c6920b23374836bcb96382d27bb46}

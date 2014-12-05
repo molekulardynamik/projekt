@@ -1,0 +1,77 @@
+\hypertarget{AbstractStringValidator_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/validators/datatype/\-Abstract\-String\-Validator.cpp File Reference}
+\label{AbstractStringValidator_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/datatype/\-Abstract\-String\-Validator.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/datatype/\-Abstract\-String\-Validator.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Abstract\-String\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Invalid\-Datatype\-Facet\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Invalid\-Datatype\-Value\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Number\-Format\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/internal/\-X\-Template\-Serializer.\-hpp$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{AbstractStringValidator_8cpp_a9d14ba6cb68b05dead5a89a56c8ebd54}{R\-E\-P\-O\-R\-T\-\_\-\-F\-A\-C\-E\-T\-\_\-\-E\-R\-R\-O\-R}(val1, val2, except\-\_\-code, manager)
+\item 
+\#define \hyperlink{AbstractStringValidator_8cpp_a64f07be9d97051a72e0d988833b04747}{R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R}(data, val1, val2, except\-\_\-code, manager)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \\*
+X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N \\*
+const int \hyperlink{AbstractStringValidator_8cpp_ab8cfffcb0c5bac2a7cebe2a347749451}{B\-U\-F\-\_\-\-L\-E\-N} = 64
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{AbstractStringValidator_8cpp_a9d14ba6cb68b05dead5a89a56c8ebd54}{\index{Abstract\-String\-Validator.\-cpp@{Abstract\-String\-Validator.\-cpp}!R\-E\-P\-O\-R\-T\-\_\-\-F\-A\-C\-E\-T\-\_\-\-E\-R\-R\-O\-R@{R\-E\-P\-O\-R\-T\-\_\-\-F\-A\-C\-E\-T\-\_\-\-E\-R\-R\-O\-R}}
+\index{R\-E\-P\-O\-R\-T\-\_\-\-F\-A\-C\-E\-T\-\_\-\-E\-R\-R\-O\-R@{R\-E\-P\-O\-R\-T\-\_\-\-F\-A\-C\-E\-T\-\_\-\-E\-R\-R\-O\-R}!AbstractStringValidator.cpp@{Abstract\-String\-Validator.\-cpp}}
+\subsubsection[{R\-E\-P\-O\-R\-T\-\_\-\-F\-A\-C\-E\-T\-\_\-\-E\-R\-R\-O\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-E\-P\-O\-R\-T\-\_\-\-F\-A\-C\-E\-T\-\_\-\-E\-R\-R\-O\-R(
+\begin{DoxyParamCaption}
+\item[{}]{val1, }
+\item[{}]{val2, }
+\item[{}]{except\-\_\-code, }
+\item[{}]{manager}
+\end{DoxyParamCaption}
+)}}\label{AbstractStringValidator_8cpp_a9d14ba6cb68b05dead5a89a56c8ebd54}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+XMLCh value1[\hyperlink{AbstractStringValidator_8cpp_ab8cfffcb0c5bac2a7cebe2a347749451}{BUF\_LEN}+1]; \(\backslash\)
+    XMLCh value2[\hyperlink{AbstractStringValidator_8cpp_ab8cfffcb0c5bac2a7cebe2a347749451}{BUF\_LEN}+1]; \(\backslash\)
+   XMLString::sizeToText(val1, value1, \hyperlink{AbstractStringValidator_8cpp_ab8cfffcb0c5bac2a7cebe2a347749451}{BUF\_LEN}, 10, manager);     \(\backslash\)
+   XMLString::sizeToText(val2, value2, \hyperlink{AbstractStringValidator_8cpp_ab8cfffcb0c5bac2a7cebe2a347749451}{BUF\_LEN}, 10, manager);     \(\backslash\)
+   ThrowXMLwithMemMgr2(InvalidDatatypeFacetException              \(\backslash\)
+           , except\_code                                \(\backslash\)
+           , value1                                     \(\backslash\)
+           , value2                                     \(\backslash\)
+           , manager);
+\end{DoxyCode}
+\hypertarget{AbstractStringValidator_8cpp_a64f07be9d97051a72e0d988833b04747}{\index{Abstract\-String\-Validator.\-cpp@{Abstract\-String\-Validator.\-cpp}!R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R@{R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R}}
+\index{R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R@{R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R}!AbstractStringValidator.cpp@{Abstract\-String\-Validator.\-cpp}}
+\subsubsection[{R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R(
+\begin{DoxyParamCaption}
+\item[{}]{data, }
+\item[{}]{val1, }
+\item[{}]{val2, }
+\item[{}]{except\-\_\-code, }
+\item[{}]{manager}
+\end{DoxyParamCaption}
+)}}\label{AbstractStringValidator_8cpp_a64f07be9d97051a72e0d988833b04747}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+XMLCh value1[\hyperlink{AbstractStringValidator_8cpp_ab8cfffcb0c5bac2a7cebe2a347749451}{BUF\_LEN}+1]; \(\backslash\)
+    XMLCh value2[\hyperlink{AbstractStringValidator_8cpp_ab8cfffcb0c5bac2a7cebe2a347749451}{BUF\_LEN}+1]; \(\backslash\)
+   XMLString::sizeToText(val1, value1, \hyperlink{AbstractStringValidator_8cpp_ab8cfffcb0c5bac2a7cebe2a347749451}{BUF\_LEN}, 10, manager);             \(\backslash\)
+   XMLString::sizeToText(val2, value2, \hyperlink{AbstractStringValidator_8cpp_ab8cfffcb0c5bac2a7cebe2a347749451}{BUF\_LEN}, 10, manager);             \(\backslash\)
+   ThrowXMLwithMemMgr3(InvalidDatatypeValueException                      \(\backslash\)
+           , except\_code                                        \(\backslash\)
+           , data                                               \(\backslash\)
+           , value1                                             \(\backslash\)
+           , value2                                             \(\backslash\)
+           , manager);
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{AbstractStringValidator_8cpp_ab8cfffcb0c5bac2a7cebe2a347749451}{\index{Abstract\-String\-Validator.\-cpp@{Abstract\-String\-Validator.\-cpp}!B\-U\-F\-\_\-\-L\-E\-N@{B\-U\-F\-\_\-\-L\-E\-N}}
+\index{B\-U\-F\-\_\-\-L\-E\-N@{B\-U\-F\-\_\-\-L\-E\-N}!AbstractStringValidator.cpp@{Abstract\-String\-Validator.\-cpp}}
+\subsubsection[{B\-U\-F\-\_\-\-L\-E\-N}]{\setlength{\rightskip}{0pt plus 5cm}X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N const int B\-U\-F\-\_\-\-L\-E\-N = 64\hspace{0.3cm}{\ttfamily [static]}}}\label{AbstractStringValidator_8cpp_ab8cfffcb0c5bac2a7cebe2a347749451}

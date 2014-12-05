@@ -1,0 +1,32 @@
+\hypertarget{AbstractNumericValidator_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/validators/datatype/\-Abstract\-Numeric\-Validator.cpp File Reference}
+\label{AbstractNumericValidator_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/datatype/\-Abstract\-Numeric\-Validator.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/datatype/\-Abstract\-Numeric\-Validator.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Abstract\-Numeric\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Invalid\-Datatype\-Value\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Abstract\-Double\-Float.\-hpp$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{AbstractNumericValidator_8cpp_abf0e0e334aa021abc2f718e9bc2f1410}{R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R}(val1, val2, except\-\_\-code, manager)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{AbstractNumericValidator_8cpp_abf0e0e334aa021abc2f718e9bc2f1410}{\index{Abstract\-Numeric\-Validator.\-cpp@{Abstract\-Numeric\-Validator.\-cpp}!R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R@{R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R}}
+\index{R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R@{R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R}!AbstractNumericValidator.cpp@{Abstract\-Numeric\-Validator.\-cpp}}
+\subsubsection[{R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-E\-P\-O\-R\-T\-\_\-\-V\-A\-L\-U\-E\-\_\-\-E\-R\-R\-O\-R(
+\begin{DoxyParamCaption}
+\item[{}]{val1, }
+\item[{}]{val2, }
+\item[{}]{except\-\_\-code, }
+\item[{}]{manager}
+\end{DoxyParamCaption}
+)}}\label{AbstractNumericValidator_8cpp_abf0e0e334aa021abc2f718e9bc2f1410}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+ThrowXMLwithMemMgr2(InvalidDatatypeValueException               \(\backslash\)
+          , except\_code                                 \(\backslash\)
+          , val1->getFormattedString()                  \(\backslash\)
+          , val2->getFormattedString()                  \(\backslash\)
+          , manager);
+\end{DoxyCode}

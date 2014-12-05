@@ -1,0 +1,119 @@
+\hypertarget{DOMImplementationImpl_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/dom/impl/\-D\-O\-M\-Implementation\-Impl.cpp File Reference}
+\label{DOMImplementationImpl_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/dom/impl/\-D\-O\-M\-Implementation\-Impl.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/dom/impl/\-D\-O\-M\-Implementation\-Impl.\-cpp}}
+}
+{\ttfamily \#include \char`\"{}D\-O\-M\-Implementation\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Document\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Document\-Type\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-L\-S\-Serializer\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-L\-S\-Input\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-L\-S\-Output\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-O\-M\-Implementation\-List\-Impl.\-hpp\char`\"{}}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Document.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Document\-Type.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Platform\-Utils.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Initializer.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Uni\-Defs.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Char.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-String\-Tokenizer.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Msg\-Loader.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/parsers/\-D\-O\-M\-L\-S\-Parser\-Impl.\-hpp$>$}\\*
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \\*
+X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N \\*
+const X\-M\-L\-Ch \hyperlink{DOMImplementationImpl_8cpp_a40e360a26c1dc2a605589085b98ff2ca}{g1\-\_\-0} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMImplementationImpl_8cpp_a6c2708fe89c11655ee896984c5b1b594}{g2\-\_\-0} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMImplementationImpl_8cpp_a00d6bb2cb378d57cefb08e1d5429a1b9}{g3\-\_\-0} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMImplementationImpl_8cpp_a37cb6e0be5d62d1ff6eab9c52dbdcc02}{g\-Trav} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMImplementationImpl_8cpp_accee2cdfeeaeddaa52610f1831f90fb1}{g\-Core} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMImplementationImpl_8cpp_a027655eda17fc4dd534846dccb0db698}{g\-Range} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMImplementationImpl_8cpp_a7f7b1e8295fe03f3df561d7bf484e81e}{g\-L\-S} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{DOMImplementationImpl_8cpp_a513c09bf0dd96c0df2b06f0ccec09b55}{g\-X\-Path} \mbox{[}$\,$\mbox{]}
+\item 
+static X\-M\-L\-Msg\-Loader $\ast$ \hyperlink{DOMImplementationImpl_8cpp_a2093b7cc30bf5c89cbec3cc41c2bef8d}{s\-Msg\-Loader} = 0
+\item 
+static D\-O\-M\-Implementation\-Impl $\ast$ \hyperlink{DOMImplementationImpl_8cpp_a01809e0a3b6388c15bcafb6aff309ad4}{g\-Domimp} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\hypertarget{DOMImplementationImpl_8cpp_a40e360a26c1dc2a605589085b98ff2ca}{\index{D\-O\-M\-Implementation\-Impl.\-cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}!g1\-\_\-0@{g1\-\_\-0}}
+\index{g1\-\_\-0@{g1\-\_\-0}!DOMImplementationImpl.cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}}
+\subsubsection[{g1\-\_\-0}]{\setlength{\rightskip}{0pt plus 5cm}X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N const X\-M\-L\-Ch g1\-\_\-0\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMImplementationImpl_8cpp_a40e360a26c1dc2a605589085b98ff2ca}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=     
+        \{chDigit\_1, chPeriod, chDigit\_0, chNull\}
+\end{DoxyCode}
+\hypertarget{DOMImplementationImpl_8cpp_a6c2708fe89c11655ee896984c5b1b594}{\index{D\-O\-M\-Implementation\-Impl.\-cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}!g2\-\_\-0@{g2\-\_\-0}}
+\index{g2\-\_\-0@{g2\-\_\-0}!DOMImplementationImpl.cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}}
+\subsubsection[{g2\-\_\-0}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g2\-\_\-0\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMImplementationImpl_8cpp_a6c2708fe89c11655ee896984c5b1b594}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=      
+        \{chDigit\_2, chPeriod, chDigit\_0, chNull\}
+\end{DoxyCode}
+\hypertarget{DOMImplementationImpl_8cpp_a00d6bb2cb378d57cefb08e1d5429a1b9}{\index{D\-O\-M\-Implementation\-Impl.\-cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}!g3\-\_\-0@{g3\-\_\-0}}
+\index{g3\-\_\-0@{g3\-\_\-0}!DOMImplementationImpl.cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}}
+\subsubsection[{g3\-\_\-0}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g3\-\_\-0\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMImplementationImpl_8cpp_a00d6bb2cb378d57cefb08e1d5429a1b9}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=      
+        \{chDigit\_3, chPeriod, chDigit\_0, chNull\}
+\end{DoxyCode}
+\hypertarget{DOMImplementationImpl_8cpp_accee2cdfeeaeddaa52610f1831f90fb1}{\index{D\-O\-M\-Implementation\-Impl.\-cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}!g\-Core@{g\-Core}}
+\index{g\-Core@{g\-Core}!DOMImplementationImpl.cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}}
+\subsubsection[{g\-Core}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-Core\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMImplementationImpl_8cpp_accee2cdfeeaeddaa52610f1831f90fb1}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=     
+        \{chLatin\_C, chLatin\_o, chLatin\_r, chLatin\_e, chNull\}
+\end{DoxyCode}
+\hypertarget{DOMImplementationImpl_8cpp_a01809e0a3b6388c15bcafb6aff309ad4}{\index{D\-O\-M\-Implementation\-Impl.\-cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}!g\-Domimp@{g\-Domimp}}
+\index{g\-Domimp@{g\-Domimp}!DOMImplementationImpl.cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}}
+\subsubsection[{g\-Domimp}]{\setlength{\rightskip}{0pt plus 5cm}D\-O\-M\-Implementation\-Impl$\ast$ g\-Domimp = 0\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMImplementationImpl_8cpp_a01809e0a3b6388c15bcafb6aff309ad4}
+\hypertarget{DOMImplementationImpl_8cpp_a7f7b1e8295fe03f3df561d7bf484e81e}{\index{D\-O\-M\-Implementation\-Impl.\-cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}!g\-L\-S@{g\-L\-S}}
+\index{g\-L\-S@{g\-L\-S}!DOMImplementationImpl.cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}}
+\subsubsection[{g\-L\-S}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-L\-S\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMImplementationImpl_8cpp_a7f7b1e8295fe03f3df561d7bf484e81e}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=     
+        \{chLatin\_L, chLatin\_S, chNull\}
+\end{DoxyCode}
+\hypertarget{DOMImplementationImpl_8cpp_a027655eda17fc4dd534846dccb0db698}{\index{D\-O\-M\-Implementation\-Impl.\-cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}!g\-Range@{g\-Range}}
+\index{g\-Range@{g\-Range}!DOMImplementationImpl.cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}}
+\subsubsection[{g\-Range}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-Range\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMImplementationImpl_8cpp_a027655eda17fc4dd534846dccb0db698}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=     
+        \{chLatin\_R, chLatin\_a, chLatin\_n, chLatin\_g, chLatin\_e, chNull\}
+\end{DoxyCode}
+\hypertarget{DOMImplementationImpl_8cpp_a37cb6e0be5d62d1ff6eab9c52dbdcc02}{\index{D\-O\-M\-Implementation\-Impl.\-cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}!g\-Trav@{g\-Trav}}
+\index{g\-Trav@{g\-Trav}!DOMImplementationImpl.cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}}
+\subsubsection[{g\-Trav}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-Trav\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMImplementationImpl_8cpp_a37cb6e0be5d62d1ff6eab9c52dbdcc02}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=     
+        \{chLatin\_T, chLatin\_r, chLatin\_a, chLatin\_v, chLatin\_e, chLatin\_r,
+            chLatin\_s, chLatin\_a, chLatin\_l, chNull\}
+\end{DoxyCode}
+\hypertarget{DOMImplementationImpl_8cpp_a513c09bf0dd96c0df2b06f0ccec09b55}{\index{D\-O\-M\-Implementation\-Impl.\-cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}!g\-X\-Path@{g\-X\-Path}}
+\index{g\-X\-Path@{g\-X\-Path}!DOMImplementationImpl.cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}}
+\subsubsection[{g\-X\-Path}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-X\-Path\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMImplementationImpl_8cpp_a513c09bf0dd96c0df2b06f0ccec09b55}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=     
+        \{chLatin\_X, chLatin\_P, chLatin\_a, chLatin\_t, chLatin\_h, chNull\}
+\end{DoxyCode}
+\hypertarget{DOMImplementationImpl_8cpp_a2093b7cc30bf5c89cbec3cc41c2bef8d}{\index{D\-O\-M\-Implementation\-Impl.\-cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}!s\-Msg\-Loader@{s\-Msg\-Loader}}
+\index{s\-Msg\-Loader@{s\-Msg\-Loader}!DOMImplementationImpl.cpp@{D\-O\-M\-Implementation\-Impl.\-cpp}}
+\subsubsection[{s\-Msg\-Loader}]{\setlength{\rightskip}{0pt plus 5cm}X\-M\-L\-Msg\-Loader$\ast$ s\-Msg\-Loader = 0\hspace{0.3cm}{\ttfamily [static]}}}\label{DOMImplementationImpl_8cpp_a2093b7cc30bf5c89cbec3cc41c2bef8d}

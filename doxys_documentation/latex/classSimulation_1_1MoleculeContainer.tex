@@ -1,0 +1,97 @@
+\hypertarget{classSimulation_1_1MoleculeContainer}{\section{Simulation\-:\-:Molecule\-Container Class Reference}
+\label{classSimulation_1_1MoleculeContainer}\index{Simulation\-::\-Molecule\-Container@{Simulation\-::\-Molecule\-Container}}
+}
+
+
+Container class for managing Molecules  
+
+
+
+
+{\ttfamily \#include $<$Molecule\-Container.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSimulation_1_1MoleculeContainer_a360a7ddab91b51cb23f69446f15ca25a}{Molecule\-Container} ()
+\item 
+\hyperlink{classSimulation_1_1MoleculeContainer_a0c72d6294527e99d079699e89782c475}{Molecule\-Container} (char $\ast$filename)
+\item 
+int \hyperlink{classSimulation_1_1MoleculeContainer_adf939bdcfc7fe2ec04d91846785a49a6}{count} ()
+\begin{DoxyCompactList}\small\item\em \begin{DoxyReturn}{Returns}
+Number of Molecules; 
+\end{DoxyReturn}
+\end{DoxyCompactList}\item 
+\hyperlink{classSimulation_1_1Particle}{Particle} \& \hyperlink{classSimulation_1_1MoleculeContainer_a59d68ea3d499b9d9b96a5a0c9c3b04a6}{operator\mbox{[}$\,$\mbox{]}} (int i)
+\begin{DoxyCompactList}\small\item\em \begin{DoxyReturn}{Returns}
+\hyperlink{classSimulation_1_1Particle}{Particle} at location i 
+\end{DoxyReturn}
+\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::vector$<$ \hyperlink{classSimulation_1_1Particle}{Particle} $>$ \hyperlink{classSimulation_1_1MoleculeContainer_a030dda8865bc9fed733c1b01e435e3a5}{particles}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Container class for managing Molecules 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSimulation_1_1MoleculeContainer_a360a7ddab91b51cb23f69446f15ca25a}{\index{Simulation\-::\-Molecule\-Container@{Simulation\-::\-Molecule\-Container}!Molecule\-Container@{Molecule\-Container}}
+\index{Molecule\-Container@{Molecule\-Container}!Simulation::MoleculeContainer@{Simulation\-::\-Molecule\-Container}}
+\subsubsection[{Molecule\-Container}]{\setlength{\rightskip}{0pt plus 5cm}Simulation\-::\-Molecule\-Container\-::\-Molecule\-Container (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSimulation_1_1MoleculeContainer_a360a7ddab91b51cb23f69446f15ca25a}
+\hypertarget{classSimulation_1_1MoleculeContainer_a0c72d6294527e99d079699e89782c475}{\index{Simulation\-::\-Molecule\-Container@{Simulation\-::\-Molecule\-Container}!Molecule\-Container@{Molecule\-Container}}
+\index{Molecule\-Container@{Molecule\-Container}!Simulation::MoleculeContainer@{Simulation\-::\-Molecule\-Container}}
+\subsubsection[{Molecule\-Container}]{\setlength{\rightskip}{0pt plus 5cm}Molecule\-Container\-::\-Molecule\-Container (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{filename}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1MoleculeContainer_a0c72d6294527e99d079699e89782c475}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSimulation_1_1MoleculeContainer_adf939bdcfc7fe2ec04d91846785a49a6}{\index{Simulation\-::\-Molecule\-Container@{Simulation\-::\-Molecule\-Container}!count@{count}}
+\index{count@{count}!Simulation::MoleculeContainer@{Simulation\-::\-Molecule\-Container}}
+\subsubsection[{count}]{\setlength{\rightskip}{0pt plus 5cm}int Simulation\-::\-Molecule\-Container\-::count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSimulation_1_1MoleculeContainer_adf939bdcfc7fe2ec04d91846785a49a6}
+
+
+\begin{DoxyReturn}{Returns}
+Number of Molecules; 
+\end{DoxyReturn}
+
+
+\hypertarget{classSimulation_1_1MoleculeContainer_a59d68ea3d499b9d9b96a5a0c9c3b04a6}{\index{Simulation\-::\-Molecule\-Container@{Simulation\-::\-Molecule\-Container}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!Simulation::MoleculeContainer@{Simulation\-::\-Molecule\-Container}}
+\subsubsection[{operator[]}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Particle}\& Simulation\-::\-Molecule\-Container\-::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSimulation_1_1MoleculeContainer_a59d68ea3d499b9d9b96a5a0c9c3b04a6}
+
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{classSimulation_1_1Particle}{Particle} at location i 
+\end{DoxyReturn}
+
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classSimulation_1_1MoleculeContainer_a030dda8865bc9fed733c1b01e435e3a5}{\index{Simulation\-::\-Molecule\-Container@{Simulation\-::\-Molecule\-Container}!particles@{particles}}
+\index{particles@{particles}!Simulation::MoleculeContainer@{Simulation\-::\-Molecule\-Container}}
+\subsubsection[{particles}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Particle}$>$ Simulation\-::\-Molecule\-Container\-::particles\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1MoleculeContainer_a030dda8865bc9fed733c1b01e435e3a5}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{MoleculeContainer_8h}{Molecule\-Container.\-h}\item 
+src/\hyperlink{MoleculeContainer_8cpp}{Molecule\-Container.\-cpp}\end{DoxyCompactItemize}

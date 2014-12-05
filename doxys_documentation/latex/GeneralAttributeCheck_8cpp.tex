@@ -1,0 +1,61 @@
+\hypertarget{GeneralAttributeCheck_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/validators/schema/\-General\-Attribute\-Check.cpp File Reference}
+\label{GeneralAttributeCheck_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/schema/\-General\-Attribute\-Check.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/schema/\-General\-Attribute\-Check.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/validators/schema/\-General\-Attribute\-Check.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Schema\-Symbols.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Traverse\-Schema.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Datatype\-Validator\-Factory.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Named\-Node\-Map.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Error\-Codes.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Annotation.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-String.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Uni\-Defs.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Janitor.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Platform\-Utils.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Initializer.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Out\-Of\-Memory\-Exception.\-hpp$>$}\\*
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \\*
+X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N \\*
+const X\-M\-L\-Ch \hyperlink{GeneralAttributeCheck_8cpp_a5c74da1e22e6a84f93ef3dbdfcdd70b9}{fg\-Value\-Zero} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{GeneralAttributeCheck_8cpp_acad3f1eb0a9bd955226a4bfe923bb338}{fg\-Value\-One} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{GeneralAttributeCheck_8cpp_a32c8eb119598189088b48175d4bd3c70}{fg\-Unbounded} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\hypertarget{GeneralAttributeCheck_8cpp_a32c8eb119598189088b48175d4bd3c70}{\index{General\-Attribute\-Check.\-cpp@{General\-Attribute\-Check.\-cpp}!fg\-Unbounded@{fg\-Unbounded}}
+\index{fg\-Unbounded@{fg\-Unbounded}!GeneralAttributeCheck.cpp@{General\-Attribute\-Check.\-cpp}}
+\subsubsection[{fg\-Unbounded}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch fg\-Unbounded\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{GeneralAttributeCheck_8cpp_a32c8eb119598189088b48175d4bd3c70}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chLatin\_u, chLatin\_n, chLatin\_b, chLatin\_o, chLatin\_u, chLatin\_n, chLatin\_d,
+    chLatin\_e, chLatin\_d, chNull
+\}
+\end{DoxyCode}
+\hypertarget{GeneralAttributeCheck_8cpp_acad3f1eb0a9bd955226a4bfe923bb338}{\index{General\-Attribute\-Check.\-cpp@{General\-Attribute\-Check.\-cpp}!fg\-Value\-One@{fg\-Value\-One}}
+\index{fg\-Value\-One@{fg\-Value\-One}!GeneralAttributeCheck.cpp@{General\-Attribute\-Check.\-cpp}}
+\subsubsection[{fg\-Value\-One}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch fg\-Value\-One\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{GeneralAttributeCheck_8cpp_acad3f1eb0a9bd955226a4bfe923bb338}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chDigit\_1, chNull
+\}
+\end{DoxyCode}
+\hypertarget{GeneralAttributeCheck_8cpp_a5c74da1e22e6a84f93ef3dbdfcdd70b9}{\index{General\-Attribute\-Check.\-cpp@{General\-Attribute\-Check.\-cpp}!fg\-Value\-Zero@{fg\-Value\-Zero}}
+\index{fg\-Value\-Zero@{fg\-Value\-Zero}!GeneralAttributeCheck.cpp@{General\-Attribute\-Check.\-cpp}}
+\subsubsection[{fg\-Value\-Zero}]{\setlength{\rightskip}{0pt plus 5cm}X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N const X\-M\-L\-Ch fg\-Value\-Zero\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{GeneralAttributeCheck_8cpp_a5c74da1e22e6a84f93ef3dbdfcdd70b9}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chDigit\_0, chNull
+\}
+\end{DoxyCode}

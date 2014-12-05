@@ -1,0 +1,70 @@
+\hypertarget{AbstractDOMParser_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/parsers/\-Abstract\-D\-O\-M\-Parser.cpp File Reference}
+\label{AbstractDOMParser_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/parsers/\-Abstract\-D\-O\-M\-Parser.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/parsers/\-Abstract\-D\-O\-M\-Parser.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/parsers/\-Abstract\-D\-O\-M\-Parser.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/internal/\-X\-M\-L\-Scanner\-Resolver.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/internal/\-Elem\-Stack.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Uni\-Defs.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Notation\-Decl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-P\-S\-V\-I\-Element.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-P\-S\-V\-I\-Attribute.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-P\-S\-V\-I\-Attribute\-List.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Element\-Declaration.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-I\-O\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Implementation.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Implementation\-Registry.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Element.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-Attr\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-Attr\-N\-S\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-Type\-Info\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-C\-D\-A\-T\-A\-Section\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Comment.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-Text\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-Document\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-Document\-Type\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Document\-Type.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-Element\-N\-S\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-Entity\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-Entity\-Reference\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-Notation\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Named\-Node\-Map.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Processing\-Instruction.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-Processing\-Instruction\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-Node\-I\-D\-Map.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-D\-O\-M\-Casts.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/common/\-Content\-Spec\-Node.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/common/\-Grammar\-Resolver.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Schema\-Symbols.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Out\-Of\-Memory\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/xinclude/\-X\-Include\-Utils.\-hpp$>$}\\*
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Janitor\-Mem\-Fun\-Call\\*
+$<$ Abstract\-D\-O\-M\-Parser $>$ \hyperlink{AbstractDOMParser_8cpp_a421040d9329d73539bd5f67edd970685}{Reset\-In\-Progress\-Type}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N \\*
+typedef Janitor\-Mem\-Fun\-Call\\*
+$<$ Abstract\-D\-O\-M\-Parser $>$ \hyperlink{AbstractDOMParser_8cpp_a8bd214c3883056b1ed80fdca68f28717}{Cleanup\-Type}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{AbstractDOMParser_8cpp_a421040d9329d73539bd5f67edd970685}{\index{Abstract\-D\-O\-M\-Parser.\-cpp@{Abstract\-D\-O\-M\-Parser.\-cpp}!Reset\-In\-Progress\-Type@{Reset\-In\-Progress\-Type}}
+\index{Reset\-In\-Progress\-Type@{Reset\-In\-Progress\-Type}!AbstractDOMParser.cpp@{Abstract\-D\-O\-M\-Parser.\-cpp}}
+\subsubsection[{Reset\-In\-Progress\-Type}]{\setlength{\rightskip}{0pt plus 5cm}typedef Janitor\-Mem\-Fun\-Call$<$Abstract\-D\-O\-M\-Parser$>$ {\bf Reset\-In\-Progress\-Type}}}\label{AbstractDOMParser_8cpp_a421040d9329d73539bd5f67edd970685}
+
+
+\subsection{Variable Documentation}
+\hypertarget{AbstractDOMParser_8cpp_a8bd214c3883056b1ed80fdca68f28717}{\index{Abstract\-D\-O\-M\-Parser.\-cpp@{Abstract\-D\-O\-M\-Parser.\-cpp}!Cleanup\-Type@{Cleanup\-Type}}
+\index{Cleanup\-Type@{Cleanup\-Type}!AbstractDOMParser.cpp@{Abstract\-D\-O\-M\-Parser.\-cpp}}
+\subsubsection[{Cleanup\-Type}]{\setlength{\rightskip}{0pt plus 5cm}X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N typedef Janitor\-Mem\-Fun\-Call$<$Abstract\-D\-O\-M\-Parser$>$ {\bf Cleanup\-Type}}}\label{AbstractDOMParser_8cpp_a8bd214c3883056b1ed80fdca68f28717}
+This file contains code to build the D\-O\-M tree. It registers a document handler with the scanner. In these handler methods, appropriate D\-O\-M nodes are created and added to the D\-O\-M tree.
+
+\begin{DoxyParagraph}{Id\-:}
+\hyperlink{AbstractDOMParser_8cpp}{Abstract\-D\-O\-M\-Parser.\-cpp} 935358 2010-\/04-\/18 15\-:40\-:35\-Z borisk 
+\end{DoxyParagraph}

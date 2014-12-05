@@ -1,0 +1,66 @@
+\hypertarget{AbstractNumericFacetValidator_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/validators/datatype/\-Abstract\-Numeric\-Facet\-Validator.cpp File Reference}
+\label{AbstractNumericFacetValidator_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/datatype/\-Abstract\-Numeric\-Facet\-Validator.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/datatype/\-Abstract\-Numeric\-Facet\-Validator.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Abstract\-Numeric\-Facet\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Invalid\-Datatype\-Facet\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Number\-Format\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Float.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Double.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Big\-Decimal.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Date\-Time.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/internal/\-X\-Template\-Serializer.\-hpp$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{AbstractNumericFacetValidator_8cpp_a9d14ba6cb68b05dead5a89a56c8ebd54}{R\-E\-P\-O\-R\-T\-\_\-\-F\-A\-C\-E\-T\-\_\-\-E\-R\-R\-O\-R}(val1, val2, except\-\_\-code, manager)
+\item 
+\#define \hyperlink{AbstractNumericFacetValidator_8cpp_a2fd89c7e7627f78b45a5f3e8f99c771d}{F\-R\-O\-M\-\_\-\-B\-A\-S\-E\-\_\-\-V\-A\-L\-U\-E\-\_\-\-S\-P\-A\-C\-E}(val, facet\-Flag, except\-\_\-code, manager)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{AbstractNumericFacetValidator_8cpp_a2fd89c7e7627f78b45a5f3e8f99c771d}{\index{Abstract\-Numeric\-Facet\-Validator.\-cpp@{Abstract\-Numeric\-Facet\-Validator.\-cpp}!F\-R\-O\-M\-\_\-\-B\-A\-S\-E\-\_\-\-V\-A\-L\-U\-E\-\_\-\-S\-P\-A\-C\-E@{F\-R\-O\-M\-\_\-\-B\-A\-S\-E\-\_\-\-V\-A\-L\-U\-E\-\_\-\-S\-P\-A\-C\-E}}
+\index{F\-R\-O\-M\-\_\-\-B\-A\-S\-E\-\_\-\-V\-A\-L\-U\-E\-\_\-\-S\-P\-A\-C\-E@{F\-R\-O\-M\-\_\-\-B\-A\-S\-E\-\_\-\-V\-A\-L\-U\-E\-\_\-\-S\-P\-A\-C\-E}!AbstractNumericFacetValidator.cpp@{Abstract\-Numeric\-Facet\-Validator.\-cpp}}
+\subsubsection[{F\-R\-O\-M\-\_\-\-B\-A\-S\-E\-\_\-\-V\-A\-L\-U\-E\-\_\-\-S\-P\-A\-C\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-R\-O\-M\-\_\-\-B\-A\-S\-E\-\_\-\-V\-A\-L\-U\-E\-\_\-\-S\-P\-A\-C\-E(
+\begin{DoxyParamCaption}
+\item[{}]{val, }
+\item[{}]{facet\-Flag, }
+\item[{}]{except\-\_\-code, }
+\item[{}]{manager}
+\end{DoxyParamCaption}
+)}}\label{AbstractNumericFacetValidator_8cpp_a2fd89c7e7627f78b45a5f3e8f99c771d}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} ((thisFacetsDefined & facetFlag) != 0)                   \(\backslash\)
+\{                                                             \(\backslash\)
+    try                                                       \(\backslash\)
+\{                                                             \(\backslash\)
+        numBase->checkContent(val->getRawData(), (ValidationContext*)0, \textcolor{keyword}{false}, manager);      \(\backslash\)
+\}                                                             \(\backslash\)
+    catch ( XMLException& )                                   \(\backslash\)
+\{                                                             \(\backslash\)
+        ThrowXMLwithMemMgr1(InvalidDatatypeFacetException               \(\backslash\)
+                , except\_code                                 \(\backslash\)
+                , val->getRawData()                           \(\backslash\)
+                , manager);                                   \(\backslash\)
+\}                                                             \(\backslash\)
+\}
+\end{DoxyCode}
+\hypertarget{AbstractNumericFacetValidator_8cpp_a9d14ba6cb68b05dead5a89a56c8ebd54}{\index{Abstract\-Numeric\-Facet\-Validator.\-cpp@{Abstract\-Numeric\-Facet\-Validator.\-cpp}!R\-E\-P\-O\-R\-T\-\_\-\-F\-A\-C\-E\-T\-\_\-\-E\-R\-R\-O\-R@{R\-E\-P\-O\-R\-T\-\_\-\-F\-A\-C\-E\-T\-\_\-\-E\-R\-R\-O\-R}}
+\index{R\-E\-P\-O\-R\-T\-\_\-\-F\-A\-C\-E\-T\-\_\-\-E\-R\-R\-O\-R@{R\-E\-P\-O\-R\-T\-\_\-\-F\-A\-C\-E\-T\-\_\-\-E\-R\-R\-O\-R}!AbstractNumericFacetValidator.cpp@{Abstract\-Numeric\-Facet\-Validator.\-cpp}}
+\subsubsection[{R\-E\-P\-O\-R\-T\-\_\-\-F\-A\-C\-E\-T\-\_\-\-E\-R\-R\-O\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-E\-P\-O\-R\-T\-\_\-\-F\-A\-C\-E\-T\-\_\-\-E\-R\-R\-O\-R(
+\begin{DoxyParamCaption}
+\item[{}]{val1, }
+\item[{}]{val2, }
+\item[{}]{except\-\_\-code, }
+\item[{}]{manager}
+\end{DoxyParamCaption}
+)}}\label{AbstractNumericFacetValidator_8cpp_a9d14ba6cb68b05dead5a89a56c8ebd54}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+ThrowXMLwithMemMgr2(InvalidDatatypeFacetException               \(\backslash\)
+          , except\_code                                 \(\backslash\)
+          , val1->getFormattedString()                  \(\backslash\)
+          , val2->getFormattedString()                  \(\backslash\)
+          , manager);
+\end{DoxyCode}

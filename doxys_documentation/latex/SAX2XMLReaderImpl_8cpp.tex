@@ -1,0 +1,60 @@
+\hypertarget{SAX2XMLReaderImpl_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/parsers/\-S\-A\-X2\-X\-M\-L\-Reader\-Impl.cpp File Reference}
+\label{SAX2XMLReaderImpl_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/parsers/\-S\-A\-X2\-X\-M\-L\-Reader\-Impl.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/parsers/\-S\-A\-X2\-X\-M\-L\-Reader\-Impl.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/util/\-I\-O\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Ref\-Stack\-Of.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Uni\-Defs.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Janitor.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/sax2/\-Content\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/sax2/\-Lexical\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/sax2/\-Decl\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/sax2/\-X\-M\-L\-Reader\-Factory.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/sax/\-D\-T\-D\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/sax/\-Error\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/sax/\-Entity\-Resolver.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/sax/\-S\-A\-X\-Parse\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/sax/\-S\-A\-X\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/internal/\-X\-M\-L\-Scanner\-Resolver.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/parsers/\-S\-A\-X2\-X\-M\-L\-Reader\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/common/\-Grammar\-Resolver.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Grammar\-Pool.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Schema\-Description.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Out\-Of\-Memory\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Entity\-Resolver.\-hpp$>$}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Janitor\-Mem\-Fun\-Call\\*
+$<$ S\-A\-X2\-X\-M\-L\-Reader\-Impl $>$ \hyperlink{SAX2XMLReaderImpl_8cpp_ab042917310111a962fe12ec08696c27c}{Cleanup\-Type}
+\item 
+typedef Janitor\-Mem\-Fun\-Call\\*
+$<$ S\-A\-X2\-X\-M\-L\-Reader\-Impl $>$ \hyperlink{SAX2XMLReaderImpl_8cpp_a323b10a74db77f862e2ee3503d7a18c2}{Reset\-In\-Progress\-Type}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const X\-M\-L\-Ch \hyperlink{SAX2XMLReaderImpl_8cpp_a52c0e537e69835dc56dc29a7a53e33cb}{g\-D\-T\-D\-Entity\-Str} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{SAX2XMLReaderImpl_8cpp_ab042917310111a962fe12ec08696c27c}{\index{S\-A\-X2\-X\-M\-L\-Reader\-Impl.\-cpp@{S\-A\-X2\-X\-M\-L\-Reader\-Impl.\-cpp}!Cleanup\-Type@{Cleanup\-Type}}
+\index{Cleanup\-Type@{Cleanup\-Type}!SAX2XMLReaderImpl.cpp@{S\-A\-X2\-X\-M\-L\-Reader\-Impl.\-cpp}}
+\subsubsection[{Cleanup\-Type}]{\setlength{\rightskip}{0pt plus 5cm}typedef Janitor\-Mem\-Fun\-Call$<$S\-A\-X2\-X\-M\-L\-Reader\-Impl$>$ {\bf Cleanup\-Type}}}\label{SAX2XMLReaderImpl_8cpp_ab042917310111a962fe12ec08696c27c}
+\hypertarget{SAX2XMLReaderImpl_8cpp_a323b10a74db77f862e2ee3503d7a18c2}{\index{S\-A\-X2\-X\-M\-L\-Reader\-Impl.\-cpp@{S\-A\-X2\-X\-M\-L\-Reader\-Impl.\-cpp}!Reset\-In\-Progress\-Type@{Reset\-In\-Progress\-Type}}
+\index{Reset\-In\-Progress\-Type@{Reset\-In\-Progress\-Type}!SAX2XMLReaderImpl.cpp@{S\-A\-X2\-X\-M\-L\-Reader\-Impl.\-cpp}}
+\subsubsection[{Reset\-In\-Progress\-Type}]{\setlength{\rightskip}{0pt plus 5cm}typedef Janitor\-Mem\-Fun\-Call$<$S\-A\-X2\-X\-M\-L\-Reader\-Impl$>$ {\bf Reset\-In\-Progress\-Type}}}\label{SAX2XMLReaderImpl_8cpp_a323b10a74db77f862e2ee3503d7a18c2}
+
+
+\subsection{Variable Documentation}
+\hypertarget{SAX2XMLReaderImpl_8cpp_a52c0e537e69835dc56dc29a7a53e33cb}{\index{S\-A\-X2\-X\-M\-L\-Reader\-Impl.\-cpp@{S\-A\-X2\-X\-M\-L\-Reader\-Impl.\-cpp}!g\-D\-T\-D\-Entity\-Str@{g\-D\-T\-D\-Entity\-Str}}
+\index{g\-D\-T\-D\-Entity\-Str@{g\-D\-T\-D\-Entity\-Str}!SAX2XMLReaderImpl.cpp@{S\-A\-X2\-X\-M\-L\-Reader\-Impl.\-cpp}}
+\subsubsection[{g\-D\-T\-D\-Entity\-Str}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch g\-D\-T\-D\-Entity\-Str\mbox{[}$\,$\mbox{]}}}\label{SAX2XMLReaderImpl_8cpp_a52c0e537e69835dc56dc29a7a53e33cb}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chOpenSquare, chLatin\_d, chLatin\_t, chLatin\_d, chCloseSquare, chNull
+\}
+\end{DoxyCode}

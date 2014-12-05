@@ -1,0 +1,192 @@
+\hypertarget{TraverseSchema_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/validators/schema/\-Traverse\-Schema.cpp File Reference}
+\label{TraverseSchema_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/schema/\-Traverse\-Schema.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/validators/schema/\-Traverse\-Schema.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/validators/schema/\-Traverse\-Schema.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Entity\-Handler.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Validity\-Codes.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/identity/\-I\-C\-\_\-\-Key.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/identity/\-I\-C\-\_\-\-Key\-Ref.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/identity/\-I\-C\-\_\-\-Unique.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/identity/\-I\-C\-\_\-\-Field.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/identity/\-I\-C\-\_\-\-Selector.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/identity/\-Xerces\-X\-Path.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-String\-Tokenizer.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-X\-Util.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/common/\-Grammar\-Resolver.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/internal/\-X\-M\-L\-Reader.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Complex\-Type\-Info.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Namespace\-Scope.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Schema\-Att\-Def\-List.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/internal/\-X\-M\-L\-Scanner.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-Local\-File\-Input\-Source.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-U\-R\-L\-Input\-Source.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Grammar\-Pool.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-X\-M\-L\-Schema\-Description.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/identity/\-X\-Path\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-General\-Attribute\-Check.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Xerces\-Group\-Info.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Xerces\-Att\-Group\-Info.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-X\-S\-D\-Locator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-X\-S\-D\-D\-O\-M\-Parser.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Named\-Node\-Map.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/\-D\-O\-M\-Text.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/dom/impl/\-X\-S\-D\-Element\-N\-S\-Impl.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Out\-Of\-Memory\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-Number\-Format\-Exception.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Entity\-Resolver.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-Uri.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Annotation.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/\-Mem\-Buf\-Input\-Source.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/internal/\-X\-S\-A\-X\-M\-L\-Scanner.\-hpp$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classNamespaceScopeManager}{Namespace\-Scope\-Manager}
+\item 
+class \hyperlink{classAnnotationErrorReporter}{Annotation\-Error\-Reporter}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Janitor\-Mem\-Fun\-Call\\*
+$<$ Traverse\-Schema $>$ \hyperlink{TraverseSchema_8cpp_aa73fc699673c4b014edfd22dde7c4470}{Cleanup\-Type}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \\*
+\hyperlink{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55baff371055a35b05b80aa51a1db89a54f3}{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-S\-I\-M\-P\-L\-E\-T\-Y\-P\-E}, 
+\hyperlink{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55bac6480f8f55cb087c910994e05d07ebb2}{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-C\-O\-M\-P\-L\-E\-X\-T\-Y\-P\-E}, 
+\hyperlink{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55ba05d9c9cdf992578cf203893c71cb2f12}{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-E\-L\-E\-M\-E\-N\-T}, 
+\hyperlink{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55bacc0381bfa83bf326c33bf755e24b3b67}{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-A\-T\-T\-R\-I\-B\-U\-T\-E}, 
+\\*
+\hyperlink{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55ba094a2cac9b8c4ccb22396f1f41b6bf07}{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-A\-T\-T\-R\-I\-B\-U\-T\-E\-G\-R\-O\-U\-P}, 
+\hyperlink{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55ba6ba4fd5d8447a71a614a0d02b345591c}{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-G\-R\-O\-U\-P}, 
+\hyperlink{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55ba97eb95981ab99cffe3624e9a80a5792d}{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-S\-I\-Z\-E}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const X\-M\-L\-Ch \hyperlink{TraverseSchema_8cpp_a3d668a2ad532df0852c9f3b430c63652}{fg\-Anon\-S\-Name\-Prefix} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{TraverseSchema_8cpp_a348aca86e134a914cefc0df149389361}{fg\-Anon\-C\-Name\-Prefix} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{TraverseSchema_8cpp_a32c8eb119598189088b48175d4bd3c70}{fg\-Unbounded} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{TraverseSchema_8cpp_acad3f1eb0a9bd955226a4bfe923bb338}{fg\-Value\-One} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{TraverseSchema_8cpp_afa4b286e8ffee20a5323d3d9aede2a5d}{fg\-Value\-Zero} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch $\ast$ \hyperlink{TraverseSchema_8cpp_aea6a2c7189dfd225fbece5125c383514}{fg\-Identity\-Constraints} \mbox{[}$\,$\mbox{]}
+\item 
+static const X\-M\-L\-Ch \hyperlink{TraverseSchema_8cpp_a401b45d5b2b29dd0111d18424c4631d6}{fg\-Synthetic\-\_\-\-Annotation} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{TraverseSchema_8cpp_aa73fc699673c4b014edfd22dde7c4470}{\index{Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}!Cleanup\-Type@{Cleanup\-Type}}
+\index{Cleanup\-Type@{Cleanup\-Type}!TraverseSchema.cpp@{Traverse\-Schema.\-cpp}}
+\subsubsection[{Cleanup\-Type}]{\setlength{\rightskip}{0pt plus 5cm}typedef Janitor\-Mem\-Fun\-Call$<$Traverse\-Schema$>$ {\bf Cleanup\-Type}}}\label{TraverseSchema_8cpp_aa73fc699673c4b014edfd22dde7c4470}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55b}{\subsubsection[{anonymous enum}]{\setlength{\rightskip}{0pt plus 5cm}anonymous enum}}\label{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55b}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-S\-I\-M\-P\-L\-E\-T\-Y\-P\-E@{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-S\-I\-M\-P\-L\-E\-T\-Y\-P\-E}!Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}}\index{Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}!E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-S\-I\-M\-P\-L\-E\-T\-Y\-P\-E@{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-S\-I\-M\-P\-L\-E\-T\-Y\-P\-E}}\item[{\em 
+\hypertarget{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55baff371055a35b05b80aa51a1db89a54f3}{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-S\-I\-M\-P\-L\-E\-T\-Y\-P\-E}\label{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55baff371055a35b05b80aa51a1db89a54f3}
+}]\index{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-C\-O\-M\-P\-L\-E\-X\-T\-Y\-P\-E@{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-C\-O\-M\-P\-L\-E\-X\-T\-Y\-P\-E}!Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}}\index{Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}!E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-C\-O\-M\-P\-L\-E\-X\-T\-Y\-P\-E@{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-C\-O\-M\-P\-L\-E\-X\-T\-Y\-P\-E}}\item[{\em 
+\hypertarget{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55bac6480f8f55cb087c910994e05d07ebb2}{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-C\-O\-M\-P\-L\-E\-X\-T\-Y\-P\-E}\label{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55bac6480f8f55cb087c910994e05d07ebb2}
+}]\index{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-E\-L\-E\-M\-E\-N\-T@{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-E\-L\-E\-M\-E\-N\-T}!Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}}\index{Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}!E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-E\-L\-E\-M\-E\-N\-T@{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-E\-L\-E\-M\-E\-N\-T}}\item[{\em 
+\hypertarget{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55ba05d9c9cdf992578cf203893c71cb2f12}{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-E\-L\-E\-M\-E\-N\-T}\label{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55ba05d9c9cdf992578cf203893c71cb2f12}
+}]\index{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-A\-T\-T\-R\-I\-B\-U\-T\-E@{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-A\-T\-T\-R\-I\-B\-U\-T\-E}!Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}}\index{Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}!E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-A\-T\-T\-R\-I\-B\-U\-T\-E@{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-A\-T\-T\-R\-I\-B\-U\-T\-E}}\item[{\em 
+\hypertarget{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55bacc0381bfa83bf326c33bf755e24b3b67}{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-A\-T\-T\-R\-I\-B\-U\-T\-E}\label{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55bacc0381bfa83bf326c33bf755e24b3b67}
+}]\index{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-A\-T\-T\-R\-I\-B\-U\-T\-E\-G\-R\-O\-U\-P@{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-A\-T\-T\-R\-I\-B\-U\-T\-E\-G\-R\-O\-U\-P}!Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}}\index{Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}!E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-A\-T\-T\-R\-I\-B\-U\-T\-E\-G\-R\-O\-U\-P@{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-A\-T\-T\-R\-I\-B\-U\-T\-E\-G\-R\-O\-U\-P}}\item[{\em 
+\hypertarget{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55ba094a2cac9b8c4ccb22396f1f41b6bf07}{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-A\-T\-T\-R\-I\-B\-U\-T\-E\-G\-R\-O\-U\-P}\label{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55ba094a2cac9b8c4ccb22396f1f41b6bf07}
+}]\index{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-G\-R\-O\-U\-P@{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-G\-R\-O\-U\-P}!Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}}\index{Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}!E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-G\-R\-O\-U\-P@{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-G\-R\-O\-U\-P}}\item[{\em 
+\hypertarget{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55ba6ba4fd5d8447a71a614a0d02b345591c}{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-G\-R\-O\-U\-P}\label{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55ba6ba4fd5d8447a71a614a0d02b345591c}
+}]\index{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-S\-I\-Z\-E@{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-S\-I\-Z\-E}!Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}}\index{Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}!E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-S\-I\-Z\-E@{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-S\-I\-Z\-E}}\item[{\em 
+\hypertarget{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55ba97eb95981ab99cffe3624e9a80a5792d}{E\-N\-U\-M\-\_\-\-E\-L\-T\-\_\-\-S\-I\-Z\-E}\label{TraverseSchema_8cpp_a06fc87d81c62e9abb8790b6e5713c55ba97eb95981ab99cffe3624e9a80a5792d}
+}]\end{description}
+\end{Desc}
+
+
+\subsection{Variable Documentation}
+\hypertarget{TraverseSchema_8cpp_a348aca86e134a914cefc0df149389361}{\index{Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}!fg\-Anon\-C\-Name\-Prefix@{fg\-Anon\-C\-Name\-Prefix}}
+\index{fg\-Anon\-C\-Name\-Prefix@{fg\-Anon\-C\-Name\-Prefix}!TraverseSchema.cpp@{Traverse\-Schema.\-cpp}}
+\subsubsection[{fg\-Anon\-C\-Name\-Prefix}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch fg\-Anon\-C\-Name\-Prefix\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{TraverseSchema_8cpp_a348aca86e134a914cefc0df149389361}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chUnderscore, chUnderscore, chLatin\_A, chLatin\_n, chLatin\_o, chLatin\_n, chLatin\_C, chNull
+\}
+\end{DoxyCode}
+\hypertarget{TraverseSchema_8cpp_a3d668a2ad532df0852c9f3b430c63652}{\index{Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}!fg\-Anon\-S\-Name\-Prefix@{fg\-Anon\-S\-Name\-Prefix}}
+\index{fg\-Anon\-S\-Name\-Prefix@{fg\-Anon\-S\-Name\-Prefix}!TraverseSchema.cpp@{Traverse\-Schema.\-cpp}}
+\subsubsection[{fg\-Anon\-S\-Name\-Prefix}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch fg\-Anon\-S\-Name\-Prefix\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{TraverseSchema_8cpp_a3d668a2ad532df0852c9f3b430c63652}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chUnderscore, chUnderscore, chLatin\_A, chLatin\_n, chLatin\_o, chLatin\_n, chLatin\_S, chNull
+\}
+\end{DoxyCode}
+\hypertarget{TraverseSchema_8cpp_aea6a2c7189dfd225fbece5125c383514}{\index{Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}!fg\-Identity\-Constraints@{fg\-Identity\-Constraints}}
+\index{fg\-Identity\-Constraints@{fg\-Identity\-Constraints}!TraverseSchema.cpp@{Traverse\-Schema.\-cpp}}
+\subsubsection[{fg\-Identity\-Constraints}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch$\ast$ fg\-Identity\-Constraints\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{TraverseSchema_8cpp_aea6a2c7189dfd225fbece5125c383514}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    SchemaSymbols::fgELT\_UNIQUE,
+    SchemaSymbols::fgELT\_KEY,
+    SchemaSymbols::fgELT\_KEYREF
+\}
+\end{DoxyCode}
+\hypertarget{TraverseSchema_8cpp_a401b45d5b2b29dd0111d18424c4631d6}{\index{Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}!fg\-Synthetic\-\_\-\-Annotation@{fg\-Synthetic\-\_\-\-Annotation}}
+\index{fg\-Synthetic\-\_\-\-Annotation@{fg\-Synthetic\-\_\-\-Annotation}!TraverseSchema.cpp@{Traverse\-Schema.\-cpp}}
+\subsubsection[{fg\-Synthetic\-\_\-\-Annotation}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch fg\-Synthetic\-\_\-\-Annotation\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{TraverseSchema_8cpp_a401b45d5b2b29dd0111d18424c4631d6}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chLatin\_S, chLatin\_y, chLatin\_n, chLatin\_t, chLatin\_h, chLatin\_e, chLatin\_t
+    ,   chLatin\_i, chLatin\_c, chUnderscore
+    ,   chLatin\_A, chLatin\_n, chLatin\_n, chLatin\_o, chLatin\_t, chLatin\_a, chLatin\_t
+    ,   chLatin\_i, chLatin\_o, chLatin\_n, chNull
+\}
+\end{DoxyCode}
+\hypertarget{TraverseSchema_8cpp_a32c8eb119598189088b48175d4bd3c70}{\index{Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}!fg\-Unbounded@{fg\-Unbounded}}
+\index{fg\-Unbounded@{fg\-Unbounded}!TraverseSchema.cpp@{Traverse\-Schema.\-cpp}}
+\subsubsection[{fg\-Unbounded}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch fg\-Unbounded\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{TraverseSchema_8cpp_a32c8eb119598189088b48175d4bd3c70}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chLatin\_u, chLatin\_n, chLatin\_b, chLatin\_o, chLatin\_u, chLatin\_n, chLatin\_d,
+    chLatin\_e, chLatin\_d, chNull
+\}
+\end{DoxyCode}
+\hypertarget{TraverseSchema_8cpp_acad3f1eb0a9bd955226a4bfe923bb338}{\index{Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}!fg\-Value\-One@{fg\-Value\-One}}
+\index{fg\-Value\-One@{fg\-Value\-One}!TraverseSchema.cpp@{Traverse\-Schema.\-cpp}}
+\subsubsection[{fg\-Value\-One}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch fg\-Value\-One\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{TraverseSchema_8cpp_acad3f1eb0a9bd955226a4bfe923bb338}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chDigit\_1, chNull
+\}
+\end{DoxyCode}
+\hypertarget{TraverseSchema_8cpp_afa4b286e8ffee20a5323d3d9aede2a5d}{\index{Traverse\-Schema.\-cpp@{Traverse\-Schema.\-cpp}!fg\-Value\-Zero@{fg\-Value\-Zero}}
+\index{fg\-Value\-Zero@{fg\-Value\-Zero}!TraverseSchema.cpp@{Traverse\-Schema.\-cpp}}
+\subsubsection[{fg\-Value\-Zero}]{\setlength{\rightskip}{0pt plus 5cm}const X\-M\-L\-Ch fg\-Value\-Zero\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}}\label{TraverseSchema_8cpp_afa4b286e8ffee20a5323d3d9aede2a5d}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+\{
+    chDigit\_0, chNull
+\}
+\end{DoxyCode}

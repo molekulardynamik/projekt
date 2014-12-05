@@ -1,0 +1,44 @@
+\hypertarget{XSObjectFactory_8cpp}{\section{src/xerces-\/c-\/3.1.1/src/xercesc/internal/\-X\-S\-Object\-Factory.cpp File Reference}
+\label{XSObjectFactory_8cpp}\index{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/internal/\-X\-S\-Object\-Factory.\-cpp@{src/xerces-\/c-\/3.\-1.\-1/src/xercesc/internal/\-X\-S\-Object\-Factory.\-cpp}}
+}
+{\ttfamily \#include $<$xercesc/internal/\-X\-S\-Object\-Factory.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Model.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Particle.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Model\-Group.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Element\-Declaration.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Complex\-Type\-Definition.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Simple\-Type\-Definition.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Model\-Group\-Definition.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Attribute\-Group\-Definition.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Wildcard.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Namespace\-Item.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-I\-D\-C\-Definition.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Attribute\-Use.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Attribute\-Declaration.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Notation\-Declaration.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Facet.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Multi\-Value\-Facet.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/framework/psvi/\-X\-S\-Annotation.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/common/\-Content\-Spec\-Node.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/datatype/\-Datatype\-Validator.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Schema\-Att\-Def\-List.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Schema\-Grammar.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Xerces\-Group\-Info.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/\-Xerces\-Att\-Group\-Info.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/identity/\-Identity\-Constraint.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/identity/\-I\-C\-\_\-\-Key\-Ref.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/validators/schema/identity/\-Xerces\-X\-Path.\-hpp$>$}\\*
+{\ttfamily \#include $<$xercesc/util/\-X\-M\-L\-String\-Tokenizer.\-hpp$>$}\\*
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \\*
+X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N \\*
+X\-M\-L\-Ch \hyperlink{XSObjectFactory_8cpp_aee455d6bf2fc3156d534543362d8fb39}{regex\-Separator} \mbox{[}$\,$\mbox{]} = \{ch\-Pipe, ch\-Null\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\hypertarget{XSObjectFactory_8cpp_aee455d6bf2fc3156d534543362d8fb39}{\index{X\-S\-Object\-Factory.\-cpp@{X\-S\-Object\-Factory.\-cpp}!regex\-Separator@{regex\-Separator}}
+\index{regex\-Separator@{regex\-Separator}!XSObjectFactory.cpp@{X\-S\-Object\-Factory.\-cpp}}
+\subsubsection[{regex\-Separator}]{\setlength{\rightskip}{0pt plus 5cm}X\-E\-R\-C\-E\-S\-\_\-\-C\-P\-P\-\_\-\-N\-A\-M\-E\-S\-P\-A\-C\-E\-\_\-\-B\-E\-G\-I\-N X\-M\-L\-Ch regex\-Separator\mbox{[}$\,$\mbox{]} = \{ch\-Pipe, ch\-Null\}\hspace{0.3cm}{\ttfamily [static]}}}\label{XSObjectFactory_8cpp_aee455d6bf2fc3156d534543362d8fb39}
