@@ -116,12 +116,18 @@ void ParticleContainer::ParticleCell::combineParticlePairsExclusive(ParticleCont
 
 void ParticleContainer::init(char* filename)
 {
+
 	double domainX, domainY;
 	FileReader fileReader;
+
 	fileReader.readFile(particles, filename, &reflective, &domainX, &domainY, &rCutOff);
+
+
+	LOG4CXX_DEBUG(containerLogger, "init");
 
 	numCellsX = ceil(domainX / rCutOff) + 2;
 	numCellsY = ceil(domainY / rCutOff) + 2;
+
 
 	for (int x = 0; x < numCellsX; x++)
 	{
@@ -129,12 +135,23 @@ void ParticleContainer::init(char* filename)
 		{
 			cells.push_back(ParticleCell());
 
-			if (isBoundry(x,y))
+			char cT = cellType(x, y);
+
+			if (cT != InnerCell)
 			{
 				int cell;
-
 				flatten(x, y, &cell);
 				boundryCells.push_back(cell);
+
+				if (reflective)
+					boundryConditions.push_back(Reflecting);
+
+				/*if ((cT & BottomBoundry) || (cT & TopBoundry))
+					boundryConditions.push_back(Reflecting);
+				else if ((cT & LeftBoundry) || (cT & RightBoundry))
+					boundryConditions.push_back(OutFlow);
+				else
+					LOG4CXX_DEBUG(containerLogger, "BoundryError");*/
 			}
 		}
 
@@ -211,21 +228,33 @@ void ParticleContainer::expand(int c, int* x, int* y)
 	*y = floor(c / numCellsX);
 }
 
-bool ParticleContainer::isBoundry(int x, int y)
+char ParticleContainer::cellType(int x, int y)
 {
 	bool left = x == 0;
 	bool right = x == numCellsX - 1;
 	bool bottom = y == 0;
 	bool top = y == numCellsY - 1;
 
-	return left || right || bottom || top;
+	char output = InnerCell;
+
+	if (left)
+		output |= LeftBoundry;
+	if (right)
+		output |= RightBoundry;
+	if (bottom)
+		output |= BottomBoundry;
+	if (top)
+		output |= TopBoundry;
+
+
+	return output;
 }
 
-bool ParticleContainer::isBoundry(int c)
+char ParticleContainer::cellType(int c)
 {
 	int x, y;
 	expand(c, &x, &y);
-	return isBoundry(x, y);
+	return cellType(x, y);
 }
 
 int ParticleContainer::getReflectingCell(int boundryCell)
@@ -280,6 +309,8 @@ void ParticleContainer::iterateParticlePairs(ParticleHandler& handler)
 	for (int i = 0; i < cells.size(); i++)
 	{
 		cells[i].iterateParticlePairs(handler);
+
+
 		bool left = (i % numCellsX) != 0;
 		bool right = (i + 1 % numCellsX) != 0;
 
@@ -310,20 +341,23 @@ void ParticleContainer::iterateParticlePairsExclusive(ParticleHandler& handler)
 {
 	for (int i = 0; i < cells.size(); i++)
 	{
+
 		cells[i].iterateParticlePairsExclusive(handler);
+
 		bool left = (i % numCellsX) != 0;
 		bool right = (i + 1 % numCellsX) != 0;
 
 		bool top = (floor(i / numCellsX) + 1) != numCellsY;
 
-		if (right)
+		if (right && cells.size() > (i +1))
 			cells[i].combineParticlePairsExclusive(cells[i + 1], handler);
-		if (top)
+
+		if (top && cells.size() > (i + numCellsX))
 			cells[i].combineParticlePairsExclusive(cells[i + numCellsX], handler);
 
-		if (left && top)
+		if (left && top && cells.size() > (i - 1 + numCellsX))
 			cells[i].combineParticlePairsExclusive(cells[i - 1 + numCellsX], handler);
-		if (right && top)
+		if (right && top && cells.size() > (i + 1 + numCellsX))
 			cells[i].combineParticlePairsExclusive(cells[i + 1 + numCellsX], handler);
 	}
 }
@@ -358,15 +392,17 @@ void ParticleContainer::iterateBoundryCells()
 		int bx, by;
 		expand(boundry, &bx, &by);
 
-		if (reflective)
+		switch (boundryConditions[i])
+		{
+		case Reflecting:
 		{
 			int cell = getReflectingCell(boundry);
 			int cellX, cellY;
 			expand(cell, &cellX, &cellY);
 
-			if (cell != -1)
+			if (cell != -1 && cell < cells.size())
 			{
-				if (isBoundry(cell))
+				if (cellType(cell) != InnerCell)
 				{
 					LOG4CXX_ERROR(containerLogger, "reflecting cell cannot be a boundrycell");
 					continue;
@@ -374,6 +410,7 @@ void ParticleContainer::iterateBoundryCells()
 
 				for (int p = 0; p < cells[cell].count(); p++)
 				{
+
 					Vector<double, 3> position = cells[cell][p]->getX();
 					Vector<double, 3> cellPosition(0.0);
 					cellPosition[0] = cellX * rCutOff;
@@ -389,21 +426,27 @@ void ParticleContainer::iterateBoundryCells()
 						delta[0] = -0.01;
 					else if (cellX < bx)
 						delta[0] = rCutOff + 0.01;
-					
+
 					position = cellPosition + delta;
 					Vector<double, 3> velocity;
 					velocity[0] = velocity[1] = velocity[2] = 0;
 
 					int dummyIndex = particles.size();
 					Particle dummy(position, velocity, 10000);
-					dummy.setDead(false);
+					dummy.setDead(true);
+
 
 					particles.push_back(dummy);
-					cells[boundryCells[boundry]].insert(&(particles[dummyIndex]));
+					cells[boundry].insert(&(particles[dummyIndex]));
 
 					numDummies++;
 				}
 			}
+		}
+		break;
+
+		default:
+			break;
 		}
 	}
 }

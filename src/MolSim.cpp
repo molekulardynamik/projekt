@@ -14,6 +14,7 @@
 #include <log4cxx/logger.h>
 #include <log4cxx/xml/domconfigurator.h>
 
+//#include "hello.hxx"
 
 
 using namespace std;
@@ -99,30 +100,37 @@ int main(int argc, char* argsv[])
 
 	LOG4CXX_INFO(logger, "start iterating, " << end_time / delta_t << " iterations in total");
 	 // for this loop, we assume: current x, current f and current v are known
+	
+	// loops until end_time is reached
 	while (current_time < end_time) {
 
+		
+		// apply BoudryConditions to BoundryCells
 		container.iterateBoundryCells();
 
+		// find cell for each particle based on its location
 		container.updateCells();
 
-
-		// calculate new x
+		// calculate new Position for each Particle (ph --> PositionHandler) 
 		container.iterateParticles(ph);
 
-		// store old f
+		// clear Force for each Particle (ljh -> leonard jones Handler)
 		container.iterateParticles(ljh);
 
-		// calculate new f
+		// calculate new Force for each Particle Pair (ljh -> leonard jones Handler)
 		container.iterateParticlePairsExclusive(ljh);
 
-		// calculate new v
+		// calculate new Velocty for each Particle based on its force (vh --> velocity Handler)
 		container.iterateParticles(vh);
 
 		iteration++;
+
+		// write Particles to file
 		if (iteration % 10 == 0) {
 			plotParticles(iteration);
 		}
 		lastTrace++;
+		// print símulation status
 		if (lastTrace >= (end_time / delta_t / 100.0))
 		{
 			LOG4CXX_INFO(logger, (100.0 * iteration * delta_t / end_time) << " %");
@@ -149,7 +157,6 @@ void plotParticles(int iteration) {
 
 	outputWriter::VTKWriter writer;
 	writer.initializeOutput(container.live());
-
 	for(int i=0; i<container.count(); i++)
 	{
 		Particle& p = container[i];

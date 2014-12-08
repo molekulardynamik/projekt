@@ -7,6 +7,9 @@ using namespace std;
 
 void ParticleGenerator::generateCuboid(Vector<double, 3> bottomLeftFront, Vector<int, 3 > numParticles, double h, double mass, Vector<double, 3 > initialVelocity, double meanValue, vector<Particle>& particles)
 {
+
+	cout << "JKDJDKJ " << particles.size() << endl;
+
 	for (int x = 0; x < numParticles[0]; x++)
 	{
 		for (int y = 0; y < numParticles[1]; y++)

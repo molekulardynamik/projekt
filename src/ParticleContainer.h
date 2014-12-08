@@ -36,8 +36,29 @@ namespace Simulation
 			std::list<Particle*> particles;
 		};
 
+		enum CellType
+		{
+			InnerCell		= 0, 
+			LeftBoundry		= 1 << 0,
+			RightBoundry	= 1 << 1,
+			BottomBoundry	= 1 << 2,
+			TopBoundry		= 1 << 3
+		};
+
+		enum BoundryCondition
+		{
+			OutFlow,
+			Reflecting
+		};
+
 	public:
-		ParticleContainer(){};
+		ParticleContainer()
+		{
+			cells.clear();
+			boundryCells.clear();
+			boundryConditions.clear();
+			particles.clear();
+		};
 		void init(char* filename);
 		
 		/// <returns> Number of Particles; 
@@ -62,8 +83,8 @@ namespace Simulation
 		void flatten(int x, int y, int* c);
 		void expand(int c, int* x, int* y);
 
-		bool isBoundry(int x, int y);
-		bool isBoundry(int c);
+		char cellType(int x, int y);
+		char cellType(int c);
 
 		int getReflectingCell(int boundrycell);
 
@@ -77,6 +98,8 @@ namespace Simulation
 
 		std::vector<ParticleCell> cells;
 		std::vector<int> boundryCells;
+		std::vector<BoundryCondition> boundryConditions;
 		std::vector<Particle> particles;
+
 	};
 };
