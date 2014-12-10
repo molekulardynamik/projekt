@@ -26,38 +26,40 @@ LoggerPtr particleLogger(Logger::getLogger("Particle"));
 
 Particle::Particle(int type_arg) {
 	type = type_arg;
-	cell = -1;
-	dead = false;
 	f = 0.0;
 	old_f = 0.0;
+	cell = -1;
+
+	e = 0;
+	o = 0;
+	visible = true;
 }
 
-Particle::Particle(const Particle& other) {
+Particle::Particle(const Particle& other) 
+	:x(other.x), v(other.v), f(other.f), old_f(other.old_f), m(other.m), e(other.e), o(other.o), type(other.type), cell(other.cell), visible(other.visible)
 
-	x = other.x;
-	v = other.v;
-	f = other.f;
-	old_f = other.old_f;
-	m = other.m;
-	type = other.type;
-	cell = other.cell;
-	dead = other.dead;
+{
 }
 
 // Todo: maybe use initializater list instead of copy?
 Particle::Particle(	utils::Vector<double, 3> x_arg,
 	        utils::Vector<double, 3> v_arg,
 	        double m_arg,
+			double e_arg,
+			double o_arg,
+			bool vis,
 	        int type_arg
 ) {
     x = x_arg;
     v = v_arg;
     m = m_arg;
     type = type_arg;
-	cell = -1;
-	dead = false;
+	visible = vis;
+	e = e_arg;
+	o = o_arg;
     f = 0.0;
     old_f = 0.0;
+	cell = -1;
 }
 
 Particle::~Particle() {
@@ -93,18 +95,21 @@ void Particle::setType(int t) {
 int Particle::getCell() {
 	return cell;
 }
-void Particle::setCell(int c){
+void Particle::setCell(int c) {
 	cell = c;
 }
 
-bool Particle::isDead()
-{
-	return dead;
+bool Particle::isVisible(){
+	return visible;
 }
 
-void Particle::setDead(bool d)
-{
-	dead = d;
+
+double Particle::getE() {
+	return e;
+}
+
+double Particle::getO(){
+	return o;
 }
 
 std::string Particle::toString() {
@@ -115,7 +120,7 @@ std::string Particle::toString() {
 
 bool Particle::operator ==(Particle& other) {
 	if ( (x == other.x) && (v == other.v) && (f == other.f) &&
-			(type == other.type) & (m == other.m) && (old_f == other.old_f)) {
+			(type == other.type) & (m == other.m) && (old_f == other.old_f) && (cell == other.cell)) {
 		return true;
 	}
 

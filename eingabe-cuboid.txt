@@ -1,22 +1,10 @@
+
+
 #
-# file format: 
-# Lines of comment start with '#' and are only allowed at the beginning of the file
-# Empty lines are not allowed.
-# The first line not being a comment has to be one integer, indicating the number of 
-# molecule data sets.
-#
-# Molecule data consists of 
-# * xyz-coordinates (3 double values)
-# * velocities (3 double values)
-# * number of molecules (3 double values)
-# * space between molecues (1 double value)
-# * mass (1 double value)
-# * mean Value (1 double value)
-#
-# x      	 v	         n	     h	     m	mean
+# x      	 v	         n	     h	   m    e   o	    mean
 Cuboids
 outflow
-180 90 3 
+43 36 2.5 
 2
-10.0 10.0 0.0    0.0 0.0 0.0     50 10 1   1.1225  1	0.1
-35.0 30.0 0.0    0.0 -10.0 0.0   10 10 1    1.1225  1	0.1
+0.6 2.0 0.0    0.0 0.0 0.0    30 6 1   1.1225  1	1   1        0.1
+0.6 10.0 0.0   0.0 0.0 0.0    30 6 1   1.1225  1	1   0.9412   0.3

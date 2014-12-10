@@ -65,7 +65,7 @@ namespace Simulation
 		};
 	};
 
-	class GravityHandler : public ParticleHandlerTimeAware
+	/*class GravityHandler : public ParticleHandlerTimeAware
 	{
 	public:
 		GravityHandler(double dt) : ParticleHandlerTimeAware(dt)
@@ -94,20 +94,24 @@ namespace Simulation
 			p1.getF() = p1.getF() + force;
 			p2.getF() = p2.getF() - force;
 		}
-	};
+	};*/
 
-	class LennardJonesHandler : public ParticleHandlerTimeAware
+	class ForceReset : public ParticleHandler
 	{
 	public:
-		LennardJonesHandler(double dt) : ParticleHandlerTimeAware(dt)
-		{};
-
 		void compute(Particle& p)
 		{
 			p.getOldF() = p.getF();
 			double zeros[3] = { 0, 0, 0 };
 			p.getF() = utils::Vector<double, 3>(zeros);
 		}
+	};
+
+	class LennardJonesHandler : public ParticleHandlerTimeAware
+	{
+	public:
+		LennardJonesHandler(double dt, double r) : ParticleHandlerTimeAware(dt), rCutOff(r)
+		{};
 
 		void compute(Particle& p1, Particle& p2)
 		{
@@ -123,9 +127,13 @@ namespace Simulation
 
 		void computeExclusive(Particle& p1, Particle& p2)
 		{
-			double e = 5, o = 1;
+			double e = (p1.getE() + p2.getE()) / 2.0;
+			double o = sqrt(p1.getE() * p2.getE());
 
 			double dist = (p1.getX() - p2.getX()).L2Norm();
+			if (dist > rCutOff)
+				return;
+
 			double sqrtDist = dist * dist;
 
 			double scalar = 24 * e / sqrtDist * (pow(o / dist, 6) - 2 * pow(o / dist, 12));
@@ -135,5 +143,23 @@ namespace Simulation
 			p2.getF() = p2.getF() - force;
 		}
 
+	private:
+		double rCutOff;
+
+	};
+
+	class GravityHandler : public ParticleHandler
+	{
+	public:
+		GravityHandler(double grav) : g(grav)
+		{}
+
+		void compute(Particle& p)
+		{
+			p.getF()[1] = p.getF()[1] + p.getM() * g;
+		}
+
+	private:
+		double g;
 	};
 }

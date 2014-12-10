@@ -81,7 +81,7 @@ void FileReader::readFile(std::vector<Simulation::Particle>& particles, char* fi
 					exit(-1);
 				}
 				datastream >> m;
-				Particle p(x, v, m);
+				Particle p(x, v, m, 0, 0, true);
 				particles.push_back(p);
 
 				getline(input_file, tmp_string);
@@ -91,7 +91,7 @@ void FileReader::readFile(std::vector<Simulation::Particle>& particles, char* fi
 		{
 
 			int num_cuboids = 0;
-			double h = 0, m = 0, mean = 0;
+			double h = 0, m = 0, mean = 0, e = 0, o = 0;
 			double x[] = { 0, 0, 0 };
 			double v[] = { 0, 0, 0 };
 			int n[] = { 0, 0, 0 };
@@ -128,9 +128,11 @@ void FileReader::readFile(std::vector<Simulation::Particle>& particles, char* fi
 
 				datastream >> h;
 				datastream >> m;
+				datastream >> e;
+				datastream >> o;
 				datastream >> mean;
 
-				ParticleGenerator::generateCuboid(Vector<double,3>(x), Vector<int, 3>(n), h, m, Vector<double, 3>(v), mean, particles);
+				ParticleGenerator::generateCuboid(Vector<double,3>(x), Vector<int, 3>(n), h, m, e, o, Vector<double, 3>(v), mean, particles);
 
 				getline(input_file, tmp_string);
 			}

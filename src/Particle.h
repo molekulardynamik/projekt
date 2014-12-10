@@ -40,7 +40,11 @@ namespace Simulation
 		/** cell in wich holds the particle*/
 		int cell;
 
-		bool dead;
+		bool visible;
+
+		double e;
+
+		double o;
 
 	public:
 		Particle(int type = 0);
@@ -53,6 +57,9 @@ namespace Simulation
 				utils::Vector<double, 3> x_arg,
 			utils::Vector<double, 3> v_arg,
 			double m_arg,
+			double e_arg,
+			double o_arg,
+			bool vis,
 			int type = 0
 		);
 
@@ -74,8 +81,11 @@ namespace Simulation
 		int getCell();
 		void setCell(int c);
 
-		bool isDead();
-		void setDead(bool d);
+		bool isVisible();
+
+		double getE();
+
+		double getO();
 
 		bool operator==(Particle& other);
 

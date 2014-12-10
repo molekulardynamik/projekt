@@ -7,99 +7,115 @@
 
 namespace Simulation
 {
-	/// <summary> Container class for managing particles
-	class ParticleContainer
+
+	typedef std::list<Particle*>::iterator PParticleIterator;
+
+	class ParticleCell
 	{
-	private:
-		typedef std::list<Particle>::iterator ParticleIterator;
-
-		class ParticleCell
-		{
-		public:
-			typedef std::list<Particle*>::iterator PParticleIterator;
-
-		public:
-			void insert(Particle* p);
-			void remove(Particle* p);
-			Particle* operator[](int i);
-
-			int count();
-			void empty();
-
-			void iterateParticles(ParticleHandler& handler);
-			void iterateParticlePairs(ParticleHandler& handler);
-			void iterateParticlePairsExclusive(ParticleHandler& handler);
-
-			void combineParticlePairs(ParticleCell& other, ParticleHandler& handler);
-			void combineParticlePairsExclusive(ParticleCell& other, ParticleHandler& handler);
-		private:
-			std::list<Particle*> particles;
-		};
-
+	public:
 		enum CellType
 		{
-			InnerCell		= 0, 
-			LeftBoundry		= 1 << 0,
-			RightBoundry	= 1 << 1,
-			BottomBoundry	= 1 << 2,
-			TopBoundry		= 1 << 3
+			InnerCell,
+			LeftBoundry,
+			RightBoundry,
+			BottomBoundry,
+			TopBoundry,
+			Corner
 		};
 
+		ParticleCell(int i, utils::Vector<double, 3>& pos, double* r);
+		CellType& cellType();
+
+		void insert(Particle* pParticle);
+		void remove(Particle* pParticle);
+		bool contains(Particle* pParticle);
+
+		int count();
+		Particle* operator[](int i);
+
+		void iterateParticles(ParticleHandler& handler);
+		void iterateParticlePairs(ParticleHandler& handler);
+		void iterateParticlePairsExclusive(ParticleHandler& handler);
+
+		void combineParticlePairs(ParticleCell& other, ParticleHandler& handler);
+		void combineParticlePairsExclusive(ParticleCell& other, ParticleHandler& handler);	
+
+		utils::Vector<double, 3>& pos(){
+			return position;
+		}
+
+		int index(){
+			return selfIndex;
+		}
+
+	private:
+		std::list<Particle*> pParticles;
+
+		int selfIndex;
+		utils::Vector<double, 3> position;
+		double* pRCutOff;
+		CellType type;
+	};
+
+
+	class ParticleContainer
+	{
 		enum BoundryCondition
 		{
 			OutFlow,
-			Reflecting
+			Reflecting,
+			Periodic,
 		};
 
 	public:
-		ParticleContainer()
-		{
-			cells.clear();
-			boundryCells.clear();
-			boundryConditions.clear();
-			particles.clear();
-		};
-		void init(char* filename);
-		
-		/// <returns> Number of Particles; 
-		int count();
+		ParticleContainer();
 
-		int live();
-		
-		/// <returns> Particle at location i
+		void init(char* filename);
+
+		void updateCells();
+
+		int count();
+		int countVisible();
+
 		Particle& operator[](int i);
 
 		void iterateParticles(ParticleHandler& handler);
 		void iterateParticlePairs(ParticleHandler& handler);
 		void iterateParticlePairsExclusive(ParticleHandler& handler);
 
-		void iterateBoundryParticles(ParticleHandler& handler);
 		void iterateBoundryCells();
 
-		void updateCells();
+		double getCutOff();
 
 	private:
 		void findCell(utils::Vector<double, 3> position, int* cell);
-		void flatten(int x, int y, int* c);
-		void expand(int c, int* x, int* y);
-
-		char cellType(int x, int y);
-		char cellType(int c);
-
-		int getReflectingCell(int boundrycell);
+		void flatten(int x, int y, int* cell);
+		void expand(int* x, int* y, int cell);
 
 	private:
+		std::vector<Particle> particlePool;
+		std::vector<Particle> dummies;
+		std::list<Particle*> liveParticles;
+
+		int visible;
+
 		double rCutOff;
 		int numCellsX, numCellsY;
-		bool reflective;
-
-		int liveParticles;
-		int numDummies;
-
 		std::vector<ParticleCell> cells;
-		std::vector<int> boundryCells;
-		std::vector<BoundryCondition> boundryConditions;
-		std::vector<Particle> particles;
 
+		struct BoundryHaloPair
+		{
+			ParticleCell* boundryCell;
+			ParticleCell* haloCell;
+			BoundryCondition condition;
+
+			BoundryHaloPair(ParticleCell* b, ParticleCell* h, BoundryCondition c)
+				: boundryCell(b), haloCell(h), condition(c)
+			{
+
+			}
+		};
+
+		std::vector<BoundryHaloPair> boundryHaloPairs;
 	};
 };
