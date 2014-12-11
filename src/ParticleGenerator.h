@@ -13,11 +13,9 @@ namespace Simulation
 		static void generateCuboid(
 			utils::Vector<double, 3> bottomLeftFront,
 			utils::Vector<int, 3 > numParticles,
+			utils::Vector<double, 3 > initialVelocity,
+			int type,
 			double h,
-			double mass,
-			double e,
-			double o,
-			utils::Vector<double, 3 > initialVelocity, 
 			double meanValue,
 			std::vector<Particle>& particles);
 	};

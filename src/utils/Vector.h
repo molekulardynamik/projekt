@@ -98,6 +98,15 @@ public:
 		return Vector(result);
 	}
 
+	type operator*(const Vector& rhs) const{
+		type result = 0;
+
+		for (int i = 0; i < length; i++) {
+			result += this->content[i] * rhs.content[i];
+		}
+		return result;
+	}
+
 	double L2Norm() const {
 		double square_sum = 0;
 		for (int i = 0; i < length; i++) {

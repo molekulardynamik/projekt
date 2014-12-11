@@ -30,6 +30,7 @@ private:
 	class TestHandler : public Simulation::ParticleHandler
 	{
 	public:
+
 		void compute(Simulation::Particle& p)
 		{
 			p.getX()[0] *= 100;

@@ -156,6 +156,23 @@ void ParticleContainer::init(char* filename)
 	FileReader fileReader;
 	fileReader.readFile(particlePool, filename, &reflective, &domainX, &domainY, &rCutOff);
 
+	ParticleProperty wallProp;
+	for (int pr = 0; pr < ParticleProperty::count(); pr++)
+	{
+		wallProp.e += ParticleProperty::get(pr).e;
+		wallProp.o += ParticleProperty::get(pr).o;
+		wallProp.mass += ParticleProperty::get(pr).mass;
+	}
+
+	wallProp.e /= ParticleProperty::count();
+	wallProp.o /= ParticleProperty::count();
+	wallProp.mass /= ParticleProperty::count();
+	wallProp.mass *= 1000;
+
+	wallType = ParticleProperty::count();
+	ParticleProperty::push(wallProp);
+
+
 	numCellsX = ceil(domainX / rCutOff) + 2;
 	numCellsY = ceil(domainY / rCutOff) + 2;
 
@@ -236,6 +253,8 @@ void ParticleContainer::init(char* filename)
 	{
 		liveParticles.push_back(&(particlePool[p]));
 	}
+
+	updateCells();
 
 	LOG4CXX_DEBUG(containerLogger, "LiveParticles: " << (int)liveParticles.size());
 }
@@ -365,12 +384,14 @@ void ParticleContainer::iterateParticlePairs(ParticleHandler& handler)
 	{
 		cells[i].iterateParticlePairs(handler);
 
+		int x, y;
+		expand(&x, &y, i);
 
-		bool left = floor(i / numCellsY) != 0;
-		bool right = (floor(i / numCellsY) + 1) != numCellsX;
+		bool left = x != 0;
+		bool right = x != numCellsX - 1;
 
-		bool bottom = i % numCellsY != 0;
-		bool top = (i + 1) % numCellsY  != 0;
+		bool bottom = y != 0;
+		bool top = y != numCellsY -1;
 
 		if (left)
 			cells[i].combineParticlePairs(cells[i - numCellsY], handler);
@@ -399,20 +420,23 @@ void ParticleContainer::iterateParticlePairsExclusive(ParticleHandler& handler)
 
 		cells[i].iterateParticlePairsExclusive(handler);
 
-		bool left = floor(i / numCellsY) != 0;
-		bool right = (floor(i / numCellsY) + 1) != numCellsX;
+		int x, y;
+		expand(&x, &y, i);
 
-		bool top = (i + 1) % numCellsY != 0;
+		bool left = x != 0;
+		bool right = x != numCellsX - 1;
 
-		if (right && cells.size() >(i + 1))
+		bool top = y != numCellsY - 1;
+
+		if (right)
 			cells[i].combineParticlePairsExclusive(cells[i + numCellsY], handler);
 
-		if (top && cells.size() > (i + numCellsX))
+		if (top)
 			cells[i].combineParticlePairsExclusive(cells[i + 1], handler);
 
-		if (left && top && cells.size() > (i - 1 + numCellsX))
+		if (left && top)
 			cells[i].combineParticlePairsExclusive(cells[i - numCellsY + 1], handler);
-		if (right && top && cells.size() > (i + 1 + numCellsX))
+		if (right && top)
 			cells[i].combineParticlePairsExclusive(cells[i + numCellsY + 1], handler);
 	}
 }
@@ -492,8 +516,8 @@ void ParticleContainer::iterateBoundryCells()
 				Particle& particle = *haloCell[p];
 				Vector<double, 3> position = particle.getX() + delta;
 				Vector<double, 3> velocity(0.0);
-				double m = particle.getM();
-				dummies.push_back(Particle(position, velocity, m, particle.getE(), particle.getO(), false));
+				int type = particle.getType();
+				dummies.push_back(Particle(position, velocity, type, false));
 			}
 
 			for (int p = 0; p < boundryCell.count(); p++)
@@ -544,7 +568,7 @@ void ParticleContainer::iterateBoundryCells()
 
 				Vector<double, 3> velocity(0.0);
 
-				dummies.push_back(Particle(position, velocity, 100, particle.getE(), particle.getO(), false));
+				dummies.push_back(Particle(position, velocity, wallType, false));
 
 				//LOG4CXX_DEBUG(containerLogger, "added dummy cell: " << dummies.back().getCell() << ", now " << (int)liveParticles.size() << " live Ps");
 			}

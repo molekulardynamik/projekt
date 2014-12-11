@@ -36,7 +36,7 @@ FileReader::~FileReader() {
 }
 
 
-void FileReader::readFile(std::vector<Simulation::Particle>& particles, char* filename, bool* reflective, double* domainX, double* domainY, double* rCutOff) {
+void FileReader::readFile(vector<Particle>& particles, char* filename, bool* reflective, double* domainX, double* domainY, double* rCutOff) {
 
 	LOG4CXX_INFO(fileReaderLogger, "Reading file: " << filename);
 	
@@ -81,7 +81,7 @@ void FileReader::readFile(std::vector<Simulation::Particle>& particles, char* fi
 					exit(-1);
 				}
 				datastream >> m;
-				Particle p(x, v, m, 0, 0, true);
+				Particle p(x, v, 0, true);
 				particles.push_back(p);
 
 				getline(input_file, tmp_string);
@@ -126,13 +126,19 @@ void FileReader::readFile(std::vector<Simulation::Particle>& particles, char* fi
 					datastream >> n[j];
 				}
 
+				ParticleProperty prop;
+
 				datastream >> h;
-				datastream >> m;
-				datastream >> e;
-				datastream >> o;
 				datastream >> mean;
 
-				ParticleGenerator::generateCuboid(Vector<double,3>(x), Vector<int, 3>(n), h, m, e, o, Vector<double, 3>(v), mean, particles);
+				datastream >> prop.mass;
+				datastream >> prop.e;
+				datastream >> prop.o;
+
+				int type = ParticleProperty::count();
+				ParticleProperty::push(prop);
+
+				ParticleGenerator::generateCuboid(Vector<double,3>(x), Vector<int, 3>(n), Vector<double, 3>(v), type, h, mean, particles);
 
 				getline(input_file, tmp_string);
 			}

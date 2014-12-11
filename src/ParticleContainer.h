@@ -86,6 +86,7 @@ namespace Simulation
 		void iterateBoundryCells();
 
 		double getCutOff();
+		std::vector<ParticleProperty>& getProperties();
 
 	private:
 		void findCell(utils::Vector<double, 3> position, int* cell);
@@ -115,7 +116,8 @@ namespace Simulation
 
 			}
 		};
-
 		std::vector<BoundryHaloPair> boundryHaloPairs;
+
+		int wallType;
 	};
 };

@@ -14,7 +14,7 @@
 #include <iostream>
 
 using namespace Simulation;
-
+using namespace std;
 
 using namespace log4cxx;
 using namespace log4cxx::xml;
@@ -24,42 +24,49 @@ using namespace log4cxx::helpers;
 // Define static logger variable
 LoggerPtr particleLogger(Logger::getLogger("Particle"));
 
-Particle::Particle(int type_arg) {
-	type = type_arg;
-	f = 0.0;
-	old_f = 0.0;
-	cell = -1;
 
-	e = 0;
-	o = 0;
-	visible = true;
+vector<ParticleProperty> ParticleProperty::properties;
+
+
+void ParticleProperty::push(ParticleProperty& prop)
+{
+	properties.push_back(prop);
+}
+
+ParticleProperty& ParticleProperty::get(int i)
+{
+	return properties[i];
+}
+
+int ParticleProperty::count()
+{
+	return properties.size();
+}
+
+
+
+
+Particle::Particle(int type_arg, bool vis /*= true*/) 
+	: x(0.0), v(0.0), f(0.0), old_f(0.0), type(type_arg), cell(-1), visible(vis)
+{
+
 }
 
 Particle::Particle(const Particle& other) 
-	:x(other.x), v(other.v), f(other.f), old_f(other.old_f), m(other.m), e(other.e), o(other.o), type(other.type), cell(other.cell), visible(other.visible)
+	:x(other.x), v(other.v), f(other.f), old_f(other.old_f), type(other.type), cell(other.cell), visible(other.visible)
 
 {
+
 }
 
 // Todo: maybe use initializater list instead of copy?
-Particle::Particle(	utils::Vector<double, 3> x_arg,
-	        utils::Vector<double, 3> v_arg,
-	        double m_arg,
-			double e_arg,
-			double o_arg,
-			bool vis,
-	        int type_arg
-) {
-    x = x_arg;
-    v = v_arg;
-    m = m_arg;
-    type = type_arg;
-	visible = vis;
-	e = e_arg;
-	o = o_arg;
-    f = 0.0;
-    old_f = 0.0;
-	cell = -1;
+Particle::Particle(	
+	utils::Vector<double, 3> x_arg,
+	utils::Vector<double, 3> v_arg,
+	int type_arg,
+	bool vis /* = true*/)
+	: x(x_arg), v(v_arg), f(0.0), old_f(0.0), type(type_arg), cell(-1), visible(vis)
+{
 }
 
 Particle::~Particle() {
@@ -81,10 +88,6 @@ utils::Vector<double, 3>& Particle::getOldF() {
 	return old_f;
 }
 
-double Particle::getM() {
-	return m;
-}
-
 int Particle::getType() {
 	return type;
 }
@@ -103,26 +106,32 @@ bool Particle::isVisible(){
 	return visible;
 }
 
-
-double Particle::getE() {
-	return e;
+double Particle::getM()
+{
+	return ParticleProperty::get(type).mass;
 }
 
-double Particle::getO(){
-	return o;
+double Particle::getE()
+{
+	return ParticleProperty::get(type).e;
+}
+
+double Particle::getO()
+{
+	return ParticleProperty::get(type).o;
 }
 
 std::string Particle::toString() {
 	std::stringstream stream;
-	stream << "Particle: X:" << x <<  " v: " << v << " f: " << f << " old_f: " << old_f << " type: " << type;
+	stream << "Particle: X:" << x <<  " v: " << v << " f: " << f << " old_f: " << old_f << " type: " << type << " cell: " << cell << (visible ? " visible" : " invisible");
 	return stream.str();
 }
 
 bool Particle::operator ==(Particle& other) {
-	if ( (x == other.x) && (v == other.v) && (f == other.f) &&
-			(type == other.type) & (m == other.m) && (old_f == other.old_f) && (cell == other.cell)) {
+	if ((x == other.x) && (v == other.v) && (f == other.f) &&
+		(type == other.type) && (old_f == other.old_f) && 
+		(cell == other.cell) && (visible == other.visible) )
 		return true;
-	}
 
 	return false;
 }

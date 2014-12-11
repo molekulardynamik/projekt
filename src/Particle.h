@@ -9,9 +9,37 @@
 #define PARTICLE_H_
 
 #include "utils/Vector.h"
+#include <vector>
 
 namespace Simulation
 {
+	class ParticleProperty
+	{
+	public:
+		ParticleProperty():
+			mass(0), e(0), o(0)
+		{}
+
+		double mass;
+		double e;
+		double o;
+		// static
+
+	public:
+		static void push(ParticleProperty& prop);
+
+		static ParticleProperty& get(int i);
+
+		static int count();
+
+	private:
+		static std::vector<ParticleProperty> properties;
+	};
+
+	class StaticPropert
+	{
+
+	};
 
 	class Particle {
 
@@ -29,9 +57,6 @@ namespace Simulation
 		/** the force wich was effective on this particle */
 		utils::Vector<double, 3> old_f;
 
-		/** the mass of this particle */
-		double m;
-
 		/** type of the particle. Use it for whatever you want (e.g. to seperate
 		 * molecules belonging to different bodies, matters, and so on)
 		 */
@@ -42,25 +67,18 @@ namespace Simulation
 
 		bool visible;
 
-		double e;
-
-		double o;
-
 	public:
-		Particle(int type = 0);
+		Particle(int type, bool vivible = true);
 
 		Particle(const Particle& other);
 
 		Particle(
 				// for visualization, we need always 3 coordinates
 				// -> in case of 2d, we use only the first and the second
-				utils::Vector<double, 3> x_arg,
+			utils::Vector<double, 3> x_arg,
 			utils::Vector<double, 3> v_arg,
-			double m_arg,
-			double e_arg,
-			double o_arg,
-			bool vis,
-			int type = 0
+			int type,
+			bool vis = true
 		);
 
 		virtual ~Particle();
@@ -75,6 +93,10 @@ namespace Simulation
 
 		double getM();
 
+		double getE();
+
+		double getO();
+
 		int getType();
 		void setType(int t);
 
@@ -82,10 +104,6 @@ namespace Simulation
 		void setCell(int c);
 
 		bool isVisible();
-
-		double getE();
-
-		double getO();
 
 		bool operator==(Particle& other);
 

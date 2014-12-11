@@ -5,6 +5,7 @@
 #include "outputWriter/VTKWriter.h"
 #include "ParticleContainer.h"
 #include "ParticleHandler.h"
+#include "Thermostat.h"
 
 #include <cstring>
 #include <cstdlib>
@@ -85,6 +86,10 @@ int main(int argc, char* argsv[])
 
 	container.init(argsv[1]);
 
+
+	Thermostat thermostat(container);
+	thermostat.applyInitialTemperature(40);
+
 	PositionHandler ph = PositionHandler(delta_t);
 	VelocityHandler vh = VelocityHandler(delta_t);
 	ForceReset fr = ForceReset();
@@ -93,8 +98,8 @@ int main(int argc, char* argsv[])
 
 	// the forces are needed to calculate x, but are not given in the input file.
 	
-	//container.iterateParticles(ljh);
-	//container.iterateParticlePairsExclusive(ljh);
+	container.iterateParticles(ljh);
+	container.iterateParticlePairsExclusive(ljh);
 
 	int iteration = 0;
 	int lastTrace = 0;
@@ -108,6 +113,7 @@ int main(int argc, char* argsv[])
 		//LOG4CXX_DEBUG(logger, "boundries");
 		// apply BoudryConditions to BoundryCells
 		container.iterateBoundryCells();
+
 
 		//LOG4CXX_DEBUG(logger, "update");
 		// find cell for each particle based on its location
@@ -129,9 +135,13 @@ int main(int argc, char* argsv[])
 		// calculate new Force for each Particle Pair (ljh -> leonard jones Handler)
 		container.iterateParticlePairsExclusive(ljh);
 
+
 		//LOG4CXX_DEBUG(logger, "iterate4");
 		// calculate new Velocty for each Particle based on its force (vh --> velocity Handler)
 		container.iterateParticles(vh);
+
+		if ((iteration % 1000) == 0)
+			thermostat.applyTemperature(40);
 
 		iteration++;
 

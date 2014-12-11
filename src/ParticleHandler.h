@@ -115,9 +115,13 @@ namespace Simulation
 
 		void compute(Particle& p1, Particle& p2)
 		{
-			double e = 5, o = 1;
+			double e = (p1.getE() + p2.getE()) / 2;
+			double o = sqrt(p1.getO() * p2.getO());
 
 			double dist = (p1.getX() - p2.getX()).L2Norm();
+			if (dist > rCutOff)
+				return;
+
 			double sqrtDist = dist * dist;
 
 			double scalar = 24 * e / sqrtDist * (pow(o / dist, 6) - 2 * pow(o / dist, 12));
@@ -127,8 +131,8 @@ namespace Simulation
 
 		void computeExclusive(Particle& p1, Particle& p2)
 		{
-			double e = (p1.getE() + p2.getE()) / 2.0;
-			double o = sqrt(p1.getE() * p2.getE());
+			double e = (p1.getE() + p2.getE()) / 2;
+			double o = sqrt(p1.getO() * p2.getO());
 
 			double dist = (p1.getX() - p2.getX()).L2Norm();
 			if (dist > rCutOff)
