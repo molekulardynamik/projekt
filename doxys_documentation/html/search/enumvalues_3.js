@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['innercell',['InnerCell',['../classSimulation_1_1ParticleCell.html#a2212779392dcf6befecc55da1ec5356caa37d40bf1097ce2043342c9a4d52182b',1,'Simulation::ParticleCell']]],
-  ['int16',['Int16',['../classtype.html#a83781d700ce124b4224c316326a5a975a8d3d044c5da17c4e92e2c61c2f0ea556',1,'type']]],
-  ['int32',['Int32',['../classtype.html#a83781d700ce124b4224c316326a5a975a62e1ad64aa38ad0b50e1a6bd9b9ae25e',1,'type']]],
-  ['int64',['Int64',['../classtype.html#a83781d700ce124b4224c316326a5a975a2cc7bf870db9a3b5e9e580a58b6c1308',1,'type']]],
-  ['int8',['Int8',['../classtype.html#a83781d700ce124b4224c316326a5a975ad559d992c88431b0a1cb90b340929d4e',1,'type']]]
+  ['leftboundary',['LeftBoundary',['../classSimulation_1_1ParticleCell.html#a2212779392dcf6befecc55da1ec5356ca9b7b3132a0d07ce3c1ec88e586bf2eb0',1,'Simulation::ParticleCell']]]
 ];

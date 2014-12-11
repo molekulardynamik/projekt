@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['filereader',['FileReader',['../classFileReader.html',1,'']]],
-  ['forcereset',['ForceReset',['../classSimulation_1_1ForceReset.html',1,'Simulation']]]
+  ['lennardjoneshandler',['LennardJonesHandler',['../classSimulation_1_1LennardJonesHandler.html',1,'Simulation']]]
 ];
