@@ -1,6 +1,6 @@
 
 domain: 63 36
-rCutOff: 2.5 * 1.2
+rCutOff: 3
 
 type:
 m: 1

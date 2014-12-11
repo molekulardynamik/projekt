@@ -7,6 +7,7 @@ namespace Simulation
 {
 	class StateWriter
 	{
-		static void writeStateToFile(char * filename, ParticleContainer& container);
+	public:
+		static void writeStateToFile(const char * filename, ParticleContainer& container);
 	};
 }

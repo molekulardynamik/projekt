@@ -151,6 +151,11 @@ namespace Simulation
 		/// \return Cutoff radius
 		double getCutOff();
 
+		double getDomainX();
+		double getDomainY();
+
+		int getWallType();
+
 	private:
 
 		/// Finds 1D cell index based on given poistion
@@ -176,6 +181,7 @@ namespace Simulation
 		int visible;								///< Number of visible particles
 
 		double rCutOff;								///< Cutoff radius
+		double domainX, domainY;					///< Domain definition of simulation space \note Only used for storing Simulation State
 		int numCellsX, numCellsY;					///< Number of cells in X/Y - Direction
 		std::vector<ParticleCell> cells;			///< List of all cells (including boundaries) \note This is a 1D representation of a 2D grid
 

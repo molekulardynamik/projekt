@@ -6,6 +6,7 @@
 #include "ParticleContainer.h"
 #include "ParticleHandler.h"
 #include "Thermostat.h"
+#include "StateWriter.h"
 
 #include <cstring>
 #include <cstdlib>
@@ -69,17 +70,25 @@ int main(int argc, char* argsv[])
 		LOG4CXX_INFO(logger, "BYE");
 		return 0;
 	}
-	else if (argc != 4) 
+	else if (argc != 6 && argc != 7) 
 	{
 		LOG4CXX_ERROR(logger, "Errounous programme call!");
-		LOG4CXX_ERROR(logger, "use /MolSim <filename> <t_end> <t_delta>");
-		LOG4CXX_ERROR(logger, "or /MolSim -test");
+		LOG4CXX_ERROR(logger, "use /MolSim <filename> <t_end> <t_delta> <g_grav> <temp>");
+		LOG4CXX_ERROR(logger, "use /MolSim <filename> <t_end> <t_delta> <g_grav> <temp> -save");
+		//LOG4CXX_ERROR(logger, "or /MolSim -test");
 		return 0;
 	}
 
-
+	bool saveState = false;
+	if (argc == 7)
+		saveState = strcmp(argsv[6], "-save") == 0;
 
 	double current_time = start_time;
+
+	double gravity = atof(argsv[4]);
+	double temperature = atof(argsv[5]);
+
+	cout << "grav " << gravity << " temp " << temperature << endl;
 
 	end_time = atof(argsv[2]);
 	delta_t = atof(argsv[3]);	
@@ -88,12 +97,13 @@ int main(int argc, char* argsv[])
 
 
 	Thermostat thermostat(container);
-	thermostat.applyInitialTemperature(40);
+	if (temperature != 0)
+		thermostat.applyInitialTemperature(40);
 
 	PositionHandler ph = PositionHandler(delta_t);
 	VelocityHandler vh = VelocityHandler(delta_t);
 	ForceReset fr = ForceReset();
-	GravityHandler gh = GravityHandler(-12.4);
+	GravityHandler gh = GravityHandler(gravity);
 	LennardJonesHandler ljh = LennardJonesHandler(delta_t, container.getCutOff());
 
 	// the forces are needed to calculate x, but are not given in the input file.
@@ -139,7 +149,7 @@ int main(int argc, char* argsv[])
 		// calculate new Velocty for each Particle based on its force (vh --> velocity Handler)
 		container.iterateParticles(vh);
 
-		if ((iteration % 1000) == 0)
+		if ((iteration % 1000) == 0 && temperature != 0)
 			thermostat.applyTemperature(40);
 
 		iteration++;
@@ -160,11 +170,20 @@ int main(int argc, char* argsv[])
 		//LOG4CXX_DEBUG(logger, "end");
 	}
 
-
 	LOG4CXX_INFO(logger, "output written. Terminating now...");
 
 	time(&end);
 	LOG4CXX_INFO(logger, "Simulation took " << end - start << " seconds");
+
+	if (saveState)
+	{
+		string outputFile = "savedState.txt";
+
+		StateWriter::writeStateToFile(outputFile.c_str(), container);
+
+
+		LOG4CXX_INFO(logger, "State written in " << outputFile);
+	}
 
 	return 0;
 }

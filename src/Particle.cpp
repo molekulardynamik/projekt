@@ -27,6 +27,17 @@ LoggerPtr particleLogger(Logger::getLogger("Particle"));
 
 vector<ParticleProperty> ParticleProperty::properties;
 
+std::string ParticleProperty::saveProperties()
+{
+	std::stringstream stream;
+	stream << "type:" << endl;
+	stream << "m: " << mass << endl;
+	stream << "e: " << e << endl;
+	stream << "o: " << o << endl;
+	stream << "end" << endl;
+	return stream.str();
+}
+
 
 void ParticleProperty::push(ParticleProperty& prop)
 {
@@ -42,8 +53,6 @@ int ParticleProperty::count()
 {
 	return properties.size();
 }
-
-
 
 
 Particle::Particle(int type_arg, bool vis /*= true*/) 
@@ -124,6 +133,17 @@ double Particle::getO()
 std::string Particle::toString() {
 	std::stringstream stream;
 	stream << "Particle: X:" << x <<  " v: " << v << " f: " << f << " old_f: " << old_f << " type: " << type << " cell: " << cell << (visible ? " visible" : " invisible");
+	return stream.str();
+}
+
+std::string Particle::saveParticle() 
+{
+	std::stringstream stream;
+	stream << "particle:" << endl;
+	stream << "x: " << x[0] << " " << x[1] << " " << x[2] << endl;
+	stream << "v: " << v[0] << " " << v[1] << " " << v[2] << endl;
+	stream << "type: " << type << endl;
+	stream << "end" << endl;
 	return stream.str();
 }
 

@@ -22,10 +22,19 @@ namespace Simulation
 		/// \param particles List of particles at which cuboid will be apended
 		static void generateCuboid(
 			utils::Vector<double, 3> bottomLeftFront,
-			utils::Vector<int, 3 > numParticles,
 			utils::Vector<double, 3 > initialVelocity,
-			int type,
+			utils::Vector<int, 3 > numParticles,
 			double h,
+			int type,
 			std::vector<Particle>& particles);
+
+		static void generateSphere(
+			utils::Vector<double, 3> center,
+			utils::Vector<double, 3 > initialVelocity,
+			int numParticles,
+			double h,
+			int type,
+			std::vector<Particle>& particles);
+
 	};
 }

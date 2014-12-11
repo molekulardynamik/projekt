@@ -27,6 +27,9 @@ namespace Simulation
 		double e;			///< Epsilon of particle \note Used for Lennard-Jones potential
 		double o;			///< Sigma of particle \note Used for Lennard-Jones potential
 
+		/// Converts properties into a string that can be read as input again
+		std::string saveProperties();
+
 	public:
 
 		/// Add new type of particles
@@ -103,6 +106,9 @@ namespace Simulation
 		bool operator==(Particle& other);
 
 		std::string toString();
+
+		/// Converts particle into a string that can be read as input again
+		std::string saveParticle();
 	};
 
 };

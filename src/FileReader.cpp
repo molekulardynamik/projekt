@@ -152,7 +152,7 @@ void FileReader::readFile(vector<Particle>& particles, char* filename, bool* ref
 }
 */
 
-void FileReader::readFile(vector<Particle>& particles, char* filename, bool* reflective, double* domainX, double* domainY, double* rCutOff)
+void FileReader::readFile(vector<Particle>& particles, char* filename, double* domainX, double* domainY, double* rCutOff)
 {
 	LOG4CXX_INFO(fileReaderLogger, "Reading file: " << filename);
 
@@ -243,21 +243,83 @@ void FileReader::readFile(vector<Particle>& particles, char* filename, bool* ref
 			}			
 
 
-			ParticleGenerator::generateCuboid(Vector<double, 3>(x), Vector<int, 3>(n), Vector<double, 3>(v), type, h, particles);
+			ParticleGenerator::generateCuboid(Vector<double, 3>(x), Vector<double, 3>(v), Vector<int, 3>(n), h, type, particles);
 
 			LOG4CXX_DEBUG(fileReaderLogger, "generated cuboid ");
+		}
+		else if (args[0] == "sphere")
+		{
+
+			double x[3] = { 0, 0, 0 };
+			double v[3] = { 0, 0, 0 };
+			int n = 0;
+			int type = 0;
+			double h = 0;
+
+			string sphereLine;
+			while (getline(input_file, sphereLine))
+			{
+				if (sphereLine[0] == '#')
+					continue;
+
+				vector<string> sphereArgs = splitString(sphereLine, ':');
+
+				if (sphereArgs.size() > 1)
+				{
+					if (sphereArgs[0] == "x")
+					{
+						istringstream positionstream(sphereArgs[1]);
+
+						for (int j = 0; j < 3; j++) {
+							positionstream >> x[j];
+						}
+					}
+					else if (sphereArgs[0] == "v")
+					{
+						istringstream velocitystream(sphereArgs[1]);
+
+						for (int j = 0; j < 3; j++) {
+							velocitystream >> v[j];
+						}
+					}
+					else if (sphereArgs[0] == "n")
+					{
+						istringstream sizestream(sphereArgs[1]);
+
+						sizestream >> n;
+					}
+					else if (sphereArgs[0] == "h")
+					{
+						istringstream spacingstream(sphereArgs[1]);
+						spacingstream >> h;
+					}
+					else if (sphereArgs[0] == "type")
+					{
+						istringstream typestream(sphereArgs[1]);
+						typestream >> type;
+					}
+
+				}
+				else if (sphereLine == "end")
+					break;
+			}
+
+
+			ParticleGenerator::generateSphere(Vector<double, 3>(x), Vector<double, 3>(v), n, h, type, particles);
+
+			LOG4CXX_DEBUG(fileReaderLogger, "generated sphere " << v[0] << " " << v[1] << " " << v[2]);
 		}
 		else if (args[0] == "type")
 		{
 			double m = 0, h = 0, e = 0, o = 0;
 
-			string cuboidLine;
-			while (getline(input_file, cuboidLine))
+			string typeLine;
+			while (getline(input_file, typeLine))
 			{
-				if (cuboidLine[0] == '#')
+				if (typeLine[0] == '#')
 					continue;
 
-				vector<string> typeArgs = splitString(cuboidLine, ':');
+				vector<string> typeArgs = splitString(typeLine, ':');
 
 				if (typeArgs.size() > 1)
 				{
@@ -277,7 +339,7 @@ void FileReader::readFile(vector<Particle>& particles, char* filename, bool* ref
 						sigmastream >> o;
 					}
 				}
-				else if (cuboidLine == "end")
+				else if (typeLine == "end")
 					break;
 			}
 

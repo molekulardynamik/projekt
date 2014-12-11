@@ -150,11 +150,9 @@ void ParticleContainer::init(char* filename)
 {
 	LOG4CXX_DEBUG(containerLogger, "init");
 
-	bool reflective;
-	double domainX, domainY;
 	
 	FileReader fileReader;
-	fileReader.readFile(particlePool, filename, &reflective, &domainX, &domainY, &rCutOff);
+	fileReader.readFile(particlePool, filename, &domainX, &domainY, &rCutOff);
 
 	ParticleProperty wallProp;
 	for (int pr = 0; pr < ParticleProperty::count(); pr++)
@@ -599,4 +597,19 @@ void ParticleContainer::iterateBoundaryCells()
 double ParticleContainer::getCutOff()
 {
 	return rCutOff;
+}
+
+double ParticleContainer::getDomainX()
+{
+	return domainX;
+}
+
+double ParticleContainer::getDomainY()
+{
+	return domainY;
+}
+
+int ParticleContainer::getWallType()
+{
+	return wallType;
 }
