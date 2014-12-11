@@ -3,9 +3,9 @@ PSE Molekulardynamik WS14 - Implementation
 
 How to use:
 
-call "./MolSim <inputfile> <endTime> <deltaTime> <g_grav> <initialTemp>"
+call "./MolSim \<inputfile\> \<endTime\> \<deltaTime\> \<g_grav\> \<initialTemp\>"
 
-or "./MolSim <inputfile> <endTime> <deltaTime> <g_grav> <initialTemp> -save" if you want to save the state of your finished simulation
+or "./MolSim \<inputfile\> \<endTime\> \<deltaTime\> \<g_grav\> \<initialTemp\> -save" if you want to save the state of your finished simulation
 
 Inputfile:
 
