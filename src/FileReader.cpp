@@ -29,13 +29,15 @@ using namespace log4cxx::helpers;
 // Define static logger variable
 LoggerPtr fileReaderLogger(Logger::getLogger("FileReader"));
 
+vector<string> splitString(string s, char c);
+
 FileReader::FileReader() {
 }
 
 FileReader::~FileReader() {
 }
 
-
+/*
 void FileReader::readFile(vector<Particle>& particles, char* filename, bool* reflective, double* domainX, double* domainY, double* rCutOff) {
 
 	LOG4CXX_INFO(fileReaderLogger, "Reading file: " << filename);
@@ -148,4 +150,212 @@ void FileReader::readFile(vector<Particle>& particles, char* filename, bool* ref
     }
 
 }
+*/
 
+void FileReader::readFile(vector<Particle>& particles, char* filename, bool* reflective, double* domainX, double* domainY, double* rCutOff)
+{
+	LOG4CXX_INFO(fileReaderLogger, "Reading file: " << filename);
+
+	std::ifstream input_file(filename);
+
+	if (!input_file.is_open())
+	{
+		LOG4CXX_ERROR(fileReaderLogger, "Error: could not open file " << filename);
+		exit(-1);
+	}
+
+	string line;
+	while (getline(input_file, line))
+	{
+		if (line[0] == '#')
+			continue;
+
+		vector<string> args = splitString(line, ':');
+
+		if (args[0] == "domain" && args.size() > 1)
+		{
+			istringstream domainstream(args[1]);
+			domainstream >> *domainX;
+			domainstream >> *domainY;
+		}
+		else if (args[0] == "rCutOff" && args.size() > 1)
+		{
+			istringstream cutofstream(args[1]);
+			cutofstream >> *rCutOff;
+		}
+		else if (args[0] == "cuboid")
+		{
+
+			double x[3] = { 0, 0, 0 };
+			double v[3] = { 0, 0, 0 };
+			int n[3] = { 0, 0, 0 };
+			int type = 0;
+			double h = 0;
+
+			string cuboidLine;
+			while (getline(input_file, cuboidLine))
+			{
+				if (cuboidLine[0] == '#')
+					continue;
+
+				vector<string> cuboidArgs = splitString(cuboidLine, ':');
+
+				if (cuboidArgs.size() > 1)
+				{
+					if (cuboidArgs[0] == "x")
+					{
+						istringstream positionstream(cuboidArgs[1]);
+
+						for (int j = 0; j < 3; j++) {
+							positionstream >> x[j];
+						}
+					}
+					else if (cuboidArgs[0] == "v")
+					{
+						istringstream velocitystream(cuboidArgs[1]);
+
+						for (int j = 0; j < 3; j++) {
+							velocitystream >> v[j];
+						}
+					}
+					else if (cuboidArgs[0] == "n")
+					{
+						istringstream sizestream(cuboidArgs[1]);
+
+						for (int j = 0; j < 3; j++) {
+							sizestream >> n[j];
+						}
+					}
+					else if (cuboidArgs[0] == "h")
+					{
+						istringstream spacingstream(cuboidArgs[1]);
+						spacingstream >> h;
+					}
+					else if (cuboidArgs[0] == "type")
+					{
+						istringstream typestream(cuboidArgs[1]);
+						typestream >> type;
+					}
+					
+				}
+				else if (cuboidLine == "end")
+					break;
+			}			
+
+
+			ParticleGenerator::generateCuboid(Vector<double, 3>(x), Vector<int, 3>(n), Vector<double, 3>(v), type, h, particles);
+
+			LOG4CXX_DEBUG(fileReaderLogger, "generated cuboid ");
+		}
+		else if (args[0] == "type")
+		{
+			double m = 0, h = 0, e = 0, o = 0;
+
+			string cuboidLine;
+			while (getline(input_file, cuboidLine))
+			{
+				if (cuboidLine[0] == '#')
+					continue;
+
+				vector<string> typeArgs = splitString(cuboidLine, ':');
+
+				if (typeArgs.size() > 1)
+				{
+					if (typeArgs[0] == "m")
+					{
+						istringstream massstream(typeArgs[1]);
+						massstream >> m;
+					}
+					else if (typeArgs[0] == "e")
+					{
+						istringstream epsilonstream(typeArgs[1]);
+						epsilonstream >> e;
+					}
+					else if (typeArgs[0] == "o")
+					{
+						istringstream sigmastream(typeArgs[1]);
+						sigmastream >> o;
+					}
+				}
+				else if (cuboidLine == "end")
+					break;
+			}
+
+			ParticleProperty prop;
+			prop.mass = m;
+			prop.e = e;
+			prop.o = o;
+
+			ParticleProperty::push(prop);
+		}
+		else if (args[0] == "particle")
+		{
+			double x[3] = { 0, 0, 0 };
+			double v[3] = { 0, 0, 0 };
+			int type = 0;
+
+
+			string particleLine;
+			while (getline(input_file, particleLine))
+			{
+				if (particleLine[0] == '#')
+					continue;
+
+				vector<string> particledArgs = splitString(particleLine, ':');
+
+				if (particledArgs.size() > 1)
+				{
+					if (particledArgs[0] == "x")
+					{
+						istringstream positionstream(particledArgs[1]);
+
+						for (int j = 0; j < 3; j++) {
+							positionstream >> x[j];
+						}
+					}
+					else if (particledArgs[0] == "v")
+					{
+						istringstream velocitystream(particledArgs[1]);
+
+						for (int j = 0; j < 3; j++) {
+							velocitystream >> v[j];
+						}
+					}
+					else if (particledArgs[0] == "type")
+					{
+						istringstream typestream(particledArgs[1]);
+						typestream >> type;
+					}
+				}
+				else if (particleLine == "end")
+					break;
+			}
+
+			particles.push_back(Particle(x, v, type));
+		}
+
+	}
+
+	LOG4CXX_DEBUG(fileReaderLogger, "end of File");
+}
+
+
+vector<string> splitString(string s, char c)
+{
+	vector<string> subs;
+	string remainder = s;
+	string sub = "";
+	while (true)
+	{
+		sub = remainder.substr(0, remainder.find_first_of(c));
+
+		subs.push_back(sub);
+
+		if (remainder.length() <= sub.length())
+			break;
+
+		remainder = remainder.substr(sub.length() + 1);
+	}
+
+	return subs;
+}
