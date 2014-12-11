@@ -101,13 +101,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aa4b339a3676975dcd51e3b7a345dd494"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleGenerator.html#aa4b339a3676975dcd51e3b7a345dd494">generateCuboid</a> (<a class="el" href="classutils_1_1Vector.html">utils::Vector</a>&lt; double, 3 &gt; bottomLeftFront, <a class="el" href="classutils_1_1Vector.html">utils::Vector</a>&lt; int, 3 &gt; numParticles, <a class="el" href="classutils_1_1Vector.html">utils::Vector</a>&lt; double, 3 &gt; initialVelocity, int <a class="el" href="classtype.html">type</a>, double h, std::vector&lt; <a class="el" href="classSimulation_1_1Particle.html">Particle</a> &gt; &amp;particles)</td></tr>
-<tr class="separator:aa4b339a3676975dcd51e3b7a345dd494"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fb7273c9b825209540396c1cbacf574"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleGenerator.html#a8fb7273c9b825209540396c1cbacf574">generateCuboid</a> (<a class="el" href="classutils_1_1Vector.html">utils::Vector</a>&lt; double, 3 &gt; bottomLeftFront, <a class="el" href="classutils_1_1Vector.html">utils::Vector</a>&lt; double, 3 &gt; initialVelocity, <a class="el" href="classutils_1_1Vector.html">utils::Vector</a>&lt; int, 3 &gt; numParticles, double h, int <a class="el" href="classtype.html">type</a>, std::vector&lt; <a class="el" href="classSimulation_1_1Particle.html">Particle</a> &gt; &amp;particles)</td></tr>
+<tr class="separator:a8fb7273c9b825209540396c1cbacf574"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1726b3093c82abebf17baf580e5137f4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleGenerator.html#a1726b3093c82abebf17baf580e5137f4">generateSphere</a> (<a class="el" href="classutils_1_1Vector.html">utils::Vector</a>&lt; double, 3 &gt; center, <a class="el" href="classutils_1_1Vector.html">utils::Vector</a>&lt; double, 3 &gt; initialVelocity, int numParticles, double h, int <a class="el" href="classtype.html">type</a>, std::vector&lt; <a class="el" href="classSimulation_1_1Particle.html">Particle</a> &gt; &amp;particles)</td></tr>
+<tr class="separator:a1726b3093c82abebf17baf580e5137f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>penerates particles in different shapes </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="aa4b339a3676975dcd51e3b7a345dd494"></a>
+<a class="anchor" id="a8fb7273c9b825209540396c1cbacf574"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -123,26 +125,26 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classutils_1_1Vector.html">utils::Vector</a>&lt; int, 3 &gt;&#160;</td>
-          <td class="paramname"><em>numParticles</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype"><a class="el" href="classutils_1_1Vector.html">utils::Vector</a>&lt; double, 3 &gt;&#160;</td>
           <td class="paramname"><em>initialVelocity</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
+          <td class="paramtype"><a class="el" href="classutils_1_1Vector.html">utils::Vector</a>&lt; int, 3 &gt;&#160;</td>
+          <td class="paramname"><em>numParticles</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -177,6 +179,64 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a1726b3093c82abebf17baf580e5137f4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ParticleGenerator::generateSphere </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classutils_1_1Vector.html">utils::Vector</a>&lt; double, 3 &gt;&#160;</td>
+          <td class="paramname"><em>center</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classutils_1_1Vector.html">utils::Vector</a>&lt; double, 3 &gt;&#160;</td>
+          <td class="paramname"><em>initialVelocity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numParticles</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classSimulation_1_1Particle.html">Particle</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>particles</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="ParticleGenerator_8h_source.html">ParticleGenerator.h</a></li>
 <li>src/<a class="el" href="ParticleGenerator_8cpp.html">ParticleGenerator.cpp</a></li>
@@ -184,7 +244,7 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 11 2014 04:45:51 for MolSim by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 11 2014 14:12:13 for MolSim by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

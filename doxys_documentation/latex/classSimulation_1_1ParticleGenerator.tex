@@ -13,7 +13,9 @@ penerates particles in different shapes
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static void \hyperlink{classSimulation_1_1ParticleGenerator_aa4b339a3676975dcd51e3b7a345dd494}{generate\-Cuboid} (\hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ double, 3 $>$ bottom\-Left\-Front, \hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ int, 3 $>$ num\-Particles, \hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ double, 3 $>$ initial\-Velocity, int \hyperlink{classtype}{type}, double h, std\-::vector$<$ \hyperlink{classSimulation_1_1Particle}{Particle} $>$ \&particles)
+static void \hyperlink{classSimulation_1_1ParticleGenerator_a8fb7273c9b825209540396c1cbacf574}{generate\-Cuboid} (\hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ double, 3 $>$ bottom\-Left\-Front, \hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ double, 3 $>$ initial\-Velocity, \hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ int, 3 $>$ num\-Particles, double h, int \hyperlink{classtype}{type}, std\-::vector$<$ \hyperlink{classSimulation_1_1Particle}{Particle} $>$ \&particles)
+\item 
+static void \hyperlink{classSimulation_1_1ParticleGenerator_a1726b3093c82abebf17baf580e5137f4}{generate\-Sphere} (\hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ double, 3 $>$ center, \hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ double, 3 $>$ initial\-Velocity, int num\-Particles, double h, int \hyperlink{classtype}{type}, std\-::vector$<$ \hyperlink{classSimulation_1_1Particle}{Particle} $>$ \&particles)
 \end{DoxyCompactItemize}
 
 
@@ -21,18 +23,18 @@ static void \hyperlink{classSimulation_1_1ParticleGenerator_aa4b339a3676975dcd51
 penerates particles in different shapes 
 
 \subsection{Member Function Documentation}
-\hypertarget{classSimulation_1_1ParticleGenerator_aa4b339a3676975dcd51e3b7a345dd494}{\index{Simulation\-::\-Particle\-Generator@{Simulation\-::\-Particle\-Generator}!generate\-Cuboid@{generate\-Cuboid}}
+\hypertarget{classSimulation_1_1ParticleGenerator_a8fb7273c9b825209540396c1cbacf574}{\index{Simulation\-::\-Particle\-Generator@{Simulation\-::\-Particle\-Generator}!generate\-Cuboid@{generate\-Cuboid}}
 \index{generate\-Cuboid@{generate\-Cuboid}!Simulation::ParticleGenerator@{Simulation\-::\-Particle\-Generator}}
 \subsubsection[{generate\-Cuboid}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Generator\-::generate\-Cuboid (
 \begin{DoxyParamCaption}
 \item[{{\bf utils\-::\-Vector}$<$ double, 3 $>$}]{bottom\-Left\-Front, }
-\item[{{\bf utils\-::\-Vector}$<$ int, 3 $>$}]{num\-Particles, }
 \item[{{\bf utils\-::\-Vector}$<$ double, 3 $>$}]{initial\-Velocity, }
-\item[{int}]{type, }
+\item[{{\bf utils\-::\-Vector}$<$ int, 3 $>$}]{num\-Particles, }
 \item[{double}]{h, }
+\item[{int}]{type, }
 \item[{std\-::vector$<$ {\bf Particle} $>$ \&}]{particles}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [static]}}}\label{classSimulation_1_1ParticleGenerator_aa4b339a3676975dcd51e3b7a345dd494}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classSimulation_1_1ParticleGenerator_a8fb7273c9b825209540396c1cbacf574}
 Generates Cuboid 
 \begin{DoxyParams}{Parameters}
 {\em bottom\-Left\-Front} & Position of cuboid \\
@@ -48,6 +50,18 @@ Generates Cuboid
 {\em particles} & List of particles at which cuboid will be apended \\
 \hline
 \end{DoxyParams}
+\hypertarget{classSimulation_1_1ParticleGenerator_a1726b3093c82abebf17baf580e5137f4}{\index{Simulation\-::\-Particle\-Generator@{Simulation\-::\-Particle\-Generator}!generate\-Sphere@{generate\-Sphere}}
+\index{generate\-Sphere@{generate\-Sphere}!Simulation::ParticleGenerator@{Simulation\-::\-Particle\-Generator}}
+\subsubsection[{generate\-Sphere}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Generator\-::generate\-Sphere (
+\begin{DoxyParamCaption}
+\item[{{\bf utils\-::\-Vector}$<$ double, 3 $>$}]{center, }
+\item[{{\bf utils\-::\-Vector}$<$ double, 3 $>$}]{initial\-Velocity, }
+\item[{int}]{num\-Particles, }
+\item[{double}]{h, }
+\item[{int}]{type, }
+\item[{std\-::vector$<$ {\bf Particle} $>$ \&}]{particles}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classSimulation_1_1ParticleGenerator_a1726b3093c82abebf17baf580e5137f4}
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}

@@ -39,6 +39,12 @@ void \hyperlink{classSimulation_1_1ParticleContainer_ab70a9d544a8428d7085863990b
 void \hyperlink{classSimulation_1_1ParticleContainer_a4ecf8c0f85e656bbfbe36b883c5e5e23}{iterate\-Boundary\-Cells} ()
 \begin{DoxyCompactList}\small\item\em Iterates over all boundry cells and handles boundary behavior. \end{DoxyCompactList}\item 
 double \hyperlink{classSimulation_1_1ParticleContainer_a81e96b1c9c1466650af5c5a0b2fb5652}{get\-Cut\-Off} ()
+\item 
+double \hyperlink{classSimulation_1_1ParticleContainer_aca55beff40f1a87aff98df78449fa07d}{get\-Domain\-X} ()
+\item 
+double \hyperlink{classSimulation_1_1ParticleContainer_a81219d7633c7ed8d4c3efaa37f15de8b}{get\-Domain\-Y} ()
+\item 
+int \hyperlink{classSimulation_1_1ParticleContainer_ad313d33feb003443885f79cb370f274e}{get\-Wall\-Type} ()
 \end{DoxyCompactItemize}
 \subsection*{Private Types}
 \begin{DoxyCompactItemize}
@@ -70,6 +76,10 @@ int \hyperlink{classSimulation_1_1ParticleContainer_a3e3805eea543d96c5cf6ced07b9
 \begin{DoxyCompactList}\small\item\em Number of visible particles. \end{DoxyCompactList}\item 
 double \hyperlink{classSimulation_1_1ParticleContainer_a1f0e9467546c765bf8533a307b5587e1}{r\-Cut\-Off}
 \begin{DoxyCompactList}\small\item\em Cutoff radius. \end{DoxyCompactList}\item 
+double \hyperlink{classSimulation_1_1ParticleContainer_a62984b65f30802a718edb5a1d7a20974}{domain\-X}
+\item 
+double \hyperlink{classSimulation_1_1ParticleContainer_a6398508c88afa2b1f50516457d20d747}{domain\-Y}
+\begin{DoxyCompactList}\small\item\em Domain definition of simulation space. \end{DoxyCompactList}\item 
 int \hyperlink{classSimulation_1_1ParticleContainer_a26ff75d3f5c109fc354bb95e460bef20}{num\-Cells\-X}
 \item 
 int \hyperlink{classSimulation_1_1ParticleContainer_ae248a9742a4d62f0cc692214eef9ba63}{num\-Cells\-Y}
@@ -196,6 +206,27 @@ Converts 2\-D indices to a 1\-D index
 \begin{DoxyReturn}{Returns}
 Cutoff radius 
 \end{DoxyReturn}
+\hypertarget{classSimulation_1_1ParticleContainer_aca55beff40f1a87aff98df78449fa07d}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!get\-Domain\-X@{get\-Domain\-X}}
+\index{get\-Domain\-X@{get\-Domain\-X}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
+\subsubsection[{get\-Domain\-X}]{\setlength{\rightskip}{0pt plus 5cm}double Particle\-Container\-::get\-Domain\-X (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleContainer_aca55beff40f1a87aff98df78449fa07d}
+\hypertarget{classSimulation_1_1ParticleContainer_a81219d7633c7ed8d4c3efaa37f15de8b}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!get\-Domain\-Y@{get\-Domain\-Y}}
+\index{get\-Domain\-Y@{get\-Domain\-Y}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
+\subsubsection[{get\-Domain\-Y}]{\setlength{\rightskip}{0pt plus 5cm}double Particle\-Container\-::get\-Domain\-Y (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleContainer_a81219d7633c7ed8d4c3efaa37f15de8b}
+\hypertarget{classSimulation_1_1ParticleContainer_ad313d33feb003443885f79cb370f274e}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!get\-Wall\-Type@{get\-Wall\-Type}}
+\index{get\-Wall\-Type@{get\-Wall\-Type}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
+\subsubsection[{get\-Wall\-Type}]{\setlength{\rightskip}{0pt plus 5cm}int Particle\-Container\-::get\-Wall\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleContainer_ad313d33feb003443885f79cb370f274e}
 \hypertarget{classSimulation_1_1ParticleContainer_a2bdf40eb2fab6e85afddf69d6ef43f27}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!init@{init}}
 \index{init@{init}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
 \subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::init (
@@ -296,6 +327,19 @@ List of all cells (including boundaries)
 
 \begin{DoxyNote}{Note}
 This is a 1\-D representation of a 2\-D grid 
+\end{DoxyNote}
+\hypertarget{classSimulation_1_1ParticleContainer_a62984b65f30802a718edb5a1d7a20974}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!domain\-X@{domain\-X}}
+\index{domain\-X@{domain\-X}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
+\subsubsection[{domain\-X}]{\setlength{\rightskip}{0pt plus 5cm}double Simulation\-::\-Particle\-Container\-::domain\-X\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a62984b65f30802a718edb5a1d7a20974}
+\hypertarget{classSimulation_1_1ParticleContainer_a6398508c88afa2b1f50516457d20d747}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!domain\-Y@{domain\-Y}}
+\index{domain\-Y@{domain\-Y}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
+\subsubsection[{domain\-Y}]{\setlength{\rightskip}{0pt plus 5cm}double Simulation\-::\-Particle\-Container\-::domain\-Y\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a6398508c88afa2b1f50516457d20d747}
+
+
+Domain definition of simulation space. 
+
+\begin{DoxyNote}{Note}
+Only used for storing \hyperlink{namespaceSimulation}{Simulation} State 
 \end{DoxyNote}
 \hypertarget{classSimulation_1_1ParticleContainer_af7710cc9a30897b05c4dae5610562f2e}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!dummies@{dummies}}
 \index{dummies@{dummies}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}

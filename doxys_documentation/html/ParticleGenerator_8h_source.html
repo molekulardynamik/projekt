@@ -102,25 +102,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        {</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classSimulation_1_1ParticleGenerator.html#aa4b339a3676975dcd51e3b7a345dd494">generateCuboid</a>(</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classSimulation_1_1ParticleGenerator.html#a8fb7273c9b825209540396c1cbacf574">generateCuboid</a>(</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                        <a class="code" href="classutils_1_1Vector.html">utils::Vector&lt;double, 3&gt;</a> bottomLeftFront,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                        <a class="code" href="classutils_1_1Vector.html">utils::Vector&lt;int, 3 &gt;</a> numParticles,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                        <a class="code" href="classutils_1_1Vector.html">utils::Vector&lt;double, 3 &gt;</a> initialVelocity,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                        <span class="keywordtype">int</span> <a class="code" href="classtype.html">type</a>,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                        <span class="keywordtype">double</span> h,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                        <a class="code" href="classutils_1_1Vector.html">utils::Vector&lt;double, 3 &gt;</a> initialVelocity,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                        <a class="code" href="classutils_1_1Vector.html">utils::Vector&lt;int, 3 &gt;</a> numParticles,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                        <span class="keywordtype">double</span> h,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                        <span class="keywordtype">int</span> <a class="code" href="classtype.html">type</a>,</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                        std::vector&lt;Particle&gt;&amp; particles);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        };</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
-<div class="ttc" id="classSimulation_1_1ParticleGenerator_html_aa4b339a3676975dcd51e3b7a345dd494"><div class="ttname"><a href="classSimulation_1_1ParticleGenerator.html#aa4b339a3676975dcd51e3b7a345dd494">Simulation::ParticleGenerator::generateCuboid</a></div><div class="ttdeci">static void generateCuboid(utils::Vector&lt; double, 3 &gt; bottomLeftFront, utils::Vector&lt; int, 3 &gt; numParticles, utils::Vector&lt; double, 3 &gt; initialVelocity, int type, double h, std::vector&lt; Particle &gt; &amp;particles)</div><div class="ttdef"><b>Definition:</b> ParticleGenerator.cpp:8</div></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classSimulation_1_1ParticleGenerator.html#a1726b3093c82abebf17baf580e5137f4">generateSphere</a>(</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                        <a class="code" href="classutils_1_1Vector.html">utils::Vector&lt;double, 3&gt;</a> center,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                        <a class="code" href="classutils_1_1Vector.html">utils::Vector&lt;double, 3 &gt;</a> initialVelocity,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                        <span class="keywordtype">int</span> numParticles,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                        <span class="keywordtype">double</span> h,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                        <span class="keywordtype">int</span> type,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                        std::vector&lt;Particle&gt;&amp; particles);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        };</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<div class="ttc" id="classSimulation_1_1ParticleGenerator_html_a8fb7273c9b825209540396c1cbacf574"><div class="ttname"><a href="classSimulation_1_1ParticleGenerator.html#a8fb7273c9b825209540396c1cbacf574">Simulation::ParticleGenerator::generateCuboid</a></div><div class="ttdeci">static void generateCuboid(utils::Vector&lt; double, 3 &gt; bottomLeftFront, utils::Vector&lt; double, 3 &gt; initialVelocity, utils::Vector&lt; int, 3 &gt; numParticles, double h, int type, std::vector&lt; Particle &gt; &amp;particles)</div><div class="ttdef"><b>Definition:</b> ParticleGenerator.cpp:8</div></div>
 <div class="ttc" id="classSimulation_1_1ParticleGenerator_html"><div class="ttname"><a href="classSimulation_1_1ParticleGenerator.html">Simulation::ParticleGenerator</a></div><div class="ttdoc">penerates particles in different shapes </div><div class="ttdef"><b>Definition:</b> ParticleGenerator.h:12</div></div>
 <div class="ttc" id="Vector_8h_html"><div class="ttname"><a href="Vector_8h.html">Vector.h</a></div></div>
 <div class="ttc" id="Particle_8h_html"><div class="ttname"><a href="Particle_8h.html">Particle.h</a></div></div>
+<div class="ttc" id="classSimulation_1_1ParticleGenerator_html_a1726b3093c82abebf17baf580e5137f4"><div class="ttname"><a href="classSimulation_1_1ParticleGenerator.html#a1726b3093c82abebf17baf580e5137f4">Simulation::ParticleGenerator::generateSphere</a></div><div class="ttdeci">static void generateSphere(utils::Vector&lt; double, 3 &gt; center, utils::Vector&lt; double, 3 &gt; initialVelocity, int numParticles, double h, int type, std::vector&lt; Particle &gt; &amp;particles)</div><div class="ttdef"><b>Definition:</b> ParticleGenerator.cpp:29</div></div>
 <div class="ttc" id="classutils_1_1Vector_html"><div class="ttname"><a href="classutils_1_1Vector.html">utils::Vector&lt; double, 3 &gt;</a></div></div>
 <div class="ttc" id="classtype_html"><div class="ttname"><a href="classtype.html">type</a></div><div class="ttdoc">Enumeration class corresponding to the type schema type. </div><div class="ttdef"><b>Definition:</b> vtk-unstructured.h:2221</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 11 2014 04:45:47 for MolSim by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 11 2014 14:12:07 for MolSim by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['saveparticle',['saveParticle',['../classSimulation_1_1Particle.html#a17d10f7b358727e40123bbb8c829f54c',1,'Simulation::Particle']]],
+  ['saveproperties',['saveProperties',['../classSimulation_1_1ParticleProperty.html#a636944dd6fa9f25fb39b7dc871dc51e4',1,'Simulation::ParticleProperty']]],
   ['scaletemperature',['scaleTemperature',['../classSimulation_1_1Thermostat.html#a6d7ef0a0e8dc0aadee57630d63938f7d',1,'Simulation::Thermostat']]],
   ['selfindex',['selfIndex',['../classSimulation_1_1ParticleCell.html#a9c834e02eef34d364fafd837776bbf23',1,'Simulation::ParticleCell']]],
   ['serialization',['serialization',['../namespacexml__schema.html#a40e04a11c9e6204762591b4de3755899',1,'xml_schema']]],
@@ -10,6 +12,7 @@ var searchData=
   ['short_5f',['short_',['../namespacexml__schema.html#a705720c1fed1575ccdcfd21cb7ab39ab',1,'xml_schema']]],
   ['simple_5ftype',['simple_type',['../namespacexml__schema.html#a44789bb4367951bcf8ae867cb983324d',1,'xml_schema']]],
   ['simulation',['Simulation',['../namespaceSimulation.html',1,'']]],
+  ['splitstring',['splitString',['../FileReader_8cpp.html#ae0e990639df543e239ff1a68daf8b411',1,'FileReader.cpp']]],
   ['start_5ftime',['start_time',['../MolSim_8cpp.html#a00b0c9b1c3ea8bb73a7fc8b53a3961fd',1,'MolSim.cpp']]],
   ['statewriter',['StateWriter',['../classSimulation_1_1StateWriter.html',1,'Simulation']]],
   ['statewriter_2ecpp',['StateWriter.cpp',['../StateWriter_8cpp.html',1,'']]],

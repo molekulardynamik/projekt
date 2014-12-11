@@ -13,6 +13,8 @@ var searchData=
   ['decimal',['decimal',['../namespacexml__schema.html#a69bfaf24f63a8c18ebd8e21db6b343df',1,'xml_schema']]],
   ['delta_5ft',['delta_t',['../classSimulation_1_1ParticleHandlerTimeAware.html#a8c6378b506877c8d69dee8c31f3dfc45',1,'Simulation::ParticleHandlerTimeAware::delta_t()'],['../MolSim_8cpp.html#a4cfc079302fe9a34fe24637c4e44303a',1,'delta_t():&#160;MolSim.cpp']]],
   ['diagnostics',['diagnostics',['../namespacexml__schema.html#a62cc106990ec99fdaf2f3364d98cfabd',1,'xml_schema']]],
+  ['domainx',['domainX',['../classSimulation_1_1ParticleContainer.html#a62984b65f30802a718edb5a1d7a20974',1,'Simulation::ParticleContainer']]],
+  ['domainy',['domainY',['../classSimulation_1_1ParticleContainer.html#a6398508c88afa2b1f50516457d20d747',1,'Simulation::ParticleContainer']]],
   ['double_5f',['double_',['../namespacexml__schema.html#aac2d3d3483d3a20e8d96d2e8e5b3a470',1,'xml_schema']]],
   ['dummies',['dummies',['../classSimulation_1_1ParticleContainer.html#af7710cc9a30897b05c4dae5610562f2e',1,'Simulation::ParticleContainer']]],
   ['duplicate_5fid',['duplicate_id',['../namespacexml__schema.html#a22a2b3c973b87b06c2868d85a154fd63',1,'xml_schema']]],
