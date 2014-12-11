@@ -112,8 +112,7 @@ int main(int argc, char* argsv[])
 
 		//LOG4CXX_DEBUG(logger, "boundries");
 		// apply BoudryConditions to BoundryCells
-		container.iterateBoundryCells();
-
+		container.iterateBoundaryCells();
 
 		//LOG4CXX_DEBUG(logger, "update");
 		// find cell for each particle based on its location
@@ -173,7 +172,7 @@ int main(int argc, char* argsv[])
 
 void plotParticles(int iteration) {
 
-	string out_name("/media/sf_Shared/vtkOutput/MD_vtk");
+	string out_name("../vtkOutput/MD_vtk");
 
 	outputWriter::VTKWriter writer;
 	writer.initializeOutput(container.countVisible());

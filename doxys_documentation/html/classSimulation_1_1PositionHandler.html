@@ -94,6 +94,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
+<p>Computes position of particle.  
+ <a href="classSimulation_1_1PositionHandler.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="ParticleHandler_8h_source.html">ParticleHandler.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Simulation::PositionHandler:</div>
@@ -101,8 +104,8 @@ Inheritance diagram for Simulation::PositionHandler:</div>
  <div class="center">
   <img src="classSimulation_1_1PositionHandler.png" usemap="#Simulation::PositionHandler_map" alt=""/>
   <map id="Simulation::PositionHandler_map" name="Simulation::PositionHandler_map">
-<area href="classSimulation_1_1ParticleHandlerTimeAware.html" alt="Simulation::ParticleHandlerTimeAware" shape="rect" coords="0,56,226,80"/>
-<area href="classSimulation_1_1ParticleHandler.html" alt="Simulation::ParticleHandler" shape="rect" coords="0,0,226,24"/>
+<area href="classSimulation_1_1ParticleHandlerTimeAware.html" title="Baseclass for handling computations that are time dependant. " alt="Simulation::ParticleHandlerTimeAware" shape="rect" coords="0,56,226,80"/>
+<area href="classSimulation_1_1ParticleHandler.html" title="Baseclass for handling particle computations. " alt="Simulation::ParticleHandler" shape="rect" coords="0,0,226,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -111,23 +114,29 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab66e6345c9e20bae0fc297253e4f6f5f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1PositionHandler.html#ab66e6345c9e20bae0fc297253e4f6f5f">PositionHandler</a> (double dt)</td></tr>
 <tr class="separator:ab66e6345c9e20bae0fc297253e4f6f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adfd177c32d7c11827ae6556ee6dd7602"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1PositionHandler.html#adfd177c32d7c11827ae6556ee6dd7602">compute</a> (<a class="el" href="classSimulation_1_1Particle.html">Particle</a> &amp;p)</td></tr>
+<tr class="memdesc:adfd177c32d7c11827ae6556ee6dd7602"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes one single particle.  <a href="#adfd177c32d7c11827ae6556ee6dd7602">More...</a><br/></td></tr>
 <tr class="separator:adfd177c32d7c11827ae6556ee6dd7602"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classSimulation_1_1ParticleHandlerTimeAware"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classSimulation_1_1ParticleHandlerTimeAware')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classSimulation_1_1ParticleHandlerTimeAware.html">Simulation::ParticleHandlerTimeAware</a></td></tr>
 <tr class="memitem:a839536b59b78947066e2b9cbf01010fc inherit pub_methods_classSimulation_1_1ParticleHandlerTimeAware"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleHandlerTimeAware.html#a839536b59b78947066e2b9cbf01010fc">ParticleHandlerTimeAware</a> (double dt)</td></tr>
 <tr class="separator:a839536b59b78947066e2b9cbf01010fc inherit pub_methods_classSimulation_1_1ParticleHandlerTimeAware"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classSimulation_1_1ParticleHandler"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classSimulation_1_1ParticleHandler')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classSimulation_1_1ParticleHandler.html">Simulation::ParticleHandler</a></td></tr>
 <tr class="memitem:a013ad557c6892ed2287db090192144ea inherit pub_methods_classSimulation_1_1ParticleHandler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleHandler.html#a013ad557c6892ed2287db090192144ea">compute</a> (<a class="el" href="classSimulation_1_1Particle.html">Particle</a> &amp;p1, <a class="el" href="classSimulation_1_1Particle.html">Particle</a> &amp;p2)</td></tr>
+<tr class="memdesc:a013ad557c6892ed2287db090192144ea inherit pub_methods_classSimulation_1_1ParticleHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes one particle pair.  <a href="#a013ad557c6892ed2287db090192144ea">More...</a><br/></td></tr>
 <tr class="separator:a013ad557c6892ed2287db090192144ea inherit pub_methods_classSimulation_1_1ParticleHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a1caeb40ada4f410fec9244bda4af69 inherit pub_methods_classSimulation_1_1ParticleHandler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleHandler.html#a4a1caeb40ada4f410fec9244bda4af69">computeExclusive</a> (<a class="el" href="classSimulation_1_1Particle.html">Particle</a> &amp;p1, <a class="el" href="classSimulation_1_1Particle.html">Particle</a> &amp;p2)</td></tr>
+<tr class="memdesc:a4a1caeb40ada4f410fec9244bda4af69 inherit pub_methods_classSimulation_1_1ParticleHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes one particle pair, but applies result on both particles (symmetrical computation)  <a href="#a4a1caeb40ada4f410fec9244bda4af69">More...</a><br/></td></tr>
 <tr class="separator:a4a1caeb40ada4f410fec9244bda4af69 inherit pub_methods_classSimulation_1_1ParticleHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_classSimulation_1_1ParticleHandlerTimeAware"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classSimulation_1_1ParticleHandlerTimeAware')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classSimulation_1_1ParticleHandlerTimeAware.html">Simulation::ParticleHandlerTimeAware</a></td></tr>
 <tr class="memitem:a8c6378b506877c8d69dee8c31f3dfc45 inherit pro_attribs_classSimulation_1_1ParticleHandlerTimeAware"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleHandlerTimeAware.html#a8c6378b506877c8d69dee8c31f3dfc45">delta_t</a></td></tr>
+<tr class="memdesc:a8c6378b506877c8d69dee8c31f3dfc45 inherit pro_attribs_classSimulation_1_1ParticleHandlerTimeAware"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delta time between iterations.  <a href="#a8c6378b506877c8d69dee8c31f3dfc45">More...</a><br/></td></tr>
 <tr class="separator:a8c6378b506877c8d69dee8c31f3dfc45 inherit pro_attribs_classSimulation_1_1ParticleHandlerTimeAware"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Computes position of particle. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ab66e6345c9e20bae0fc297253e4f6f5f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -175,6 +184,8 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Computes one single particle. </p>
+
 <p>Reimplemented from <a class="el" href="classSimulation_1_1ParticleHandler.html#a6b1fc310603bc10093d50c674097fd25">Simulation::ParticleHandler</a>.</p>
 
 </div>
@@ -185,7 +196,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 5 2014 15:45:29 for MolSim by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 11 2014 04:45:51 for MolSim by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

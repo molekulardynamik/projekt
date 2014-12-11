@@ -1,0 +1,137 @@
+\hypertarget{classSimulation_1_1ParticleProperty}{\section{Simulation\-:\-:Particle\-Property Class Reference}
+\label{classSimulation_1_1ParticleProperty}\index{Simulation\-::\-Particle\-Property@{Simulation\-::\-Particle\-Property}}
+}
+
+
+Stores properties for one type of particles.  
+
+
+
+
+{\ttfamily \#include $<$Particle.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSimulation_1_1ParticleProperty_a6a931af7787ba8bb7ee3bba88cc875e6}{Particle\-Property} ()
+\begin{DoxyCompactList}\small\item\em Contructor for property. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classSimulation_1_1ParticleProperty_af725f9c9d30cb1b64fe669a7842de12c}{push} (\hyperlink{classSimulation_1_1ParticleProperty}{Particle\-Property} \&prop)
+\begin{DoxyCompactList}\small\item\em Add new type of particles. \end{DoxyCompactList}\item 
+static \hyperlink{classSimulation_1_1ParticleProperty}{Particle\-Property} \& \hyperlink{classSimulation_1_1ParticleProperty_acab370093ec1ad31402b68aaf386dad2}{get} (int i)
+\item 
+static int \hyperlink{classSimulation_1_1ParticleProperty_a000e6d8061005aa0352ad66d97e41efc}{count} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classSimulation_1_1ParticleProperty_a8f145877445ca59f131da94402d2f754}{mass}
+\begin{DoxyCompactList}\small\item\em Mass of particle. \end{DoxyCompactList}\item 
+double \hyperlink{classSimulation_1_1ParticleProperty_a3b5090b0388ea6708f204377648b9f7d}{e}
+\begin{DoxyCompactList}\small\item\em Epsilon of particle. \end{DoxyCompactList}\item 
+double \hyperlink{classSimulation_1_1ParticleProperty_a53851810b9a7de47591967ce60b69367}{o}
+\begin{DoxyCompactList}\small\item\em Sigma of particle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\-::vector\\*
+$<$ \hyperlink{classSimulation_1_1ParticleProperty}{Particle\-Property} $>$ \hyperlink{classSimulation_1_1ParticleProperty_a347c0996e25e4d4fa48ca1ce3db7e7f7}{properties}
+\begin{DoxyCompactList}\small\item\em list of all type properties \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Stores properties for one type of particles. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSimulation_1_1ParticleProperty_a6a931af7787ba8bb7ee3bba88cc875e6}{\index{Simulation\-::\-Particle\-Property@{Simulation\-::\-Particle\-Property}!Particle\-Property@{Particle\-Property}}
+\index{Particle\-Property@{Particle\-Property}!Simulation::ParticleProperty@{Simulation\-::\-Particle\-Property}}
+\subsubsection[{Particle\-Property}]{\setlength{\rightskip}{0pt plus 5cm}Simulation\-::\-Particle\-Property\-::\-Particle\-Property (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSimulation_1_1ParticleProperty_a6a931af7787ba8bb7ee3bba88cc875e6}
+
+
+Contructor for property. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSimulation_1_1ParticleProperty_a000e6d8061005aa0352ad66d97e41efc}{\index{Simulation\-::\-Particle\-Property@{Simulation\-::\-Particle\-Property}!count@{count}}
+\index{count@{count}!Simulation::ParticleProperty@{Simulation\-::\-Particle\-Property}}
+\subsubsection[{count}]{\setlength{\rightskip}{0pt plus 5cm}int Particle\-Property\-::count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classSimulation_1_1ParticleProperty_a000e6d8061005aa0352ad66d97e41efc}
+\begin{DoxyReturn}{Returns}
+Number of properties 
+\end{DoxyReturn}
+\hypertarget{classSimulation_1_1ParticleProperty_acab370093ec1ad31402b68aaf386dad2}{\index{Simulation\-::\-Particle\-Property@{Simulation\-::\-Particle\-Property}!get@{get}}
+\index{get@{get}!Simulation::ParticleProperty@{Simulation\-::\-Particle\-Property}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Particle\-Property} \& Particle\-Property\-::get (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classSimulation_1_1ParticleProperty_acab370093ec1ad31402b68aaf386dad2}
+Get properties for type 
+\begin{DoxyParams}{Parameters}
+{\em i} & Type of particle \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSimulation_1_1ParticleProperty_af725f9c9d30cb1b64fe669a7842de12c}{\index{Simulation\-::\-Particle\-Property@{Simulation\-::\-Particle\-Property}!push@{push}}
+\index{push@{push}!Simulation::ParticleProperty@{Simulation\-::\-Particle\-Property}}
+\subsubsection[{push}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Property\-::push (
+\begin{DoxyParamCaption}
+\item[{{\bf Particle\-Property} \&}]{prop}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classSimulation_1_1ParticleProperty_af725f9c9d30cb1b64fe669a7842de12c}
+
+
+Add new type of particles. 
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classSimulation_1_1ParticleProperty_a3b5090b0388ea6708f204377648b9f7d}{\index{Simulation\-::\-Particle\-Property@{Simulation\-::\-Particle\-Property}!e@{e}}
+\index{e@{e}!Simulation::ParticleProperty@{Simulation\-::\-Particle\-Property}}
+\subsubsection[{e}]{\setlength{\rightskip}{0pt plus 5cm}double Simulation\-::\-Particle\-Property\-::e}}\label{classSimulation_1_1ParticleProperty_a3b5090b0388ea6708f204377648b9f7d}
+
+
+Epsilon of particle. 
+
+\begin{DoxyNote}{Note}
+Used for Lennard-\/\-Jones potential 
+\end{DoxyNote}
+\hypertarget{classSimulation_1_1ParticleProperty_a8f145877445ca59f131da94402d2f754}{\index{Simulation\-::\-Particle\-Property@{Simulation\-::\-Particle\-Property}!mass@{mass}}
+\index{mass@{mass}!Simulation::ParticleProperty@{Simulation\-::\-Particle\-Property}}
+\subsubsection[{mass}]{\setlength{\rightskip}{0pt plus 5cm}double Simulation\-::\-Particle\-Property\-::mass}}\label{classSimulation_1_1ParticleProperty_a8f145877445ca59f131da94402d2f754}
+
+
+Mass of particle. 
+
+\hypertarget{classSimulation_1_1ParticleProperty_a53851810b9a7de47591967ce60b69367}{\index{Simulation\-::\-Particle\-Property@{Simulation\-::\-Particle\-Property}!o@{o}}
+\index{o@{o}!Simulation::ParticleProperty@{Simulation\-::\-Particle\-Property}}
+\subsubsection[{o}]{\setlength{\rightskip}{0pt plus 5cm}double Simulation\-::\-Particle\-Property\-::o}}\label{classSimulation_1_1ParticleProperty_a53851810b9a7de47591967ce60b69367}
+
+
+Sigma of particle. 
+
+\begin{DoxyNote}{Note}
+Used for Lennard-\/\-Jones potential 
+\end{DoxyNote}
+\hypertarget{classSimulation_1_1ParticleProperty_a347c0996e25e4d4fa48ca1ce3db7e7f7}{\index{Simulation\-::\-Particle\-Property@{Simulation\-::\-Particle\-Property}!properties@{properties}}
+\index{properties@{properties}!Simulation::ParticleProperty@{Simulation\-::\-Particle\-Property}}
+\subsubsection[{properties}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ {\bf Particle\-Property} $>$ Particle\-Property\-::properties\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{classSimulation_1_1ParticleProperty_a347c0996e25e4d4fa48ca1ce3db7e7f7}
+
+
+list of all type properties 
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{Particle_8h}{Particle.\-h}\item 
+src/\hyperlink{Particle_8cpp}{Particle.\-cpp}\end{DoxyCompactItemize}

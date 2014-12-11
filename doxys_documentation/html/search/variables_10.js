@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['z',['z',['../structParticleContainerTest_1_1TestParticle.html#a0d9bef972bdcf0fc2465aa2a4d124033',1,'ParticleContainerTest::TestParticle']]]
+  ['walltype',['wallType',['../classSimulation_1_1ParticleContainer.html#a257c23a232693610d47c0ee082085a49',1,'Simulation::ParticleContainer']]]
 ];

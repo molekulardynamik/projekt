@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['gravityhandler',['GravityHandler',['../classSimulation_1_1GravityHandler.html',1,'Simulation']]]
+  ['filereader',['FileReader',['../classFileReader.html',1,'']]],
+  ['forcereset',['ForceReset',['../classSimulation_1_1ForceReset.html',1,'Simulation']]]
 ];

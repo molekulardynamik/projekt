@@ -129,7 +129,6 @@ void FileReader::readFile(vector<Particle>& particles, char* filename, bool* ref
 				ParticleProperty prop;
 
 				datastream >> h;
-				datastream >> mean;
 
 				datastream >> prop.mass;
 				datastream >> prop.e;
@@ -138,7 +137,7 @@ void FileReader::readFile(vector<Particle>& particles, char* filename, bool* ref
 				int type = ParticleProperty::count();
 				ParticleProperty::push(prop);
 
-				ParticleGenerator::generateCuboid(Vector<double,3>(x), Vector<int, 3>(n), Vector<double, 3>(v), type, h, mean, particles);
+				ParticleGenerator::generateCuboid(Vector<double,3>(x), Vector<int, 3>(n), Vector<double, 3>(v), type, h, particles);
 
 				getline(input_file, tmp_string);
 			}

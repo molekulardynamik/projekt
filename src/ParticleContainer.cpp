@@ -196,7 +196,7 @@ void ParticleContainer::init(char* filename)
 
 	LOG4CXX_DEBUG(containerLogger, "NumCells: " << i << " == " << (int)cells.size());
 
-	// find Boundries
+	// find Boundaries
 	i = 0;
 	for(int x = 0; x < numCellsX; x++)
 	{
@@ -214,38 +214,38 @@ void ParticleContainer::init(char* filename)
 			}
 			else if (x == 0)
 			{
-				cell.cellType() = ParticleCell::LeftBoundry;
+				cell.cellType() = ParticleCell::LeftBoundary;
 				ParticleCell& other = cells[i + numCellsY];
 
-				boundryHaloPairs.push_back(BoundryHaloPair(&cell, &other, Periodic));
+				boundaryHaloPairs.push_back(BoundaryHaloPair(&cell, &other, Periodic));
 			}
 			else if (x == numCellsX - 1)
 			{
-				cell.cellType() = ParticleCell::RightBoundry;
+				cell.cellType() = ParticleCell::RightBoundary;
 				ParticleCell& other = cells[i - numCellsY];
 
-				boundryHaloPairs.push_back(BoundryHaloPair(&cell, &other, Periodic));
+				boundaryHaloPairs.push_back(BoundaryHaloPair(&cell, &other, Periodic));
 			}
 			else if (y == 0)
 			{
-				cell.cellType() = ParticleCell::BottomBoundry;
+				cell.cellType() = ParticleCell::BottomBoundary;
 				ParticleCell& other = cells[i + 1];
 
-				boundryHaloPairs.push_back(BoundryHaloPair(&cell, &other, Reflecting));
+				boundaryHaloPairs.push_back(BoundaryHaloPair(&cell, &other, Reflecting));
 			}
 			else if (y == numCellsY - 1)
 			{
-				cell.cellType() = ParticleCell::TopBoundry;
+				cell.cellType() = ParticleCell::TopBoundary;
 				ParticleCell& other = cells[i - 1];
 
-				boundryHaloPairs.push_back(BoundryHaloPair(&cell, &other, Reflecting));
+				boundaryHaloPairs.push_back(BoundaryHaloPair(&cell, &other, Reflecting));
 			}
 
 			i++;
 		}
 	}
 
-	LOG4CXX_DEBUG(containerLogger, "NumBoundries: " << (int)boundryHaloPairs.size());
+	LOG4CXX_DEBUG(containerLogger, "NumBoundaries: " << (int)boundaryHaloPairs.size());
 
 	LOG4CXX_DEBUG(containerLogger, "Particles: " << (int)particlePool.size());
 
@@ -441,7 +441,7 @@ void ParticleContainer::iterateParticlePairsExclusive(ParticleHandler& handler)
 	}
 }
 
-void ParticleContainer::iterateBoundryCells()
+void ParticleContainer::iterateBoundaryCells()
 {
 	for (int d = 0; d < dummies.size(); d++)
 	{
@@ -455,61 +455,61 @@ void ParticleContainer::iterateBoundryCells()
 	dummies.clear();
 	//LOG4CXX_DEBUG(containerLogger, "iterate");
 
-	for (int b = 0; b < boundryHaloPairs.size(); b++)
+	for (int b = 0; b < boundaryHaloPairs.size(); b++)
 	{
-		BoundryHaloPair boundryHalo = boundryHaloPairs[b];
-		ParticleCell& boundryCell = *boundryHaloPairs[b].boundryCell;
-		ParticleCell& haloCell = *boundryHaloPairs[b].haloCell;
+		BoundaryHaloPair boundaryHalo = boundaryHaloPairs[b];
+		ParticleCell& boundaryCell = *boundaryHaloPairs[b].boundaryCell;
+		ParticleCell& haloCell = *boundaryHaloPairs[b].haloCell;
 
-		switch (boundryHalo.condition)
+		switch (boundaryHalo.condition)
 		{
 		case Periodic:{
 
-			int boundryX, boundryY;
-			expand(&boundryX, &boundryY, boundryCell.index());
+			int boundaryX, boundaryY;
+			expand(&boundaryX, &boundaryY, boundaryCell.index());
 
 			int haloX, haloY;
 			expand(&haloX, &haloY, haloCell.index());
 
-			if (boundryX != haloX && boundryY != haloY)
-				LOG4CXX_DEBUG(containerLogger, "Boundry does not match Halo");
+			if (boundaryX != haloX && boundaryY != haloY)
+				LOG4CXX_DEBUG(containerLogger, "Boundary does not match Halo");
 
 
-			int oBoundryIndex, oHaloindex;
+			int oBoundaryIndex, oHaloindex;
 
-			switch (boundryCell.cellType())
+			switch (boundaryCell.cellType())
 			{
-			case ParticleCell::LeftBoundry:
-				flatten(numCellsX - 1, boundryY, &oBoundryIndex);
-				flatten(numCellsX - 2, boundryY, &oHaloindex);
+			case ParticleCell::LeftBoundary:
+				flatten(numCellsX - 1, boundaryY, &oBoundaryIndex);
+				flatten(numCellsX - 2, boundaryY, &oHaloindex);
 				break;
-			case ParticleCell::RightBoundry:
-				flatten(0, boundryY, &oBoundryIndex);
-				flatten(1, boundryY, &oHaloindex);
+			case ParticleCell::RightBoundary:
+				flatten(0, boundaryY, &oBoundaryIndex);
+				flatten(1, boundaryY, &oHaloindex);
 				break;
-			case ParticleCell::BottomBoundry:
-				flatten(boundryX, numCellsY - 1, &oBoundryIndex);
-				flatten(boundryX, numCellsY - 2, &oHaloindex);
+			case ParticleCell::BottomBoundary:
+				flatten(boundaryX, numCellsY - 1, &oBoundaryIndex);
+				flatten(boundaryX, numCellsY - 2, &oHaloindex);
 				break;
-			case ParticleCell::TopBoundry:
-				flatten(boundryX, 0, &oBoundryIndex);
-				flatten(boundryX, 1, &oHaloindex);
+			case ParticleCell::TopBoundary:
+				flatten(boundaryX, 0, &oBoundaryIndex);
+				flatten(boundaryX, 1, &oHaloindex);
 				break;
 			default:
-				LOG4CXX_DEBUG(containerLogger, "Not a boundry");
+				LOG4CXX_DEBUG(containerLogger, "Not a boundary");
 			}
 
-			expand(&boundryX, &boundryY, oBoundryIndex);
+			expand(&boundaryX, &boundaryY, oBoundaryIndex);
 			expand(&haloX, &haloY, oHaloindex);
 
-			if (boundryX != haloX && boundryY != haloY)
-				LOG4CXX_DEBUG(containerLogger, "Boundry does not match Halo");
+			if (boundaryX != haloX && boundaryY != haloY)
+				LOG4CXX_DEBUG(containerLogger, "Boundary does not match Halo");
 
 
-			ParticleCell& otherBoundryCell = cells[oBoundryIndex];
+			ParticleCell& otherBoundaryCell = cells[oBoundaryIndex];
 			ParticleCell& otherHaloCell = cells[oHaloindex];
 
-			Vector<double, 3> delta = otherBoundryCell.pos() - haloCell.pos();
+			Vector<double, 3> delta = otherBoundaryCell.pos() - haloCell.pos();
 
 			for (int p = 0; p < haloCell.count(); p++)
 			{
@@ -520,9 +520,9 @@ void ParticleContainer::iterateBoundryCells()
 				dummies.push_back(Particle(position, velocity, type, false));
 			}
 
-			for (int p = 0; p < boundryCell.count(); p++)
+			for (int p = 0; p < boundaryCell.count(); p++)
 			{
-				Particle& particle = *boundryCell[p];
+				Particle& particle = *boundaryCell[p];
 				Vector<double, 3> position = particle.getX() + delta;
 				particle.getX() = position;
 			}
@@ -536,26 +536,26 @@ void ParticleContainer::iterateBoundryCells()
 			Vector<double, 3> mid;
 			int a;
 
-			switch (boundryCell.cellType())
+			switch (boundaryCell.cellType())
 			{
-			case ParticleCell::LeftBoundry:
+			case ParticleCell::LeftBoundary:
 				mid = haloCell.pos();
 				a = 0;
 				break;
-			case ParticleCell::RightBoundry:
-				mid = boundryCell.pos();
+			case ParticleCell::RightBoundary:
+				mid = boundaryCell.pos();
 				a = 0;
 				break;
-			case ParticleCell::BottomBoundry:
+			case ParticleCell::BottomBoundary:
 				mid = haloCell.pos();
 				a = 1;
 				break;
-			case ParticleCell::TopBoundry:
-				mid = boundryCell.pos();
+			case ParticleCell::TopBoundary:
+				mid = boundaryCell.pos();
 				a = 1;
 				break;
 			default:
-				LOG4CXX_ERROR(containerLogger, "invalid boundry");
+				LOG4CXX_ERROR(containerLogger, "invalid boundary");
 				continue;
 			}
 
@@ -578,9 +578,9 @@ void ParticleContainer::iterateBoundryCells()
 		{
 			//LOG4CXX_DEBUG(containerLogger, "outflow");
 
-			for (int p = 0; p < boundryCell.count(); p++)
+			for (int p = 0; p < boundaryCell.count(); p++)
 			{
-				Particle* pParticle = boundryCell[p];
+				Particle* pParticle = boundaryCell[p];
 				cells[pParticle->getCell()].remove(pParticle);
 				liveParticles.remove(pParticle);
 			}

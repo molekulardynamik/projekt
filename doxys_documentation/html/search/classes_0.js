@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['celldata',['CellData',['../classCellData.html',1,'']]],
-  ['cells',['Cells',['../classCells.html',1,'']]]
+  ['boundaryhalopair',['BoundaryHaloPair',['../structSimulation_1_1ParticleContainer_1_1BoundaryHaloPair.html',1,'Simulation::ParticleContainer']]]
 ];

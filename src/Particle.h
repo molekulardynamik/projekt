@@ -13,57 +13,54 @@
 
 namespace Simulation
 {
+	/// \class ParticleProperty
+	/// \brief Stores properties for one type of particles
 	class ParticleProperty
 	{
 	public:
+		/// Contructor for property
 		ParticleProperty():
 			mass(0), e(0), o(0)
 		{}
 
-		double mass;
-		double e;
-		double o;
-		// static
+		double mass;		///< Mass of particle
+		double e;			///< Epsilon of particle \note Used for Lennard-Jones potential
+		double o;			///< Sigma of particle \note Used for Lennard-Jones potential
 
 	public:
+
+		/// Add new type of particles
 		static void push(ParticleProperty& prop);
 
+		/// Get properties for type
+		/// \param i Type of particle
 		static ParticleProperty& get(int i);
 
+		/// \return Number of properties
 		static int count();
 
 	private:
-		static std::vector<ParticleProperty> properties;
+		static std::vector<ParticleProperty> properties;		///< list of all type properties
 	};
 
-	class StaticPropert
-	{
 
-	};
 
+	/// \class Particle
+	/// \brief Definition for particle that participates in Simulation
 	class Particle {
 
 	private:
+		utils::Vector<double, 3> x;			///< The position of the particle
 
-		/** the position of the particle */
-		utils::Vector<double, 3> x;
+		utils::Vector<double, 3> v;			///< The velocity of the particle
 
-		/** the velocity of the particle */
-		utils::Vector<double, 3> v;
+		utils::Vector<double, 3> f;			///< The force effective on this particle
 
-		/** the force effective on this particle */
-		utils::Vector<double, 3> f;
+		utils::Vector<double, 3> old_f;		///< The force wich was effective on this particle
 
-		/** the force wich was effective on this particle */
-		utils::Vector<double, 3> old_f;
+		int type;							///< Type, defines properties of particle
 
-		/** type of the particle. Use it for whatever you want (e.g. to seperate
-		 * molecules belonging to different bodies, matters, and so on)
-		 */
-		int type;
-
-		/** cell in wich holds the particle*/
-		int cell;
+		int cell;							///< Cell which holds particle
 
 		bool visible;
 
@@ -73,8 +70,6 @@ namespace Simulation
 		Particle(const Particle& other);
 
 		Particle(
-				// for visualization, we need always 3 coordinates
-				// -> in case of 2d, we use only the first and the second
 			utils::Vector<double, 3> x_arg,
 			utils::Vector<double, 3> v_arg,
 			int type,

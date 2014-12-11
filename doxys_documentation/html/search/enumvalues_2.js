@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['uint16',['UInt16',['../classtype.html#a83781d700ce124b4224c316326a5a975a36b08866238b21675704f38517929e69',1,'type']]],
-  ['uint32',['UInt32',['../classtype.html#a83781d700ce124b4224c316326a5a975acfca6c13984dbb7ac515cff88a01826e',1,'type']]],
-  ['uint64',['UInt64',['../classtype.html#a83781d700ce124b4224c316326a5a975a64538f1914f2fd739bc876253b75fe4c',1,'type']]],
-  ['uint8',['UInt8',['../classtype.html#a83781d700ce124b4224c316326a5a975a82bbc808c985056ed74b30bcca131fad',1,'type']]]
+  ['float32',['Float32',['../classtype.html#a83781d700ce124b4224c316326a5a975a1b5e448b6fc2bafbc9b5f8e4cc582834',1,'type']]],
+  ['float64',['Float64',['../classtype.html#a83781d700ce124b4224c316326a5a975a72818204734582235e144a1e64563947',1,'type']]]
 ];

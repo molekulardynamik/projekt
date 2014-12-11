@@ -98,91 +98,100 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Container class for managing particles  
+<p>Stores particles and handles accesses and computations.  
  <a href="classSimulation_1_1ParticleContainer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ParticleContainer_8h_source.html">ParticleContainer.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer_1_1ParticleCell.html">ParticleCell</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulation_1_1ParticleContainer_1_1BoundaryHaloPair.html">BoundaryHaloPair</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6cbb30163cc128858fa33534b1c79a74"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a6cbb30163cc128858fa33534b1c79a74">ParticleContainer</a> ()</td></tr>
-<tr class="separator:a6cbb30163cc128858fa33534b1c79a74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76d21bdb5141158cf664d65e2d8b1db7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a76d21bdb5141158cf664d65e2d8b1db7">ParticleContainer</a> ()</td></tr>
+<tr class="separator:a76d21bdb5141158cf664d65e2d8b1db7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bdf40eb2fab6e85afddf69d6ef43f27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a2bdf40eb2fab6e85afddf69d6ef43f27">init</a> (char *filename)</td></tr>
 <tr class="separator:a2bdf40eb2fab6e85afddf69d6ef43f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3b7b2d3c26a67a390857a8aa0c8b31b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#af3b7b2d3c26a67a390857a8aa0c8b31b">updateCells</a> ()</td></tr>
+<tr class="memdesc:af3b7b2d3c26a67a390857a8aa0c8b31b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns particles to cells based on their location.  <a href="#af3b7b2d3c26a67a390857a8aa0c8b31b">More...</a><br/></td></tr>
+<tr class="separator:af3b7b2d3c26a67a390857a8aa0c8b31b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a7a0979f6d714977491fe14529004ee"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a8a7a0979f6d714977491fe14529004ee">count</a> ()</td></tr>
-<tr class="memdesc:a8a7a0979f6d714977491fe14529004ee"><td class="mdescLeft">&#160;</td><td class="mdescRight"><dl class="section return"><dt>Returns</dt><dd>Number of Particles; </dd></dl>
- <a href="#a8a7a0979f6d714977491fe14529004ee">More...</a><br/></td></tr>
 <tr class="separator:a8a7a0979f6d714977491fe14529004ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9aae4bb1525dc6d27592ebfc0dfd0d9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#ab9aae4bb1525dc6d27592ebfc0dfd0d9">live</a> ()</td></tr>
-<tr class="separator:ab9aae4bb1525dc6d27592ebfc0dfd0d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d3d7a52a8a5fe0db99e6e424c83d3bf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a5d3d7a52a8a5fe0db99e6e424c83d3bf">countVisible</a> ()</td></tr>
+<tr class="separator:a5d3d7a52a8a5fe0db99e6e424c83d3bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a691b50db5c7d2fce6d2576c0b51b4ea9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSimulation_1_1Particle.html">Particle</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a691b50db5c7d2fce6d2576c0b51b4ea9">operator[]</a> (int i)</td></tr>
-<tr class="memdesc:a691b50db5c7d2fce6d2576c0b51b4ea9"><td class="mdescLeft">&#160;</td><td class="mdescRight"><dl class="section return"><dt>Returns</dt><dd><a class="el" href="classSimulation_1_1Particle.html">Particle</a> at location i </dd></dl>
- <a href="#a691b50db5c7d2fce6d2576c0b51b4ea9">More...</a><br/></td></tr>
 <tr class="separator:a691b50db5c7d2fce6d2576c0b51b4ea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13b3ada63172c5070e81235bc16801ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a13b3ada63172c5070e81235bc16801ca">iterateParticles</a> (<a class="el" href="classSimulation_1_1ParticleHandler.html">ParticleHandler</a> &amp;handler)</td></tr>
+<tr class="memdesc:a13b3ada63172c5070e81235bc16801ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterates over all live particles an executes particle handler.  <a href="#a13b3ada63172c5070e81235bc16801ca">More...</a><br/></td></tr>
 <tr class="separator:a13b3ada63172c5070e81235bc16801ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d7f15f3d5cb18cd08dadc8f01f2e04a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a2d7f15f3d5cb18cd08dadc8f01f2e04a">iterateParticlePairs</a> (<a class="el" href="classSimulation_1_1ParticleHandler.html">ParticleHandler</a> &amp;handler)</td></tr>
+<tr class="memdesc:a2d7f15f3d5cb18cd08dadc8f01f2e04a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterates over all live particle pairs (only neighbouring cells are considered) and executes particle pair handler.  <a href="#a2d7f15f3d5cb18cd08dadc8f01f2e04a">More...</a><br/></td></tr>
 <tr class="separator:a2d7f15f3d5cb18cd08dadc8f01f2e04a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab70a9d544a8428d7085863990bca1811"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#ab70a9d544a8428d7085863990bca1811">iterateParticlePairsExclusive</a> (<a class="el" href="classSimulation_1_1ParticleHandler.html">ParticleHandler</a> &amp;handler)</td></tr>
 <tr class="separator:ab70a9d544a8428d7085863990bca1811"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa04de698586200976d6530e8fa37005"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#aaa04de698586200976d6530e8fa37005">iterateBoundryParticles</a> (<a class="el" href="classSimulation_1_1ParticleHandler.html">ParticleHandler</a> &amp;handler)</td></tr>
-<tr class="separator:aaa04de698586200976d6530e8fa37005"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a037e66a27f55a9bacec458a1c7925266"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a037e66a27f55a9bacec458a1c7925266">iterateBoundryCells</a> ()</td></tr>
-<tr class="separator:a037e66a27f55a9bacec458a1c7925266"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3b7b2d3c26a67a390857a8aa0c8b31b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#af3b7b2d3c26a67a390857a8aa0c8b31b">updateCells</a> ()</td></tr>
-<tr class="separator:af3b7b2d3c26a67a390857a8aa0c8b31b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ecf8c0f85e656bbfbe36b883c5e5e23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a4ecf8c0f85e656bbfbe36b883c5e5e23">iterateBoundaryCells</a> ()</td></tr>
+<tr class="memdesc:a4ecf8c0f85e656bbfbe36b883c5e5e23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterates over all boundry cells and handles boundary behavior.  <a href="#a4ecf8c0f85e656bbfbe36b883c5e5e23">More...</a><br/></td></tr>
+<tr class="separator:a4ecf8c0f85e656bbfbe36b883c5e5e23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81e96b1c9c1466650af5c5a0b2fb5652"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a81e96b1c9c1466650af5c5a0b2fb5652">getCutOff</a> ()</td></tr>
+<tr class="separator:a81e96b1c9c1466650af5c5a0b2fb5652"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
 Private Types</h2></td></tr>
-<tr class="memitem:ac9a1b3682da81d23bd530595d41766d6"><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; <a class="el" href="classSimulation_1_1Particle.html">Particle</a> &gt;<br class="typebreak"/>
-::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#ac9a1b3682da81d23bd530595d41766d6">ParticleIterator</a></td></tr>
-<tr class="separator:ac9a1b3682da81d23bd530595d41766d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e913177d570f1276e90e4d5c19029bd"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a5e913177d570f1276e90e4d5c19029bd">BoundaryCondition</a> { <a class="el" href="classSimulation_1_1ParticleContainer.html#a5e913177d570f1276e90e4d5c19029bda02c8f7e918ce61d7457aad6d5136de06">OutFlow</a>, 
+<a class="el" href="classSimulation_1_1ParticleContainer.html#a5e913177d570f1276e90e4d5c19029bda38294f9ed6bccc27cb21a49dfd465383">Reflecting</a>, 
+<a class="el" href="classSimulation_1_1ParticleContainer.html#a5e913177d570f1276e90e4d5c19029bda98c413bdf3bd391fb5e5cb15a13a1b7a">Periodic</a>
+ }</td></tr>
+<tr class="memdesc:a5e913177d570f1276e90e4d5c19029bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifies behavior of a boundary cell.  <a href="classSimulation_1_1ParticleContainer.html#a5e913177d570f1276e90e4d5c19029bd">More...</a><br/></td></tr>
+<tr class="separator:a5e913177d570f1276e90e4d5c19029bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:aafaf96d8f9cf6ee877b0e001f46e854a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#aafaf96d8f9cf6ee877b0e001f46e854a">findCell</a> (<a class="el" href="classutils_1_1Vector.html">utils::Vector</a>&lt; double, 3 &gt; position, int *cell)</td></tr>
 <tr class="separator:aafaf96d8f9cf6ee877b0e001f46e854a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d4e11b76547402b11b3bc7e018f5dfa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a2d4e11b76547402b11b3bc7e018f5dfa">flatten</a> (int x, int y, int *c)</td></tr>
-<tr class="separator:a2d4e11b76547402b11b3bc7e018f5dfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20494365b8058fa53927dd855d8c200a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a20494365b8058fa53927dd855d8c200a">expand</a> (int c, int *x, int *y)</td></tr>
-<tr class="separator:a20494365b8058fa53927dd855d8c200a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ae3d25e9b26f8bd190e3691625cba64"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a4ae3d25e9b26f8bd190e3691625cba64">isBoundry</a> (int x, int y)</td></tr>
-<tr class="separator:a4ae3d25e9b26f8bd190e3691625cba64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67d65655ae079316295a8ac7b32aca16"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a67d65655ae079316295a8ac7b32aca16">isBoundry</a> (int c)</td></tr>
-<tr class="separator:a67d65655ae079316295a8ac7b32aca16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c1f20c317c9e26c1dc591048e0fe758"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a6c1f20c317c9e26c1dc591048e0fe758">getReflectingCell</a> (int boundrycell)</td></tr>
-<tr class="separator:a6c1f20c317c9e26c1dc591048e0fe758"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa815ad7b798de3be1f1c35f1e979716d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#aa815ad7b798de3be1f1c35f1e979716d">flatten</a> (int x, int y, int *cell)</td></tr>
+<tr class="separator:aa815ad7b798de3be1f1c35f1e979716d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d88bfbe1dcd2857d9ca60e87e112090"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a3d88bfbe1dcd2857d9ca60e87e112090">expand</a> (int *x, int *y, int cell)</td></tr>
+<tr class="separator:a3d88bfbe1dcd2857d9ca60e87e112090"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
+<tr class="memitem:a45869e923d4b355d3be609ec78235bf0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classSimulation_1_1Particle.html">Particle</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a45869e923d4b355d3be609ec78235bf0">particlePool</a></td></tr>
+<tr class="memdesc:a45869e923d4b355d3be609ec78235bf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of every particle which was created at startup.  <a href="#a45869e923d4b355d3be609ec78235bf0">More...</a><br/></td></tr>
+<tr class="separator:a45869e923d4b355d3be609ec78235bf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7710cc9a30897b05c4dae5610562f2e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classSimulation_1_1Particle.html">Particle</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#af7710cc9a30897b05c4dae5610562f2e">dummies</a></td></tr>
+<tr class="memdesc:af7710cc9a30897b05c4dae5610562f2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of dummy particles which are needed to handle boundary behavior.  <a href="#af7710cc9a30897b05c4dae5610562f2e">More...</a><br/></td></tr>
+<tr class="separator:af7710cc9a30897b05c4dae5610562f2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a851707b9ea1f91a934e7eda5e219b97d"><td class="memItemLeft" align="right" valign="top">std::list&lt; <a class="el" href="classSimulation_1_1Particle.html">Particle</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a851707b9ea1f91a934e7eda5e219b97d">liveParticles</a></td></tr>
+<tr class="memdesc:a851707b9ea1f91a934e7eda5e219b97d"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of pointers to live particles that should be computed.  <a href="#a851707b9ea1f91a934e7eda5e219b97d">More...</a><br/></td></tr>
+<tr class="separator:a851707b9ea1f91a934e7eda5e219b97d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e3805eea543d96c5cf6ced07b9c2e7b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a3e3805eea543d96c5cf6ced07b9c2e7b">visible</a></td></tr>
+<tr class="memdesc:a3e3805eea543d96c5cf6ced07b9c2e7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of visible particles.  <a href="#a3e3805eea543d96c5cf6ced07b9c2e7b">More...</a><br/></td></tr>
+<tr class="separator:a3e3805eea543d96c5cf6ced07b9c2e7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f0e9467546c765bf8533a307b5587e1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a1f0e9467546c765bf8533a307b5587e1">rCutOff</a></td></tr>
+<tr class="memdesc:a1f0e9467546c765bf8533a307b5587e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cutoff radius.  <a href="#a1f0e9467546c765bf8533a307b5587e1">More...</a><br/></td></tr>
 <tr class="separator:a1f0e9467546c765bf8533a307b5587e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26ff75d3f5c109fc354bb95e460bef20"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a26ff75d3f5c109fc354bb95e460bef20">numCellsX</a></td></tr>
 <tr class="separator:a26ff75d3f5c109fc354bb95e460bef20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae248a9742a4d62f0cc692214eef9ba63"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#ae248a9742a4d62f0cc692214eef9ba63">numCellsY</a></td></tr>
+<tr class="memdesc:ae248a9742a4d62f0cc692214eef9ba63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of cells in X/Y - Direction.  <a href="#ae248a9742a4d62f0cc692214eef9ba63">More...</a><br/></td></tr>
 <tr class="separator:ae248a9742a4d62f0cc692214eef9ba63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53f222132c6a1177d3a14939e865de35"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a53f222132c6a1177d3a14939e865de35">reflective</a></td></tr>
-<tr class="separator:a53f222132c6a1177d3a14939e865de35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe3ee9f5e9a35e525809c6a01129948c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#abe3ee9f5e9a35e525809c6a01129948c">liveParticles</a></td></tr>
-<tr class="separator:abe3ee9f5e9a35e525809c6a01129948c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36eded0724f9d476df35499387d33815"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a36eded0724f9d476df35499387d33815">numDummies</a></td></tr>
-<tr class="separator:a36eded0724f9d476df35499387d33815"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3836f9563a3827414df5288a2f3fcee6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classSimulation_1_1ParticleContainer_1_1ParticleCell.html">ParticleCell</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a3836f9563a3827414df5288a2f3fcee6">cells</a></td></tr>
+<tr class="memitem:a3836f9563a3827414df5288a2f3fcee6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classSimulation_1_1ParticleCell.html">ParticleCell</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a3836f9563a3827414df5288a2f3fcee6">cells</a></td></tr>
+<tr class="memdesc:a3836f9563a3827414df5288a2f3fcee6"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of all cells (including boundaries)  <a href="#a3836f9563a3827414df5288a2f3fcee6">More...</a><br/></td></tr>
 <tr class="separator:a3836f9563a3827414df5288a2f3fcee6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4df9c8b9d1a1677e241a2b1fa3aa1c7d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a4df9c8b9d1a1677e241a2b1fa3aa1c7d">boundryCells</a></td></tr>
-<tr class="separator:a4df9c8b9d1a1677e241a2b1fa3aa1c7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae99eb8aa1b2acbecb888dee8c32f6b18"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classSimulation_1_1Particle.html">Particle</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#ae99eb8aa1b2acbecb888dee8c32f6b18">particles</a></td></tr>
-<tr class="separator:ae99eb8aa1b2acbecb888dee8c32f6b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d56f7233d097b228ddea76670a9861f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structSimulation_1_1ParticleContainer_1_1BoundaryHaloPair.html">BoundaryHaloPair</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a7d56f7233d097b228ddea76670a9861f">boundaryHaloPairs</a></td></tr>
+<tr class="memdesc:a7d56f7233d097b228ddea76670a9861f"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of all boundary-halo pair, except conrner cells.  <a href="#a7d56f7233d097b228ddea76670a9861f">More...</a><br/></td></tr>
+<tr class="separator:a7d56f7233d097b228ddea76670a9861f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a257c23a232693610d47c0ee082085a49"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleContainer.html#a257c23a232693610d47c0ee082085a49">wallType</a></td></tr>
+<tr class="memdesc:a257c23a232693610d47c0ee082085a49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type index of wall properties.  <a href="#a257c23a232693610d47c0ee082085a49">More...</a><br/></td></tr>
+<tr class="separator:a257c23a232693610d47c0ee082085a49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Container class for managing particles </p>
-</div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a class="anchor" id="ac9a1b3682da81d23bd530595d41766d6"></a>
+<div class="textblock"><p>Stores particles and handles accesses and computations. </p>
+<p>This class stores all particles participating in the simulation. It is recommended to access particles only over this class. For performance purposes all particles are assigned to different cells to avoid unnecessary computations over large distances. This implies that every computation which involes two or more particles can be neglected at a certain distance ( the cutOff radius). It is possible to specify a boundary condition for each boundary of simulation space. </p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a class="anchor" id="a5e913177d570f1276e90e4d5c19029bd"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -190,7 +199,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::list&lt;<a class="el" href="classSimulation_1_1Particle.html">Particle</a>&gt;::iterator <a class="el" href="classSimulation_1_1ParticleContainer.html#ac9a1b3682da81d23bd530595d41766d6">Simulation::ParticleContainer::ParticleIterator</a></td>
+          <td class="memname">enum <a class="el" href="classSimulation_1_1ParticleContainer.html#a5e913177d570f1276e90e4d5c19029bd">Simulation::ParticleContainer::BoundaryCondition</a></td>
         </tr>
       </table>
   </td>
@@ -200,28 +209,33 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Specifies behavior of a boundary cell. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="a5e913177d570f1276e90e4d5c19029bda02c8f7e918ce61d7457aad6d5136de06"></a>OutFlow</em>&#160;</td><td class="fielddoc">
+<p>Particles which leave the simulation space will be deleted. </p>
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="a5e913177d570f1276e90e4d5c19029bda38294f9ed6bccc27cb21a49dfd465383"></a>Reflecting</em>&#160;</td><td class="fielddoc">
+<p>Particles will be reflected on the boundaries. </p>
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="a5e913177d570f1276e90e4d5c19029bda98c413bdf3bd391fb5e5cb15a13a1b7a"></a>Periodic</em>&#160;</td><td class="fielddoc">
+<p>Particles will enter the simulation space on the opposite side. </p>
+</td></tr>
+</table>
+
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a6cbb30163cc128858fa33534b1c79a74"></a>
+<a class="anchor" id="a76d21bdb5141158cf664d65e2d8b1db7"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Simulation::ParticleContainer::ParticleContainer </td>
+          <td class="memname">ParticleContainer::ParticleContainer </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -239,13 +253,27 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p><dl class="section return"><dt>Returns</dt><dd>Number of Particles; </dd></dl>
-</p>
+<dl class="section return"><dt>Returns</dt><dd>Number of live particles </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a20494365b8058fa53927dd855d8c200a"></a>
+<a class="anchor" id="a5d3d7a52a8a5fe0db99e6e424c83d3bf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ParticleContainer::countVisible </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Number of live and visible particles </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3d88bfbe1dcd2857d9ca60e87e112090"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -255,12 +283,6 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">void ParticleContainer::expand </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>c</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">int *&#160;</td>
           <td class="paramname"><em>x</em>, </td>
         </tr>
@@ -268,7 +290,13 @@ Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>y</em>&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cell</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -282,6 +310,14 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Converts a 1D index to 2D indices </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x,y</td><td>Pointers to 2D indices </td></tr>
+    <tr><td class="paramname">cell</td><td>1D cell index </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -316,10 +352,18 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Finds 1D cell index based on given poistion </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>Position of <a class="el" href="classSimulation_1_1Particle.html" title="Definition for particle that participates in Simulation. ">Particle</a> </td></tr>
+    <tr><td class="paramname">cell</td><td>Pointer to 1D cell index </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a class="anchor" id="a2d4e11b76547402b11b3bc7e018f5dfa"></a>
+<a class="anchor" id="aa815ad7b798de3be1f1c35f1e979716d"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -342,7 +386,7 @@ Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>c</em>&#160;</td>
+          <td class="paramname"><em>cell</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -356,30 +400,30 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Converts 2D indices to a 1D index </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x,y</td><td>2D indices </td></tr>
+    <tr><td class="paramname">cell</td><td>Pointer to 1D cell index </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a class="anchor" id="a6c1f20c317c9e26c1dc591048e0fe758"></a>
+<a class="anchor" id="a81e96b1c9c1466650af5c5a0b2fb5652"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int ParticleContainer::getReflectingCell </td>
+          <td class="memname">double ParticleContainer::getCutOff </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>boundrycell</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Cutoff radius </dd></dl>
 
 </div>
 </div>
@@ -396,73 +440,22 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Initializes particle container with data from file </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>File which will be read </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a class="anchor" id="a4ae3d25e9b26f8bd190e3691625cba64"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ParticleContainer::isBoundry </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>y</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a67d65655ae079316295a8ac7b32aca16"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ParticleContainer::isBoundry </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>c</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a037e66a27f55a9bacec458a1c7925266"></a>
+<a class="anchor" id="a4ecf8c0f85e656bbfbe36b883c5e5e23"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ParticleContainer::iterateBoundryCells </td>
+          <td class="memname">void ParticleContainer::iterateBoundaryCells </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -470,21 +463,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="aaa04de698586200976d6530e8fa37005"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ParticleContainer::iterateBoundryParticles </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classSimulation_1_1ParticleHandler.html">ParticleHandler</a> &amp;&#160;</td>
-          <td class="paramname"><em>handler</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Iterates over all boundry cells and handles boundary behavior. </p>
 
 </div>
 </div>
@@ -502,6 +481,8 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Iterates over all live particle pairs (only neighbouring cells are considered) and executes particle pair handler. </p>
+
 </div>
 </div>
 <a class="anchor" id="ab70a9d544a8428d7085863990bca1811"></a>
@@ -517,6 +498,8 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Iterates over all live particle pairs (only neighbouring cells are considered) and executes exclusive particle par handler. </p>
+<dl class="section note"><dt>Note</dt><dd>Every particle will be handled only once. This is faster but requires a symmetrical computation. </dd></dl>
 
 </div>
 </div>
@@ -534,20 +517,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="ab9aae4bb1525dc6d27592ebfc0dfd0d9"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ParticleContainer::live </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Iterates over all live particles an executes particle handler. </p>
 
 </div>
 </div>
@@ -564,9 +534,13 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="classSimulation_1_1Particle.html">Particle</a> at location i </dd></dl>
-</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>Index of particle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classSimulation_1_1Particle.html" title="Definition for particle that participates in Simulation. ">Particle</a> at index i </dd></dl>
 
 </div>
 </div>
@@ -583,10 +557,12 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Assigns particles to cells based on their location. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a4df9c8b9d1a1677e241a2b1fa3aa1c7d"></a>
+<a class="anchor" id="a7d56f7233d097b228ddea76670a9861f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -594,7 +570,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;int&gt; Simulation::ParticleContainer::boundryCells</td>
+          <td class="memname">std::vector&lt;<a class="el" href="structSimulation_1_1ParticleContainer_1_1BoundaryHaloPair.html">BoundaryHaloPair</a>&gt; Simulation::ParticleContainer::boundaryHaloPairs</td>
         </tr>
       </table>
   </td>
@@ -603,6 +579,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>List of all boundary-halo pair, except conrner cells. </p>
 
 </div>
 </div>
@@ -614,7 +592,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="classSimulation_1_1ParticleContainer_1_1ParticleCell.html">ParticleCell</a>&gt; Simulation::ParticleContainer::cells</td>
+          <td class="memname">std::vector&lt;<a class="el" href="classSimulation_1_1ParticleCell.html">ParticleCell</a>&gt; Simulation::ParticleContainer::cells</td>
         </tr>
       </table>
   </td>
@@ -624,9 +602,12 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>List of all cells (including boundaries) </p>
+<dl class="section note"><dt>Note</dt><dd>This is a 1D representation of a 2D grid </dd></dl>
+
 </div>
 </div>
-<a class="anchor" id="abe3ee9f5e9a35e525809c6a01129948c"></a>
+<a class="anchor" id="af7710cc9a30897b05c4dae5610562f2e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -634,7 +615,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int Simulation::ParticleContainer::liveParticles</td>
+          <td class="memname">std::vector&lt;<a class="el" href="classSimulation_1_1Particle.html">Particle</a>&gt; Simulation::ParticleContainer::dummies</td>
         </tr>
       </table>
   </td>
@@ -643,6 +624,30 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>List of dummy particles which are needed to handle boundary behavior. </p>
+
+</div>
+</div>
+<a class="anchor" id="a851707b9ea1f91a934e7eda5e219b97d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::list&lt;<a class="el" href="classSimulation_1_1Particle.html">Particle</a>*&gt; Simulation::ParticleContainer::liveParticles</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>List of pointers to live particles that should be computed. </p>
 
 </div>
 </div>
@@ -684,9 +689,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Number of cells in X/Y - Direction. </p>
+
 </div>
 </div>
-<a class="anchor" id="a36eded0724f9d476df35499387d33815"></a>
+<a class="anchor" id="a45869e923d4b355d3be609ec78235bf0"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -694,7 +701,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int Simulation::ParticleContainer::numDummies</td>
+          <td class="memname">std::vector&lt;<a class="el" href="classSimulation_1_1Particle.html">Particle</a>&gt; Simulation::ParticleContainer::particlePool</td>
         </tr>
       </table>
   </td>
@@ -704,25 +711,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="ae99eb8aa1b2acbecb888dee8c32f6b18"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="classSimulation_1_1Particle.html">Particle</a>&gt; Simulation::ParticleContainer::particles</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p>List of every particle which was created at startup. </p>
 
 </div>
 </div>
@@ -744,9 +733,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Cutoff radius. </p>
+
 </div>
 </div>
-<a class="anchor" id="a53f222132c6a1177d3a14939e865de35"></a>
+<a class="anchor" id="a3e3805eea543d96c5cf6ced07b9c2e7b"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -754,7 +745,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Simulation::ParticleContainer::reflective</td>
+          <td class="memname">int Simulation::ParticleContainer::visible</td>
         </tr>
       </table>
   </td>
@@ -763,6 +754,30 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Number of visible particles. </p>
+
+</div>
+</div>
+<a class="anchor" id="a257c23a232693610d47c0ee082085a49"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Simulation::ParticleContainer::wallType</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type index of wall properties. </p>
 
 </div>
 </div>
@@ -773,7 +788,7 @@ Private Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 5 2014 15:45:29 for MolSim by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 11 2014 04:45:51 for MolSim by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

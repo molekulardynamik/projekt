@@ -3,29 +3,51 @@
 }
 
 
+penerates particles in different shapes  
+
+
+
+
 {\ttfamily \#include $<$Particle\-Generator.\-h$>$}
 
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static void \hyperlink{classSimulation_1_1ParticleGenerator_a1c86f6335f49fba950e9651ea63044b5}{generate\-Cuboid} (\hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ double, 3 $>$ bottom\-Left\-Front, \hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ int, 3 $>$ num\-Particles, double h, double mass, \hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ double, 3 $>$ initial\-Velocity, double mean\-Value, std\-::vector$<$ \hyperlink{classSimulation_1_1Particle}{Particle} $>$ \&particles)
+static void \hyperlink{classSimulation_1_1ParticleGenerator_aa4b339a3676975dcd51e3b7a345dd494}{generate\-Cuboid} (\hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ double, 3 $>$ bottom\-Left\-Front, \hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ int, 3 $>$ num\-Particles, \hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ double, 3 $>$ initial\-Velocity, int \hyperlink{classtype}{type}, double h, std\-::vector$<$ \hyperlink{classSimulation_1_1Particle}{Particle} $>$ \&particles)
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+penerates particles in different shapes 
+
 \subsection{Member Function Documentation}
-\hypertarget{classSimulation_1_1ParticleGenerator_a1c86f6335f49fba950e9651ea63044b5}{\index{Simulation\-::\-Particle\-Generator@{Simulation\-::\-Particle\-Generator}!generate\-Cuboid@{generate\-Cuboid}}
+\hypertarget{classSimulation_1_1ParticleGenerator_aa4b339a3676975dcd51e3b7a345dd494}{\index{Simulation\-::\-Particle\-Generator@{Simulation\-::\-Particle\-Generator}!generate\-Cuboid@{generate\-Cuboid}}
 \index{generate\-Cuboid@{generate\-Cuboid}!Simulation::ParticleGenerator@{Simulation\-::\-Particle\-Generator}}
 \subsubsection[{generate\-Cuboid}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Generator\-::generate\-Cuboid (
 \begin{DoxyParamCaption}
 \item[{{\bf utils\-::\-Vector}$<$ double, 3 $>$}]{bottom\-Left\-Front, }
 \item[{{\bf utils\-::\-Vector}$<$ int, 3 $>$}]{num\-Particles, }
-\item[{double}]{h, }
-\item[{double}]{mass, }
 \item[{{\bf utils\-::\-Vector}$<$ double, 3 $>$}]{initial\-Velocity, }
-\item[{double}]{mean\-Value, }
+\item[{int}]{type, }
+\item[{double}]{h, }
 \item[{std\-::vector$<$ {\bf Particle} $>$ \&}]{particles}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [static]}}}\label{classSimulation_1_1ParticleGenerator_a1c86f6335f49fba950e9651ea63044b5}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classSimulation_1_1ParticleGenerator_aa4b339a3676975dcd51e3b7a345dd494}
+Generates Cuboid 
+\begin{DoxyParams}{Parameters}
+{\em bottom\-Left\-Front} & Position of cuboid \\
+\hline
+{\em num\-Particles} & Number of particles in each axis \\
+\hline
+{\em initial\-Velocity} & \\
+\hline
+{\em type} & Type which defines properties of particles \\
+\hline
+{\em h} & Distance between particles \\
+\hline
+{\em particles} & List of particles at which cuboid will be apended \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}

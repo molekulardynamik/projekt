@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['float32',['Float32',['../classtype.html#a83781d700ce124b4224c316326a5a975a1b5e448b6fc2bafbc9b5f8e4cc582834',1,'type']]],
-  ['float64',['Float64',['../classtype.html#a83781d700ce124b4224c316326a5a975a72818204734582235e144a1e64563947',1,'type']]]
+  ['bottomboundary',['BottomBoundary',['../classSimulation_1_1ParticleCell.html#a2212779392dcf6befecc55da1ec5356ca10c2e4dddb9ca58b6b4526d5996ad288',1,'Simulation::ParticleCell']]]
 ];

@@ -4,21 +4,43 @@
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
+class \hyperlink{classSimulation_1_1ParticleProperty}{Particle\-Property}
+\begin{DoxyCompactList}\small\item\em Stores properties for one type of particles. \end{DoxyCompactList}\item 
 class \hyperlink{classSimulation_1_1Particle}{Particle}
-\item 
+\begin{DoxyCompactList}\small\item\em Definition for particle that participates in \hyperlink{namespaceSimulation}{Simulation}. \end{DoxyCompactList}\item 
+class \hyperlink{classSimulation_1_1ParticleCell}{Particle\-Cell}
+\begin{DoxyCompactList}\small\item\em Stores pointers to particles which lie in this cell. \end{DoxyCompactList}\item 
 class \hyperlink{classSimulation_1_1ParticleContainer}{Particle\-Container}
-\begin{DoxyCompactList}\small\item\em Container class for managing particles \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Stores particles and handles accesses and computations. \end{DoxyCompactList}\item 
 class \hyperlink{classSimulation_1_1ParticleGenerator}{Particle\-Generator}
-\item 
+\begin{DoxyCompactList}\small\item\em penerates particles in different shapes \end{DoxyCompactList}\item 
 class \hyperlink{classSimulation_1_1ParticleHandler}{Particle\-Handler}
-\item 
+\begin{DoxyCompactList}\small\item\em Baseclass for handling particle computations. \end{DoxyCompactList}\item 
 class \hyperlink{classSimulation_1_1ParticleHandlerTimeAware}{Particle\-Handler\-Time\-Aware}
-\item 
+\begin{DoxyCompactList}\small\item\em Baseclass for handling computations that are time dependant. \end{DoxyCompactList}\item 
 class \hyperlink{classSimulation_1_1PositionHandler}{Position\-Handler}
-\item 
+\begin{DoxyCompactList}\small\item\em Computes position of particle. \end{DoxyCompactList}\item 
 class \hyperlink{classSimulation_1_1VelocityHandler}{Velocity\-Handler}
-\item 
-class \hyperlink{classSimulation_1_1GravityHandler}{Gravity\-Handler}
-\item 
+\begin{DoxyCompactList}\small\item\em Computes velocity of particle. \end{DoxyCompactList}\item 
+class \hyperlink{classSimulation_1_1ForceReset}{Force\-Reset}
+\begin{DoxyCompactList}\small\item\em resets force of zarticle to zero \end{DoxyCompactList}\item 
 class \hyperlink{classSimulation_1_1LennardJonesHandler}{Lennard\-Jones\-Handler}
+\begin{DoxyCompactList}\small\item\em Computes force applied by Lennard-\/\-Jones potential. \end{DoxyCompactList}\item 
+class \hyperlink{classSimulation_1_1GravityHandler}{Gravity\-Handler}
+\begin{DoxyCompactList}\small\item\em Computes gravitational force. \end{DoxyCompactList}\item 
+class \hyperlink{classSimulation_1_1StateWriter}{State\-Writer}
+\item 
+class \hyperlink{classSimulation_1_1Thermostat}{Thermostat}
+\begin{DoxyCompactList}\small\item\em Handles temperature of particles in the simulation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\-::list$<$ \hyperlink{classSimulation_1_1Particle}{Particle} $\ast$ $>$\\*
+\-::iterator \hyperlink{namespaceSimulation_a12159ab8aae83e7edd7a19bc93695340}{P\-Particle\-Iterator}
 \end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{namespaceSimulation_a12159ab8aae83e7edd7a19bc93695340}{\index{Simulation@{Simulation}!P\-Particle\-Iterator@{P\-Particle\-Iterator}}
+\index{P\-Particle\-Iterator@{P\-Particle\-Iterator}!Simulation@{Simulation}}
+\subsubsection[{P\-Particle\-Iterator}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::list$<${\bf Particle}$\ast$$>$\-::iterator {\bf Simulation\-::\-P\-Particle\-Iterator}}}\label{namespaceSimulation_a12159ab8aae83e7edd7a19bc93695340}

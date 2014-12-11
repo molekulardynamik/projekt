@@ -5,7 +5,6 @@ var searchData=
   ['_7edataarray_5ft',['~DataArray_t',['../classDataArray__t.html#ac9806a5eedf7abecd7adf6408c8af894',1,'DataArray_t']]],
   ['_7edataarraylist_5ft',['~DataArrayList_t',['../classDataArrayList__t.html#aee3c16237122c72a9c163847232d830f',1,'DataArrayList_t']]],
   ['_7efilereader',['~FileReader',['../classFileReader.html#a1382969e8f1468f3b04ad4b44ab39dee',1,'FileReader']]],
-  ['_7enamespacescopemanager',['~NamespaceScopeManager',['../classNamespaceScopeManager.html#ac45ca69c110e355c606eb38072a4be88',1,'NamespaceScopeManager']]],
   ['_7eparticle',['~Particle',['../classSimulation_1_1Particle.html#ad030d0fe7b88cf81744b127c99244ff4',1,'Simulation::Particle']]],
   ['_7epieceunstructuredgrid_5ft',['~PieceUnstructuredGrid_t',['../classPieceUnstructuredGrid__t.html#a9d1eb720775ac4e3b7778f898decc264',1,'PieceUnstructuredGrid_t']]],
   ['_7epointdata',['~PointData',['../classPointData.html#a53f701fd5abdb6105900c13f8282305e',1,'PointData']]],

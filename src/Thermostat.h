@@ -8,26 +8,27 @@
 
 namespace Simulation
 {
-
+	/// \class Thermostat
+	/// \brief Handles temperature of particles in the simulation
 	class Thermostat
 	{
 	public:
 		Thermostat(ParticleContainer& cont);
 
+		/// Scale temperature of simulation
 		void scaleTemperature(double scaling);
+		
+		/// Calculate kinetic energy of simulation
 		double calcKineticEnergy();
 
+		/// Apply temperature to simulation
 		void applyTemperature(double temp);
+
+		/// Apply initial temperature to simulation
 		void applyInitialTemperature(double temp);
 
-		void setTargetTemperature(double target);
-		void setStartTme(double start);
-		void tick(double delta);
-
 	private:
-		ParticleContainer& container;
-		double targetTemperature;
-		double startTime;
+		ParticleContainer& container;		///< Container which stores particles for temperature calculations
 
 	};
 };

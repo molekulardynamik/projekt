@@ -94,6 +94,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
+<p>Baseclass for handling particle computations.  
+ <a href="classSimulation_1_1ParticleHandler.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="ParticleHandler_8h_source.html">ParticleHandler.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Simulation::ParticleHandler:</div>
@@ -102,24 +105,30 @@ Inheritance diagram for Simulation::ParticleHandler:</div>
   <img src="classSimulation_1_1ParticleHandler.png" usemap="#Simulation::ParticleHandler_map" alt=""/>
   <map id="Simulation::ParticleHandler_map" name="Simulation::ParticleHandler_map">
 <area href="classParticleContainerTest_1_1TestHandler.html" alt="ParticleContainerTest::TestHandler" shape="rect" coords="0,56,226,80"/>
-<area href="classSimulation_1_1ParticleHandlerTimeAware.html" alt="Simulation::ParticleHandlerTimeAware" shape="rect" coords="354,56,580,80"/>
-<area href="classSimulation_1_1GravityHandler.html" alt="Simulation::GravityHandler" shape="rect" coords="0,112,226,136"/>
-<area href="classSimulation_1_1LennardJonesHandler.html" alt="Simulation::LennardJonesHandler" shape="rect" coords="236,112,462,136"/>
-<area href="classSimulation_1_1PositionHandler.html" alt="Simulation::PositionHandler" shape="rect" coords="472,112,698,136"/>
-<area href="classSimulation_1_1VelocityHandler.html" alt="Simulation::VelocityHandler" shape="rect" coords="708,112,934,136"/>
+<area href="classSimulation_1_1ForceReset.html" title="resets force of zarticle to zero " alt="Simulation::ForceReset" shape="rect" coords="236,56,462,80"/>
+<area href="classSimulation_1_1GravityHandler.html" title="Computes gravitational force. " alt="Simulation::GravityHandler" shape="rect" coords="472,56,698,80"/>
+<area href="classSimulation_1_1ParticleHandlerTimeAware.html" title="Baseclass for handling computations that are time dependant. " alt="Simulation::ParticleHandlerTimeAware" shape="rect" coords="708,56,934,80"/>
+<area href="classSimulation_1_1LennardJonesHandler.html" title="Computes force applied by Lennard-Jones potential. " alt="Simulation::LennardJonesHandler" shape="rect" coords="472,112,698,136"/>
+<area href="classSimulation_1_1PositionHandler.html" title="Computes position of particle. " alt="Simulation::PositionHandler" shape="rect" coords="708,112,934,136"/>
+<area href="classSimulation_1_1VelocityHandler.html" title="Computes velocity of particle. " alt="Simulation::VelocityHandler" shape="rect" coords="944,112,1170,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6b1fc310603bc10093d50c674097fd25"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleHandler.html#a6b1fc310603bc10093d50c674097fd25">compute</a> (<a class="el" href="classSimulation_1_1Particle.html">Particle</a> &amp;p)</td></tr>
+<tr class="memdesc:a6b1fc310603bc10093d50c674097fd25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes one single particle.  <a href="#a6b1fc310603bc10093d50c674097fd25">More...</a><br/></td></tr>
 <tr class="separator:a6b1fc310603bc10093d50c674097fd25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a013ad557c6892ed2287db090192144ea"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleHandler.html#a013ad557c6892ed2287db090192144ea">compute</a> (<a class="el" href="classSimulation_1_1Particle.html">Particle</a> &amp;p1, <a class="el" href="classSimulation_1_1Particle.html">Particle</a> &amp;p2)</td></tr>
+<tr class="memdesc:a013ad557c6892ed2287db090192144ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes one particle pair.  <a href="#a013ad557c6892ed2287db090192144ea">More...</a><br/></td></tr>
 <tr class="separator:a013ad557c6892ed2287db090192144ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a1caeb40ada4f410fec9244bda4af69"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation_1_1ParticleHandler.html#a4a1caeb40ada4f410fec9244bda4af69">computeExclusive</a> (<a class="el" href="classSimulation_1_1Particle.html">Particle</a> &amp;p1, <a class="el" href="classSimulation_1_1Particle.html">Particle</a> &amp;p2)</td></tr>
+<tr class="memdesc:a4a1caeb40ada4f410fec9244bda4af69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes one particle pair, but applies result on both particles (symmetrical computation)  <a href="#a4a1caeb40ada4f410fec9244bda4af69">More...</a><br/></td></tr>
 <tr class="separator:a4a1caeb40ada4f410fec9244bda4af69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Baseclass for handling particle computations. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a6b1fc310603bc10093d50c674097fd25"></a>
 <div class="memitem">
 <div class="memproto">
@@ -142,7 +151,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classSimulation_1_1LennardJonesHandler.html#aa2a7d4ce850ece69663918a7cfc4072f">Simulation::LennardJonesHandler</a>, <a class="el" href="classSimulation_1_1GravityHandler.html#a7f5b0d36e4e8e3dd6eb54d364add0287">Simulation::GravityHandler</a>, <a class="el" href="classSimulation_1_1VelocityHandler.html#a5ddac3276478a84466bc7bf3e495b6bb">Simulation::VelocityHandler</a>, <a class="el" href="classSimulation_1_1PositionHandler.html#adfd177c32d7c11827ae6556ee6dd7602">Simulation::PositionHandler</a>, and <a class="el" href="classParticleContainerTest_1_1TestHandler.html#a6cb31cb392bac8a4a001a64cefda0634">ParticleContainerTest::TestHandler</a>.</p>
+<p>Computes one single particle. </p>
+
+<p>Reimplemented in <a class="el" href="classSimulation_1_1GravityHandler.html#a7f5b0d36e4e8e3dd6eb54d364add0287">Simulation::GravityHandler</a>, <a class="el" href="classSimulation_1_1ForceReset.html#aae6e2c5b90fba7254e2213c02afdc5f1">Simulation::ForceReset</a>, <a class="el" href="classSimulation_1_1VelocityHandler.html#a5ddac3276478a84466bc7bf3e495b6bb">Simulation::VelocityHandler</a>, <a class="el" href="classSimulation_1_1PositionHandler.html#adfd177c32d7c11827ae6556ee6dd7602">Simulation::PositionHandler</a>, and <a class="el" href="classParticleContainerTest_1_1TestHandler.html#a6cb31cb392bac8a4a001a64cefda0634">ParticleContainerTest::TestHandler</a>.</p>
 
 </div>
 </div>
@@ -178,7 +189,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classSimulation_1_1LennardJonesHandler.html#a81842168e68a61cb75448f91bc27f99c">Simulation::LennardJonesHandler</a>, and <a class="el" href="classSimulation_1_1GravityHandler.html#a7805aa1b40a206d9fe3362a321d933ed">Simulation::GravityHandler</a>.</p>
+<p>Computes one particle pair. </p>
+
+<p>Reimplemented in <a class="el" href="classSimulation_1_1LennardJonesHandler.html#a81842168e68a61cb75448f91bc27f99c">Simulation::LennardJonesHandler</a>.</p>
 
 </div>
 </div>
@@ -214,7 +227,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classSimulation_1_1LennardJonesHandler.html#ac16127a588f6e8598dc2598d1224517f">Simulation::LennardJonesHandler</a>, and <a class="el" href="classSimulation_1_1GravityHandler.html#a4abb48d878ea825e6582ba0bf9ae5c0d">Simulation::GravityHandler</a>.</p>
+<p>Computes one particle pair, but applies result on both particles (symmetrical computation) </p>
+
+<p>Reimplemented in <a class="el" href="classSimulation_1_1LennardJonesHandler.html#ac16127a588f6e8598dc2598d1224517f">Simulation::LennardJonesHandler</a>.</p>
 
 </div>
 </div>
@@ -224,7 +239,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 5 2014 15:45:29 for MolSim by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 11 2014 04:45:51 for MolSim by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

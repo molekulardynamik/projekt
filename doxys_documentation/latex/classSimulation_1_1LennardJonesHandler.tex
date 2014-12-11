@@ -3,6 +3,11 @@
 }
 
 
+Computes force applied by Lennard-\/\-Jones potential.  
+
+
+
+
 {\ttfamily \#include $<$Particle\-Handler.\-h$>$}
 
 Inheritance diagram for Simulation\-:\-:Lennard\-Jones\-Handler\-:\begin{figure}[H]
@@ -14,39 +19,35 @@ Inheritance diagram for Simulation\-:\-:Lennard\-Jones\-Handler\-:\begin{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSimulation_1_1LennardJonesHandler_a1eea638f715656e842824a9f9fa56a01}{Lennard\-Jones\-Handler} (double dt)
-\item 
-void \hyperlink{classSimulation_1_1LennardJonesHandler_aa2a7d4ce850ece69663918a7cfc4072f}{compute} (\hyperlink{classSimulation_1_1Particle}{Particle} \&p)
+\hyperlink{classSimulation_1_1LennardJonesHandler_ab42ec6d50cb81143d872676e24c49800}{Lennard\-Jones\-Handler} (double dt, double r)
 \item 
 void \hyperlink{classSimulation_1_1LennardJonesHandler_a81842168e68a61cb75448f91bc27f99c}{compute} (\hyperlink{classSimulation_1_1Particle}{Particle} \&p1, \hyperlink{classSimulation_1_1Particle}{Particle} \&p2)
-\item 
+\begin{DoxyCompactList}\small\item\em Nonsymmetric computation. \end{DoxyCompactList}\item 
 void \hyperlink{classSimulation_1_1LennardJonesHandler_ac16127a588f6e8598dc2598d1224517f}{compute\-Exclusive} (\hyperlink{classSimulation_1_1Particle}{Particle} \&p1, \hyperlink{classSimulation_1_1Particle}{Particle} \&p2)
+\begin{DoxyCompactList}\small\item\em Symmetric computation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classSimulation_1_1LennardJonesHandler_af8e31fb6a5016a95b8d91593822f383e}{r\-Cut\-Off}
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
+\subsection{Detailed Description}
+Computes force applied by Lennard-\/\-Jones potential. 
+
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classSimulation_1_1LennardJonesHandler_a1eea638f715656e842824a9f9fa56a01}{\index{Simulation\-::\-Lennard\-Jones\-Handler@{Simulation\-::\-Lennard\-Jones\-Handler}!Lennard\-Jones\-Handler@{Lennard\-Jones\-Handler}}
+\hypertarget{classSimulation_1_1LennardJonesHandler_ab42ec6d50cb81143d872676e24c49800}{\index{Simulation\-::\-Lennard\-Jones\-Handler@{Simulation\-::\-Lennard\-Jones\-Handler}!Lennard\-Jones\-Handler@{Lennard\-Jones\-Handler}}
 \index{Lennard\-Jones\-Handler@{Lennard\-Jones\-Handler}!Simulation::LennardJonesHandler@{Simulation\-::\-Lennard\-Jones\-Handler}}
 \subsubsection[{Lennard\-Jones\-Handler}]{\setlength{\rightskip}{0pt plus 5cm}Simulation\-::\-Lennard\-Jones\-Handler\-::\-Lennard\-Jones\-Handler (
 \begin{DoxyParamCaption}
-\item[{double}]{dt}
+\item[{double}]{dt, }
+\item[{double}]{r}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSimulation_1_1LennardJonesHandler_a1eea638f715656e842824a9f9fa56a01}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSimulation_1_1LennardJonesHandler_ab42ec6d50cb81143d872676e24c49800}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classSimulation_1_1LennardJonesHandler_aa2a7d4ce850ece69663918a7cfc4072f}{\index{Simulation\-::\-Lennard\-Jones\-Handler@{Simulation\-::\-Lennard\-Jones\-Handler}!compute@{compute}}
-\index{compute@{compute}!Simulation::LennardJonesHandler@{Simulation\-::\-Lennard\-Jones\-Handler}}
-\subsubsection[{compute}]{\setlength{\rightskip}{0pt plus 5cm}void Simulation\-::\-Lennard\-Jones\-Handler\-::compute (
-\begin{DoxyParamCaption}
-\item[{{\bf Particle} \&}]{p}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSimulation_1_1LennardJonesHandler_aa2a7d4ce850ece69663918a7cfc4072f}
-
-
-Reimplemented from \hyperlink{classSimulation_1_1ParticleHandler_a6b1fc310603bc10093d50c674097fd25}{Simulation\-::\-Particle\-Handler}.
-
 \hypertarget{classSimulation_1_1LennardJonesHandler_a81842168e68a61cb75448f91bc27f99c}{\index{Simulation\-::\-Lennard\-Jones\-Handler@{Simulation\-::\-Lennard\-Jones\-Handler}!compute@{compute}}
 \index{compute@{compute}!Simulation::LennardJonesHandler@{Simulation\-::\-Lennard\-Jones\-Handler}}
 \subsubsection[{compute}]{\setlength{\rightskip}{0pt plus 5cm}void Simulation\-::\-Lennard\-Jones\-Handler\-::compute (
@@ -55,6 +56,10 @@ Reimplemented from \hyperlink{classSimulation_1_1ParticleHandler_a6b1fc310603bc1
 \item[{{\bf Particle} \&}]{p2}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSimulation_1_1LennardJonesHandler_a81842168e68a61cb75448f91bc27f99c}
+
+
+Nonsymmetric computation. 
+
 
 
 Reimplemented from \hyperlink{classSimulation_1_1ParticleHandler_a013ad557c6892ed2287db090192144ea}{Simulation\-::\-Particle\-Handler}.
@@ -69,8 +74,18 @@ Reimplemented from \hyperlink{classSimulation_1_1ParticleHandler_a013ad557c6892e
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSimulation_1_1LennardJonesHandler_ac16127a588f6e8598dc2598d1224517f}
 
 
+Symmetric computation. 
+
+
+
 Reimplemented from \hyperlink{classSimulation_1_1ParticleHandler_a4a1caeb40ada4f410fec9244bda4af69}{Simulation\-::\-Particle\-Handler}.
 
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classSimulation_1_1LennardJonesHandler_af8e31fb6a5016a95b8d91593822f383e}{\index{Simulation\-::\-Lennard\-Jones\-Handler@{Simulation\-::\-Lennard\-Jones\-Handler}!r\-Cut\-Off@{r\-Cut\-Off}}
+\index{r\-Cut\-Off@{r\-Cut\-Off}!Simulation::LennardJonesHandler@{Simulation\-::\-Lennard\-Jones\-Handler}}
+\subsubsection[{r\-Cut\-Off}]{\setlength{\rightskip}{0pt plus 5cm}double Simulation\-::\-Lennard\-Jones\-Handler\-::r\-Cut\-Off\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1LennardJonesHandler_af8e31fb6a5016a95b8d91593822f383e}
 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}

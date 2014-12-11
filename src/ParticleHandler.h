@@ -8,31 +8,45 @@
 
 namespace Simulation
 {
+	/// \class ParticleHandler
+	/// \brief Baseclass for handling particle computations
 	class ParticleHandler
 	{
 	public:
+
+		/// Computes one single particle
 		virtual void compute(Particle& p)
 		{};
+
+		/// Computes one particle pair
 		virtual void compute(Particle& p1, Particle& p2)
 		{};
+
+		/// Computes one particle pair, but applies result on both particles (symmetrical computation)
 		virtual void computeExclusive(Particle& p1, Particle& p2)
 		{};
 	};
 
 
-
+	/// \class ParticleHandlerTimeAware
+	/// \brief Baseclass for handling computations that are time dependant
 	class ParticleHandlerTimeAware : public ParticleHandler
 	{
 	public:
+
+		/// \param Delta time between iterations
 		ParticleHandlerTimeAware(double dt)
 		{
 			delta_t = dt;
 		}
 
 	protected:
-		double delta_t;
+		double delta_t;		///< Delta time between iterations
 	};
 
+
+	/// \class PositionHandler
+	/// \brief Computes position of particle
 	class PositionHandler : public ParticleHandlerTimeAware
 	{
 	public:
@@ -49,7 +63,8 @@ namespace Simulation
 		}
 	};
 
-
+	/// \class VelocityHandler
+	/// \brief Computes velocity of particle
 	class VelocityHandler : public ParticleHandlerTimeAware
 	{
 	public:
@@ -65,37 +80,8 @@ namespace Simulation
 		};
 	};
 
-	/*class GravityHandler : public ParticleHandlerTimeAware
-	{
-	public:
-		GravityHandler(double dt) : ParticleHandlerTimeAware(dt)
-		{};
-
-		void compute(Particle& p)
-		{
-			p.getOldF() = p.getF();
-			double zeros[3] = { 0, 0, 0 };
-			p.getF() = utils::Vector<double, 3>(zeros);
-		}
-
-		void compute(Particle& p1, Particle& p2)
-		{
-			double scalar = p1.getM() * p2.getM() / pow((p1.getX() - p2.getX()).L2Norm(), 3);
-			utils::Vector<double, 3> force = scalar * (p2.getX() - p1.getX());
-
-			p1.getF() = p1.getF() + force;
-		}
-
-		void computeExclusive(Particle& p1, Particle& p2)
-		{
-			double scalar = p1.getM() * p2.getM() / pow((p1.getX() - p2.getX()).L2Norm(), 3);
-			utils::Vector<double, 3> force = scalar * (p2.getX() - p1.getX());
-
-			p1.getF() = p1.getF() + force;
-			p2.getF() = p2.getF() - force;
-		}
-	};*/
-
+	/// \class ForceReset
+	/// \brief resets force of zarticle to zero
 	class ForceReset : public ParticleHandler
 	{
 	public:
@@ -107,12 +93,16 @@ namespace Simulation
 		}
 	};
 
+	/// \class LennardJonesHandler
+	/// \brief Computes force  applied by Lennard-Jones potential
 	class LennardJonesHandler : public ParticleHandlerTimeAware
 	{
 	public:
 		LennardJonesHandler(double dt, double r) : ParticleHandlerTimeAware(dt), rCutOff(r)
 		{};
 
+
+		/// Nonsymmetric computation
 		void compute(Particle& p1, Particle& p2)
 		{
 			double e = (p1.getE() + p2.getE()) / 2;
@@ -129,6 +119,7 @@ namespace Simulation
 			p1.getF() = p1.getF() + (scalar * (p2.getX() - p1.getX()));
 		}
 
+		/// Symmetric computation
 		void computeExclusive(Particle& p1, Particle& p2)
 		{
 			double e = (p1.getE() + p2.getE()) / 2;
@@ -152,6 +143,8 @@ namespace Simulation
 
 	};
 
+	/// \class GravityHandler
+	/// \brief Computes gravitational force
 	class GravityHandler : public ParticleHandler
 	{
 	public:

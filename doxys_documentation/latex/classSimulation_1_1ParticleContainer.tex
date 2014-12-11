@@ -3,7 +3,7 @@
 }
 
 
-Container class for managing particles  
+Stores particles and handles accesses and computations.  
 
 
 
@@ -13,100 +13,109 @@ Container class for managing particles
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{classSimulation_1_1ParticleContainer_1_1ParticleCell}{Particle\-Cell}
+struct \hyperlink{structSimulation_1_1ParticleContainer_1_1BoundaryHaloPair}{Boundary\-Halo\-Pair}
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSimulation_1_1ParticleContainer_a6cbb30163cc128858fa33534b1c79a74}{Particle\-Container} ()
+\hyperlink{classSimulation_1_1ParticleContainer_a76d21bdb5141158cf664d65e2d8b1db7}{Particle\-Container} ()
 \item 
 void \hyperlink{classSimulation_1_1ParticleContainer_a2bdf40eb2fab6e85afddf69d6ef43f27}{init} (char $\ast$filename)
 \item 
+void \hyperlink{classSimulation_1_1ParticleContainer_af3b7b2d3c26a67a390857a8aa0c8b31b}{update\-Cells} ()
+\begin{DoxyCompactList}\small\item\em Assigns particles to cells based on their location. \end{DoxyCompactList}\item 
 int \hyperlink{classSimulation_1_1ParticleContainer_a8a7a0979f6d714977491fe14529004ee}{count} ()
-\begin{DoxyCompactList}\small\item\em \begin{DoxyReturn}{Returns}
-Number of Particles; 
-\end{DoxyReturn}
-\end{DoxyCompactList}\item 
-int \hyperlink{classSimulation_1_1ParticleContainer_ab9aae4bb1525dc6d27592ebfc0dfd0d9}{live} ()
+\item 
+int \hyperlink{classSimulation_1_1ParticleContainer_a5d3d7a52a8a5fe0db99e6e424c83d3bf}{count\-Visible} ()
 \item 
 \hyperlink{classSimulation_1_1Particle}{Particle} \& \hyperlink{classSimulation_1_1ParticleContainer_a691b50db5c7d2fce6d2576c0b51b4ea9}{operator\mbox{[}$\,$\mbox{]}} (int i)
-\begin{DoxyCompactList}\small\item\em \begin{DoxyReturn}{Returns}
-\hyperlink{classSimulation_1_1Particle}{Particle} at location i 
-\end{DoxyReturn}
-\end{DoxyCompactList}\item 
+\item 
 void \hyperlink{classSimulation_1_1ParticleContainer_a13b3ada63172c5070e81235bc16801ca}{iterate\-Particles} (\hyperlink{classSimulation_1_1ParticleHandler}{Particle\-Handler} \&handler)
-\item 
+\begin{DoxyCompactList}\small\item\em Iterates over all live particles an executes particle handler. \end{DoxyCompactList}\item 
 void \hyperlink{classSimulation_1_1ParticleContainer_a2d7f15f3d5cb18cd08dadc8f01f2e04a}{iterate\-Particle\-Pairs} (\hyperlink{classSimulation_1_1ParticleHandler}{Particle\-Handler} \&handler)
-\item 
+\begin{DoxyCompactList}\small\item\em Iterates over all live particle pairs (only neighbouring cells are considered) and executes particle pair handler. \end{DoxyCompactList}\item 
 void \hyperlink{classSimulation_1_1ParticleContainer_ab70a9d544a8428d7085863990bca1811}{iterate\-Particle\-Pairs\-Exclusive} (\hyperlink{classSimulation_1_1ParticleHandler}{Particle\-Handler} \&handler)
 \item 
-void \hyperlink{classSimulation_1_1ParticleContainer_aaa04de698586200976d6530e8fa37005}{iterate\-Boundry\-Particles} (\hyperlink{classSimulation_1_1ParticleHandler}{Particle\-Handler} \&handler)
-\item 
-void \hyperlink{classSimulation_1_1ParticleContainer_a037e66a27f55a9bacec458a1c7925266}{iterate\-Boundry\-Cells} ()
-\item 
-void \hyperlink{classSimulation_1_1ParticleContainer_af3b7b2d3c26a67a390857a8aa0c8b31b}{update\-Cells} ()
+void \hyperlink{classSimulation_1_1ParticleContainer_a4ecf8c0f85e656bbfbe36b883c5e5e23}{iterate\-Boundary\-Cells} ()
+\begin{DoxyCompactList}\small\item\em Iterates over all boundry cells and handles boundary behavior. \end{DoxyCompactList}\item 
+double \hyperlink{classSimulation_1_1ParticleContainer_a81e96b1c9c1466650af5c5a0b2fb5652}{get\-Cut\-Off} ()
 \end{DoxyCompactItemize}
 \subsection*{Private Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef std\-::list$<$ \hyperlink{classSimulation_1_1Particle}{Particle} $>$\\*
-\-::iterator \hyperlink{classSimulation_1_1ParticleContainer_ac9a1b3682da81d23bd530595d41766d6}{Particle\-Iterator}
-\end{DoxyCompactItemize}
+enum \hyperlink{classSimulation_1_1ParticleContainer_a5e913177d570f1276e90e4d5c19029bd}{Boundary\-Condition} \{ \hyperlink{classSimulation_1_1ParticleContainer_a5e913177d570f1276e90e4d5c19029bda02c8f7e918ce61d7457aad6d5136de06}{Out\-Flow}, 
+\hyperlink{classSimulation_1_1ParticleContainer_a5e913177d570f1276e90e4d5c19029bda38294f9ed6bccc27cb21a49dfd465383}{Reflecting}, 
+\hyperlink{classSimulation_1_1ParticleContainer_a5e913177d570f1276e90e4d5c19029bda98c413bdf3bd391fb5e5cb15a13a1b7a}{Periodic}
+ \}
+\begin{DoxyCompactList}\small\item\em Specifies behavior of a boundary cell. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{classSimulation_1_1ParticleContainer_aafaf96d8f9cf6ee877b0e001f46e854a}{find\-Cell} (\hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ double, 3 $>$ position, int $\ast$cell)
 \item 
-void \hyperlink{classSimulation_1_1ParticleContainer_a2d4e11b76547402b11b3bc7e018f5dfa}{flatten} (int x, int y, int $\ast$c)
+void \hyperlink{classSimulation_1_1ParticleContainer_aa815ad7b798de3be1f1c35f1e979716d}{flatten} (int x, int y, int $\ast$cell)
 \item 
-void \hyperlink{classSimulation_1_1ParticleContainer_a20494365b8058fa53927dd855d8c200a}{expand} (int c, int $\ast$x, int $\ast$y)
-\item 
-bool \hyperlink{classSimulation_1_1ParticleContainer_a4ae3d25e9b26f8bd190e3691625cba64}{is\-Boundry} (int x, int y)
-\item 
-bool \hyperlink{classSimulation_1_1ParticleContainer_a67d65655ae079316295a8ac7b32aca16}{is\-Boundry} (int c)
-\item 
-int \hyperlink{classSimulation_1_1ParticleContainer_a6c1f20c317c9e26c1dc591048e0fe758}{get\-Reflecting\-Cell} (int boundrycell)
+void \hyperlink{classSimulation_1_1ParticleContainer_a3d88bfbe1dcd2857d9ca60e87e112090}{expand} (int $\ast$x, int $\ast$y, int cell)
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
+std\-::vector$<$ \hyperlink{classSimulation_1_1Particle}{Particle} $>$ \hyperlink{classSimulation_1_1ParticleContainer_a45869e923d4b355d3be609ec78235bf0}{particle\-Pool}
+\begin{DoxyCompactList}\small\item\em List of every particle which was created at startup. \end{DoxyCompactList}\item 
+std\-::vector$<$ \hyperlink{classSimulation_1_1Particle}{Particle} $>$ \hyperlink{classSimulation_1_1ParticleContainer_af7710cc9a30897b05c4dae5610562f2e}{dummies}
+\begin{DoxyCompactList}\small\item\em List of dummy particles which are needed to handle boundary behavior. \end{DoxyCompactList}\item 
+std\-::list$<$ \hyperlink{classSimulation_1_1Particle}{Particle} $\ast$ $>$ \hyperlink{classSimulation_1_1ParticleContainer_a851707b9ea1f91a934e7eda5e219b97d}{live\-Particles}
+\begin{DoxyCompactList}\small\item\em List of pointers to live particles that should be computed. \end{DoxyCompactList}\item 
+int \hyperlink{classSimulation_1_1ParticleContainer_a3e3805eea543d96c5cf6ced07b9c2e7b}{visible}
+\begin{DoxyCompactList}\small\item\em Number of visible particles. \end{DoxyCompactList}\item 
 double \hyperlink{classSimulation_1_1ParticleContainer_a1f0e9467546c765bf8533a307b5587e1}{r\-Cut\-Off}
-\item 
+\begin{DoxyCompactList}\small\item\em Cutoff radius. \end{DoxyCompactList}\item 
 int \hyperlink{classSimulation_1_1ParticleContainer_a26ff75d3f5c109fc354bb95e460bef20}{num\-Cells\-X}
 \item 
 int \hyperlink{classSimulation_1_1ParticleContainer_ae248a9742a4d62f0cc692214eef9ba63}{num\-Cells\-Y}
-\item 
-bool \hyperlink{classSimulation_1_1ParticleContainer_a53f222132c6a1177d3a14939e865de35}{reflective}
-\item 
-int \hyperlink{classSimulation_1_1ParticleContainer_abe3ee9f5e9a35e525809c6a01129948c}{live\-Particles}
-\item 
-int \hyperlink{classSimulation_1_1ParticleContainer_a36eded0724f9d476df35499387d33815}{num\-Dummies}
-\item 
-std\-::vector$<$ \hyperlink{classSimulation_1_1ParticleContainer_1_1ParticleCell}{Particle\-Cell} $>$ \hyperlink{classSimulation_1_1ParticleContainer_a3836f9563a3827414df5288a2f3fcee6}{cells}
-\item 
-std\-::vector$<$ int $>$ \hyperlink{classSimulation_1_1ParticleContainer_a4df9c8b9d1a1677e241a2b1fa3aa1c7d}{boundry\-Cells}
-\item 
-std\-::vector$<$ \hyperlink{classSimulation_1_1Particle}{Particle} $>$ \hyperlink{classSimulation_1_1ParticleContainer_ae99eb8aa1b2acbecb888dee8c32f6b18}{particles}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Number of cells in X/\-Y -\/ Direction. \end{DoxyCompactList}\item 
+std\-::vector$<$ \hyperlink{classSimulation_1_1ParticleCell}{Particle\-Cell} $>$ \hyperlink{classSimulation_1_1ParticleContainer_a3836f9563a3827414df5288a2f3fcee6}{cells}
+\begin{DoxyCompactList}\small\item\em List of all cells (including boundaries) \end{DoxyCompactList}\item 
+std\-::vector$<$ \hyperlink{structSimulation_1_1ParticleContainer_1_1BoundaryHaloPair}{Boundary\-Halo\-Pair} $>$ \hyperlink{classSimulation_1_1ParticleContainer_a7d56f7233d097b228ddea76670a9861f}{boundary\-Halo\-Pairs}
+\begin{DoxyCompactList}\small\item\em List of all boundary-\/halo pair, except conrner cells. \end{DoxyCompactList}\item 
+int \hyperlink{classSimulation_1_1ParticleContainer_a257c23a232693610d47c0ee082085a49}{wall\-Type}
+\begin{DoxyCompactList}\small\item\em Type index of wall properties. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-Container class for managing particles 
+Stores particles and handles accesses and computations. 
 
-\subsection{Member Typedef Documentation}
-\hypertarget{classSimulation_1_1ParticleContainer_ac9a1b3682da81d23bd530595d41766d6}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!Particle\-Iterator@{Particle\-Iterator}}
-\index{Particle\-Iterator@{Particle\-Iterator}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
-\subsubsection[{Particle\-Iterator}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::list$<${\bf Particle}$>$\-::iterator {\bf Simulation\-::\-Particle\-Container\-::\-Particle\-Iterator}\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_ac9a1b3682da81d23bd530595d41766d6}
+This class stores all particles participating in the simulation. It is recommended to access particles only over this class. For performance purposes all particles are assigned to different cells to avoid unnecessary computations over large distances. This implies that every computation which involes two or more particles can be neglected at a certain distance ( the cut\-Off radius). It is possible to specify a boundary condition for each boundary of simulation space. 
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{classSimulation_1_1ParticleContainer_a5e913177d570f1276e90e4d5c19029bd}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!Boundary\-Condition@{Boundary\-Condition}}
+\index{Boundary\-Condition@{Boundary\-Condition}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
+\subsubsection[{Boundary\-Condition}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Simulation\-::\-Particle\-Container\-::\-Boundary\-Condition}\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a5e913177d570f1276e90e4d5c19029bd}
+
+
+Specifies behavior of a boundary cell. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Out\-Flow@{Out\-Flow}!Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}}\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!Out\-Flow@{Out\-Flow}}\item[{\em 
+\hypertarget{classSimulation_1_1ParticleContainer_a5e913177d570f1276e90e4d5c19029bda02c8f7e918ce61d7457aad6d5136de06}{Out\-Flow}\label{classSimulation_1_1ParticleContainer_a5e913177d570f1276e90e4d5c19029bda02c8f7e918ce61d7457aad6d5136de06}
+}]Particles which leave the simulation space will be deleted. \index{Reflecting@{Reflecting}!Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}}\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!Reflecting@{Reflecting}}\item[{\em 
+\hypertarget{classSimulation_1_1ParticleContainer_a5e913177d570f1276e90e4d5c19029bda38294f9ed6bccc27cb21a49dfd465383}{Reflecting}\label{classSimulation_1_1ParticleContainer_a5e913177d570f1276e90e4d5c19029bda38294f9ed6bccc27cb21a49dfd465383}
+}]Particles will be reflected on the boundaries. \index{Periodic@{Periodic}!Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}}\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!Periodic@{Periodic}}\item[{\em 
+\hypertarget{classSimulation_1_1ParticleContainer_a5e913177d570f1276e90e4d5c19029bda98c413bdf3bd391fb5e5cb15a13a1b7a}{Periodic}\label{classSimulation_1_1ParticleContainer_a5e913177d570f1276e90e4d5c19029bda98c413bdf3bd391fb5e5cb15a13a1b7a}
+}]Particles will enter the simulation space on the opposite side. \end{description}
+\end{Desc}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classSimulation_1_1ParticleContainer_a6cbb30163cc128858fa33534b1c79a74}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!Particle\-Container@{Particle\-Container}}
+\hypertarget{classSimulation_1_1ParticleContainer_a76d21bdb5141158cf664d65e2d8b1db7}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!Particle\-Container@{Particle\-Container}}
 \index{Particle\-Container@{Particle\-Container}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
-\subsubsection[{Particle\-Container}]{\setlength{\rightskip}{0pt plus 5cm}Simulation\-::\-Particle\-Container\-::\-Particle\-Container (
+\subsubsection[{Particle\-Container}]{\setlength{\rightskip}{0pt plus 5cm}Particle\-Container\-::\-Particle\-Container (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSimulation_1_1ParticleContainer_a6cbb30163cc128858fa33534b1c79a74}
+)}}\label{classSimulation_1_1ParticleContainer_a76d21bdb5141158cf664d65e2d8b1db7}
 
 
 \subsection{Member Function Documentation}
@@ -117,22 +126,35 @@ Container class for managing particles
 {}
 \end{DoxyParamCaption}
 )}}\label{classSimulation_1_1ParticleContainer_a8a7a0979f6d714977491fe14529004ee}
-
-
 \begin{DoxyReturn}{Returns}
-Number of Particles; 
+Number of live particles 
 \end{DoxyReturn}
-
-
-\hypertarget{classSimulation_1_1ParticleContainer_a20494365b8058fa53927dd855d8c200a}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!expand@{expand}}
+\hypertarget{classSimulation_1_1ParticleContainer_a5d3d7a52a8a5fe0db99e6e424c83d3bf}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!count\-Visible@{count\-Visible}}
+\index{count\-Visible@{count\-Visible}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
+\subsubsection[{count\-Visible}]{\setlength{\rightskip}{0pt plus 5cm}int Particle\-Container\-::count\-Visible (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleContainer_a5d3d7a52a8a5fe0db99e6e424c83d3bf}
+\begin{DoxyReturn}{Returns}
+Number of live and visible particles 
+\end{DoxyReturn}
+\hypertarget{classSimulation_1_1ParticleContainer_a3d88bfbe1dcd2857d9ca60e87e112090}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!expand@{expand}}
 \index{expand@{expand}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
 \subsubsection[{expand}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::expand (
 \begin{DoxyParamCaption}
-\item[{int}]{c, }
 \item[{int $\ast$}]{x, }
-\item[{int $\ast$}]{y}
+\item[{int $\ast$}]{y, }
+\item[{int}]{cell}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a20494365b8058fa53927dd855d8c200a}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a3d88bfbe1dcd2857d9ca60e87e112090}
+Converts a 1\-D index to 2\-D indices 
+\begin{DoxyParams}{Parameters}
+{\em x,y} & Pointers to 2\-D indices \\
+\hline
+{\em cell} & 1\-D cell index \\
+\hline
+\end{DoxyParams}
 \hypertarget{classSimulation_1_1ParticleContainer_aafaf96d8f9cf6ee877b0e001f46e854a}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!find\-Cell@{find\-Cell}}
 \index{find\-Cell@{find\-Cell}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
 \subsubsection[{find\-Cell}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::find\-Cell (
@@ -141,22 +163,39 @@ Number of Particles;
 \item[{int $\ast$}]{cell}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_aafaf96d8f9cf6ee877b0e001f46e854a}
-\hypertarget{classSimulation_1_1ParticleContainer_a2d4e11b76547402b11b3bc7e018f5dfa}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!flatten@{flatten}}
+Finds 1\-D cell index based on given poistion 
+\begin{DoxyParams}{Parameters}
+{\em position} & Position of \hyperlink{classSimulation_1_1Particle}{Particle} \\
+\hline
+{\em cell} & Pointer to 1\-D cell index \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSimulation_1_1ParticleContainer_aa815ad7b798de3be1f1c35f1e979716d}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!flatten@{flatten}}
 \index{flatten@{flatten}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
 \subsubsection[{flatten}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::flatten (
 \begin{DoxyParamCaption}
 \item[{int}]{x, }
 \item[{int}]{y, }
-\item[{int $\ast$}]{c}
+\item[{int $\ast$}]{cell}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a2d4e11b76547402b11b3bc7e018f5dfa}
-\hypertarget{classSimulation_1_1ParticleContainer_a6c1f20c317c9e26c1dc591048e0fe758}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!get\-Reflecting\-Cell@{get\-Reflecting\-Cell}}
-\index{get\-Reflecting\-Cell@{get\-Reflecting\-Cell}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
-\subsubsection[{get\-Reflecting\-Cell}]{\setlength{\rightskip}{0pt plus 5cm}int Particle\-Container\-::get\-Reflecting\-Cell (
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_aa815ad7b798de3be1f1c35f1e979716d}
+Converts 2\-D indices to a 1\-D index 
+\begin{DoxyParams}{Parameters}
+{\em x,y} & 2\-D indices \\
+\hline
+{\em cell} & Pointer to 1\-D cell index \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSimulation_1_1ParticleContainer_a81e96b1c9c1466650af5c5a0b2fb5652}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!get\-Cut\-Off@{get\-Cut\-Off}}
+\index{get\-Cut\-Off@{get\-Cut\-Off}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
+\subsubsection[{get\-Cut\-Off}]{\setlength{\rightskip}{0pt plus 5cm}double Particle\-Container\-::get\-Cut\-Off (
 \begin{DoxyParamCaption}
-\item[{int}]{boundrycell}
+{}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a6c1f20c317c9e26c1dc591048e0fe758}
+)}}\label{classSimulation_1_1ParticleContainer_a81e96b1c9c1466650af5c5a0b2fb5652}
+\begin{DoxyReturn}{Returns}
+Cutoff radius 
+\end{DoxyReturn}
 \hypertarget{classSimulation_1_1ParticleContainer_a2bdf40eb2fab6e85afddf69d6ef43f27}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!init@{init}}
 \index{init@{init}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
 \subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::init (
@@ -164,35 +203,22 @@ Number of Particles;
 \item[{char $\ast$}]{filename}
 \end{DoxyParamCaption}
 )}}\label{classSimulation_1_1ParticleContainer_a2bdf40eb2fab6e85afddf69d6ef43f27}
-\hypertarget{classSimulation_1_1ParticleContainer_a4ae3d25e9b26f8bd190e3691625cba64}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!is\-Boundry@{is\-Boundry}}
-\index{is\-Boundry@{is\-Boundry}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
-\subsubsection[{is\-Boundry}]{\setlength{\rightskip}{0pt plus 5cm}bool Particle\-Container\-::is\-Boundry (
-\begin{DoxyParamCaption}
-\item[{int}]{x, }
-\item[{int}]{y}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a4ae3d25e9b26f8bd190e3691625cba64}
-\hypertarget{classSimulation_1_1ParticleContainer_a67d65655ae079316295a8ac7b32aca16}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!is\-Boundry@{is\-Boundry}}
-\index{is\-Boundry@{is\-Boundry}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
-\subsubsection[{is\-Boundry}]{\setlength{\rightskip}{0pt plus 5cm}bool Particle\-Container\-::is\-Boundry (
-\begin{DoxyParamCaption}
-\item[{int}]{c}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a67d65655ae079316295a8ac7b32aca16}
-\hypertarget{classSimulation_1_1ParticleContainer_a037e66a27f55a9bacec458a1c7925266}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!iterate\-Boundry\-Cells@{iterate\-Boundry\-Cells}}
-\index{iterate\-Boundry\-Cells@{iterate\-Boundry\-Cells}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
-\subsubsection[{iterate\-Boundry\-Cells}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::iterate\-Boundry\-Cells (
+Initializes particle container with data from file 
+\begin{DoxyParams}{Parameters}
+{\em filename} & File which will be read \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSimulation_1_1ParticleContainer_a4ecf8c0f85e656bbfbe36b883c5e5e23}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!iterate\-Boundary\-Cells@{iterate\-Boundary\-Cells}}
+\index{iterate\-Boundary\-Cells@{iterate\-Boundary\-Cells}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
+\subsubsection[{iterate\-Boundary\-Cells}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::iterate\-Boundary\-Cells (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classSimulation_1_1ParticleContainer_a037e66a27f55a9bacec458a1c7925266}
-\hypertarget{classSimulation_1_1ParticleContainer_aaa04de698586200976d6530e8fa37005}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!iterate\-Boundry\-Particles@{iterate\-Boundry\-Particles}}
-\index{iterate\-Boundry\-Particles@{iterate\-Boundry\-Particles}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
-\subsubsection[{iterate\-Boundry\-Particles}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::iterate\-Boundry\-Particles (
-\begin{DoxyParamCaption}
-\item[{{\bf Particle\-Handler} \&}]{handler}
-\end{DoxyParamCaption}
-)}}\label{classSimulation_1_1ParticleContainer_aaa04de698586200976d6530e8fa37005}
+)}}\label{classSimulation_1_1ParticleContainer_a4ecf8c0f85e656bbfbe36b883c5e5e23}
+
+
+Iterates over all boundry cells and handles boundary behavior. 
+
 \hypertarget{classSimulation_1_1ParticleContainer_a2d7f15f3d5cb18cd08dadc8f01f2e04a}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!iterate\-Particle\-Pairs@{iterate\-Particle\-Pairs}}
 \index{iterate\-Particle\-Pairs@{iterate\-Particle\-Pairs}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
 \subsubsection[{iterate\-Particle\-Pairs}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::iterate\-Particle\-Pairs (
@@ -200,6 +226,10 @@ Number of Particles;
 \item[{{\bf Particle\-Handler} \&}]{handler}
 \end{DoxyParamCaption}
 )}}\label{classSimulation_1_1ParticleContainer_a2d7f15f3d5cb18cd08dadc8f01f2e04a}
+
+
+Iterates over all live particle pairs (only neighbouring cells are considered) and executes particle pair handler. 
+
 \hypertarget{classSimulation_1_1ParticleContainer_ab70a9d544a8428d7085863990bca1811}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!iterate\-Particle\-Pairs\-Exclusive@{iterate\-Particle\-Pairs\-Exclusive}}
 \index{iterate\-Particle\-Pairs\-Exclusive@{iterate\-Particle\-Pairs\-Exclusive}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
 \subsubsection[{iterate\-Particle\-Pairs\-Exclusive}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::iterate\-Particle\-Pairs\-Exclusive (
@@ -207,6 +237,9 @@ Number of Particles;
 \item[{{\bf Particle\-Handler} \&}]{handler}
 \end{DoxyParamCaption}
 )}}\label{classSimulation_1_1ParticleContainer_ab70a9d544a8428d7085863990bca1811}
+Iterates over all live particle pairs (only neighbouring cells are considered) and executes exclusive particle par handler. \begin{DoxyNote}{Note}
+Every particle will be handled only once. This is faster but requires a symmetrical computation. 
+\end{DoxyNote}
 \hypertarget{classSimulation_1_1ParticleContainer_a13b3ada63172c5070e81235bc16801ca}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!iterate\-Particles@{iterate\-Particles}}
 \index{iterate\-Particles@{iterate\-Particles}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
 \subsubsection[{iterate\-Particles}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::iterate\-Particles (
@@ -214,13 +247,10 @@ Number of Particles;
 \item[{{\bf Particle\-Handler} \&}]{handler}
 \end{DoxyParamCaption}
 )}}\label{classSimulation_1_1ParticleContainer_a13b3ada63172c5070e81235bc16801ca}
-\hypertarget{classSimulation_1_1ParticleContainer_ab9aae4bb1525dc6d27592ebfc0dfd0d9}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!live@{live}}
-\index{live@{live}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
-\subsubsection[{live}]{\setlength{\rightskip}{0pt plus 5cm}int Particle\-Container\-::live (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{classSimulation_1_1ParticleContainer_ab9aae4bb1525dc6d27592ebfc0dfd0d9}
+
+
+Iterates over all live particles an executes particle handler. 
+
 \hypertarget{classSimulation_1_1ParticleContainer_a691b50db5c7d2fce6d2576c0b51b4ea9}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
 \index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
 \subsubsection[{operator[]}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Particle} \& Particle\-Container\-::operator\mbox{[}$\,$\mbox{]} (
@@ -229,12 +259,13 @@ Number of Particles;
 \end{DoxyParamCaption}
 )}}\label{classSimulation_1_1ParticleContainer_a691b50db5c7d2fce6d2576c0b51b4ea9}
 
-
+\begin{DoxyParams}{Parameters}
+{\em i} & Index of particle \\
+\hline
+\end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-\hyperlink{classSimulation_1_1Particle}{Particle} at location i 
+\hyperlink{classSimulation_1_1Particle}{Particle} at index i 
 \end{DoxyReturn}
-
-
 \hypertarget{classSimulation_1_1ParticleContainer_af3b7b2d3c26a67a390857a8aa0c8b31b}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!update\-Cells@{update\-Cells}}
 \index{update\-Cells@{update\-Cells}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
 \subsubsection[{update\-Cells}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Container\-::update\-Cells (
@@ -244,34 +275,80 @@ Number of Particles;
 )}}\label{classSimulation_1_1ParticleContainer_af3b7b2d3c26a67a390857a8aa0c8b31b}
 
 
+Assigns particles to cells based on their location. 
+
+
+
 \subsection{Member Data Documentation}
-\hypertarget{classSimulation_1_1ParticleContainer_a4df9c8b9d1a1677e241a2b1fa3aa1c7d}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!boundry\-Cells@{boundry\-Cells}}
-\index{boundry\-Cells@{boundry\-Cells}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
-\subsubsection[{boundry\-Cells}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$int$>$ Simulation\-::\-Particle\-Container\-::boundry\-Cells\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a4df9c8b9d1a1677e241a2b1fa3aa1c7d}
+\hypertarget{classSimulation_1_1ParticleContainer_a7d56f7233d097b228ddea76670a9861f}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!boundary\-Halo\-Pairs@{boundary\-Halo\-Pairs}}
+\index{boundary\-Halo\-Pairs@{boundary\-Halo\-Pairs}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
+\subsubsection[{boundary\-Halo\-Pairs}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Boundary\-Halo\-Pair}$>$ Simulation\-::\-Particle\-Container\-::boundary\-Halo\-Pairs\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a7d56f7233d097b228ddea76670a9861f}
+
+
+List of all boundary-\/halo pair, except conrner cells. 
+
 \hypertarget{classSimulation_1_1ParticleContainer_a3836f9563a3827414df5288a2f3fcee6}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!cells@{cells}}
 \index{cells@{cells}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
 \subsubsection[{cells}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Particle\-Cell}$>$ Simulation\-::\-Particle\-Container\-::cells\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a3836f9563a3827414df5288a2f3fcee6}
-\hypertarget{classSimulation_1_1ParticleContainer_abe3ee9f5e9a35e525809c6a01129948c}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!live\-Particles@{live\-Particles}}
+
+
+List of all cells (including boundaries) 
+
+\begin{DoxyNote}{Note}
+This is a 1\-D representation of a 2\-D grid 
+\end{DoxyNote}
+\hypertarget{classSimulation_1_1ParticleContainer_af7710cc9a30897b05c4dae5610562f2e}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!dummies@{dummies}}
+\index{dummies@{dummies}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
+\subsubsection[{dummies}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Particle}$>$ Simulation\-::\-Particle\-Container\-::dummies\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_af7710cc9a30897b05c4dae5610562f2e}
+
+
+List of dummy particles which are needed to handle boundary behavior. 
+
+\hypertarget{classSimulation_1_1ParticleContainer_a851707b9ea1f91a934e7eda5e219b97d}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!live\-Particles@{live\-Particles}}
 \index{live\-Particles@{live\-Particles}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
-\subsubsection[{live\-Particles}]{\setlength{\rightskip}{0pt plus 5cm}int Simulation\-::\-Particle\-Container\-::live\-Particles\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_abe3ee9f5e9a35e525809c6a01129948c}
+\subsubsection[{live\-Particles}]{\setlength{\rightskip}{0pt plus 5cm}std\-::list$<${\bf Particle}$\ast$$>$ Simulation\-::\-Particle\-Container\-::live\-Particles\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a851707b9ea1f91a934e7eda5e219b97d}
+
+
+List of pointers to live particles that should be computed. 
+
 \hypertarget{classSimulation_1_1ParticleContainer_a26ff75d3f5c109fc354bb95e460bef20}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!num\-Cells\-X@{num\-Cells\-X}}
 \index{num\-Cells\-X@{num\-Cells\-X}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
 \subsubsection[{num\-Cells\-X}]{\setlength{\rightskip}{0pt plus 5cm}int Simulation\-::\-Particle\-Container\-::num\-Cells\-X\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a26ff75d3f5c109fc354bb95e460bef20}
 \hypertarget{classSimulation_1_1ParticleContainer_ae248a9742a4d62f0cc692214eef9ba63}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!num\-Cells\-Y@{num\-Cells\-Y}}
 \index{num\-Cells\-Y@{num\-Cells\-Y}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
 \subsubsection[{num\-Cells\-Y}]{\setlength{\rightskip}{0pt plus 5cm}int Simulation\-::\-Particle\-Container\-::num\-Cells\-Y\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_ae248a9742a4d62f0cc692214eef9ba63}
-\hypertarget{classSimulation_1_1ParticleContainer_a36eded0724f9d476df35499387d33815}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!num\-Dummies@{num\-Dummies}}
-\index{num\-Dummies@{num\-Dummies}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
-\subsubsection[{num\-Dummies}]{\setlength{\rightskip}{0pt plus 5cm}int Simulation\-::\-Particle\-Container\-::num\-Dummies\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a36eded0724f9d476df35499387d33815}
-\hypertarget{classSimulation_1_1ParticleContainer_ae99eb8aa1b2acbecb888dee8c32f6b18}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!particles@{particles}}
-\index{particles@{particles}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
-\subsubsection[{particles}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Particle}$>$ Simulation\-::\-Particle\-Container\-::particles\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_ae99eb8aa1b2acbecb888dee8c32f6b18}
+
+
+Number of cells in X/\-Y -\/ Direction. 
+
+\hypertarget{classSimulation_1_1ParticleContainer_a45869e923d4b355d3be609ec78235bf0}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!particle\-Pool@{particle\-Pool}}
+\index{particle\-Pool@{particle\-Pool}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
+\subsubsection[{particle\-Pool}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Particle}$>$ Simulation\-::\-Particle\-Container\-::particle\-Pool\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a45869e923d4b355d3be609ec78235bf0}
+
+
+List of every particle which was created at startup. 
+
 \hypertarget{classSimulation_1_1ParticleContainer_a1f0e9467546c765bf8533a307b5587e1}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!r\-Cut\-Off@{r\-Cut\-Off}}
 \index{r\-Cut\-Off@{r\-Cut\-Off}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
 \subsubsection[{r\-Cut\-Off}]{\setlength{\rightskip}{0pt plus 5cm}double Simulation\-::\-Particle\-Container\-::r\-Cut\-Off\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a1f0e9467546c765bf8533a307b5587e1}
-\hypertarget{classSimulation_1_1ParticleContainer_a53f222132c6a1177d3a14939e865de35}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!reflective@{reflective}}
-\index{reflective@{reflective}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
-\subsubsection[{reflective}]{\setlength{\rightskip}{0pt plus 5cm}bool Simulation\-::\-Particle\-Container\-::reflective\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a53f222132c6a1177d3a14939e865de35}
+
+
+Cutoff radius. 
+
+\hypertarget{classSimulation_1_1ParticleContainer_a3e3805eea543d96c5cf6ced07b9c2e7b}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!visible@{visible}}
+\index{visible@{visible}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
+\subsubsection[{visible}]{\setlength{\rightskip}{0pt plus 5cm}int Simulation\-::\-Particle\-Container\-::visible\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a3e3805eea543d96c5cf6ced07b9c2e7b}
+
+
+Number of visible particles. 
+
+\hypertarget{classSimulation_1_1ParticleContainer_a257c23a232693610d47c0ee082085a49}{\index{Simulation\-::\-Particle\-Container@{Simulation\-::\-Particle\-Container}!wall\-Type@{wall\-Type}}
+\index{wall\-Type@{wall\-Type}!Simulation::ParticleContainer@{Simulation\-::\-Particle\-Container}}
+\subsubsection[{wall\-Type}]{\setlength{\rightskip}{0pt plus 5cm}int Simulation\-::\-Particle\-Container\-::wall\-Type\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleContainer_a257c23a232693610d47c0ee082085a49}
+
+
+Type index of wall properties. 
+
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}

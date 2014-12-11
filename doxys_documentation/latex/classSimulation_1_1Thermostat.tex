@@ -1,0 +1,106 @@
+\hypertarget{classSimulation_1_1Thermostat}{\section{Simulation\-:\-:Thermostat Class Reference}
+\label{classSimulation_1_1Thermostat}\index{Simulation\-::\-Thermostat@{Simulation\-::\-Thermostat}}
+}
+
+
+Handles temperature of particles in the simulation.  
+
+
+
+
+{\ttfamily \#include $<$Thermostat.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSimulation_1_1Thermostat_a3132362562357ff26f7bb02fa9ed59e0}{Thermostat} (\hyperlink{classSimulation_1_1ParticleContainer}{Particle\-Container} \&cont)
+\item 
+void \hyperlink{classSimulation_1_1Thermostat_a6d7ef0a0e8dc0aadee57630d63938f7d}{scale\-Temperature} (double scaling)
+\begin{DoxyCompactList}\small\item\em Scale temperature of simulation. \end{DoxyCompactList}\item 
+double \hyperlink{classSimulation_1_1Thermostat_ac082f2cc212aa2ac0c7d364e96afdb32}{calc\-Kinetic\-Energy} ()
+\begin{DoxyCompactList}\small\item\em Calculate kinetic energy of simulation. \end{DoxyCompactList}\item 
+void \hyperlink{classSimulation_1_1Thermostat_adac7020482a6f258d5d4757099016c22}{apply\-Temperature} (double temp)
+\begin{DoxyCompactList}\small\item\em Apply temperature to simulation. \end{DoxyCompactList}\item 
+void \hyperlink{classSimulation_1_1Thermostat_a37f1ec4f15eaeb89580d3fd28a0c984f}{apply\-Initial\-Temperature} (double temp)
+\begin{DoxyCompactList}\small\item\em Apply initial temperature to simulation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSimulation_1_1ParticleContainer}{Particle\-Container} \& \hyperlink{classSimulation_1_1Thermostat_a7625bc9f97f3b385ec28a4e049898032}{container}
+\begin{DoxyCompactList}\small\item\em Container which stores particles for temperature calculations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Handles temperature of particles in the simulation. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSimulation_1_1Thermostat_a3132362562357ff26f7bb02fa9ed59e0}{\index{Simulation\-::\-Thermostat@{Simulation\-::\-Thermostat}!Thermostat@{Thermostat}}
+\index{Thermostat@{Thermostat}!Simulation::Thermostat@{Simulation\-::\-Thermostat}}
+\subsubsection[{Thermostat}]{\setlength{\rightskip}{0pt plus 5cm}Thermostat\-::\-Thermostat (
+\begin{DoxyParamCaption}
+\item[{{\bf Particle\-Container} \&}]{cont}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1Thermostat_a3132362562357ff26f7bb02fa9ed59e0}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSimulation_1_1Thermostat_a37f1ec4f15eaeb89580d3fd28a0c984f}{\index{Simulation\-::\-Thermostat@{Simulation\-::\-Thermostat}!apply\-Initial\-Temperature@{apply\-Initial\-Temperature}}
+\index{apply\-Initial\-Temperature@{apply\-Initial\-Temperature}!Simulation::Thermostat@{Simulation\-::\-Thermostat}}
+\subsubsection[{apply\-Initial\-Temperature}]{\setlength{\rightskip}{0pt plus 5cm}void Thermostat\-::apply\-Initial\-Temperature (
+\begin{DoxyParamCaption}
+\item[{double}]{temp}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1Thermostat_a37f1ec4f15eaeb89580d3fd28a0c984f}
+
+
+Apply initial temperature to simulation. 
+
+\hypertarget{classSimulation_1_1Thermostat_adac7020482a6f258d5d4757099016c22}{\index{Simulation\-::\-Thermostat@{Simulation\-::\-Thermostat}!apply\-Temperature@{apply\-Temperature}}
+\index{apply\-Temperature@{apply\-Temperature}!Simulation::Thermostat@{Simulation\-::\-Thermostat}}
+\subsubsection[{apply\-Temperature}]{\setlength{\rightskip}{0pt plus 5cm}void Thermostat\-::apply\-Temperature (
+\begin{DoxyParamCaption}
+\item[{double}]{temp}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1Thermostat_adac7020482a6f258d5d4757099016c22}
+
+
+Apply temperature to simulation. 
+
+\hypertarget{classSimulation_1_1Thermostat_ac082f2cc212aa2ac0c7d364e96afdb32}{\index{Simulation\-::\-Thermostat@{Simulation\-::\-Thermostat}!calc\-Kinetic\-Energy@{calc\-Kinetic\-Energy}}
+\index{calc\-Kinetic\-Energy@{calc\-Kinetic\-Energy}!Simulation::Thermostat@{Simulation\-::\-Thermostat}}
+\subsubsection[{calc\-Kinetic\-Energy}]{\setlength{\rightskip}{0pt plus 5cm}double Thermostat\-::calc\-Kinetic\-Energy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1Thermostat_ac082f2cc212aa2ac0c7d364e96afdb32}
+
+
+Calculate kinetic energy of simulation. 
+
+\hypertarget{classSimulation_1_1Thermostat_a6d7ef0a0e8dc0aadee57630d63938f7d}{\index{Simulation\-::\-Thermostat@{Simulation\-::\-Thermostat}!scale\-Temperature@{scale\-Temperature}}
+\index{scale\-Temperature@{scale\-Temperature}!Simulation::Thermostat@{Simulation\-::\-Thermostat}}
+\subsubsection[{scale\-Temperature}]{\setlength{\rightskip}{0pt plus 5cm}void Thermostat\-::scale\-Temperature (
+\begin{DoxyParamCaption}
+\item[{double}]{scaling}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1Thermostat_a6d7ef0a0e8dc0aadee57630d63938f7d}
+
+
+Scale temperature of simulation. 
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classSimulation_1_1Thermostat_a7625bc9f97f3b385ec28a4e049898032}{\index{Simulation\-::\-Thermostat@{Simulation\-::\-Thermostat}!container@{container}}
+\index{container@{container}!Simulation::Thermostat@{Simulation\-::\-Thermostat}}
+\subsubsection[{container}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Particle\-Container}\& Simulation\-::\-Thermostat\-::container\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1Thermostat_a7625bc9f97f3b385ec28a4e049898032}
+
+
+Container which stores particles for temperature calculations. 
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{Thermostat_8h}{Thermostat.\-h}\item 
+src/\hyperlink{Thermostat_8cpp}{Thermostat.\-cpp}\end{DoxyCompactItemize}

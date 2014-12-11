@@ -3,36 +3,44 @@
 }
 
 
+Computes gravitational force.  
+
+
+
+
 {\ttfamily \#include $<$Particle\-Handler.\-h$>$}
 
 Inheritance diagram for Simulation\-:\-:Gravity\-Handler\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3.000000cm]{classSimulation_1_1GravityHandler}
+\includegraphics[height=2.000000cm]{classSimulation_1_1GravityHandler}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSimulation_1_1GravityHandler_abe61e3434323c7b7aaf52f00ac613bc9}{Gravity\-Handler} (double dt)
+\hyperlink{classSimulation_1_1GravityHandler_aa7a255d6fca3bb50ad2e76c521eda322}{Gravity\-Handler} (double grav)
 \item 
 void \hyperlink{classSimulation_1_1GravityHandler_a7f5b0d36e4e8e3dd6eb54d364add0287}{compute} (\hyperlink{classSimulation_1_1Particle}{Particle} \&p)
+\begin{DoxyCompactList}\small\item\em Computes one single particle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
 \item 
-void \hyperlink{classSimulation_1_1GravityHandler_a7805aa1b40a206d9fe3362a321d933ed}{compute} (\hyperlink{classSimulation_1_1Particle}{Particle} \&p1, \hyperlink{classSimulation_1_1Particle}{Particle} \&p2)
-\item 
-void \hyperlink{classSimulation_1_1GravityHandler_a4abb48d878ea825e6582ba0bf9ae5c0d}{compute\-Exclusive} (\hyperlink{classSimulation_1_1Particle}{Particle} \&p1, \hyperlink{classSimulation_1_1Particle}{Particle} \&p2)
+double \hyperlink{classSimulation_1_1GravityHandler_ad4a9911ae16b09fb2be6d50424efbeee}{g}
 \end{DoxyCompactItemize}
-\subsection*{Additional Inherited Members}
 
+
+\subsection{Detailed Description}
+Computes gravitational force. 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classSimulation_1_1GravityHandler_abe61e3434323c7b7aaf52f00ac613bc9}{\index{Simulation\-::\-Gravity\-Handler@{Simulation\-::\-Gravity\-Handler}!Gravity\-Handler@{Gravity\-Handler}}
+\hypertarget{classSimulation_1_1GravityHandler_aa7a255d6fca3bb50ad2e76c521eda322}{\index{Simulation\-::\-Gravity\-Handler@{Simulation\-::\-Gravity\-Handler}!Gravity\-Handler@{Gravity\-Handler}}
 \index{Gravity\-Handler@{Gravity\-Handler}!Simulation::GravityHandler@{Simulation\-::\-Gravity\-Handler}}
 \subsubsection[{Gravity\-Handler}]{\setlength{\rightskip}{0pt plus 5cm}Simulation\-::\-Gravity\-Handler\-::\-Gravity\-Handler (
 \begin{DoxyParamCaption}
-\item[{double}]{dt}
+\item[{double}]{grav}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSimulation_1_1GravityHandler_abe61e3434323c7b7aaf52f00ac613bc9}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSimulation_1_1GravityHandler_aa7a255d6fca3bb50ad2e76c521eda322}
 
 
 \subsection{Member Function Documentation}
@@ -45,32 +53,18 @@ void \hyperlink{classSimulation_1_1GravityHandler_a4abb48d878ea825e6582ba0bf9ae5
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSimulation_1_1GravityHandler_a7f5b0d36e4e8e3dd6eb54d364add0287}
 
 
+Computes one single particle. 
+
+
+
 Reimplemented from \hyperlink{classSimulation_1_1ParticleHandler_a6b1fc310603bc10093d50c674097fd25}{Simulation\-::\-Particle\-Handler}.
 
-\hypertarget{classSimulation_1_1GravityHandler_a7805aa1b40a206d9fe3362a321d933ed}{\index{Simulation\-::\-Gravity\-Handler@{Simulation\-::\-Gravity\-Handler}!compute@{compute}}
-\index{compute@{compute}!Simulation::GravityHandler@{Simulation\-::\-Gravity\-Handler}}
-\subsubsection[{compute}]{\setlength{\rightskip}{0pt plus 5cm}void Simulation\-::\-Gravity\-Handler\-::compute (
-\begin{DoxyParamCaption}
-\item[{{\bf Particle} \&}]{p1, }
-\item[{{\bf Particle} \&}]{p2}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSimulation_1_1GravityHandler_a7805aa1b40a206d9fe3362a321d933ed}
 
 
-Reimplemented from \hyperlink{classSimulation_1_1ParticleHandler_a013ad557c6892ed2287db090192144ea}{Simulation\-::\-Particle\-Handler}.
-
-\hypertarget{classSimulation_1_1GravityHandler_a4abb48d878ea825e6582ba0bf9ae5c0d}{\index{Simulation\-::\-Gravity\-Handler@{Simulation\-::\-Gravity\-Handler}!compute\-Exclusive@{compute\-Exclusive}}
-\index{compute\-Exclusive@{compute\-Exclusive}!Simulation::GravityHandler@{Simulation\-::\-Gravity\-Handler}}
-\subsubsection[{compute\-Exclusive}]{\setlength{\rightskip}{0pt plus 5cm}void Simulation\-::\-Gravity\-Handler\-::compute\-Exclusive (
-\begin{DoxyParamCaption}
-\item[{{\bf Particle} \&}]{p1, }
-\item[{{\bf Particle} \&}]{p2}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSimulation_1_1GravityHandler_a4abb48d878ea825e6582ba0bf9ae5c0d}
-
-
-Reimplemented from \hyperlink{classSimulation_1_1ParticleHandler_a4a1caeb40ada4f410fec9244bda4af69}{Simulation\-::\-Particle\-Handler}.
-
+\subsection{Member Data Documentation}
+\hypertarget{classSimulation_1_1GravityHandler_ad4a9911ae16b09fb2be6d50424efbeee}{\index{Simulation\-::\-Gravity\-Handler@{Simulation\-::\-Gravity\-Handler}!g@{g}}
+\index{g@{g}!Simulation::GravityHandler@{Simulation\-::\-Gravity\-Handler}}
+\subsubsection[{g}]{\setlength{\rightskip}{0pt plus 5cm}double Simulation\-::\-Gravity\-Handler\-::g\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1GravityHandler_ad4a9911ae16b09fb2be6d50424efbeee}
 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}

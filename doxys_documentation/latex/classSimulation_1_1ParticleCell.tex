@@ -1,0 +1,305 @@
+\hypertarget{classSimulation_1_1ParticleCell}{\section{Simulation\-:\-:Particle\-Cell Class Reference}
+\label{classSimulation_1_1ParticleCell}\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}}
+}
+
+
+Stores pointers to particles which lie in this cell.  
+
+
+
+
+{\ttfamily \#include $<$Particle\-Container.\-h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356c}{Cell\-Type} \{ \\*
+\hyperlink{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356caa37d40bf1097ce2043342c9a4d52182b}{Inner\-Cell}, 
+\hyperlink{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356ca9b7b3132a0d07ce3c1ec88e586bf2eb0}{Left\-Boundary}, 
+\hyperlink{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356ca424b56d6cea2bc492efd833bd3b07cdb}{Right\-Boundary}, 
+\hyperlink{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356ca10c2e4dddb9ca58b6b4526d5996ad288}{Bottom\-Boundary}, 
+\\*
+\hyperlink{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356ca10d23b8bf6686ae323d3af3dcb61c368}{Top\-Boundary}, 
+\hyperlink{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356cac0b8b9d11a7514e08bf149a2246ceb7f}{Corner}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSimulation_1_1ParticleCell_a2a61d645388b8c75d17d3d7c63640674}{Particle\-Cell} (int i, \hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ double, 3 $>$ \&\hyperlink{classSimulation_1_1ParticleCell_a4bb88bb8f5196cf9ad558f304fe33404}{pos}, double $\ast$r)
+\item 
+\hyperlink{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356c}{Cell\-Type} \& \hyperlink{classSimulation_1_1ParticleCell_a17d535f80c15a7abcab53d5230bbc524}{cell\-Type} ()
+\item 
+void \hyperlink{classSimulation_1_1ParticleCell_a780c301fa5e209ac14e36cc642e6450b}{insert} (\hyperlink{classSimulation_1_1Particle}{Particle} $\ast$p\-Particle)
+\begin{DoxyCompactList}\small\item\em Assigns particle to cell. \end{DoxyCompactList}\item 
+void \hyperlink{classSimulation_1_1ParticleCell_a5904e658b003356347c0f91e5293a0fb}{remove} (\hyperlink{classSimulation_1_1Particle}{Particle} $\ast$p\-Particle)
+\begin{DoxyCompactList}\small\item\em Renoves particle from cell. \end{DoxyCompactList}\item 
+bool \hyperlink{classSimulation_1_1ParticleCell_a6bda33452ea101d0ef4e06097286a7b3}{contains} (\hyperlink{classSimulation_1_1Particle}{Particle} $\ast$p\-Particle)
+\item 
+int \hyperlink{classSimulation_1_1ParticleCell_a8bb8b7e8ec24efb5a8fa89c0888e9367}{count} ()
+\item 
+\hyperlink{classSimulation_1_1Particle}{Particle} $\ast$ \hyperlink{classSimulation_1_1ParticleCell_a947d53f31f29826e948f0461c2795341}{operator\mbox{[}$\,$\mbox{]}} (int i)
+\item 
+void \hyperlink{classSimulation_1_1ParticleCell_aeaf10920eb0a8065635e31e27630fd5d}{iterate\-Particles} (\hyperlink{classSimulation_1_1ParticleHandler}{Particle\-Handler} \&handler)
+\begin{DoxyCompactList}\small\item\em Iterates over all live particles in cell an executes particle handler. \end{DoxyCompactList}\item 
+void \hyperlink{classSimulation_1_1ParticleCell_af8598bbf4f16c78024b3cbfbcd82f840}{iterate\-Particle\-Pairs} (\hyperlink{classSimulation_1_1ParticleHandler}{Particle\-Handler} \&handler)
+\begin{DoxyCompactList}\small\item\em Iterates over all live particles pairs in cell an executes particle handler. \end{DoxyCompactList}\item 
+void \hyperlink{classSimulation_1_1ParticleCell_aeb6f2c822b074287ee326601620cb976}{iterate\-Particle\-Pairs\-Exclusive} (\hyperlink{classSimulation_1_1ParticleHandler}{Particle\-Handler} \&handler)
+\item 
+void \hyperlink{classSimulation_1_1ParticleCell_a085607f34528b0fcf3b957792316305e}{combine\-Particle\-Pairs} (\hyperlink{classSimulation_1_1ParticleCell}{Particle\-Cell} \&other, \hyperlink{classSimulation_1_1ParticleHandler}{Particle\-Handler} \&handler)
+\begin{DoxyCompactList}\small\item\em Iterates over all live particles pairs in this and other cell. \end{DoxyCompactList}\item 
+void \hyperlink{classSimulation_1_1ParticleCell_a549a864549fe46ac551074f056a6805e}{combine\-Particle\-Pairs\-Exclusive} (\hyperlink{classSimulation_1_1ParticleCell}{Particle\-Cell} \&other, \hyperlink{classSimulation_1_1ParticleHandler}{Particle\-Handler} \&handler)
+\item 
+\hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ double, 3 $>$ \& \hyperlink{classSimulation_1_1ParticleCell_a4bb88bb8f5196cf9ad558f304fe33404}{pos} ()
+\item 
+int \hyperlink{classSimulation_1_1ParticleCell_ab05253d30f6451bc6af50d5293a4def1}{index} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::list$<$ \hyperlink{classSimulation_1_1Particle}{Particle} $\ast$ $>$ \hyperlink{classSimulation_1_1ParticleCell_adba57fd356e5966d87c181713cf9ca28}{p\-Particles}
+\begin{DoxyCompactList}\small\item\em List of pointers to particles in this cell. \end{DoxyCompactList}\item 
+int \hyperlink{classSimulation_1_1ParticleCell_a9c834e02eef34d364fafd837776bbf23}{self\-Index}
+\begin{DoxyCompactList}\small\item\em Index of cell in 1\-D cell list. \end{DoxyCompactList}\item 
+\hyperlink{classutils_1_1Vector}{utils\-::\-Vector}$<$ double, 3 $>$ \hyperlink{classSimulation_1_1ParticleCell_af518d59e9d7b1839e7c69de47d73fc09}{position}
+\begin{DoxyCompactList}\small\item\em Position of cell. \end{DoxyCompactList}\item 
+double $\ast$ \hyperlink{classSimulation_1_1ParticleCell_a5daab4af3ab096dfd7b2de63125ff8b5}{p\-R\-Cut\-Off}
+\begin{DoxyCompactList}\small\item\em Pointer to cutoff radius. \end{DoxyCompactList}\item 
+\hyperlink{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356c}{Cell\-Type} \hyperlink{classSimulation_1_1ParticleCell_a4b86c6d459e7cf660b0ff4dbb9796348}{type}
+\begin{DoxyCompactList}\small\item\em Type of cell. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Stores pointers to particles which lie in this cell. 
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356c}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!Cell\-Type@{Cell\-Type}}
+\index{Cell\-Type@{Cell\-Type}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{Cell\-Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Simulation\-::\-Particle\-Cell\-::\-Cell\-Type}}}\label{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356c}
+Defines whether cell is boundary or not \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Inner\-Cell@{Inner\-Cell}!Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}}\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!Inner\-Cell@{Inner\-Cell}}\item[{\em 
+\hypertarget{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356caa37d40bf1097ce2043342c9a4d52182b}{Inner\-Cell}\label{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356caa37d40bf1097ce2043342c9a4d52182b}
+}]\index{Left\-Boundary@{Left\-Boundary}!Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}}\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!Left\-Boundary@{Left\-Boundary}}\item[{\em 
+\hypertarget{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356ca9b7b3132a0d07ce3c1ec88e586bf2eb0}{Left\-Boundary}\label{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356ca9b7b3132a0d07ce3c1ec88e586bf2eb0}
+}]\index{Right\-Boundary@{Right\-Boundary}!Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}}\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!Right\-Boundary@{Right\-Boundary}}\item[{\em 
+\hypertarget{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356ca424b56d6cea2bc492efd833bd3b07cdb}{Right\-Boundary}\label{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356ca424b56d6cea2bc492efd833bd3b07cdb}
+}]\index{Bottom\-Boundary@{Bottom\-Boundary}!Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}}\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!Bottom\-Boundary@{Bottom\-Boundary}}\item[{\em 
+\hypertarget{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356ca10c2e4dddb9ca58b6b4526d5996ad288}{Bottom\-Boundary}\label{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356ca10c2e4dddb9ca58b6b4526d5996ad288}
+}]\index{Top\-Boundary@{Top\-Boundary}!Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}}\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!Top\-Boundary@{Top\-Boundary}}\item[{\em 
+\hypertarget{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356ca10d23b8bf6686ae323d3af3dcb61c368}{Top\-Boundary}\label{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356ca10d23b8bf6686ae323d3af3dcb61c368}
+}]\index{Corner@{Corner}!Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}}\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!Corner@{Corner}}\item[{\em 
+\hypertarget{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356cac0b8b9d11a7514e08bf149a2246ceb7f}{Corner}\label{classSimulation_1_1ParticleCell_a2212779392dcf6befecc55da1ec5356cac0b8b9d11a7514e08bf149a2246ceb7f}
+}]\end{description}
+\end{Desc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSimulation_1_1ParticleCell_a2a61d645388b8c75d17d3d7c63640674}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!Particle\-Cell@{Particle\-Cell}}
+\index{Particle\-Cell@{Particle\-Cell}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{Particle\-Cell}]{\setlength{\rightskip}{0pt plus 5cm}Particle\-Cell\-::\-Particle\-Cell (
+\begin{DoxyParamCaption}
+\item[{int}]{i, }
+\item[{{\bf utils\-::\-Vector}$<$ double, 3 $>$ \&}]{pos, }
+\item[{double $\ast$}]{r}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleCell_a2a61d645388b8c75d17d3d7c63640674}
+Constructor for particle cell 
+\begin{DoxyParams}{Parameters}
+{\em i} & Index of cell in 1\-D cell list \\
+\hline
+{\em pos} & Position of cell (lower left-\/hand corner) \\
+\hline
+{\em r} & Pointer to cutoff radius \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSimulation_1_1ParticleCell_a17d535f80c15a7abcab53d5230bbc524}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!cell\-Type@{cell\-Type}}
+\index{cell\-Type@{cell\-Type}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{cell\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Particle\-Cell\-::\-Cell\-Type} \& Particle\-Cell\-::cell\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleCell_a17d535f80c15a7abcab53d5230bbc524}
+\begin{DoxyReturn}{Returns}
+Celltype of cell 
+\end{DoxyReturn}
+\hypertarget{classSimulation_1_1ParticleCell_a085607f34528b0fcf3b957792316305e}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!combine\-Particle\-Pairs@{combine\-Particle\-Pairs}}
+\index{combine\-Particle\-Pairs@{combine\-Particle\-Pairs}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{combine\-Particle\-Pairs}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Cell\-::combine\-Particle\-Pairs (
+\begin{DoxyParamCaption}
+\item[{{\bf Particle\-Cell} \&}]{other, }
+\item[{{\bf Particle\-Handler} \&}]{handler}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleCell_a085607f34528b0fcf3b957792316305e}
+
+
+Iterates over all live particles pairs in this and other cell. 
+
+\hypertarget{classSimulation_1_1ParticleCell_a549a864549fe46ac551074f056a6805e}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!combine\-Particle\-Pairs\-Exclusive@{combine\-Particle\-Pairs\-Exclusive}}
+\index{combine\-Particle\-Pairs\-Exclusive@{combine\-Particle\-Pairs\-Exclusive}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{combine\-Particle\-Pairs\-Exclusive}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Cell\-::combine\-Particle\-Pairs\-Exclusive (
+\begin{DoxyParamCaption}
+\item[{{\bf Particle\-Cell} \&}]{other, }
+\item[{{\bf Particle\-Handler} \&}]{handler}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleCell_a549a864549fe46ac551074f056a6805e}
+Iterates over all live particles pairs in this and other cell \begin{DoxyNote}{Note}
+Every particle will be handled only once. This is faster but requires a symmetrical computation. 
+\end{DoxyNote}
+\hypertarget{classSimulation_1_1ParticleCell_a6bda33452ea101d0ef4e06097286a7b3}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!contains@{contains}}
+\index{contains@{contains}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{contains}]{\setlength{\rightskip}{0pt plus 5cm}bool Particle\-Cell\-::contains (
+\begin{DoxyParamCaption}
+\item[{{\bf Particle} $\ast$}]{p\-Particle}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleCell_a6bda33452ea101d0ef4e06097286a7b3}
+\begin{DoxyReturn}{Returns}
+Whether particle lies in cell 
+\end{DoxyReturn}
+\hypertarget{classSimulation_1_1ParticleCell_a8bb8b7e8ec24efb5a8fa89c0888e9367}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!count@{count}}
+\index{count@{count}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{count}]{\setlength{\rightskip}{0pt plus 5cm}int Particle\-Cell\-::count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleCell_a8bb8b7e8ec24efb5a8fa89c0888e9367}
+\begin{DoxyReturn}{Returns}
+Number of particles associated with cell 
+\end{DoxyReturn}
+\hypertarget{classSimulation_1_1ParticleCell_ab05253d30f6451bc6af50d5293a4def1}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!index@{index}}
+\index{index@{index}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{index}]{\setlength{\rightskip}{0pt plus 5cm}int Simulation\-::\-Particle\-Cell\-::index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSimulation_1_1ParticleCell_ab05253d30f6451bc6af50d5293a4def1}
+\begin{DoxyReturn}{Returns}
+Index of cell in 1\-D cell list 
+\end{DoxyReturn}
+\hypertarget{classSimulation_1_1ParticleCell_a780c301fa5e209ac14e36cc642e6450b}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!insert@{insert}}
+\index{insert@{insert}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{insert}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Cell\-::insert (
+\begin{DoxyParamCaption}
+\item[{{\bf Particle} $\ast$}]{p\-Particle}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleCell_a780c301fa5e209ac14e36cc642e6450b}
+
+
+Assigns particle to cell. 
+
+\hypertarget{classSimulation_1_1ParticleCell_af8598bbf4f16c78024b3cbfbcd82f840}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!iterate\-Particle\-Pairs@{iterate\-Particle\-Pairs}}
+\index{iterate\-Particle\-Pairs@{iterate\-Particle\-Pairs}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{iterate\-Particle\-Pairs}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Cell\-::iterate\-Particle\-Pairs (
+\begin{DoxyParamCaption}
+\item[{{\bf Particle\-Handler} \&}]{handler}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleCell_af8598bbf4f16c78024b3cbfbcd82f840}
+
+
+Iterates over all live particles pairs in cell an executes particle handler. 
+
+\hypertarget{classSimulation_1_1ParticleCell_aeb6f2c822b074287ee326601620cb976}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!iterate\-Particle\-Pairs\-Exclusive@{iterate\-Particle\-Pairs\-Exclusive}}
+\index{iterate\-Particle\-Pairs\-Exclusive@{iterate\-Particle\-Pairs\-Exclusive}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{iterate\-Particle\-Pairs\-Exclusive}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Cell\-::iterate\-Particle\-Pairs\-Exclusive (
+\begin{DoxyParamCaption}
+\item[{{\bf Particle\-Handler} \&}]{handler}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleCell_aeb6f2c822b074287ee326601620cb976}
+Iterates over all live particles pairs in cell an executes particle handler \begin{DoxyNote}{Note}
+Every particle will be handled only once. This is faster but requires a symmetrical computation. 
+\end{DoxyNote}
+\hypertarget{classSimulation_1_1ParticleCell_aeaf10920eb0a8065635e31e27630fd5d}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!iterate\-Particles@{iterate\-Particles}}
+\index{iterate\-Particles@{iterate\-Particles}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{iterate\-Particles}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Cell\-::iterate\-Particles (
+\begin{DoxyParamCaption}
+\item[{{\bf Particle\-Handler} \&}]{handler}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleCell_aeaf10920eb0a8065635e31e27630fd5d}
+
+
+Iterates over all live particles in cell an executes particle handler. 
+
+\hypertarget{classSimulation_1_1ParticleCell_a947d53f31f29826e948f0461c2795341}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{operator[]}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Particle} $\ast$ Particle\-Cell\-::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleCell_a947d53f31f29826e948f0461c2795341}
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Index of particle in cell \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to particle at index i 
+\end{DoxyReturn}
+\hypertarget{classSimulation_1_1ParticleCell_a4bb88bb8f5196cf9ad558f304fe33404}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!pos@{pos}}
+\index{pos@{pos}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{pos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf utils\-::\-Vector}$<$double, 3$>$\& Simulation\-::\-Particle\-Cell\-::pos (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSimulation_1_1ParticleCell_a4bb88bb8f5196cf9ad558f304fe33404}
+\begin{DoxyReturn}{Returns}
+Position of cell 
+\end{DoxyReturn}
+\hypertarget{classSimulation_1_1ParticleCell_a5904e658b003356347c0f91e5293a0fb}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!remove@{remove}}
+\index{remove@{remove}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{remove}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-Cell\-::remove (
+\begin{DoxyParamCaption}
+\item[{{\bf Particle} $\ast$}]{p\-Particle}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_1_1ParticleCell_a5904e658b003356347c0f91e5293a0fb}
+
+
+Renoves particle from cell. 
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classSimulation_1_1ParticleCell_af518d59e9d7b1839e7c69de47d73fc09}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!position@{position}}
+\index{position@{position}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{position}]{\setlength{\rightskip}{0pt plus 5cm}{\bf utils\-::\-Vector}$<$double, 3$>$ Simulation\-::\-Particle\-Cell\-::position\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleCell_af518d59e9d7b1839e7c69de47d73fc09}
+
+
+Position of cell. 
+
+\hypertarget{classSimulation_1_1ParticleCell_adba57fd356e5966d87c181713cf9ca28}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!p\-Particles@{p\-Particles}}
+\index{p\-Particles@{p\-Particles}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{p\-Particles}]{\setlength{\rightskip}{0pt plus 5cm}std\-::list$<${\bf Particle}$\ast$$>$ Simulation\-::\-Particle\-Cell\-::p\-Particles\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleCell_adba57fd356e5966d87c181713cf9ca28}
+
+
+List of pointers to particles in this cell. 
+
+\hypertarget{classSimulation_1_1ParticleCell_a5daab4af3ab096dfd7b2de63125ff8b5}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!p\-R\-Cut\-Off@{p\-R\-Cut\-Off}}
+\index{p\-R\-Cut\-Off@{p\-R\-Cut\-Off}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{p\-R\-Cut\-Off}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ Simulation\-::\-Particle\-Cell\-::p\-R\-Cut\-Off\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleCell_a5daab4af3ab096dfd7b2de63125ff8b5}
+
+
+Pointer to cutoff radius. 
+
+\hypertarget{classSimulation_1_1ParticleCell_a9c834e02eef34d364fafd837776bbf23}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!self\-Index@{self\-Index}}
+\index{self\-Index@{self\-Index}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{self\-Index}]{\setlength{\rightskip}{0pt plus 5cm}int Simulation\-::\-Particle\-Cell\-::self\-Index\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleCell_a9c834e02eef34d364fafd837776bbf23}
+
+
+Index of cell in 1\-D cell list. 
+
+\hypertarget{classSimulation_1_1ParticleCell_a4b86c6d459e7cf660b0ff4dbb9796348}{\index{Simulation\-::\-Particle\-Cell@{Simulation\-::\-Particle\-Cell}!type@{type}}
+\index{type@{type}!Simulation::ParticleCell@{Simulation\-::\-Particle\-Cell}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Cell\-Type} Simulation\-::\-Particle\-Cell\-::type\hspace{0.3cm}{\ttfamily [private]}}}\label{classSimulation_1_1ParticleCell_a4b86c6d459e7cf660b0ff4dbb9796348}
+
+
+Type of cell. 
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{ParticleContainer_8h}{Particle\-Container.\-h}\item 
+src/\hyperlink{ParticleContainer_8cpp}{Particle\-Container.\-cpp}\end{DoxyCompactItemize}
