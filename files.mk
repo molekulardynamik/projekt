@@ -8,4 +8,5 @@ src/outputWriter/XYZWriter.cpp\
 src/Particle.cpp\
 src/ParticleContainer.cpp\
 src/ParticleGenerator.cpp\
+src/Thermostat.cpp\
 src/UnitTests.cpp\
