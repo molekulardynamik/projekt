@@ -24,7 +24,7 @@ CFLAGS=-g -O3 -ggdb
 
 # Linker flags
 # ------------
-LDFLAGS= -lxerces-c -lcppunit -lapr-1 -laprutil-1 -llog4cxx -lxerces-c -Wl,--version-script memcpy_wrap.map 
+LDFLAGS= -lxerces-c -lcppunit -lapr-1 -laprutil-1 -llog4cxx -lxerces-c
 INCLUDES= -I./src -I./libxsd
 
 OBJECTS=$(SOURCES:.cpp=.o)
@@ -33,7 +33,7 @@ EXECUTABLE=MolSim
 all: $(SOURCES) $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(OBJECTS) memcpy_wrap.o $(LDFLAGS) -o $@ 
+	$(CC) $(OBJECTS) $(LDFLAGS) -o $@ 
 
 clean:
 	rm $(OBJECTS)
