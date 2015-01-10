@@ -9,8 +9,8 @@ include files.mk
 
 # Compiler
 # --------
-CC=g++
-#CC=icpc
+#CC=g++
+CC=icpc
 
 # Build.
 #
@@ -24,7 +24,7 @@ CFLAGS=-g -O3 -ggdb
 
 # Linker flags
 # ------------
-LDFLAGS= -lxerces-c -lcppunit -lapr-1 -laprutil-1 -llog4cxx -lxerces-c
+LDFLAGS= -lxerces-c -lcppunit -laprutil-1 -lapr-1 -llog4cxx -lxerces-c
 INCLUDES= -I./src -I./libxsd
 
 OBJECTS=$(SOURCES:.cpp=.o)
