@@ -1,6 +1,7 @@
 PSE Molekulardynamik WS14 - Implementation
 =======
 
+
 How to set up the environment (contents of envMolSim.sh):
 
 copy and paste each line below seperately on the command line:
@@ -28,6 +29,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/scratch/t1221/di34muv/libraries/apache-
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/lrz/sys/libraries/xerces/3.1/lib/
 
 export LIBRARY_PATH=$LIBRARY_PATH:$LD_LIBRARY_PATH
+
 
 
 How to use:
