@@ -146,13 +146,14 @@ ParticleContainer::ParticleContainer()
 	particlePool.clear();
 }
 
-void ParticleContainer::init(char* filename)
+bool ParticleContainer::init(string filename)
 {
 	LOG4CXX_DEBUG(containerLogger, "init");
 
 	
 	FileReader fileReader;
-	fileReader.readFile(particlePool, filename, &domainX, &domainY, &rCutOff);
+	if(!fileReader.readFile(particlePool, filename, &domainX, &domainY, &rCutOff))
+		return false;
 
 	ParticleProperty wallProp;
 	for (int pr = 0; pr < ParticleProperty::count(); pr++)
@@ -255,6 +256,8 @@ void ParticleContainer::init(char* filename)
 	updateCells();
 
 	LOG4CXX_DEBUG(containerLogger, "LiveParticles: " << (int)liveParticles.size());
+
+	return true;
 }
 
 void ParticleContainer::updateCells()

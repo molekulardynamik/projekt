@@ -17,7 +17,7 @@ public:
 	FileReader();
 	virtual ~FileReader();
 
-	void readFile(std::vector<Simulation::Particle>& particles, char* filename, double* domainX, double* domainY, double* rCutOff );
+	bool readFile(std::vector<Simulation::Particle>& particles, std::string filename, double* domainX, double* domainY, double* rCutOff );
 };
 
 #endif /* FILE_READER_H_ */

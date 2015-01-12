@@ -16,8 +16,7 @@
 #include <log4cxx/logger.h>
 #include <log4cxx/xml/domconfigurator.h>
 
-//#include "hello.hxx"
-
+#include "config.hxx"
 
 using namespace std;
 using namespace Simulation;
@@ -29,7 +28,7 @@ using namespace log4cxx::helpers;
 // Define static logger variable
 LoggerPtr logger(Logger::getLogger("main"));
 
-
+auto_ptr<config_t> configuration;
 
 
 /**
@@ -43,9 +42,7 @@ double start_time = 0;
 double end_time = 1000;
 double delta_t = 0.014;
 
-
-
-int main(int argc, char* argsv[]) 
+int main(int argc, char* argsv[])
 {
 	time_t start, end;
 	time(&start);
@@ -53,72 +50,62 @@ int main(int argc, char* argsv[])
 	DOMConfigurator::configure("Log4cxxConfig.xml");
 	LOG4CXX_INFO(logger, "Hello from MolSim for PSE!");
 
-	if (argc == 2 && strcmp(argsv[1], "-test") == 0)
-	{
-		LOG4CXX_INFO(logger, "Running test suit...");
-		CppUnit::TextUi::TestRunner runner;
-		runner.addTest(ParticleContainerTest::suite());
-		runner.run();
-		return 0;		
-	}
-	else if (argc == 3 && strcmp(argsv[1], "-single") == 0)
-	{
-		container.init(argsv[2]);
+	char* configFile = "config.xml";
+	if(argc == 2)
+		configFile = argsv[1];
 
-		plotParticles(0);
-
-		LOG4CXX_INFO(logger, "BYE");
-		return 0;
-	}
-	else if (argc != 6 && argc != 7) 
+	try
 	{
-		LOG4CXX_ERROR(logger, "Errounous programme call!");
-		LOG4CXX_ERROR(logger, "use /MolSim <filename> <t_end> <t_delta> <g_grav> <temp>");
-		LOG4CXX_ERROR(logger, "use /MolSim <filename> <t_end> <t_delta> <g_grav> <temp> -save");
-		//LOG4CXX_ERROR(logger, "or /MolSim -test");
-		return 0;
+		configuration = configSim(configFile);
+	} catch (const xml_schema::exception& e)
+	{
+		LOG4CXX_ERROR(logger, e);
+		return 1;
 	}
 
 	bool saveState = false;
-	if (argc == 7)
-		saveState = strcmp(argsv[6], "-save") == 0;
 
 	double current_time = start_time;
 
-	double gravity = atof(argsv[4]);
-	double temperature = atof(argsv[5]);
+	double gravity = configuration->properties().gravity();
+	double temperature = configuration->properties().thermostat().initialTemp();
 
-	cout << "grav " << gravity << " temp " << temperature << endl;
+	LOG4CXX_DEBUG(logger,"grav " << gravity << " temp " << temperature);
 
-	end_time = atof(argsv[2]);
-	delta_t = atof(argsv[3]);	
+	end_time = configuration->properties().end();
+	delta_t = configuration->properties().delta();
 
-	container.init(argsv[1]);
-
+	if(!container.init(configuration->simulationFile()))
+		return 1;
 
 	Thermostat thermostat(container);
 	if (temperature != 0)
-		thermostat.applyInitialTemperature(40);
+		thermostat.applyInitialTemperature(configuration->properties().thermostat().initialTemp());
 
 	PositionHandler ph = PositionHandler(delta_t);
 	VelocityHandler vh = VelocityHandler(delta_t);
 	ForceReset fr = ForceReset();
 	GravityHandler gh = GravityHandler(gravity);
-	LennardJonesHandler ljh = LennardJonesHandler(delta_t, container.getCutOff());
+	LennardJonesHandler ljh = LennardJonesHandler(delta_t,
+			container.getCutOff());
 
 	// the forces are needed to calculate x, but are not given in the input file.
-	
+
 	container.iterateParticles(ljh);
 	container.iterateParticlePairsExclusive(ljh);
 
 	int iteration = 0;
 	int lastTrace = 0;
+	int skipIterations = configuration->output().iterations();
 
-	LOG4CXX_INFO(logger, "start iterating, " << end_time / delta_t << " iterations in total");
-	 // for this loop, we assume: current x, current f and current v are known
-	
+	LOG4CXX_INFO(logger,
+			"start iterating, " << end_time / delta_t
+					<< " iterations in total");
+	// for this loop, we assume: current x, current f and current v are known
+
 	// loops until end_time is reached
-	while (current_time < end_time) {
+	while (current_time < end_time)
+	{
 
 		//LOG4CXX_DEBUG(logger, "boundries");
 		// apply BoudryConditions to BoundryCells
@@ -144,7 +131,6 @@ int main(int argc, char* argsv[])
 		// calculate new Force for each Particle Pair (ljh -> leonard jones Handler)
 		container.iterateParticlePairsExclusive(ljh);
 
-
 		//LOG4CXX_DEBUG(logger, "iterate4");
 		// calculate new Velocty for each Particle based on its force (vh --> velocity Handler)
 		container.iterateParticles(vh);
@@ -155,14 +141,16 @@ int main(int argc, char* argsv[])
 		iteration++;
 
 		// write Particles to file
-		if (iteration % 10 == 0) {
+		if (iteration % skipIterations == 0)
+		{
 			plotParticles(iteration);
 		}
 		lastTrace++;
-		// print símulation status
+		// print sï¿½mulation status
 		if (lastTrace >= (end_time / delta_t / 100.0))
 		{
-			LOG4CXX_INFO(logger, (100.0 * iteration * delta_t / end_time) << " %");
+			LOG4CXX_INFO(logger,
+					(100.0 * iteration * delta_t / end_time) << " %");
 			lastTrace = 0;
 		}
 
@@ -181,25 +169,23 @@ int main(int argc, char* argsv[])
 
 		StateWriter::writeStateToFile(outputFile.c_str(), container);
 
-
 		LOG4CXX_INFO(logger, "State written in " << outputFile);
 	}
 
 	return 0;
 }
 
-
-void plotParticles(int iteration) {
-
-	string out_name("../vtkOutput/MD_vtk");
+void plotParticles(int iteration)
+{
+	string out_name(configuration->output().dir() + configuration->output().filename());
 
 	outputWriter::VTKWriter writer;
 	writer.initializeOutput(container.countVisible());
-	for(int i=0; i<container.count(); i++)
+	for (int i = 0; i < container.count(); i++)
 	{
 		Particle& p = container[i];
 		if (p.isVisible())
 			writer.plotParticle(p);
-	}	
+	}
 	writer.writeFile(out_name, iteration);
 }

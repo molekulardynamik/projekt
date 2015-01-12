@@ -9,9 +9,9 @@
 #define VTKWRITER_H_
 
 #include "Particle.h"
-#include "outputWriter/vtk-unstructured.h"
-
 #include <list>
+
+#include "vtk-unstructured.hxx"
 
 namespace outputWriter {
 

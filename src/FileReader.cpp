@@ -16,6 +16,7 @@
 #include <iostream>
 #include <cstdlib>
 
+#include "simulation.hxx"
 
 using namespace std;
 using namespace Simulation;
@@ -152,11 +153,102 @@ void FileReader::readFile(vector<Particle>& particles, char* filename, bool* ref
 }
 */
 
-void FileReader::readFile(vector<Particle>& particles, char* filename, double* domainX, double* domainY, double* rCutOff)
+bool FileReader::readFile(vector<Particle>& particles, std::string filename, double* domainX, double* domainY, double* rCutOf)
 {
+	auto_ptr<simulation_t> sim;
+	try
+	{
+		sim = simulation(filename);
+	}
+	catch(const xml_schema::exception& e)
+	{
+		LOG4CXX_ERROR(fileReaderLogger, e);
+		return false;
+	}
+
 	LOG4CXX_INFO(fileReaderLogger, "Reading file: " << filename);
 
-	std::ifstream input_file(filename);
+	*domainX = sim->domain().X();
+	*domainY = sim->domain().Y();
+	*rCutOf = sim->rCutOf();
+
+	int numCuboids = 0;
+	int numSpheres = 0;
+
+	for(simulation_t::type_const_iterator i(sim->type().begin());
+				i != sim->type().end();
+				++i)
+	{
+		ParticleProperty prop;
+		prop.mass = i->mass();
+		prop.e = i->epsilon();
+		prop.o = i->sigma();
+
+		ParticleProperty::push(prop);
+	}
+
+	for(simulation_t::cuboid_const_iterator i(sim->cuboid().begin());
+			i != sim->cuboid().end();
+			++i)
+	{
+		int type;;
+		double x[3];
+		double v[3];
+		int n[3];
+		double h;
+
+		type = i->type();
+		x[0] = i->position().X();
+		x[1] = i->position().Y();
+		x[2] = i->position().Z();
+		v[0] = i->initialVelocity().X();
+		v[1] = i->initialVelocity().Y();
+		v[2] = i->initialVelocity().Z();
+		n[0] = i->particleCount().X();
+		n[1] = i->particleCount().Y();
+		n[2] = i->particleCount().Z();
+		h = i->spacing();
+
+
+		ParticleGenerator::generateCuboid(Vector<double, 3>(x), Vector<double, 3>(v), Vector<int, 3>(n), h, type, particles);
+		numCuboids++;
+
+		LOG4CXX_DEBUG(fileReaderLogger, "generated cuboid ");
+	}
+
+	for(simulation_t::sphere_const_iterator i(sim->sphere().begin());
+				i != sim->sphere().end();
+				++i)
+		{
+			int type;;
+			double x[3];
+			double v[3];
+			int n;
+			double h;
+
+			type = i->type();
+			x[0] = i->position().X();
+			x[1] = i->position().Y();
+			x[2] = i->position().Z();
+			v[0] = i->initialVelocity().X();
+			v[1] = i->initialVelocity().Y();
+			v[2] = i->initialVelocity().Z();
+			n = i->radius();
+			h = i->spacing();
+
+
+			ParticleGenerator::generateSphere(Vector<double, 3>(x), Vector<double, 3>(v), n, h, type, particles);
+			numSpheres++;
+
+			LOG4CXX_DEBUG(fileReaderLogger, "generated sphere " << v[0] << " " << v[1] << " " << v[2]);
+		}
+
+	LOG4CXX_INFO(fileReaderLogger, "generated " << numCuboids << (numCuboids != 1 ? " cuboids" : " cuboid")
+			<<" and " << numSpheres << (numSpheres != 1 ? " spheres" : " sphere") << ".");
+
+	return true;
+
+	/*std::ifstream input_file(filename);
 
 	if (!input_file.is_open())
 	{
@@ -398,7 +490,7 @@ void FileReader::readFile(vector<Particle>& particles, char* filename, double* d
 
 	}
 
-	LOG4CXX_DEBUG(fileReaderLogger, "end of File");
+	LOG4CXX_DEBUG(fileReaderLogger, "end of File");*/
 }
 
 

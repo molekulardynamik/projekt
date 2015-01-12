@@ -119,7 +119,7 @@ namespace Simulation
 
 		/// Initializes particle container with data from file
 		/// \param filename File which will be read
-		void init(char* filename);
+		bool init(std::string filename);
 
 
 		/// Assigns particles to cells based on their location 
