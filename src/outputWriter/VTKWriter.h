@@ -11,7 +11,7 @@
 #include "Particle.h"
 #include <list>
 
-#include "vtk-unstructured.hxx"
+#include "vtk-unstructured.h"
 
 namespace outputWriter {
 

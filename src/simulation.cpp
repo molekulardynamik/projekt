@@ -38,7 +38,7 @@
 
 #include <xsd/cxx/pre.hxx>
 
-#include "simulation.hxx"
+#include "simulation.h"
 
 // type_t
 // 

@@ -31,8 +31,8 @@
 // in the accompanying FLOSSE file.
 //
 
-#ifndef SRC_OUTPUT_WRITER_VTK_UNSTRUCTURED_HXX
-#define SRC_OUTPUT_WRITER_VTK_UNSTRUCTURED_HXX
+#ifndef SRC_OUTPUT_WRITER_VTK_UNSTRUCTURED_H
+#define SRC_OUTPUT_WRITER_VTK_UNSTRUCTURED_H
 
 // Begin prologue.
 //
@@ -1294,4 +1294,4 @@ operator<< (::xercesc::DOMElement&, const Cells&);
 //
 // End epilogue.
 
-#endif // SRC_OUTPUT_WRITER_VTK_UNSTRUCTURED_HXX
+#endif // SRC_OUTPUT_WRITER_VTK_UNSTRUCTURED_H

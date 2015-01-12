@@ -9,8 +9,8 @@ include files.mk
 
 # Compiler
 # --------
-#CC=g++
-zCC=icpc
+CC=g++
+#CC=icpc
 
 # Build.
 #

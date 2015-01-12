@@ -31,8 +31,8 @@
 // in the accompanying FLOSSE file.
 //
 
-#ifndef SRC_CONFIG_HXX
-#define SRC_CONFIG_HXX
+#ifndef SRC_CONFIG_H
+#define SRC_CONFIG_H
 
 // Begin prologue.
 //
@@ -720,4 +720,4 @@ configSim (::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument >& d,
 //
 // End epilogue.
 
-#endif // SRC_CONFIG_HXX
+#endif // SRC_CONFIG_H

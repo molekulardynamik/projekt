@@ -31,8 +31,8 @@
 // in the accompanying FLOSSE file.
 //
 
-#ifndef SRC_SIMULATION_HXX
-#define SRC_SIMULATION_HXX
+#ifndef SRC_SIMULATION_H
+#define SRC_SIMULATION_H
 
 // Begin prologue.
 //
@@ -978,4 +978,4 @@ simulation (::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument >& d,
 //
 // End epilogue.
 
-#endif // SRC_SIMULATION_HXX
+#endif // SRC_SIMULATION_H

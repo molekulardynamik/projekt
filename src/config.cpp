@@ -38,7 +38,7 @@
 
 #include <xsd/cxx/pre.hxx>
 
-#include "config.hxx"
+#include "config.h"
 
 // output_t
 // 
