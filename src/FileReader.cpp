@@ -16,7 +16,7 @@
 #include <iostream>
 #include <cstdlib>
 
-#include "simulation.hxx"
+#include "simulation.h"
 
 using namespace std;
 using namespace Simulation;
