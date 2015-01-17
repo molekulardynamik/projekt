@@ -8,7 +8,7 @@
 #ifndef PARTICLE_H_
 #define PARTICLE_H_
 
-#include "utils/Vector.h"
+#include "../utils/Vector.h"
 #include <vector>
 
 namespace Simulation
@@ -65,18 +65,15 @@ namespace Simulation
 
 		int cell;							///< Cell which holds particle
 
-		bool visible;
-
 	public:
-		Particle(int type, bool vivible = true);
+		Particle(int type);
 
 		Particle(const Particle& other);
 
 		Particle(
 			utils::Vector<double, 3> x_arg,
 			utils::Vector<double, 3> v_arg,
-			int type,
-			bool vis = true
+			int type
 		);
 
 		virtual ~Particle();
@@ -98,12 +95,8 @@ namespace Simulation
 		int getType();
 		void setType(int t);
 
-		int getCell();
-		void setCell(int c);
-
-		bool isVisible();
-
 		bool operator==(Particle& other);
+		bool operator==(const Particle& other);
 
 		std::string toString();
 

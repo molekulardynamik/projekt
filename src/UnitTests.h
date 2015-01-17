@@ -3,9 +3,8 @@
 #include "cppunit/TestCaller.h"
 #include "cppunit/TestResult.h"
 
-#include "ParticleContainer.h"
-
 #include <vector>
+#include "Simulation/Container/ParticleContainer.h"
 
 class ParticleContainerTest : public CppUnit::TestCase
 {

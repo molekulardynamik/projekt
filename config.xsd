@@ -8,29 +8,13 @@
 		</xs:sequence>
 	</xs:complexType>
 
-	<xs:complexType name="thermostat_t">
-		<xs:sequence>
-			<xs:element name="initialTemp" type="xs:double"/>
-			<xs:element name="targetTemp" type="xs:double"/>
-			<xs:element name="stepTemp" type="xs:double"/>
-			<xs:element name="startTime" type="xs:int"/>
-		</xs:sequence>
-	</xs:complexType>
-	
-	<xs:complexType name="properties_t">
+	<xs:complexType name="config_t">
 		<xs:sequence>
 			<xs:element name="delta" type="xs:double"/>
 			<xs:element name="end" type="xs:double"/>
-			<xs:element name="thermostat" type="thermostat_t"/>
-			<xs:element name="gravity" type="xs:double"/>
-		</xs:sequence>
-	</xs:complexType>
-
-	<xs:complexType name="config_t">
-		<xs:sequence>
 			<xs:element name="output" type="output_t"/>
-			<xs:element name="properties" type="properties_t"/>
 			<xs:element name="simulationFile" type="xs:string"/>
+			<xs:element name="saveFile" type="xs:string" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	

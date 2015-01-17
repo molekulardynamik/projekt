@@ -1,5 +1,5 @@
-#include "ParticleContainer.h"
-#include "FileReader.h"
+#include "ParticleContainer_old.h"
+
 #include <algorithm>
 
 #include <log4cxx/logger.h>
@@ -16,9 +16,8 @@ using namespace log4cxx::helpers;
 // Define static logger variable
 LoggerPtr containerLogger(Logger::getLogger("ParticleContanier"));
 
-
-ParticleCell::ParticleCell(int i, Vector<double, 3>& pos, double* r)
-	: selfIndex(i), position(pos), type(InnerCell), pRCutOff(r)
+ParticleCell::ParticleCell(int i, Vector<double, 3>& pos, double* r) :
+		selfIndex(i), position(pos), type(InnerCell), pRCutOff(r)
 {
 }
 
@@ -33,7 +32,8 @@ void ParticleCell::insert(Particle* pParticle)
 	if ((delta[0] > *pRCutOff || delta[1] > *pRCutOff) && type == InnerCell)
 	{
 		LOG4CXX_DEBUG(containerLogger, "Particle does not fit in cell");
-		LOG4CXX_DEBUG(containerLogger, "Cell: x: " << position[0] << " y: " << position[1] << ", P: x: " << pParticle->getX()[0] << " y: " << pParticle->getX()[1]);
+		LOG4CXX_DEBUG(containerLogger,
+				"Cell: x: " << position[0] << " y: " << position[1] << ", P: x: " << pParticle->getX()[0] << " y: " << pParticle->getX()[1]);
 		LOG4CXX_DEBUG(containerLogger, "cutoff: " << *pRCutOff);
 	}
 	else
@@ -56,7 +56,8 @@ int ParticleCell::count()
 
 bool ParticleCell::contains(Particle* pParticle)
 {
-	return find(pParticles.begin(), pParticles.end(), pParticle) != pParticles.end();
+	return find(pParticles.begin(), pParticles.end(), pParticle)
+			!= pParticles.end();
 }
 
 Particle* ParticleCell::operator[](int i)
@@ -81,7 +82,8 @@ void ParticleCell::iterateParticlePairs(ParticleHandler& handler)
 	for (PParticleIterator i = pParticles.begin(); i != pParticles.end(); i++)
 	{
 		Particle& p1 = **i;
-		for (PParticleIterator j = pParticles.begin(); j != pParticles.end(); j++)
+		for (PParticleIterator j = pParticles.begin(); j != pParticles.end();
+				j++)
 		{
 			Particle& p2 = **j;
 			if (*i != *j)
@@ -108,12 +110,14 @@ void ParticleCell::iterateParticlePairsExclusive(ParticleHandler& handler)
 	}
 }
 
-void ParticleCell::combineParticlePairs(ParticleCell& other, ParticleHandler& handler)
+void ParticleCell::combineParticlePairs(ParticleCell& other,
+		ParticleHandler& handler)
 {
 	for (PParticleIterator i = pParticles.begin(); i != pParticles.end(); i++)
 	{
 		Particle& p1 = **i;
-		for (PParticleIterator j = other.pParticles.begin(); j != other.pParticles.end(); j++)
+		for (PParticleIterator j = other.pParticles.begin();
+				j != other.pParticles.end(); j++)
 		{
 			Particle& p2 = **j;
 			handler.compute(p1, p2);
@@ -121,12 +125,14 @@ void ParticleCell::combineParticlePairs(ParticleCell& other, ParticleHandler& ha
 	}
 }
 
-void ParticleCell::combineParticlePairsExclusive(ParticleCell& other, ParticleHandler& handler)
+void ParticleCell::combineParticlePairsExclusive(ParticleCell& other,
+		ParticleHandler& handler)
 {
 	for (PParticleIterator i = pParticles.begin(); i != pParticles.end(); i++)
 	{
 		Particle& p1 = **i;
-		for (PParticleIterator j = other.pParticles.begin(); j != other.pParticles.end(); j++)
+		for (PParticleIterator j = other.pParticles.begin();
+				j != other.pParticles.end(); j++)
 		{
 			Particle& p2 = **j;
 			handler.computeExclusive(p1, p2);
@@ -134,26 +140,17 @@ void ParticleCell::combineParticlePairsExclusive(ParticleCell& other, ParticleHa
 	}
 }
 
-
-
-
-
-
-
-
 ParticleContainer::ParticleContainer()
 {
 	particlePool.clear();
 }
 
-bool ParticleContainer::init(string filename)
+void ParticleContainer::init(std::auto_ptr<simulation_t> sim)
 {
-	LOG4CXX_DEBUG(containerLogger, "init");
 
-	
-	FileReader fileReader;
-	if(!fileReader.readFile(particlePool, filename, &domainX, &domainY, &rCutOff))
-		return false;
+
+
+	ParticleGenerator::readFile(sim, particlePool);
 
 	ParticleProperty wallProp;
 	for (int pr = 0; pr < ParticleProperty::count(); pr++)
@@ -171,12 +168,10 @@ bool ParticleContainer::init(string filename)
 	wallType = ParticleProperty::count();
 	ParticleProperty::push(wallProp);
 
-
 	numCellsX = ceil(domainX / rCutOff) + 2;
 	numCellsY = ceil(domainY / rCutOff) + 2;
 
-	LOG4CXX_DEBUG(containerLogger, "DomainX: " << domainX << " DomainY: " << domainY << " rCutOff: " << rCutOff);
-	LOG4CXX_DEBUG(containerLogger, "NumCellsX: " << numCellsX << " NumCellsY: " << numCellsY);
+
 
 	// create Cells
 	int i = 0;
@@ -193,21 +188,20 @@ bool ParticleContainer::init(string filename)
 		}
 	}
 
-	LOG4CXX_DEBUG(containerLogger, "NumCells: " << i << " == " << (int)cells.size());
+	LOG4CXX_DEBUG(containerLogger,
+			"NumCells: " << i << " == " << (int)cells.size());
 
 	// find Boundaries
 	i = 0;
-	for(int x = 0; x < numCellsX; x++)
+	for (int x = 0; x < numCellsX; x++)
 	{
 		for (int y = 0; y < numCellsY; y++)
 		{
 			ParticleCell& cell = cells[i];
 
-
-			if ((x == 0 && y == 0) ||
-				(x == 0 && y == numCellsY - 1) ||
-				(x == numCellsX - 1 && y == 0) ||
-				(x == numCellsX - 1 && y == numCellsY - 1))
+			if ((x == 0 && y == 0) || (x == 0 && y == numCellsY - 1)
+					|| (x == numCellsX - 1 && y == 0)
+					|| (x == numCellsX - 1 && y == numCellsY - 1))
 			{
 				cell.cellType() = ParticleCell::Corner;
 			}
@@ -216,35 +210,40 @@ bool ParticleContainer::init(string filename)
 				cell.cellType() = ParticleCell::LeftBoundary;
 				ParticleCell& other = cells[i + numCellsY];
 
-				boundaryHaloPairs.push_back(BoundaryHaloPair(&cell, &other, Periodic));
+				boundaryHaloPairs.push_back(
+						BoundaryHaloPair(&cell, &other, Periodic));
 			}
 			else if (x == numCellsX - 1)
 			{
 				cell.cellType() = ParticleCell::RightBoundary;
 				ParticleCell& other = cells[i - numCellsY];
 
-				boundaryHaloPairs.push_back(BoundaryHaloPair(&cell, &other, Periodic));
+				boundaryHaloPairs.push_back(
+						BoundaryHaloPair(&cell, &other, Periodic));
 			}
 			else if (y == 0)
 			{
 				cell.cellType() = ParticleCell::BottomBoundary;
 				ParticleCell& other = cells[i + 1];
 
-				boundaryHaloPairs.push_back(BoundaryHaloPair(&cell, &other, Reflecting));
+				boundaryHaloPairs.push_back(
+						BoundaryHaloPair(&cell, &other, Reflecting));
 			}
 			else if (y == numCellsY - 1)
 			{
 				cell.cellType() = ParticleCell::TopBoundary;
 				ParticleCell& other = cells[i - 1];
 
-				boundaryHaloPairs.push_back(BoundaryHaloPair(&cell, &other, Reflecting));
+				boundaryHaloPairs.push_back(
+						BoundaryHaloPair(&cell, &other, Reflecting));
 			}
 
 			i++;
 		}
 	}
 
-	LOG4CXX_DEBUG(containerLogger, "NumBoundaries: " << (int)boundaryHaloPairs.size());
+	LOG4CXX_DEBUG(containerLogger,
+			"NumBoundaries: " << (int)boundaryHaloPairs.size());
 
 	LOG4CXX_DEBUG(containerLogger, "Particles: " << (int)particlePool.size());
 
@@ -255,9 +254,9 @@ bool ParticleContainer::init(string filename)
 
 	updateCells();
 
-	LOG4CXX_DEBUG(containerLogger, "LiveParticles: " << (int)liveParticles.size());
+	LOG4CXX_DEBUG(containerLogger,
+			"LiveParticles: " << (int)liveParticles.size());
 
-	return true;
 }
 
 void ParticleContainer::updateCells()
@@ -288,7 +287,6 @@ void ParticleContainer::updateCells()
 
 		int oldCell = particle.getCell();
 
-
 		if (oldCell < 0 || oldCell >= cells.size())
 			oldCell = -1;
 
@@ -299,34 +297,36 @@ void ParticleContainer::updateCells()
 	}
 
 	/*for (int p = 0; p < particlePool.size(); p++)
-	{
-		Particle& particle = particlePool[p];
-		LOG4CXX_DEBUG(containerLogger, "particle " << p << " in cell " << particle.getCell());
-	}
+	 {
+	 Particle& particle = particlePool[p];
+	 LOG4CXX_DEBUG(containerLogger, "particle " << p << " in cell " << particle.getCell());
+	 }
 
-	for (int d = 0; d < dummies.size(); d++)
-	{
-		Particle& particle = dummies[d];
-		LOG4CXX_DEBUG(containerLogger, "dummy " << d << " in cell " << particle.getCell());
-	}*/
+	 for (int d = 0; d < dummies.size(); d++)
+	 {
+	 Particle& particle = dummies[d];
+	 LOG4CXX_DEBUG(containerLogger, "dummy " << d << " in cell " << particle.getCell());
+	 }*/
 
 	for (int p = 0; p < liveParticles.size(); p++)
-	{ 
+	{
 		Particle& particle = (*this)[p];
 		int cell = particle.getCell();
 
-		if ( cell < 0 || cell >= cells.size())
-			LOG4CXX_ERROR(containerLogger, "invalid Cell " << cell << " at particle " << p);
+		if (cell < 0 || cell >= cells.size())
+			LOG4CXX_ERROR(containerLogger,
+					"invalid Cell " << cell << " at particle " << p);
 
 		if (!cells[cell].contains(&particle))
-			LOG4CXX_ERROR(containerLogger, "invalid Cell Particle Pair: " << cell);
+			LOG4CXX_ERROR(containerLogger,
+					"invalid Cell Particle Pair: " << cell);
 	}
 }
 
 void ParticleContainer::findCell(utils::Vector<double, 3> position, int* cell)
 {
-	int x = floor(position[0] / (double)rCutOff) + 1;
-	int y = floor(position[1] / (double)rCutOff) + 1;
+	int x = floor(position[0] / (double) rCutOff) + 1;
+	int y = floor(position[1] / (double) rCutOff) + 1;
 
 	if (x < 0)
 		x = 0;
@@ -352,7 +352,6 @@ void ParticleContainer::expand(int* x, int* y, int c)
 	*y = c % numCellsY;
 }
 
-
 int ParticleContainer::count()
 {
 	return liveParticles.size();
@@ -369,7 +368,6 @@ Particle& ParticleContainer::operator[](int i)
 	advance(it, i);
 	return **it;
 }
-
 
 void ParticleContainer::iterateParticles(ParticleHandler& handler)
 {
@@ -392,7 +390,7 @@ void ParticleContainer::iterateParticlePairs(ParticleHandler& handler)
 		bool right = x != numCellsX - 1;
 
 		bool bottom = y != 0;
-		bool top = y != numCellsY -1;
+		bool top = y != numCellsY - 1;
 
 		if (left)
 			cells[i].combineParticlePairs(cells[i - numCellsY], handler);
@@ -430,15 +428,18 @@ void ParticleContainer::iterateParticlePairsExclusive(ParticleHandler& handler)
 		bool top = y != numCellsY - 1;
 
 		if (right)
-			cells[i].combineParticlePairsExclusive(cells[i + numCellsY], handler);
+			cells[i].combineParticlePairsExclusive(cells[i + numCellsY],
+					handler);
 
 		if (top)
 			cells[i].combineParticlePairsExclusive(cells[i + 1], handler);
 
 		if (left && top)
-			cells[i].combineParticlePairsExclusive(cells[i - numCellsY + 1], handler);
+			cells[i].combineParticlePairsExclusive(cells[i - numCellsY + 1],
+					handler);
 		if (right && top)
-			cells[i].combineParticlePairsExclusive(cells[i + numCellsY + 1], handler);
+			cells[i].combineParticlePairsExclusive(cells[i + numCellsY + 1],
+					handler);
 	}
 }
 
@@ -464,7 +465,8 @@ void ParticleContainer::iterateBoundaryCells()
 
 		switch (boundaryHalo.condition)
 		{
-		case Periodic:{
+		case Periodic:
+		{
 
 			int boundaryX, boundaryY;
 			expand(&boundaryX, &boundaryY, boundaryCell.index());
@@ -474,7 +476,6 @@ void ParticleContainer::iterateBoundaryCells()
 
 			if (boundaryX != haloX && boundaryY != haloY)
 				LOG4CXX_DEBUG(containerLogger, "Boundary does not match Halo");
-
 
 			int oBoundaryIndex, oHaloindex;
 
@@ -497,7 +498,8 @@ void ParticleContainer::iterateBoundaryCells()
 				flatten(boundaryX, 1, &oHaloindex);
 				break;
 			default:
-				LOG4CXX_DEBUG(containerLogger, "Not a boundary");
+				LOG4CXX_DEBUG(containerLogger, "Not a boundary")
+				;
 			}
 
 			expand(&boundaryX, &boundaryY, oBoundaryIndex);
@@ -505,7 +507,6 @@ void ParticleContainer::iterateBoundaryCells()
 
 			if (boundaryX != haloX && boundaryY != haloY)
 				LOG4CXX_DEBUG(containerLogger, "Boundary does not match Halo");
-
 
 			ParticleCell& otherBoundaryCell = cells[oBoundaryIndex];
 			ParticleCell& otherHaloCell = cells[oHaloindex];
@@ -531,9 +532,10 @@ void ParticleContainer::iterateBoundaryCells()
 			break;
 
 		}
-		case Reflecting:{
+		case Reflecting:
+		{
 			//LOG4CXX_DEBUG(containerLogger, "Reflect");
-			
+
 			Vector<double, 3> mid;
 			int a;
 
@@ -556,7 +558,8 @@ void ParticleContainer::iterateBoundaryCells()
 				a = 1;
 				break;
 			default:
-				LOG4CXX_ERROR(containerLogger, "invalid boundary");
+				LOG4CXX_ERROR(containerLogger, "invalid boundary")
+				;
 				continue;
 			}
 
@@ -569,7 +572,8 @@ void ParticleContainer::iterateBoundaryCells()
 
 				Vector<double, 3> velocity(0.0);
 
-				dummies.push_back(Particle(position, velocity, wallType, false));
+				dummies.push_back(
+						Particle(position, velocity, wallType, false));
 
 				//LOG4CXX_DEBUG(containerLogger, "added dummy cell: " << dummies.back().getCell() << ", now " << (int)liveParticles.size() << " live Ps");
 			}
@@ -590,12 +594,11 @@ void ParticleContainer::iterateBoundaryCells()
 		default:
 			break;
 		}
-		
+
 	}
 
 	//LOG4CXX_DEBUG(containerLogger, "end");
 }
-
 
 double ParticleContainer::getCutOff()
 {

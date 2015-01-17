@@ -1,0 +1,197 @@
+#include <cppunit/ui/text/TestRunner.h>
+#include "UnitTests.h"
+
+#include "outputWriter/XYZWriter.h"
+#include "outputWriter/VTKWriter.h"
+#include "Simulation/Container/ParticleContainer.h"
+#include "Simulation/Handler/ParticleHandler.h"
+#include "Simulation/StateWriter.h"
+
+#include <cstring>
+#include <cstdlib>
+#include <iostream>
+#include <ctime>
+
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
+
+#include "config.h"
+#include "Simulation/Thermostat.h_old"
+
+using namespace std;
+using namespace Simulation;
+
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
+
+
+// Define static logger variable
+LoggerPtr logger(Logger::getLogger("main"));
+
+
+/**
+ * plot the particles to a xyz-file
+ */
+void plotParticles(int iteration, string out_name, ParticleContainer& container);
+
+
+
+int main(int argc, char* argsv[])
+{
+	time_t start, end;
+	time(&start);
+
+	DOMConfigurator::configure("Log4cxxConfig.xml");
+	LOG4CXX_INFO(logger, "Hello from MolSim for PSE!");
+
+
+	// Load Configuration
+	const char* configFile = "config.xml";
+	if(argc == 2)
+		configFile = argsv[1];
+
+	auto_ptr<config_t> config;
+	auto_ptr<simulation_t> sim;
+	try
+	{
+		config = configSim(configFile);
+		sim = simulation(config->simulationFile());
+	} catch (const xml_schema::exception& e)
+	{
+		LOG4CXX_ERROR(logger, e);
+		return 1;
+	}
+
+	// set variables
+	double current_time = 0;
+	double end_time = config->end();
+	double delta_time = config->delta();
+
+	double gravity = sim->gravity();
+	double temperature = sim->thermostat().initialTemp();
+
+	int iteration = 0;
+	int lastTrace = 0;
+	int skipIterations = config->output().iterations();
+	string out_name = config->output().dir() + config->output().filename();
+	int thermostatStep = sim->thermostat().step();
+
+	LOG4CXX_DEBUG(logger,"grav " << gravity << " temp " << temperature);
+
+
+	ParticleContainer container;
+	Thermostat_old thermostat(container);
+
+	// initialize container
+	container.init(sim);
+
+	// initialize thermostat
+	if (temperature != 0)
+		thermostat.applyInitialTemperature(temperature);
+
+	// initialize handlers
+	PositionHandler ph = PositionHandler(delta_time);
+	VelocityHandler vh = VelocityHandler(delta_time);
+	ForceReset fr = ForceReset();
+	GravityHandler gh = GravityHandler(gravity);
+	LennardJonesHandler ljh = LennardJonesHandler(delta_time,
+			container.getCutOff());
+
+
+	// the forces are needed to calculate x, but are not given in the input file.
+	container.iterateParticles(ljh);
+	container.iterateParticlePairsExclusive(ljh);
+
+
+	LOG4CXX_INFO(logger,
+			"start iterating, " << end_time / delta_time
+					<< " iterations in total");
+
+	// loops until end_time is reached
+	while (current_time < end_time)
+	{
+
+		//LOG4CXX_DEBUG(logger, "boundries");
+		// apply BoudryConditions to BoundryCells
+		container.iterateBoundaryCells();
+
+		//LOG4CXX_DEBUG(logger, "update");
+		// find cell for each particle based on its location
+		container.updateCells();
+
+		//LOG4CXX_DEBUG(logger, "iterate1");
+		// calculate new Position for each Particle (ph --> PositionHandler) 
+		container.iterateParticles(ph);
+
+		//LOG4CXX_DEBUG(logger, "iterate2");
+		// clear Force for each Particle (ljh -> leonard jones Handler)
+		container.iterateParticles(fr);
+
+		//LOG4CXX_DEBUG(logger, "iterate2");
+		// apply Graviti to each Particle (gh -> gravity handler)
+		container.iterateParticles(gh);
+
+		//LOG4CXX_DEBUG(logger, "iteratePairs");
+		// calculate new Force for each Particle Pair (ljh -> leonard jones Handler)
+		container.iterateParticlePairsExclusive(ljh);
+
+		//LOG4CXX_DEBUG(logger, "iterate4");
+		// calculate new Velocty for each Particle based on its force (vh --> velocity Handler)
+		container.iterateParticles(vh);
+
+		if ((iteration % 1000) == 0 && temperature != 0)
+			thermostat.applyTemperature(temperature);
+
+		iteration++;
+
+		// write Particles to file
+		if (iteration % skipIterations == 0)
+		{
+			plotParticles(iteration, out_name, container);
+		}
+		lastTrace++;
+
+
+		// print s�mulation status
+		if (lastTrace >= (end_time / delta_time / 100.0))
+		{
+			LOG4CXX_INFO(logger,
+					(100.0 * iteration * delta_time / end_time) << " %");
+			lastTrace = 0;
+		}
+
+		current_time += delta_time;
+		//LOG4CXX_DEBUG(logger, "end");
+	}
+
+	LOG4CXX_INFO(logger, "output written. Terminating now...");
+
+	time(&end);
+	LOG4CXX_INFO(logger, "Simulation took " << end - start << " seconds");
+
+	if (false)
+	{
+		string outputFile = "savedState.txt";
+
+		StateWriter::writeStateToFile(outputFile.c_str(), container);
+
+		LOG4CXX_INFO(logger, "State written in " << outputFile);
+	}
+
+	return 0;
+}
+
+void plotParticles(int iteration, string out_name, ParticleContainer& container)
+{
+
+	outputWriter::VTKWriter writer;
+	writer.initializeOutput(container.countVisible());
+	for (int i = 0; i < container.count(); i++)
+	{
+		Particle& p = container[i];
+		if (p.isVisible())
+			writer.plotParticle(p);
+	}
+	writer.writeFile(out_name, iteration);
+}

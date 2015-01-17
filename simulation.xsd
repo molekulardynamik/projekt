@@ -38,14 +38,48 @@
 			<xs:element name="spacing" type="xs:double"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="particle_t">
+		<xs:sequence>
+			<xs:element name="position" type="vec3d_t"/>
+			<xs:element name="velocity" type="vec3d_t"/>
+		</xs:sequence>
+		<xs:attribute name="type" type="xs:int"/>
+	</xs:complexType>
+	<xs:complexType name="particleArray_t">
+		<xs:sequence>
+			<xs:element name="particle" type="particle_t" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>	
+	<xs:complexType name="thermostat_t">
+		<xs:sequence>
+			<xs:element name="numDimensions" type="xs:int"/>
+			<xs:element name="initialTemp" type="xs:double"/>
+			<xs:element name="targetTemp" type="xs:double"/>
+			<xs:element name="step" type="xs:int"/>
+			<xs:element name="startTime" type="xs:int"/>
+      		<xs:element name="targetTime" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
 	
+  <xs:complexType name="boundaries_t">
+    <xs:attribute name="Left" type="xs:int" default="0"/>
+    <xs:attribute name="Right" type="xs:int" default="0"/>
+    <xs:attribute name="Bottom" type="xs:int" default="0"/>
+    <xs:attribute name="Top" type="xs:int" default="0"/>
+  </xs:complexType>
+  
 	<xs:complexType name="simulation_t">
 		<xs:sequence>
+			<xs:element name="thermostat" type="thermostat_t"/>
+			<xs:element name="gravity" type="xs:double"/>
 			<xs:element name="domain" type="vec3d_t"/>
-			<xs:element name="rCutOf" type="xs:float"/>
+      		<xs:element name="boundaries" type="boundaries_t"/>
+      		<xs:element name="wallType" type="xs:int"/>
+			<xs:element name="rCutOff" type="xs:float"/>
 			<xs:element name="type" type="type_t" maxOccurs="unbounded"/>
 			<xs:element name="cuboid" type="cuboid_t" minOccurs = "0" maxOccurs="unbounded"/>
 			<xs:element name="sphere" type="sphere_t" minOccurs = "0" maxOccurs="unbounded"/>
+			<xs:element name="particles" type="particleArray_t" minOccurs = "0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:complexType>
 	

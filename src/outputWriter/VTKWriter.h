@@ -8,7 +8,7 @@
 #ifndef VTKWRITER_H_
 #define VTKWRITER_H_
 
-#include "Particle.h"
+#include "../Simulation/Particle.h"
 #include <list>
 
 #include "vtk-unstructured.h"

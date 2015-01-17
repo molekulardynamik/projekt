@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<simulation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="simulation.xsd">
+	<thermostat>
+		<numDimensions>2</numDimensions>
+  		<initialTemp>0.5</initialTemp>
+  		<targetTemp>0.5</targetTemp>
+  		<step>1000</step>
+  		<startTime>0</startTime>
+      <targetTime>0</targetTime>
+  	</thermostat>
+  	<gravity>-12.44</gravity>
+	<domain X="303" Y="180" Z="1"/>
+  	<boundaries Left="3" Right="3" Bottom="2" Top="2"/>  	
+  	<wallType>1</wallType>
+	<rCutOff>3</rCutOff>
+	<type sigma="1.2" epsilon="1" mass="1"/>
+	<type sigma="1.2" epsilon="1" mass="100"/>
+	<cuboid type="0">
+		<position X="1.5" Y="2" Z="0"/>
+		<initialVelocity X="0.0" Y="0.0" Z="0.0"/>
+		<particleCount X="250" Y="50" Z="1"/>
+		<spacing>1.2</spacing>
+	</cuboid>
+</simulation>

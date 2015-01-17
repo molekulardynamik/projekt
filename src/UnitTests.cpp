@@ -3,7 +3,7 @@
 #include <fstream>
 #include <stdio.h>
 
-#include "ParticleHandler.h"
+#include "Simulation/Handler/ParticleHandler.h"
 
 using namespace CppUnit;
 using namespace std;

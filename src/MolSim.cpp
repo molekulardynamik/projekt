@@ -3,20 +3,19 @@
 
 #include "outputWriter/XYZWriter.h"
 #include "outputWriter/VTKWriter.h"
-#include "ParticleContainer.h"
-#include "ParticleHandler.h"
-#include "Thermostat.h"
-#include "StateWriter.h"
-
+#include "Simulation/Handler/Handler.h"
 #include <cstring>
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
 #include <ctime>
 
 #include <log4cxx/logger.h>
 #include <log4cxx/xml/domconfigurator.h>
 
 #include "config.h"
+#include "Simulation/StateWriter.h_old"
+#include "Simulation/Thermostat.h_old"
 
 using namespace std;
 using namespace Simulation;
@@ -28,19 +27,12 @@ using namespace log4cxx::helpers;
 // Define static logger variable
 LoggerPtr logger(Logger::getLogger("main"));
 
-auto_ptr<config_t> configuration;
-
 
 /**
  * plot the particles to a xyz-file
  */
-void plotParticles(int iteration);
-
-ParticleContainer container;
-
-double start_time = 0;
-double end_time = 1000;
-double delta_t = 0.014;
+void plotParticles(int iteration, string out_name,
+		ParticleContainer& container);
 
 int main(int argc, char* argsv[])
 {
@@ -50,142 +42,171 @@ int main(int argc, char* argsv[])
 	DOMConfigurator::configure("Log4cxxConfig.xml");
 	LOG4CXX_INFO(logger, "Hello from MolSim for PSE!");
 
-	char* configFile = "config.xml";
-	if(argc == 2)
+	// Load Configuration
+	const char* configFile = "config.xml";
+	if (argc == 2)
 		configFile = argsv[1];
 
+	auto_ptr < config_t > config;
+	auto_ptr<simulation_t> simulationConfig;
 	try
 	{
-		configuration = configSim(configFile);
+		config = configSim(configFile);
+		simulationConfig = simulation(config->simulationFile());
 	} catch (const xml_schema::exception& e)
 	{
 		LOG4CXX_ERROR(logger, e);
 		return 1;
 	}
 
-	bool saveState = false;
+	// set variables
+	double current_time = 0;
+	double end_time = config->end();
+	double delta_time = config->delta();
 
-	double current_time = start_time;
-
-	double gravity = configuration->properties().gravity();
-	double temperature = configuration->properties().thermostat().initialTemp();
-
-	LOG4CXX_DEBUG(logger,"grav " << gravity << " temp " << temperature);
-
-	end_time = configuration->properties().end();
-	delta_t = configuration->properties().delta();
-
-	if(!container.init(configuration->simulationFile()))
-		return 1;
-
-	Thermostat thermostat(container);
-	if (temperature != 0)
-		thermostat.applyInitialTemperature(configuration->properties().thermostat().initialTemp());
-
-	PositionHandler ph = PositionHandler(delta_t);
-	VelocityHandler vh = VelocityHandler(delta_t);
-	ForceReset fr = ForceReset();
-	GravityHandler gh = GravityHandler(gravity);
-	LennardJonesHandler ljh = LennardJonesHandler(delta_t,
-			container.getCutOff());
-
-	// the forces are needed to calculate x, but are not given in the input file.
-
-	container.iterateParticles(ljh);
-	container.iterateParticlePairsExclusive(ljh);
+	double gravity = simulationConfig->gravity();
+	int numDims = simulationConfig->thermostat().numDimensions();
+	double initialTemp = simulationConfig->thermostat().initialTemp();
+	double temperature = simulationConfig->thermostat().targetTemp();
 
 	int iteration = 0;
 	int lastTrace = 0;
-	int skipIterations = configuration->output().iterations();
+	int outputSkip = config->output().iterations();
+
+	int thermoSkip = simulationConfig->thermostat().step();
+	int thermoStart = simulationConfig->thermostat().startTime() / delta_time;
+	int thermoTarget = simulationConfig->thermostat().targetTime() / delta_time;
+
+	string out_name = config->output().dir() + config->output().filename();
+	int thermostatStep = simulationConfig->thermostat().step();
+
+	LOG4CXX_DEBUG(logger, "grav " << gravity << " temp " << temperature);
+
+	// initialize container
+	ParticleContainer container(simulationConfig);
+
+
+	// initialize handler
+	OutputHandler outputHandler;
+	PositionHandler positionHandler(delta_time);
+	VelocityHandler velocityHandler(delta_time);
+	ForceResetHandler forceResetHandler;
+	GravityHandler gravityHandler(gravity);
+	LennardJonesHandler lennardJonesHandler(delta_time, container.getRCutOff());
+	BrownianMotionHandler brownianHandler(initialTemp);
+	ThermostatHandler thermostatHandler;
+	KineticEnergyHandler kineticHandler;
+	DebugHandler debugH;
+
+	// initial setup
+	Thermostat::numDimensions() = numDims;
+
+	container.iterateParticles(brownianHandler);
+	container.iterateParticles(forceResetHandler);
+	if(gravity != 0)
+		container.iterateParticles(gravityHandler);
+	container.iterateParticlePairsSymmetric(lennardJonesHandler);
+
 
 	LOG4CXX_INFO(logger,
-			"start iterating, " << end_time / delta_t
-					<< " iterations in total");
-	// for this loop, we assume: current x, current f and current v are known
+			"start iterating, " << end_time / delta_time << " iterations in total");
 
 	// loops until end_time is reached
 	while (current_time < end_time)
 	{
-
-		//LOG4CXX_DEBUG(logger, "boundries");
-		// apply BoudryConditions to BoundryCells
-		container.iterateBoundaryCells();
-
-		//LOG4CXX_DEBUG(logger, "update");
-		// find cell for each particle based on its location
 		container.updateCells();
 
-		//LOG4CXX_DEBUG(logger, "iterate1");
-		// calculate new Position for each Particle (ph --> PositionHandler) 
-		container.iterateParticles(ph);
+		container.iterateBoundaries();
 
-		//LOG4CXX_DEBUG(logger, "iterate2");
-		// clear Force for each Particle (ljh -> leonard jones Handler)
-		container.iterateParticles(fr);
+		container.iterateParticles(positionHandler);
 
-		//LOG4CXX_DEBUG(logger, "iterate2");
-		// apply Graviti to each Particle (gh -> gravity handler)
-		container.iterateParticles(gh);
+		container.iterateParticles(forceResetHandler);
+		if(gravity != 0)
+			container.iterateParticles(gravityHandler);
+		container.iterateParticlePairsSymmetric(lennardJonesHandler);
 
-		//LOG4CXX_DEBUG(logger, "iteratePairs");
-		// calculate new Force for each Particle Pair (ljh -> leonard jones Handler)
-		container.iterateParticlePairsExclusive(ljh);
+		container.clearBoundaries();
 
-		//LOG4CXX_DEBUG(logger, "iterate4");
-		// calculate new Velocty for each Particle based on its force (vh --> velocity Handler)
-		container.iterateParticles(vh);
+		container.iterateParticles(velocityHandler);
 
-		if ((iteration % 1000) == 0 && temperature != 0)
-			thermostat.applyTemperature(40);
+		if (((iteration - thermoStart) % thermoSkip) == 0 && iteration >= thermoStart && temperature != 0)
+		{
+			kineticHandler.reset();
+			container.iterateParticles(kineticHandler);
+
+			double interpolation = (iteration - thermoStart) / (double)(thermoTarget - thermoStart);
+			interpolation = max(0.0, min(1.0, interpolation));
+
+			thermostatHandler.setTargetTemp(temperature, interpolation, container.countParticles());
+			container.iterateParticles(thermostatHandler);
+		}
+
 
 		iteration++;
 
 		// write Particles to file
-		if (iteration % skipIterations == 0)
+		if (iteration % outputSkip == 0)
 		{
-			plotParticles(iteration);
+			outputHandler.init(container.countParticles());
+			container.iterateParticles(outputHandler);
+			outputHandler.finish(out_name, iteration);
 		}
+
 		lastTrace++;
-		// print s�mulation status
-		if (lastTrace >= (end_time / delta_t / 100.0))
+		// print simulation status
+		if (lastTrace >= (end_time / delta_time / 100.0))
 		{
 			LOG4CXX_INFO(logger,
-					(100.0 * iteration * delta_t / end_time) << " %");
+					(100.0 * iteration * delta_time / end_time) << " %");
 			lastTrace = 0;
 		}
 
-		current_time += delta_t;
-		//LOG4CXX_DEBUG(logger, "end");
+		current_time += delta_time;
+		//LOG4CXX_DEBUG(logger, " " << container.countParticles() << " particles in scene");
 	}
-
-	LOG4CXX_INFO(logger, "output written. Terminating now...");
 
 	time(&end);
 	LOG4CXX_INFO(logger, "Simulation took " << end - start << " seconds");
 
-	if (saveState)
+	if(config->saveFile().present())
 	{
-		string outputFile = "savedState.txt";
+		string saveFilename = config->saveFile().get();
+		simulationConfig = simulation(config->simulationFile());
 
-		StateWriter::writeStateToFile(outputFile.c_str(), container);
+		simulation_t saveSim(
+				simulationConfig->thermostat(),
+				simulationConfig->gravity(),
+				simulationConfig->domain(),
+				simulationConfig->boundaries(),
+				simulationConfig->wallType(),
+				simulationConfig->rCutOff());
 
-		LOG4CXX_INFO(logger, "State written in " << outputFile);
+		saveSim.thermostat().initialTemp() = 0;
+		saveSim.thermostat().startTime() -= end_time;
+		saveSim.thermostat().targetTime() -= end_time;
+		saveSim.thermostat().startTime() = max(saveSim.thermostat().startTime(), 0);
+		saveSim.thermostat().targetTime() = max(saveSim.thermostat().targetTime(), 0);
+
+		saveSim.type() = simulationConfig->type();
+
+		particleArray_t saveParticles;
+		SaveStateHandler saveStateHandler(saveParticles);
+		container.iterateParticles(saveStateHandler);
+
+		saveSim.particles(saveParticles);
+
+		xml_schema::namespace_infomap map;
+		map[""].name = "";
+		map[""].schema = "simulation.xsd";
+
+
+		std::ofstream ofs (saveFilename.c_str());
+		simulation(ofs, saveSim, map);
+
+		LOG4CXX_INFO(logger, "wrote simulation to " << saveFilename);
 	}
+
+	LOG4CXX_INFO(logger, "Terminating now...");
 
 	return 0;
-}
-
-void plotParticles(int iteration)
-{
-	string out_name(configuration->output().dir() + configuration->output().filename());
-
-	outputWriter::VTKWriter writer;
-	writer.initializeOutput(container.countVisible());
-	for (int i = 0; i < container.count(); i++)
-	{
-		Particle& p = container[i];
-		if (p.isVisible())
-			writer.plotParticle(p);
-	}
-	writer.writeFile(out_name, iteration);
 }

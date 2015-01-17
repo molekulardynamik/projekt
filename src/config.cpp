@@ -110,166 +110,44 @@ iterations (const iterations_type& x)
 }
 
 
-// thermostat_t
+// config_t
 // 
 
-const thermostat_t::initialTemp_type& thermostat_t::
-initialTemp () const
-{
-  return this->initialTemp_.get ();
-}
-
-thermostat_t::initialTemp_type& thermostat_t::
-initialTemp ()
-{
-  return this->initialTemp_.get ();
-}
-
-void thermostat_t::
-initialTemp (const initialTemp_type& x)
-{
-  this->initialTemp_.set (x);
-}
-
-const thermostat_t::targetTemp_type& thermostat_t::
-targetTemp () const
-{
-  return this->targetTemp_.get ();
-}
-
-thermostat_t::targetTemp_type& thermostat_t::
-targetTemp ()
-{
-  return this->targetTemp_.get ();
-}
-
-void thermostat_t::
-targetTemp (const targetTemp_type& x)
-{
-  this->targetTemp_.set (x);
-}
-
-const thermostat_t::stepTemp_type& thermostat_t::
-stepTemp () const
-{
-  return this->stepTemp_.get ();
-}
-
-thermostat_t::stepTemp_type& thermostat_t::
-stepTemp ()
-{
-  return this->stepTemp_.get ();
-}
-
-void thermostat_t::
-stepTemp (const stepTemp_type& x)
-{
-  this->stepTemp_.set (x);
-}
-
-const thermostat_t::startTime_type& thermostat_t::
-startTime () const
-{
-  return this->startTime_.get ();
-}
-
-thermostat_t::startTime_type& thermostat_t::
-startTime ()
-{
-  return this->startTime_.get ();
-}
-
-void thermostat_t::
-startTime (const startTime_type& x)
-{
-  this->startTime_.set (x);
-}
-
-
-// properties_t
-// 
-
-const properties_t::delta_type& properties_t::
+const config_t::delta_type& config_t::
 delta () const
 {
   return this->delta_.get ();
 }
 
-properties_t::delta_type& properties_t::
+config_t::delta_type& config_t::
 delta ()
 {
   return this->delta_.get ();
 }
 
-void properties_t::
+void config_t::
 delta (const delta_type& x)
 {
   this->delta_.set (x);
 }
 
-const properties_t::end_type& properties_t::
+const config_t::end_type& config_t::
 end () const
 {
   return this->end_.get ();
 }
 
-properties_t::end_type& properties_t::
+config_t::end_type& config_t::
 end ()
 {
   return this->end_.get ();
 }
 
-void properties_t::
+void config_t::
 end (const end_type& x)
 {
   this->end_.set (x);
 }
-
-const properties_t::thermostat_type& properties_t::
-thermostat () const
-{
-  return this->thermostat_.get ();
-}
-
-properties_t::thermostat_type& properties_t::
-thermostat ()
-{
-  return this->thermostat_.get ();
-}
-
-void properties_t::
-thermostat (const thermostat_type& x)
-{
-  this->thermostat_.set (x);
-}
-
-void properties_t::
-thermostat (::std::auto_ptr< thermostat_type > x)
-{
-  this->thermostat_.set (x);
-}
-
-const properties_t::gravity_type& properties_t::
-gravity () const
-{
-  return this->gravity_.get ();
-}
-
-properties_t::gravity_type& properties_t::
-gravity ()
-{
-  return this->gravity_.get ();
-}
-
-void properties_t::
-gravity (const gravity_type& x)
-{
-  this->gravity_.set (x);
-}
-
-
-// config_t
-// 
 
 const config_t::output_type& config_t::
 output () const
@@ -295,30 +173,6 @@ output (::std::auto_ptr< output_type > x)
   this->output_.set (x);
 }
 
-const config_t::properties_type& config_t::
-properties () const
-{
-  return this->properties_.get ();
-}
-
-config_t::properties_type& config_t::
-properties ()
-{
-  return this->properties_.get ();
-}
-
-void config_t::
-properties (const properties_type& x)
-{
-  this->properties_.set (x);
-}
-
-void config_t::
-properties (::std::auto_ptr< properties_type > x)
-{
-  this->properties_.set (x);
-}
-
 const config_t::simulationFile_type& config_t::
 simulationFile () const
 {
@@ -341,6 +195,36 @@ void config_t::
 simulationFile (::std::auto_ptr< simulationFile_type > x)
 {
   this->simulationFile_.set (x);
+}
+
+const config_t::saveFile_optional& config_t::
+saveFile () const
+{
+  return this->saveFile_;
+}
+
+config_t::saveFile_optional& config_t::
+saveFile ()
+{
+  return this->saveFile_;
+}
+
+void config_t::
+saveFile (const saveFile_type& x)
+{
+  this->saveFile_.set (x);
+}
+
+void config_t::
+saveFile (const saveFile_optional& x)
+{
+  this->saveFile_ = x;
+}
+
+void config_t::
+saveFile (::std::auto_ptr< saveFile_type > x)
+{
+  this->saveFile_.set (x);
 }
 
 
@@ -473,199 +357,60 @@ output_t::
 {
 }
 
-// thermostat_t
+// config_t
 //
 
-thermostat_t::
-thermostat_t (const initialTemp_type& initialTemp,
-              const targetTemp_type& targetTemp,
-              const stepTemp_type& stepTemp,
-              const startTime_type& startTime)
-: ::xml_schema::type (),
-  initialTemp_ (initialTemp, ::xml_schema::flags (), this),
-  targetTemp_ (targetTemp, ::xml_schema::flags (), this),
-  stepTemp_ (stepTemp, ::xml_schema::flags (), this),
-  startTime_ (startTime, ::xml_schema::flags (), this)
-{
-}
-
-thermostat_t::
-thermostat_t (const thermostat_t& x,
-              ::xml_schema::flags f,
-              ::xml_schema::container* c)
-: ::xml_schema::type (x, f, c),
-  initialTemp_ (x.initialTemp_, f, this),
-  targetTemp_ (x.targetTemp_, f, this),
-  stepTemp_ (x.stepTemp_, f, this),
-  startTime_ (x.startTime_, f, this)
-{
-}
-
-thermostat_t::
-thermostat_t (const ::xercesc::DOMElement& e,
-              ::xml_schema::flags f,
-              ::xml_schema::container* c)
-: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-  initialTemp_ (f, this),
-  targetTemp_ (f, this),
-  stepTemp_ (f, this),
-  startTime_ (f, this)
-{
-  if ((f & ::xml_schema::flags::base) == 0)
-  {
-    ::xsd::cxx::xml::dom::parser< char > p (e, true, false);
-    this->parse (p, f);
-  }
-}
-
-void thermostat_t::
-parse (::xsd::cxx::xml::dom::parser< char >& p,
-       ::xml_schema::flags f)
-{
-  for (; p.more_elements (); p.next_element ())
-  {
-    const ::xercesc::DOMElement& i (p.cur_element ());
-    const ::xsd::cxx::xml::qualified_name< char > n (
-      ::xsd::cxx::xml::dom::name< char > (i));
-
-    // initialTemp
-    //
-    if (n.name () == "initialTemp" && n.namespace_ ().empty ())
-    {
-      if (!initialTemp_.present ())
-      {
-        this->initialTemp_.set (initialTemp_traits::create (i, f, this));
-        continue;
-      }
-    }
-
-    // targetTemp
-    //
-    if (n.name () == "targetTemp" && n.namespace_ ().empty ())
-    {
-      if (!targetTemp_.present ())
-      {
-        this->targetTemp_.set (targetTemp_traits::create (i, f, this));
-        continue;
-      }
-    }
-
-    // stepTemp
-    //
-    if (n.name () == "stepTemp" && n.namespace_ ().empty ())
-    {
-      if (!stepTemp_.present ())
-      {
-        this->stepTemp_.set (stepTemp_traits::create (i, f, this));
-        continue;
-      }
-    }
-
-    // startTime
-    //
-    if (n.name () == "startTime" && n.namespace_ ().empty ())
-    {
-      if (!startTime_.present ())
-      {
-        this->startTime_.set (startTime_traits::create (i, f, this));
-        continue;
-      }
-    }
-
-    break;
-  }
-
-  if (!initialTemp_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "initialTemp",
-      "");
-  }
-
-  if (!targetTemp_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "targetTemp",
-      "");
-  }
-
-  if (!stepTemp_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "stepTemp",
-      "");
-  }
-
-  if (!startTime_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "startTime",
-      "");
-  }
-}
-
-thermostat_t* thermostat_t::
-_clone (::xml_schema::flags f,
-        ::xml_schema::container* c) const
-{
-  return new class thermostat_t (*this, f, c);
-}
-
-thermostat_t::
-~thermostat_t ()
-{
-}
-
-// properties_t
-//
-
-properties_t::
-properties_t (const delta_type& delta,
-              const end_type& end,
-              const thermostat_type& thermostat,
-              const gravity_type& gravity)
+config_t::
+config_t (const delta_type& delta,
+          const end_type& end,
+          const output_type& output,
+          const simulationFile_type& simulationFile)
 : ::xml_schema::type (),
   delta_ (delta, ::xml_schema::flags (), this),
   end_ (end, ::xml_schema::flags (), this),
-  thermostat_ (thermostat, ::xml_schema::flags (), this),
-  gravity_ (gravity, ::xml_schema::flags (), this)
+  output_ (output, ::xml_schema::flags (), this),
+  simulationFile_ (simulationFile, ::xml_schema::flags (), this),
+  saveFile_ (::xml_schema::flags (), this)
 {
 }
 
-properties_t::
-properties_t (const delta_type& delta,
-              const end_type& end,
-              ::std::auto_ptr< thermostat_type >& thermostat,
-              const gravity_type& gravity)
+config_t::
+config_t (const delta_type& delta,
+          const end_type& end,
+          ::std::auto_ptr< output_type >& output,
+          const simulationFile_type& simulationFile)
 : ::xml_schema::type (),
   delta_ (delta, ::xml_schema::flags (), this),
   end_ (end, ::xml_schema::flags (), this),
-  thermostat_ (thermostat, ::xml_schema::flags (), this),
-  gravity_ (gravity, ::xml_schema::flags (), this)
+  output_ (output, ::xml_schema::flags (), this),
+  simulationFile_ (simulationFile, ::xml_schema::flags (), this),
+  saveFile_ (::xml_schema::flags (), this)
 {
 }
 
-properties_t::
-properties_t (const properties_t& x,
-              ::xml_schema::flags f,
-              ::xml_schema::container* c)
+config_t::
+config_t (const config_t& x,
+          ::xml_schema::flags f,
+          ::xml_schema::container* c)
 : ::xml_schema::type (x, f, c),
   delta_ (x.delta_, f, this),
   end_ (x.end_, f, this),
-  thermostat_ (x.thermostat_, f, this),
-  gravity_ (x.gravity_, f, this)
+  output_ (x.output_, f, this),
+  simulationFile_ (x.simulationFile_, f, this),
+  saveFile_ (x.saveFile_, f, this)
 {
 }
 
-properties_t::
-properties_t (const ::xercesc::DOMElement& e,
-              ::xml_schema::flags f,
-              ::xml_schema::container* c)
+config_t::
+config_t (const ::xercesc::DOMElement& e,
+          ::xml_schema::flags f,
+          ::xml_schema::container* c)
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
   delta_ (f, this),
   end_ (f, this),
-  thermostat_ (f, this),
-  gravity_ (f, this)
+  output_ (f, this),
+  simulationFile_ (f, this),
+  saveFile_ (f, this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -674,7 +419,7 @@ properties_t (const ::xercesc::DOMElement& e,
   }
 }
 
-void properties_t::
+void config_t::
 parse (::xsd::cxx::xml::dom::parser< char >& p,
        ::xml_schema::flags f)
 {
@@ -706,27 +451,44 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
-    // thermostat
+    // output
     //
-    if (n.name () == "thermostat" && n.namespace_ ().empty ())
+    if (n.name () == "output" && n.namespace_ ().empty ())
     {
-      ::std::auto_ptr< thermostat_type > r (
-        thermostat_traits::create (i, f, this));
+      ::std::auto_ptr< output_type > r (
+        output_traits::create (i, f, this));
 
-      if (!thermostat_.present ())
+      if (!output_.present ())
       {
-        this->thermostat_.set (r);
+        this->output_.set (r);
         continue;
       }
     }
 
-    // gravity
+    // simulationFile
     //
-    if (n.name () == "gravity" && n.namespace_ ().empty ())
+    if (n.name () == "simulationFile" && n.namespace_ ().empty ())
     {
-      if (!gravity_.present ())
+      ::std::auto_ptr< simulationFile_type > r (
+        simulationFile_traits::create (i, f, this));
+
+      if (!simulationFile_.present ())
       {
-        this->gravity_.set (gravity_traits::create (i, f, this));
+        this->simulationFile_.set (r);
+        continue;
+      }
+    }
+
+    // saveFile
+    //
+    if (n.name () == "saveFile" && n.namespace_ ().empty ())
+    {
+      ::std::auto_ptr< saveFile_type > r (
+        saveFile_traits::create (i, f, this));
+
+      if (!this->saveFile_)
+      {
+        this->saveFile_.set (r);
         continue;
       }
     }
@@ -748,151 +510,10 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "");
   }
 
-  if (!thermostat_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "thermostat",
-      "");
-  }
-
-  if (!gravity_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "gravity",
-      "");
-  }
-}
-
-properties_t* properties_t::
-_clone (::xml_schema::flags f,
-        ::xml_schema::container* c) const
-{
-  return new class properties_t (*this, f, c);
-}
-
-properties_t::
-~properties_t ()
-{
-}
-
-// config_t
-//
-
-config_t::
-config_t (const output_type& output,
-          const properties_type& properties,
-          const simulationFile_type& simulationFile)
-: ::xml_schema::type (),
-  output_ (output, ::xml_schema::flags (), this),
-  properties_ (properties, ::xml_schema::flags (), this),
-  simulationFile_ (simulationFile, ::xml_schema::flags (), this)
-{
-}
-
-config_t::
-config_t (::std::auto_ptr< output_type >& output,
-          ::std::auto_ptr< properties_type >& properties,
-          const simulationFile_type& simulationFile)
-: ::xml_schema::type (),
-  output_ (output, ::xml_schema::flags (), this),
-  properties_ (properties, ::xml_schema::flags (), this),
-  simulationFile_ (simulationFile, ::xml_schema::flags (), this)
-{
-}
-
-config_t::
-config_t (const config_t& x,
-          ::xml_schema::flags f,
-          ::xml_schema::container* c)
-: ::xml_schema::type (x, f, c),
-  output_ (x.output_, f, this),
-  properties_ (x.properties_, f, this),
-  simulationFile_ (x.simulationFile_, f, this)
-{
-}
-
-config_t::
-config_t (const ::xercesc::DOMElement& e,
-          ::xml_schema::flags f,
-          ::xml_schema::container* c)
-: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-  output_ (f, this),
-  properties_ (f, this),
-  simulationFile_ (f, this)
-{
-  if ((f & ::xml_schema::flags::base) == 0)
-  {
-    ::xsd::cxx::xml::dom::parser< char > p (e, true, false);
-    this->parse (p, f);
-  }
-}
-
-void config_t::
-parse (::xsd::cxx::xml::dom::parser< char >& p,
-       ::xml_schema::flags f)
-{
-  for (; p.more_elements (); p.next_element ())
-  {
-    const ::xercesc::DOMElement& i (p.cur_element ());
-    const ::xsd::cxx::xml::qualified_name< char > n (
-      ::xsd::cxx::xml::dom::name< char > (i));
-
-    // output
-    //
-    if (n.name () == "output" && n.namespace_ ().empty ())
-    {
-      ::std::auto_ptr< output_type > r (
-        output_traits::create (i, f, this));
-
-      if (!output_.present ())
-      {
-        this->output_.set (r);
-        continue;
-      }
-    }
-
-    // properties
-    //
-    if (n.name () == "properties" && n.namespace_ ().empty ())
-    {
-      ::std::auto_ptr< properties_type > r (
-        properties_traits::create (i, f, this));
-
-      if (!properties_.present ())
-      {
-        this->properties_.set (r);
-        continue;
-      }
-    }
-
-    // simulationFile
-    //
-    if (n.name () == "simulationFile" && n.namespace_ ().empty ())
-    {
-      ::std::auto_ptr< simulationFile_type > r (
-        simulationFile_traits::create (i, f, this));
-
-      if (!simulationFile_.present ())
-      {
-        this->simulationFile_.set (r);
-        continue;
-      }
-    }
-
-    break;
-  }
-
   if (!output_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
       "output",
-      "");
-  }
-
-  if (!properties_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "properties",
       "");
   }
 

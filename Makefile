@@ -5,8 +5,8 @@ include files.mk
 
 # Compiler
 # --------
-#CC=g++
-CC=icpc
+CC=g++
+#CC=icpc
 
 
 # Compiler flags

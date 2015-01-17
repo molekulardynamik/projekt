@@ -31,8 +31,8 @@
 // in the accompanying FLOSSE file.
 //
 
-#ifndef SRC_SIMULATION_H
-#define SRC_SIMULATION_H
+#ifndef SIMULATION_H
+#define SIMULATION_H
 
 // Begin prologue.
 //
@@ -78,6 +78,21 @@
 #include <xsd/cxx/tree/parsing/float.hxx>
 #include <xsd/cxx/tree/parsing/double.hxx>
 #include <xsd/cxx/tree/parsing/decimal.hxx>
+
+#include <xsd/cxx/xml/dom/serialization-header.hxx>
+#include <xsd/cxx/tree/serialization.hxx>
+#include <xsd/cxx/tree/serialization/byte.hxx>
+#include <xsd/cxx/tree/serialization/unsigned-byte.hxx>
+#include <xsd/cxx/tree/serialization/short.hxx>
+#include <xsd/cxx/tree/serialization/unsigned-short.hxx>
+#include <xsd/cxx/tree/serialization/int.hxx>
+#include <xsd/cxx/tree/serialization/unsigned-int.hxx>
+#include <xsd/cxx/tree/serialization/long.hxx>
+#include <xsd/cxx/tree/serialization/unsigned-long.hxx>
+#include <xsd/cxx/tree/serialization/boolean.hxx>
+#include <xsd/cxx/tree/serialization/float.hxx>
+#include <xsd/cxx/tree/serialization/double.hxx>
+#include <xsd/cxx/tree/serialization/decimal.hxx>
 
 namespace xml_schema
 {
@@ -174,6 +189,16 @@ namespace xml_schema
   typedef ::xsd::cxx::tree::entity< char, ncname > entity;
   typedef ::xsd::cxx::tree::entities< char, simple_type, entity > entities;
 
+  // Namespace information and list stream. Used in
+  // serialization functions.
+  //
+  typedef ::xsd::cxx::xml::dom::namespace_info< char > namespace_info;
+  typedef ::xsd::cxx::xml::dom::namespace_infomap< char > namespace_infomap;
+  typedef ::xsd::cxx::tree::list_stream< char > list_stream;
+  typedef ::xsd::cxx::tree::as_double< double_ > as_double;
+  typedef ::xsd::cxx::tree::as_decimal< decimal > as_decimal;
+  typedef ::xsd::cxx::tree::facet facet;
+
   // Flags and properties.
   //
   typedef ::xsd::cxx::tree::flags flags;
@@ -197,6 +222,7 @@ namespace xml_schema
   typedef ::xsd::cxx::tree::unexpected_enumerator< char > unexpected_enumerator;
   typedef ::xsd::cxx::tree::expected_text_content< char > expected_text_content;
   typedef ::xsd::cxx::tree::no_prefix_mapping< char > no_prefix_mapping;
+  typedef ::xsd::cxx::tree::serialization< char > serialization;
 
   // Error handler callback interface.
   //
@@ -226,6 +252,10 @@ class vec3i_t;
 class vec3d_t;
 class cuboid_t;
 class sphere_t;
+class particle_t;
+class particleArray_t;
+class thermostat_t;
+class boundaries_t;
 class simulation_t;
 
 #include <memory>    // std::auto_ptr
@@ -749,9 +779,412 @@ class sphere_t: public ::xml_schema::type
   ::xsd::cxx::tree::one< spacing_type > spacing_;
 };
 
+class particle_t: public ::xml_schema::type
+{
+  public:
+  // position
+  // 
+  typedef ::vec3d_t position_type;
+  typedef ::xsd::cxx::tree::traits< position_type, char > position_traits;
+
+  const position_type&
+  position () const;
+
+  position_type&
+  position ();
+
+  void
+  position (const position_type& x);
+
+  void
+  position (::std::auto_ptr< position_type > p);
+
+  // velocity
+  // 
+  typedef ::vec3d_t velocity_type;
+  typedef ::xsd::cxx::tree::traits< velocity_type, char > velocity_traits;
+
+  const velocity_type&
+  velocity () const;
+
+  velocity_type&
+  velocity ();
+
+  void
+  velocity (const velocity_type& x);
+
+  void
+  velocity (::std::auto_ptr< velocity_type > p);
+
+  // type
+  // 
+  typedef ::xml_schema::int_ type_type;
+  typedef ::xsd::cxx::tree::optional< type_type > type_optional;
+  typedef ::xsd::cxx::tree::traits< type_type, char > type_traits;
+
+  const type_optional&
+  type () const;
+
+  type_optional&
+  type ();
+
+  void
+  type (const type_type& x);
+
+  void
+  type (const type_optional& x);
+
+  // Constructors.
+  //
+  particle_t (const position_type&,
+              const velocity_type&);
+
+  particle_t (::std::auto_ptr< position_type >&,
+              ::std::auto_ptr< velocity_type >&);
+
+  particle_t (const ::xercesc::DOMElement& e,
+              ::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0);
+
+  particle_t (const particle_t& x,
+              ::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0);
+
+  virtual particle_t*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  virtual 
+  ~particle_t ();
+
+  // Implementation.
+  //
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  ::xsd::cxx::tree::one< position_type > position_;
+  ::xsd::cxx::tree::one< velocity_type > velocity_;
+  type_optional type_;
+};
+
+class particleArray_t: public ::xml_schema::type
+{
+  public:
+  // particle
+  // 
+  typedef ::particle_t particle_type;
+  typedef ::xsd::cxx::tree::sequence< particle_type > particle_sequence;
+  typedef particle_sequence::iterator particle_iterator;
+  typedef particle_sequence::const_iterator particle_const_iterator;
+  typedef ::xsd::cxx::tree::traits< particle_type, char > particle_traits;
+
+  const particle_sequence&
+  particle () const;
+
+  particle_sequence&
+  particle ();
+
+  void
+  particle (const particle_sequence& s);
+
+  // Constructors.
+  //
+  particleArray_t ();
+
+  particleArray_t (const ::xercesc::DOMElement& e,
+                   ::xml_schema::flags f = 0,
+                   ::xml_schema::container* c = 0);
+
+  particleArray_t (const particleArray_t& x,
+                   ::xml_schema::flags f = 0,
+                   ::xml_schema::container* c = 0);
+
+  virtual particleArray_t*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  virtual 
+  ~particleArray_t ();
+
+  // Implementation.
+  //
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  particle_sequence particle_;
+};
+
+class thermostat_t: public ::xml_schema::type
+{
+  public:
+  // numDimensions
+  // 
+  typedef ::xml_schema::int_ numDimensions_type;
+  typedef ::xsd::cxx::tree::traits< numDimensions_type, char > numDimensions_traits;
+
+  const numDimensions_type&
+  numDimensions () const;
+
+  numDimensions_type&
+  numDimensions ();
+
+  void
+  numDimensions (const numDimensions_type& x);
+
+  // initialTemp
+  // 
+  typedef ::xml_schema::double_ initialTemp_type;
+  typedef ::xsd::cxx::tree::traits< initialTemp_type, char, ::xsd::cxx::tree::schema_type::double_ > initialTemp_traits;
+
+  const initialTemp_type&
+  initialTemp () const;
+
+  initialTemp_type&
+  initialTemp ();
+
+  void
+  initialTemp (const initialTemp_type& x);
+
+  // targetTemp
+  // 
+  typedef ::xml_schema::double_ targetTemp_type;
+  typedef ::xsd::cxx::tree::traits< targetTemp_type, char, ::xsd::cxx::tree::schema_type::double_ > targetTemp_traits;
+
+  const targetTemp_type&
+  targetTemp () const;
+
+  targetTemp_type&
+  targetTemp ();
+
+  void
+  targetTemp (const targetTemp_type& x);
+
+  // step
+  // 
+  typedef ::xml_schema::int_ step_type;
+  typedef ::xsd::cxx::tree::traits< step_type, char > step_traits;
+
+  const step_type&
+  step () const;
+
+  step_type&
+  step ();
+
+  void
+  step (const step_type& x);
+
+  // startTime
+  // 
+  typedef ::xml_schema::int_ startTime_type;
+  typedef ::xsd::cxx::tree::traits< startTime_type, char > startTime_traits;
+
+  const startTime_type&
+  startTime () const;
+
+  startTime_type&
+  startTime ();
+
+  void
+  startTime (const startTime_type& x);
+
+  // targetTime
+  // 
+  typedef ::xml_schema::int_ targetTime_type;
+  typedef ::xsd::cxx::tree::traits< targetTime_type, char > targetTime_traits;
+
+  const targetTime_type&
+  targetTime () const;
+
+  targetTime_type&
+  targetTime ();
+
+  void
+  targetTime (const targetTime_type& x);
+
+  // Constructors.
+  //
+  thermostat_t (const numDimensions_type&,
+                const initialTemp_type&,
+                const targetTemp_type&,
+                const step_type&,
+                const startTime_type&,
+                const targetTime_type&);
+
+  thermostat_t (const ::xercesc::DOMElement& e,
+                ::xml_schema::flags f = 0,
+                ::xml_schema::container* c = 0);
+
+  thermostat_t (const thermostat_t& x,
+                ::xml_schema::flags f = 0,
+                ::xml_schema::container* c = 0);
+
+  virtual thermostat_t*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  virtual 
+  ~thermostat_t ();
+
+  // Implementation.
+  //
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  ::xsd::cxx::tree::one< numDimensions_type > numDimensions_;
+  ::xsd::cxx::tree::one< initialTemp_type > initialTemp_;
+  ::xsd::cxx::tree::one< targetTemp_type > targetTemp_;
+  ::xsd::cxx::tree::one< step_type > step_;
+  ::xsd::cxx::tree::one< startTime_type > startTime_;
+  ::xsd::cxx::tree::one< targetTime_type > targetTime_;
+};
+
+class boundaries_t: public ::xml_schema::type
+{
+  public:
+  // Left
+  // 
+  typedef ::xml_schema::int_ Left_type;
+  typedef ::xsd::cxx::tree::traits< Left_type, char > Left_traits;
+
+  const Left_type&
+  Left () const;
+
+  Left_type&
+  Left ();
+
+  void
+  Left (const Left_type& x);
+
+  static Left_type
+  Left_default_value ();
+
+  // Right
+  // 
+  typedef ::xml_schema::int_ Right_type;
+  typedef ::xsd::cxx::tree::traits< Right_type, char > Right_traits;
+
+  const Right_type&
+  Right () const;
+
+  Right_type&
+  Right ();
+
+  void
+  Right (const Right_type& x);
+
+  static Right_type
+  Right_default_value ();
+
+  // Bottom
+  // 
+  typedef ::xml_schema::int_ Bottom_type;
+  typedef ::xsd::cxx::tree::traits< Bottom_type, char > Bottom_traits;
+
+  const Bottom_type&
+  Bottom () const;
+
+  Bottom_type&
+  Bottom ();
+
+  void
+  Bottom (const Bottom_type& x);
+
+  static Bottom_type
+  Bottom_default_value ();
+
+  // Top
+  // 
+  typedef ::xml_schema::int_ Top_type;
+  typedef ::xsd::cxx::tree::traits< Top_type, char > Top_traits;
+
+  const Top_type&
+  Top () const;
+
+  Top_type&
+  Top ();
+
+  void
+  Top (const Top_type& x);
+
+  static Top_type
+  Top_default_value ();
+
+  // Constructors.
+  //
+  boundaries_t ();
+
+  boundaries_t (const ::xercesc::DOMElement& e,
+                ::xml_schema::flags f = 0,
+                ::xml_schema::container* c = 0);
+
+  boundaries_t (const boundaries_t& x,
+                ::xml_schema::flags f = 0,
+                ::xml_schema::container* c = 0);
+
+  virtual boundaries_t*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  virtual 
+  ~boundaries_t ();
+
+  // Implementation.
+  //
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  ::xsd::cxx::tree::one< Left_type > Left_;
+  ::xsd::cxx::tree::one< Right_type > Right_;
+  ::xsd::cxx::tree::one< Bottom_type > Bottom_;
+  ::xsd::cxx::tree::one< Top_type > Top_;
+};
+
 class simulation_t: public ::xml_schema::type
 {
   public:
+  // thermostat
+  // 
+  typedef ::thermostat_t thermostat_type;
+  typedef ::xsd::cxx::tree::traits< thermostat_type, char > thermostat_traits;
+
+  const thermostat_type&
+  thermostat () const;
+
+  thermostat_type&
+  thermostat ();
+
+  void
+  thermostat (const thermostat_type& x);
+
+  void
+  thermostat (::std::auto_ptr< thermostat_type > p);
+
+  // gravity
+  // 
+  typedef ::xml_schema::double_ gravity_type;
+  typedef ::xsd::cxx::tree::traits< gravity_type, char, ::xsd::cxx::tree::schema_type::double_ > gravity_traits;
+
+  const gravity_type&
+  gravity () const;
+
+  gravity_type&
+  gravity ();
+
+  void
+  gravity (const gravity_type& x);
+
   // domain
   // 
   typedef ::vec3d_t domain_type;
@@ -769,19 +1202,50 @@ class simulation_t: public ::xml_schema::type
   void
   domain (::std::auto_ptr< domain_type > p);
 
-  // rCutOf
+  // boundaries
   // 
-  typedef ::xml_schema::float_ rCutOf_type;
-  typedef ::xsd::cxx::tree::traits< rCutOf_type, char > rCutOf_traits;
+  typedef ::boundaries_t boundaries_type;
+  typedef ::xsd::cxx::tree::traits< boundaries_type, char > boundaries_traits;
 
-  const rCutOf_type&
-  rCutOf () const;
+  const boundaries_type&
+  boundaries () const;
 
-  rCutOf_type&
-  rCutOf ();
+  boundaries_type&
+  boundaries ();
 
   void
-  rCutOf (const rCutOf_type& x);
+  boundaries (const boundaries_type& x);
+
+  void
+  boundaries (::std::auto_ptr< boundaries_type > p);
+
+  // wallType
+  // 
+  typedef ::xml_schema::int_ wallType_type;
+  typedef ::xsd::cxx::tree::traits< wallType_type, char > wallType_traits;
+
+  const wallType_type&
+  wallType () const;
+
+  wallType_type&
+  wallType ();
+
+  void
+  wallType (const wallType_type& x);
+
+  // rCutOff
+  // 
+  typedef ::xml_schema::float_ rCutOff_type;
+  typedef ::xsd::cxx::tree::traits< rCutOff_type, char > rCutOff_traits;
+
+  const rCutOff_type&
+  rCutOff () const;
+
+  rCutOff_type&
+  rCutOff ();
+
+  void
+  rCutOff (const rCutOff_type& x);
 
   // type
   // 
@@ -834,13 +1298,42 @@ class simulation_t: public ::xml_schema::type
   void
   sphere (const sphere_sequence& s);
 
+  // particles
+  // 
+  typedef ::particleArray_t particles_type;
+  typedef ::xsd::cxx::tree::optional< particles_type > particles_optional;
+  typedef ::xsd::cxx::tree::traits< particles_type, char > particles_traits;
+
+  const particles_optional&
+  particles () const;
+
+  particles_optional&
+  particles ();
+
+  void
+  particles (const particles_type& x);
+
+  void
+  particles (const particles_optional& x);
+
+  void
+  particles (::std::auto_ptr< particles_type > p);
+
   // Constructors.
   //
-  simulation_t (const domain_type&,
-                const rCutOf_type&);
+  simulation_t (const thermostat_type&,
+                const gravity_type&,
+                const domain_type&,
+                const boundaries_type&,
+                const wallType_type&,
+                const rCutOff_type&);
 
-  simulation_t (::std::auto_ptr< domain_type >&,
-                const rCutOf_type&);
+  simulation_t (::std::auto_ptr< thermostat_type >&,
+                const gravity_type&,
+                ::std::auto_ptr< domain_type >&,
+                ::std::auto_ptr< boundaries_type >&,
+                const wallType_type&,
+                const rCutOff_type&);
 
   simulation_t (const ::xercesc::DOMElement& e,
                 ::xml_schema::flags f = 0,
@@ -865,11 +1358,16 @@ class simulation_t: public ::xml_schema::type
          ::xml_schema::flags);
 
   protected:
+  ::xsd::cxx::tree::one< thermostat_type > thermostat_;
+  ::xsd::cxx::tree::one< gravity_type > gravity_;
   ::xsd::cxx::tree::one< domain_type > domain_;
-  ::xsd::cxx::tree::one< rCutOf_type > rCutOf_;
+  ::xsd::cxx::tree::one< boundaries_type > boundaries_;
+  ::xsd::cxx::tree::one< wallType_type > wallType_;
+  ::xsd::cxx::tree::one< rCutOff_type > rCutOff_;
   type_sequence type_;
   cuboid_sequence cuboid_;
   sphere_sequence sphere_;
+  particles_optional particles_;
 };
 
 #include <iosfwd>
@@ -971,6 +1469,112 @@ simulation (::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument >& d,
             ::xml_schema::flags f = 0,
             const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+#include <iosfwd>
+
+#include <xercesc/dom/DOMDocument.hpp>
+#include <xercesc/dom/DOMErrorHandler.hpp>
+#include <xercesc/framework/XMLFormatter.hpp>
+
+#include <xsd/cxx/xml/dom/auto-ptr.hxx>
+
+void
+operator<< (::xercesc::DOMElement&, const type_t&);
+
+void
+operator<< (::xercesc::DOMElement&, const vec3i_t&);
+
+void
+operator<< (::xercesc::DOMElement&, const vec3d_t&);
+
+void
+operator<< (::xercesc::DOMElement&, const cuboid_t&);
+
+void
+operator<< (::xercesc::DOMElement&, const sphere_t&);
+
+void
+operator<< (::xercesc::DOMElement&, const particle_t&);
+
+void
+operator<< (::xercesc::DOMElement&, const particleArray_t&);
+
+void
+operator<< (::xercesc::DOMElement&, const thermostat_t&);
+
+void
+operator<< (::xercesc::DOMElement&, const boundaries_t&);
+
+void
+operator<< (::xercesc::DOMElement&, const simulation_t&);
+
+// Serialize to std::ostream.
+//
+
+void
+simulation (::std::ostream& os,
+            const ::simulation_t& x, 
+            const ::xml_schema::namespace_infomap& m = ::xml_schema::namespace_infomap (),
+            const ::std::string& e = "UTF-8",
+            ::xml_schema::flags f = 0);
+
+void
+simulation (::std::ostream& os,
+            const ::simulation_t& x, 
+            ::xml_schema::error_handler& eh,
+            const ::xml_schema::namespace_infomap& m = ::xml_schema::namespace_infomap (),
+            const ::std::string& e = "UTF-8",
+            ::xml_schema::flags f = 0);
+
+void
+simulation (::std::ostream& os,
+            const ::simulation_t& x, 
+            ::xercesc::DOMErrorHandler& eh,
+            const ::xml_schema::namespace_infomap& m = ::xml_schema::namespace_infomap (),
+            const ::std::string& e = "UTF-8",
+            ::xml_schema::flags f = 0);
+
+// Serialize to xercesc::XMLFormatTarget.
+//
+
+void
+simulation (::xercesc::XMLFormatTarget& ft,
+            const ::simulation_t& x, 
+            const ::xml_schema::namespace_infomap& m = ::xml_schema::namespace_infomap (),
+            const ::std::string& e = "UTF-8",
+            ::xml_schema::flags f = 0);
+
+void
+simulation (::xercesc::XMLFormatTarget& ft,
+            const ::simulation_t& x, 
+            ::xml_schema::error_handler& eh,
+            const ::xml_schema::namespace_infomap& m = ::xml_schema::namespace_infomap (),
+            const ::std::string& e = "UTF-8",
+            ::xml_schema::flags f = 0);
+
+void
+simulation (::xercesc::XMLFormatTarget& ft,
+            const ::simulation_t& x, 
+            ::xercesc::DOMErrorHandler& eh,
+            const ::xml_schema::namespace_infomap& m = ::xml_schema::namespace_infomap (),
+            const ::std::string& e = "UTF-8",
+            ::xml_schema::flags f = 0);
+
+// Serialize to an existing xercesc::DOMDocument.
+//
+
+void
+simulation (::xercesc::DOMDocument& d,
+            const ::simulation_t& x,
+            ::xml_schema::flags f = 0);
+
+// Serialize to a new xercesc::DOMDocument.
+//
+
+::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument >
+simulation (const ::simulation_t& x, 
+            const ::xml_schema::namespace_infomap& m = ::xml_schema::namespace_infomap (),
+            ::xml_schema::flags f = 0);
+
 #include <xsd/cxx/post.hxx>
 
 // Begin epilogue.
@@ -978,4 +1582,4 @@ simulation (::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument >& d,
 //
 // End epilogue.
 
-#endif // SRC_SIMULATION_H
+#endif // SIMULATION_H

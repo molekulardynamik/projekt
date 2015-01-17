@@ -55,14 +55,14 @@ int ParticleProperty::count()
 }
 
 
-Particle::Particle(int type_arg, bool vis /*= true*/) 
-	: x(0.0), v(0.0), f(0.0), old_f(0.0), type(type_arg), cell(-1), visible(vis)
+Particle::Particle(int type_arg)
+	: x(0.0), v(0.0), f(0.0), old_f(0.0), type(type_arg), cell(-1)
 {
 
 }
 
 Particle::Particle(const Particle& other) 
-	:x(other.x), v(other.v), f(other.f), old_f(other.old_f), type(other.type), cell(other.cell), visible(other.visible)
+	:x(other.x), v(other.v), f(other.f), old_f(other.old_f), type(other.type), cell(other.cell)
 
 {
 
@@ -72,9 +72,8 @@ Particle::Particle(const Particle& other)
 Particle::Particle(	
 	utils::Vector<double, 3> x_arg,
 	utils::Vector<double, 3> v_arg,
-	int type_arg,
-	bool vis /* = true*/)
-	: x(x_arg), v(v_arg), f(0.0), old_f(0.0), type(type_arg), cell(-1), visible(vis)
+	int type_arg)
+	: x(x_arg), v(v_arg), f(0.0), old_f(0.0), type(type_arg), cell(-1)
 {
 }
 
@@ -104,16 +103,6 @@ void Particle::setType(int t) {
 	type = t;
 }
 
-int Particle::getCell() {
-	return cell;
-}
-void Particle::setCell(int c) {
-	cell = c;
-}
-
-bool Particle::isVisible(){
-	return visible;
-}
 
 double Particle::getM()
 {
@@ -132,7 +121,7 @@ double Particle::getO()
 
 std::string Particle::toString() {
 	std::stringstream stream;
-	stream << "Particle: X:" << x <<  " v: " << v << " f: " << f << " old_f: " << old_f << " type: " << type << " cell: " << cell << (visible ? " visible" : " invisible");
+	stream << "Particle: X:" << x <<  " v: " << v << " f: " << f << " old_f: " << old_f << " type: " << type << " cell: " << cell;
 	return stream.str();
 }
 
@@ -150,7 +139,16 @@ std::string Particle::saveParticle()
 bool Particle::operator ==(Particle& other) {
 	if ((x == other.x) && (v == other.v) && (f == other.f) &&
 		(type == other.type) && (old_f == other.old_f) && 
-		(cell == other.cell) && (visible == other.visible) )
+		(cell == other.cell))
+		return true;
+
+	return false;
+}
+
+bool Particle::operator ==(const Particle& other) {
+	if ((x == other.x) && (v == other.v) && (f == other.f) &&
+		(type == other.type) && (old_f == other.old_f) &&
+		(cell == other.cell) )
 		return true;
 
 	return false;

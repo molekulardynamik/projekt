@@ -1,24 +1,15 @@
 <?xml version="1.0"?>
 <configSim xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="src/config.xsd">
-
-  <output>
-  	<dir>vtkOutput/</dir>
-  	<filename>MD_vtk</filename>
-  	<iterations>10</iterations>
-  </output>
-  
-  <properties>
-  	<delta>0.0005</delta>
-  	<end>25</end>
-  	<thermostat>
-  		<initialTemp>40</initialTemp>
-  		<targetTemp>40</targetTemp>
-  		<stepTemp>0</stepTemp>
-  		<startTime>-1</startTime>
-  	</thermostat>
-  	<gravity>-12.5</gravity>
-  </properties>
-  <simulationFile>simulation2.xml</simulationFile>
+       xsi:noNamespaceSchemaLocation="config.xsd">
+       
+	<delta>0.0005</delta>
+  	<end>40</end>
+  	<output>
+  		<dir>vtkOutput/</dir>
+  		<filename>drop_vtk</filename>
+  		<iterations>50</iterations>
+  	</output>
+  	<simulationFile>Drop.xml</simulationFile>
+  	<!--<saveFile>Drop.xml</saveFile>-->
 
 </configSim>

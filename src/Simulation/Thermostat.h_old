@@ -3,17 +3,17 @@
 #include <list>
 
 #include "Particle.h"
-#include "ParticleContainer.h"
-#include "ParticleHandler.h"
+#include "Container/ParticleContainer.h"
+#include "Handler/ParticleHandler.h"
 
 namespace Simulation
 {
 	/// \class Thermostat
 	/// \brief Handles temperature of particles in the simulation
-	class Thermostat
+	class Thermostat_old
 	{
 	public:
-		Thermostat(ParticleContainer& cont);
+		Thermostat_old(ParticleContainer& cont);
 
 		/// Scale temperature of simulation
 		void scaleTemperature(double scaling);

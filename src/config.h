@@ -31,8 +31,8 @@
 // in the accompanying FLOSSE file.
 //
 
-#ifndef SRC_CONFIG_H
-#define SRC_CONFIG_H
+#ifndef CONFIG_H
+#define CONFIG_H
 
 // Begin prologue.
 //
@@ -222,8 +222,6 @@ namespace xml_schema
 // Forward declarations.
 //
 class output_t;
-class thermostat_t;
-class properties_t;
 class config_t;
 
 #include <memory>    // std::auto_ptr
@@ -324,102 +322,7 @@ class output_t: public ::xml_schema::type
   ::xsd::cxx::tree::one< iterations_type > iterations_;
 };
 
-class thermostat_t: public ::xml_schema::type
-{
-  public:
-  // initialTemp
-  // 
-  typedef ::xml_schema::double_ initialTemp_type;
-  typedef ::xsd::cxx::tree::traits< initialTemp_type, char, ::xsd::cxx::tree::schema_type::double_ > initialTemp_traits;
-
-  const initialTemp_type&
-  initialTemp () const;
-
-  initialTemp_type&
-  initialTemp ();
-
-  void
-  initialTemp (const initialTemp_type& x);
-
-  // targetTemp
-  // 
-  typedef ::xml_schema::double_ targetTemp_type;
-  typedef ::xsd::cxx::tree::traits< targetTemp_type, char, ::xsd::cxx::tree::schema_type::double_ > targetTemp_traits;
-
-  const targetTemp_type&
-  targetTemp () const;
-
-  targetTemp_type&
-  targetTemp ();
-
-  void
-  targetTemp (const targetTemp_type& x);
-
-  // stepTemp
-  // 
-  typedef ::xml_schema::double_ stepTemp_type;
-  typedef ::xsd::cxx::tree::traits< stepTemp_type, char, ::xsd::cxx::tree::schema_type::double_ > stepTemp_traits;
-
-  const stepTemp_type&
-  stepTemp () const;
-
-  stepTemp_type&
-  stepTemp ();
-
-  void
-  stepTemp (const stepTemp_type& x);
-
-  // startTime
-  // 
-  typedef ::xml_schema::int_ startTime_type;
-  typedef ::xsd::cxx::tree::traits< startTime_type, char > startTime_traits;
-
-  const startTime_type&
-  startTime () const;
-
-  startTime_type&
-  startTime ();
-
-  void
-  startTime (const startTime_type& x);
-
-  // Constructors.
-  //
-  thermostat_t (const initialTemp_type&,
-                const targetTemp_type&,
-                const stepTemp_type&,
-                const startTime_type&);
-
-  thermostat_t (const ::xercesc::DOMElement& e,
-                ::xml_schema::flags f = 0,
-                ::xml_schema::container* c = 0);
-
-  thermostat_t (const thermostat_t& x,
-                ::xml_schema::flags f = 0,
-                ::xml_schema::container* c = 0);
-
-  virtual thermostat_t*
-  _clone (::xml_schema::flags f = 0,
-          ::xml_schema::container* c = 0) const;
-
-  virtual 
-  ~thermostat_t ();
-
-  // Implementation.
-  //
-  protected:
-  void
-  parse (::xsd::cxx::xml::dom::parser< char >&,
-         ::xml_schema::flags);
-
-  protected:
-  ::xsd::cxx::tree::one< initialTemp_type > initialTemp_;
-  ::xsd::cxx::tree::one< targetTemp_type > targetTemp_;
-  ::xsd::cxx::tree::one< stepTemp_type > stepTemp_;
-  ::xsd::cxx::tree::one< startTime_type > startTime_;
-};
-
-class properties_t: public ::xml_schema::type
+class config_t: public ::xml_schema::type
 {
   public:
   // delta
@@ -450,81 +353,6 @@ class properties_t: public ::xml_schema::type
   void
   end (const end_type& x);
 
-  // thermostat
-  // 
-  typedef ::thermostat_t thermostat_type;
-  typedef ::xsd::cxx::tree::traits< thermostat_type, char > thermostat_traits;
-
-  const thermostat_type&
-  thermostat () const;
-
-  thermostat_type&
-  thermostat ();
-
-  void
-  thermostat (const thermostat_type& x);
-
-  void
-  thermostat (::std::auto_ptr< thermostat_type > p);
-
-  // gravity
-  // 
-  typedef ::xml_schema::double_ gravity_type;
-  typedef ::xsd::cxx::tree::traits< gravity_type, char, ::xsd::cxx::tree::schema_type::double_ > gravity_traits;
-
-  const gravity_type&
-  gravity () const;
-
-  gravity_type&
-  gravity ();
-
-  void
-  gravity (const gravity_type& x);
-
-  // Constructors.
-  //
-  properties_t (const delta_type&,
-                const end_type&,
-                const thermostat_type&,
-                const gravity_type&);
-
-  properties_t (const delta_type&,
-                const end_type&,
-                ::std::auto_ptr< thermostat_type >&,
-                const gravity_type&);
-
-  properties_t (const ::xercesc::DOMElement& e,
-                ::xml_schema::flags f = 0,
-                ::xml_schema::container* c = 0);
-
-  properties_t (const properties_t& x,
-                ::xml_schema::flags f = 0,
-                ::xml_schema::container* c = 0);
-
-  virtual properties_t*
-  _clone (::xml_schema::flags f = 0,
-          ::xml_schema::container* c = 0) const;
-
-  virtual 
-  ~properties_t ();
-
-  // Implementation.
-  //
-  protected:
-  void
-  parse (::xsd::cxx::xml::dom::parser< char >&,
-         ::xml_schema::flags);
-
-  protected:
-  ::xsd::cxx::tree::one< delta_type > delta_;
-  ::xsd::cxx::tree::one< end_type > end_;
-  ::xsd::cxx::tree::one< thermostat_type > thermostat_;
-  ::xsd::cxx::tree::one< gravity_type > gravity_;
-};
-
-class config_t: public ::xml_schema::type
-{
-  public:
   // output
   // 
   typedef ::output_t output_type;
@@ -541,23 +369,6 @@ class config_t: public ::xml_schema::type
 
   void
   output (::std::auto_ptr< output_type > p);
-
-  // properties
-  // 
-  typedef ::properties_t properties_type;
-  typedef ::xsd::cxx::tree::traits< properties_type, char > properties_traits;
-
-  const properties_type&
-  properties () const;
-
-  properties_type&
-  properties ();
-
-  void
-  properties (const properties_type& x);
-
-  void
-  properties (::std::auto_ptr< properties_type > p);
 
   // simulationFile
   // 
@@ -576,14 +387,37 @@ class config_t: public ::xml_schema::type
   void
   simulationFile (::std::auto_ptr< simulationFile_type > p);
 
+  // saveFile
+  // 
+  typedef ::xml_schema::string saveFile_type;
+  typedef ::xsd::cxx::tree::optional< saveFile_type > saveFile_optional;
+  typedef ::xsd::cxx::tree::traits< saveFile_type, char > saveFile_traits;
+
+  const saveFile_optional&
+  saveFile () const;
+
+  saveFile_optional&
+  saveFile ();
+
+  void
+  saveFile (const saveFile_type& x);
+
+  void
+  saveFile (const saveFile_optional& x);
+
+  void
+  saveFile (::std::auto_ptr< saveFile_type > p);
+
   // Constructors.
   //
-  config_t (const output_type&,
-            const properties_type&,
+  config_t (const delta_type&,
+            const end_type&,
+            const output_type&,
             const simulationFile_type&);
 
-  config_t (::std::auto_ptr< output_type >&,
-            ::std::auto_ptr< properties_type >&,
+  config_t (const delta_type&,
+            const end_type&,
+            ::std::auto_ptr< output_type >&,
             const simulationFile_type&);
 
   config_t (const ::xercesc::DOMElement& e,
@@ -609,9 +443,11 @@ class config_t: public ::xml_schema::type
          ::xml_schema::flags);
 
   protected:
+  ::xsd::cxx::tree::one< delta_type > delta_;
+  ::xsd::cxx::tree::one< end_type > end_;
   ::xsd::cxx::tree::one< output_type > output_;
-  ::xsd::cxx::tree::one< properties_type > properties_;
   ::xsd::cxx::tree::one< simulationFile_type > simulationFile_;
+  saveFile_optional saveFile_;
 };
 
 #include <iosfwd>
@@ -720,4 +556,4 @@ configSim (::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument >& d,
 //
 // End epilogue.
 
-#endif // SRC_CONFIG_H
+#endif // CONFIG_H

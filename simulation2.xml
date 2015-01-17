@@ -1,9 +1,18 @@
 <?xml version="1.0"?>
 <simulation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="src/simulation.xsd">
+       xsi:noNamespaceSchemaLocation="simulation.xsd">
        
+    <thermostat>
+  		<initialTemp>40</initialTemp>
+  		<targetTemp>40</targetTemp>
+  		<step>1000</step>
+  		<startTime>-1</startTime>
+      <targetTime>0</targetTime>
+  	</thermostat>
+  	<gravity>-12.5</gravity>
 	<domain X="150" Y="27" Z="1"/>
-	<rCutOf>3</rCutOf>
+  <boundaries Left="2" Right="3" Bottom="1" Top="1"/>
+	<rCutOff>3</rCutOff>
 	<type sigma="1.2" epsilon="1" mass="1"/>
 	<type sigma="1.1" epsilon="1" mass="2"/>
 	<cuboid type="0">
