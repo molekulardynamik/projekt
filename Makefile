@@ -11,7 +11,8 @@ CC=g++
 
 # Compiler flags
 # -------------------------------------------------------------------------
-CFLAGS=-g -O3 -ggdb
+CFLAGS=-O3 -ip -ipo -fast
+#CFLAGS=-g -O3 -ggdb
 
 # Linker flags
 # ------------
