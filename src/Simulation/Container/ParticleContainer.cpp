@@ -164,7 +164,7 @@ ParticleContainer::ParticleContainer(
 					cell.setNeighbor(&findCell(x, y, z - 1),
 							ParticleCell::Front);
 				if (right && front)
-					cell.setNeighbor(&findCell(x + 1, y - 1, z - 1),
+					cell.setNeighbor(&findCell(x + 1, y, z - 1),
 							ParticleCell::RightFront);
 				if (left && top && front)
 					cell.setNeighbor(&findCell(x - 1, y + 1, z - 1),
@@ -189,16 +189,17 @@ ParticleContainer::ParticleContainer(
 					cell.setNeighbor(&findCell(x - 1, y, z),
 							ParticleCell::Left);
 				if (right)
-					cell.setNeighbor(&findCell(x + 1, y - 1, z),
+					cell.setNeighbor(&findCell(x + 1, y, z),
 							ParticleCell::Right);
 				if (left && top)
 					cell.setNeighbor(&findCell(x - 1, y + 1, z),
 							ParticleCell::LeftTop);
 				if (top)
 					cell.setNeighbor(&findCell(x, y + 1, z), ParticleCell::Top);
+
 				if (right && top)
 					cell.setNeighbor(&findCell(x + 1, y + 1, z),
-							ParticleCell::RightTopFront);
+							ParticleCell::RightTop);
 
 				if (left && bottom && back)
 					cell.setNeighbor(&findCell(x - 1, y - 1, z + 1),
@@ -216,7 +217,7 @@ ParticleContainer::ParticleContainer(
 					cell.setNeighbor(&findCell(x, y, z + 1),
 							ParticleCell::Back);
 				if (right && back)
-					cell.setNeighbor(&findCell(x + 1, y - 1, z + 1),
+					cell.setNeighbor(&findCell(x + 1, y, z + 1),
 							ParticleCell::RightBack);
 				if (left && top && back)
 					cell.setNeighbor(&findCell(x - 1, y + 1, z + 1),
