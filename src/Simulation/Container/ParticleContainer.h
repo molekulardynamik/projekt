@@ -44,17 +44,17 @@ private:
 	/// \param cell Pointer to 1D cell index
 	ParticleCell& findCell(utils::Vector<double, 3> position);
 
-	ParticleCell& findCell(int cellX, int cellY);
+	ParticleCell& findCell(int cellX, int cellY, int cellZ);
 
 	///	 Converts 2D indices to a 1D index
 	/// \param cellX, cellY 2D indices
 	/// \param cell Pointer to 1D cell index
-	void flatten(int cellX, int cellY, int* cell);
+	void flatten(int cellX, int cellY, int cellZ, int* cell);
 
 	/// Converts a 1D index to 2D indices
 	/// \param cellX, cellY Pointers to 2D indices
 	/// \param cell 1D cell index
-	void expand(int* cellX, int* cellY, int cell);
+	void expand(int* cellX, int* cellY, int* cellZ, int cell);
 
 private:
 	std::vector<ParticleCell> particleCells_;

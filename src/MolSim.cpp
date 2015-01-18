@@ -101,7 +101,8 @@ int main(int argc, char* argsv[])
 	// initial setup
 	Thermostat::numDimensions() = numDims;
 
-	container.iterateParticles(brownianHandler);
+	if(initialTemp != 0)
+		container.iterateParticles(brownianHandler);
 	container.iterateParticles(forceResetHandler);
 	if(gravity != 0)
 		container.iterateParticles(gravityHandler);
@@ -125,6 +126,7 @@ int main(int argc, char* argsv[])
 			container.iterateParticles(gravityHandler);
 		container.iterateParticlePairsSymmetric(lennardJonesHandler);
 
+
 		container.clearBoundaries();
 
 		container.iterateParticles(velocityHandler);
@@ -141,9 +143,6 @@ int main(int argc, char* argsv[])
 			container.iterateParticles(thermostatHandler);
 		}
 
-
-		iteration++;
-
 		// write Particles to file
 		if (iteration % outputSkip == 0)
 		{
@@ -151,6 +150,8 @@ int main(int argc, char* argsv[])
 			container.iterateParticles(outputHandler);
 			outputHandler.finish(out_name, iteration);
 		}
+
+		iteration++;
 
 		lastTrace++;
 		// print simulation status

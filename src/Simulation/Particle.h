@@ -42,8 +42,11 @@ namespace Simulation
 		/// \return Number of properties
 		static int count();
 
+		static int& wallType();
+
 	private:
 		static std::vector<ParticleProperty> properties;		///< list of all type properties
+		static int wallType_;
 	};
 
 
@@ -94,6 +97,11 @@ namespace Simulation
 
 		int getType();
 		void setType(int t);
+
+		int& getCell()
+		{
+			return cell;
+		}
 
 		bool operator==(Particle& other);
 		bool operator==(const Particle& other);

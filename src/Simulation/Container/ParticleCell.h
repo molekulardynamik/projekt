@@ -18,14 +18,34 @@ public:
 public:
 	enum Neighborhood
 	{
-		BottomLeft = 0,
-		Bottom = 1,
-		BottomRight = 2,
-		Left = 3,
-		Right = 4,
-		TopLeft = 5,
-		Top = 6,
-		TopRight = 7
+		LeftBottomFront = 0,
+		BottomFront = 1,
+		RightBottomFront = 2,
+		LeftFront = 3,
+		Front = 4,
+		RightFront = 5,
+		LeftTopFront = 6,
+		TopFront = 7,
+		RightTopFront = 8,
+
+		LeftBottom = 9,
+		Bottom = 10,
+		RightBottom = 11,
+		Left = 12,
+		Right = 13,
+		LeftTop = 14,
+		Top = 15,
+		RightTop = 16,
+
+		LeftBottomBack = 17,
+		BottomBack = 18,
+		RightBottomBack = 19,
+		LeftBack = 20,
+		Back = 21,
+		RightBack = 22,
+		LeftTopBack = 23,
+		TopBack = 24,
+		RightTopBack = 25,
 	};
 
 	/// \enum CellType
@@ -37,7 +57,9 @@ public:
 		LeftBoundary,
 		RightBoundary,
 		BottomBoundary,
-		TopBoundary
+		TopBoundary,
+		FrontBoundary,
+		BackBoundary,
 	};
 
 	enum BoundaryCondition
@@ -62,7 +84,7 @@ public:
 	ParticleCell* getOppositeHaloCell();
 
 	int getIndex();
-	utils::Vector<double, 3> getBottomLeftCorner();
+	utils::Vector<double, 3> getLeftBottomFrontCorner();
 
 	void addParticle(Simulation::Particle& particle);
 	void removeParticle(Simulation::Particle& particle);
@@ -90,9 +112,9 @@ private:
 
 private:
 	int index_;
-	ParticleCell* neighbors_[8];
+	ParticleCell* neighbors_[26];
 	ParticleCell* oppositeHaloCell_;
-	utils::Vector<double, 3> bottomLeftCorner_;
+	utils::Vector<double, 3> leftBottomFrontCorner_;
 	double size_;
 	CellType cellType_;
 

@@ -19,10 +19,10 @@ void ParticleCell::moveParticle(ParticleCell& from, ParticleCell& to,
 	from.removeParticle(particle);
 }
 
-ParticleCell::ParticleCell(int index, Vector<double, 3> bottomLeft, double size) :
-		index_(index), bottomLeftCorner_(bottomLeft), size_(size), cellType_(InnerCell)
+ParticleCell::ParticleCell(int index, Vector<double, 3> leftBottomFront, double size) :
+		index_(index), leftBottomFrontCorner_(leftBottomFront), size_(size), cellType_(InnerCell)
 {
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 26; i++)
 	{
 		neighbors_[i] = 0;
 	}
@@ -48,7 +48,7 @@ void ParticleCell::setNeighbor(ParticleCell* neighbor,
 int ParticleCell::countNeighbors()
 {
 	int count;
-	for(int i=0; i<8; i++)
+	for(int i=0; i<26; i++)
 	{
 		if(neighbors_[i])
 			count++;
@@ -61,7 +61,7 @@ void ParticleCell::printNeighbors()
 {
 	stringstream out;
 	out << "Cell " << index_ << " has neighbor ";
-	for(int i=0; i<8; i++)
+	for(int i=0; i<26; i++)
 	{
 		if(neighbors_[i])
 			out << neighbors_[i]->getIndex() << " ,";
@@ -86,9 +86,9 @@ int ParticleCell::getIndex()
 	return index_;
 }
 
-Vector<double, 3> ParticleCell::getBottomLeftCorner()
+Vector<double, 3> ParticleCell::getLeftBottomFrontCorner()
 {
-	return bottomLeftCorner_;
+	return leftBottomFrontCorner_;
 }
 
 void ParticleCell::addParticle(Particle& particle)
@@ -96,7 +96,7 @@ void ParticleCell::addParticle(Particle& particle)
 	if (!checkParticle(particle))
 		return;
 
-	if(particles_.size() >500)
+	if(particles_.size() >5000)
 	{
 		LOG4CXX_ERROR(cellLogger, "Too many particles");
 		return;
@@ -104,12 +104,15 @@ void ParticleCell::addParticle(Particle& particle)
 
 	if(boundaryConditions[cellType_] == Periodic)
 	{
-		Vector<double, 3> diff = oppositeHaloCell_->bottomLeftCorner_ - bottomLeftCorner_;
+		Vector<double, 3> diff = oppositeHaloCell_->leftBottomFrontCorner_ - leftBottomFrontCorner_;
 		particle.getX() = particle.getX() + diff;
 		oppositeHaloCell_->addParticle(particle);
 	}
 	else
+	{
 		particles_.push_back(particle);
+		particles_.back().getCell() = index_;
+	}
 }
 
 void ParticleCell::removeParticle(Particle& particle)
@@ -149,14 +152,18 @@ int ParticleCell::countParticles()
 bool ParticleCell::checkParticle(Particle& particle)
 {
 	Vector<double, 3>& position = particle.getX();
-	if (position[0] < bottomLeftCorner_[0] && neighbors_[Left])
+	if (position[0] < leftBottomFrontCorner_[0] && neighbors_[Left])
 		moveParticle(*this, *neighbors_[Left], particle);
-	else if (position[0] >= bottomLeftCorner_[0] + size_ && neighbors_[Right])
+	else if (position[0] >= leftBottomFrontCorner_[0] + size_ && neighbors_[Right])
 		moveParticle(*this, *neighbors_[Right], particle);
-	else if (position[1] < bottomLeftCorner_[1] && neighbors_[Bottom])
+	else if (position[1] < leftBottomFrontCorner_[1] && neighbors_[Bottom])
 		moveParticle(*this, *neighbors_[Bottom], particle);
-	else if (position[1] >= bottomLeftCorner_[1] + size_ && neighbors_[Top])
+	else if (position[1] >= leftBottomFrontCorner_[1] + size_ && neighbors_[Top])
 		moveParticle(*this, *neighbors_[Top], particle);
+	else if(position[2] < leftBottomFrontCorner_[2] && neighbors_[Front])
+		moveParticle(*this, *neighbors_[Front], particle);
+	else if(position[2] >= leftBottomFrontCorner_[2] + size_ && neighbors_[Back])
+		moveParticle(*this, *neighbors_[Back], particle);
 	else
 		return true;
 
@@ -194,7 +201,7 @@ void ParticleCell::iterateParticlePairs(ParticleHandler& handler)
 	// Iterate through neighbors
 	for (iter1 = particles_.begin(); iter1 != particles_.end(); ++iter1)
 	{
-		for(int i=0; i<8; i++)
+		for(int i=0; i<26; i++)
 		{
 			if(neighbors_[i])
 			{
@@ -233,7 +240,7 @@ void ParticleCell::iterateParticlePairsSymmetric(ParticleHandler& handler)
 	// Iterate through neighbors
 	for (iter1 = particles_.begin(); iter1 != particles_.end(); ++iter1)
 	{
-		for(int i=0; i<4; i++)
+		for(int i=0; i<13; i++)
 		{
 			if(neighbors_[i])
 			{
@@ -259,12 +266,14 @@ void ParticleCell::applyBoundaryCondition()
 	BoundaryCondition cond;
 	if(cellType_ > Corner)
 		cond = boundaryConditions[cellType_];
-	else
+	else if(cellType_ == Corner)
 	{
 		if(boundaryConditions[LeftBoundary] == Periodic ||
 				boundaryConditions[RightBoundary] == Periodic ||
 				boundaryConditions[BottomBoundary] == Periodic ||
-				boundaryConditions[TopBoundary] == Periodic)
+				boundaryConditions[TopBoundary] == Periodic ||
+				boundaryConditions[FrontBoundary] == Periodic ||
+				boundaryConditions[BackBoundary] == Periodic)
 			cond = Periodic;
 		else
 			cond = OutFlow;
@@ -290,29 +299,42 @@ void ParticleCell::applyReflectionCondition()
 	Vector<double, 3> mid(0.0);
 	int axis;
 
-	if(cellType_ == BottomBoundary)
-	{
-		haloCell = neighbors_[Top];
-		mid = haloCell->bottomLeftCorner_;
-		axis = 1;
-	}
-	else if(cellType_ == LeftBoundary)
+
+	if(cellType_ == LeftBoundary)
 	{
 		haloCell = neighbors_[Right];
-		mid = haloCell->bottomLeftCorner_;
+		mid = haloCell->leftBottomFrontCorner_;
 		axis = 0;
 	}
 	else if(cellType_ == RightBoundary)
 	{
 		haloCell = neighbors_[Left];
-		mid = bottomLeftCorner_;
+		mid = leftBottomFrontCorner_;
 		axis = 0;
+	}
+	else if(cellType_ == BottomBoundary)
+	{
+		haloCell = neighbors_[Top];
+		mid = haloCell->leftBottomFrontCorner_;
+		axis = 1;
 	}
 	else if(cellType_ == TopBoundary)
 	{
 		haloCell = neighbors_[Bottom];
-		mid = bottomLeftCorner_;
+		mid = leftBottomFrontCorner_;
 		axis = 1;
+	}
+	else if(cellType_ == FrontBoundary)
+	{
+		haloCell = neighbors_[Back];
+		mid = haloCell->leftBottomFrontCorner_;
+		axis = 2;
+	}
+	else if(cellType_ == BackBoundary)
+	{
+		haloCell = neighbors_[Front];
+		mid = leftBottomFrontCorner_;
+		axis = 2;
 	}
 	else
 	{
@@ -335,7 +357,7 @@ void ParticleCell::applyReflectionCondition()
 
 void ParticleCell::applyPeriodicCondition()
 {
-	Vector<double, 3> diff = bottomLeftCorner_ - oppositeHaloCell_->bottomLeftCorner_;
+	Vector<double, 3> diff = leftBottomFrontCorner_ - oppositeHaloCell_->leftBottomFrontCorner_;
 	list<Particle>::iterator iter;
 	for (iter = oppositeHaloCell_->particles_.begin(); iter != oppositeHaloCell_->particles_.end(); ++iter)
 	{

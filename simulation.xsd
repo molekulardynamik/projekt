@@ -60,20 +60,13 @@
       		<xs:element name="targetTime" type="xs:int"/>
 		</xs:sequence>
 	</xs:complexType>
-	
-  <xs:complexType name="boundaries_t">
-    <xs:attribute name="Left" type="xs:int" default="0"/>
-    <xs:attribute name="Right" type="xs:int" default="0"/>
-    <xs:attribute name="Bottom" type="xs:int" default="0"/>
-    <xs:attribute name="Top" type="xs:int" default="0"/>
-  </xs:complexType>
   
 	<xs:complexType name="simulation_t">
 		<xs:sequence>
 			<xs:element name="thermostat" type="thermostat_t"/>
 			<xs:element name="gravity" type="xs:double"/>
 			<xs:element name="domain" type="vec3d_t"/>
-      		<xs:element name="boundaries" type="boundaries_t"/>
+      		<xs:element name="boundaries" type="vec3i_t"/>
       		<xs:element name="wallType" type="xs:int"/>
 			<xs:element name="rCutOff" type="xs:float"/>
 			<xs:element name="type" type="type_t" maxOccurs="unbounded"/>

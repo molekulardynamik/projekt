@@ -255,7 +255,6 @@ class sphere_t;
 class particle_t;
 class particleArray_t;
 class thermostat_t;
-class boundaries_t;
 class simulation_t;
 
 #include <memory>    // std::auto_ptr
@@ -1047,110 +1046,6 @@ class thermostat_t: public ::xml_schema::type
   ::xsd::cxx::tree::one< targetTime_type > targetTime_;
 };
 
-class boundaries_t: public ::xml_schema::type
-{
-  public:
-  // Left
-  // 
-  typedef ::xml_schema::int_ Left_type;
-  typedef ::xsd::cxx::tree::traits< Left_type, char > Left_traits;
-
-  const Left_type&
-  Left () const;
-
-  Left_type&
-  Left ();
-
-  void
-  Left (const Left_type& x);
-
-  static Left_type
-  Left_default_value ();
-
-  // Right
-  // 
-  typedef ::xml_schema::int_ Right_type;
-  typedef ::xsd::cxx::tree::traits< Right_type, char > Right_traits;
-
-  const Right_type&
-  Right () const;
-
-  Right_type&
-  Right ();
-
-  void
-  Right (const Right_type& x);
-
-  static Right_type
-  Right_default_value ();
-
-  // Bottom
-  // 
-  typedef ::xml_schema::int_ Bottom_type;
-  typedef ::xsd::cxx::tree::traits< Bottom_type, char > Bottom_traits;
-
-  const Bottom_type&
-  Bottom () const;
-
-  Bottom_type&
-  Bottom ();
-
-  void
-  Bottom (const Bottom_type& x);
-
-  static Bottom_type
-  Bottom_default_value ();
-
-  // Top
-  // 
-  typedef ::xml_schema::int_ Top_type;
-  typedef ::xsd::cxx::tree::traits< Top_type, char > Top_traits;
-
-  const Top_type&
-  Top () const;
-
-  Top_type&
-  Top ();
-
-  void
-  Top (const Top_type& x);
-
-  static Top_type
-  Top_default_value ();
-
-  // Constructors.
-  //
-  boundaries_t ();
-
-  boundaries_t (const ::xercesc::DOMElement& e,
-                ::xml_schema::flags f = 0,
-                ::xml_schema::container* c = 0);
-
-  boundaries_t (const boundaries_t& x,
-                ::xml_schema::flags f = 0,
-                ::xml_schema::container* c = 0);
-
-  virtual boundaries_t*
-  _clone (::xml_schema::flags f = 0,
-          ::xml_schema::container* c = 0) const;
-
-  virtual 
-  ~boundaries_t ();
-
-  // Implementation.
-  //
-  protected:
-  void
-  parse (::xsd::cxx::xml::dom::parser< char >&,
-         ::xml_schema::flags);
-
-  protected:
-  ::xsd::cxx::tree::one< Left_type > Left_;
-  ::xsd::cxx::tree::one< Right_type > Right_;
-  ::xsd::cxx::tree::one< Bottom_type > Bottom_;
-  ::xsd::cxx::tree::one< Top_type > Top_;
-};
-
 class simulation_t: public ::xml_schema::type
 {
   public:
@@ -1204,7 +1099,7 @@ class simulation_t: public ::xml_schema::type
 
   // boundaries
   // 
-  typedef ::boundaries_t boundaries_type;
+  typedef ::vec3i_t boundaries_type;
   typedef ::xsd::cxx::tree::traits< boundaries_type, char > boundaries_traits;
 
   const boundaries_type&
@@ -1500,9 +1395,6 @@ operator<< (::xercesc::DOMElement&, const particleArray_t&);
 
 void
 operator<< (::xercesc::DOMElement&, const thermostat_t&);
-
-void
-operator<< (::xercesc::DOMElement&, const boundaries_t&);
 
 void
 operator<< (::xercesc::DOMElement&, const simulation_t&);

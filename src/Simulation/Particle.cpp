@@ -26,6 +26,7 @@ LoggerPtr particleLogger(Logger::getLogger("Particle"));
 
 
 vector<ParticleProperty> ParticleProperty::properties;
+int ParticleProperty::wallType_;
 
 std::string ParticleProperty::saveProperties()
 {
@@ -52,6 +53,11 @@ ParticleProperty& ParticleProperty::get(int i)
 int ParticleProperty::count()
 {
 	return properties.size();
+}
+
+int& ParticleProperty::wallType()
+{
+	return wallType_;
 }
 
 

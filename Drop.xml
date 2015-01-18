@@ -14,7 +14,7 @@
 
   <domain X="303" Y="180" Z="1"/>
 
-  <boundaries Bottom="2" Left="3" Right="3" Top="2"/>
+  <boundaries Horizontal="3" Vertical="2"/>
 
   <wallType>1</wallType>
 
@@ -29,7 +29,7 @@
   	<position X="150" Y="150" Z="0"/>
   	<initialVelocity X="0" Y="0" Z="0"/>
   	<radius>20</radius>
-  	<spacing>1.2</spacing>
+  	<spacing>1.5</spacing>
   </sphere>
 
   <particles>

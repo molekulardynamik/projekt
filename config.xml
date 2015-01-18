@@ -3,13 +3,13 @@
        xsi:noNamespaceSchemaLocation="config.xsd">
        
 	<delta>0.0005</delta>
-  	<end>40</end>
+  	<end>10</end>
   	<output>
   		<dir>vtkOutput/</dir>
-  		<filename>drop_vtk</filename>
-  		<iterations>50</iterations>
+  		<filename>RayLeigh3D_vtk</filename>
+  		<iterations>10</iterations>
   	</output>
-  	<simulationFile>Drop.xml</simulationFile>
+  	<simulationFile>rayleighTaylor3d.xml</simulationFile>
   	<!--<saveFile>Drop.xml</saveFile>-->
 
 </configSim>
