@@ -30,7 +30,7 @@
 	<particleCount X="48" Y="9" Z="42"/>
 	<spacing>1.2</spacing>
   </cuboid>
-  <cuboid type="0">
+  <cuboid type="1">
   	<position X="0.6" Y="11.4" Z="0.6"/>
 	<initialVelocity X="0.0" Y="0.0" Z="0.0"/>
 	<particleCount X="48" Y="9" Z="42"/>
