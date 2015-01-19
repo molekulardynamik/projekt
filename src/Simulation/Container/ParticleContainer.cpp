@@ -1,4 +1,5 @@
 #include "ParticleContainer.h"
+#include <omp.h>
 
 #include <log4cxx/logger.h>
 
@@ -52,7 +53,46 @@ ParticleContainer::ParticleContainer(
 			"NumCellsX: " << numCells_[0] << " NumCellsY: " << numCells_[1] << " NumCellsZ: " << numCells_[2]);
 	LOG4CXX_DEBUG(containerLogger, "Particles: " << particles.size());
 
+	createCells();
+
+	// distribute particles
+	for (int i = 0; i < particles.size(); i++)
+	{
+		Particle& particle = particles[i];
+		ParticleCell& cell = findCell(particle.getX());
+		cell.addParticle(particle);
+	}
+
+	LOG4CXX_DEBUG(containerLogger, "finished creating Container");
+}
+
+void ParticleContainer::createCells()
+{
+	vector<vector<ParticleCell>*> tempDomains;
+
+	int numThreads = 1;
+#pragma omp parallel shared(numThreads)
+	{
+		numThreads = omp_get_num_threads();
+	}
+
+	particleDomains_.resize(numThreads);
+
+#pragma omp parallel for
+	for (int d = 0; d < particleDomains_.size(); d++)
+	{
+		particleDomains_[d] = new vector<ParticleCell>();
+	}
+#pragma omp barrier
+
+	domainSize_ = ceil(numCells_[0] / (double) particleDomains_.size());
+
+	LOG4CXX_DEBUG(containerLogger,
+			"threads : " << particleDomains_.size() << " domainSize " << domainSize_);
+
 	// create Cells
+	vector<ParticleCell> particleCells;
+
 	int i = 0;
 	for (int x = 0; x < numCells_[0]; x++)
 	{
@@ -65,23 +105,30 @@ ParticleContainer::ParticleContainer(
 				position[1] = (y - 1) * rCutOff_;
 				position[2] = (z - 1) * rCutOff_;
 
-				particleCells_.push_back(ParticleCell(i, position, rCutOff_));
-				//LOG4CXX_DEBUG(containerLogger,"created cell  " << particleCells_.back().getIndex() << " at position " << particleCells_.back().getBottomLeftCorner()[0] << ", " << particleCells_.back().getBottomLeftCorner()[1]);
+				int d = floor(x / domainSize_);
 
+				particleDomains_[d]->push_back(
+						ParticleCell(i, d, position, rCutOff_));
 				i++;
 			}
 		}
 	}
 
-	// bind neighbors
 	i = 0;
+	// bind neighbors
 	for (int x = 0; x < numCells_[0]; x++)
 	{
 		for (int y = 0; y < numCells_[1]; y++)
 		{
 			for (int z = 0; z < numCells_[2]; z++)
 			{
-				ParticleCell& cell = particleCells_[i];
+				ParticleCell& cell = findCell(x, y, z);
+
+				if (i == 55)
+				{
+					int f = 0;
+					LOG4CXX_DEBUG(containerLogger, "found it" << f);
+				}
 
 				bool left = x != 0;
 				bool right = x != numCells_[0] - 1;
@@ -147,6 +194,14 @@ ParticleContainer::ParticleContainer(
 					//	LOG4CXX_DEBUG(containerLogger, "boundry at " << cell.getBottomLeftCorner()[0] << ", " << cell.getBottomLeftCorner()[1]
 					//								<< " with oppositeHaloCell at " << cell.getOppositeHaloCell()->getBottomLeftCorner()[0] << ", " <<  cell.getOppositeHaloCell()->getBottomLeftCorner()[1]);
 				}
+				else
+				{
+					cell.setCellType(ParticleCell::InnerCell);
+				}
+
+				if (cell.getIndex() == 55)
+					LOG4CXX_DEBUG(containerLogger,
+							"cell 55 type: " << cell.getCellType() << " x: " << x << ", y: " << y << ", z: " << z);
 
 				if (left && bottom && front)
 					cell.setNeighbor(&findCell(x - 1, y - 1, z - 1),
@@ -237,33 +292,32 @@ ParticleContainer::ParticleContainer(
 		}
 	}
 
-	// distribute particles
-	for (int i = 0; i < particles.size(); i++)
-	{
-		Particle& particle = particles[i];
-		ParticleCell& cell = findCell(particle.getX());
-		cell.addParticle(particle);
-
-	}
-
-	LOG4CXX_DEBUG(containerLogger, "finished creating Container");
 }
 
 void ParticleContainer::updateCells()
 {
-	for (int i = 0; i < particleCells_.size(); i++)
+	for (int d = 0; d < particleDomains_.size(); d++)
 	{
-		particleCells_[i].checkParticles();
+		vector<ParticleCell>* particleCells = particleDomains_[d];
+		for (int i = 0; i < particleCells->size(); i++)
+		{
+			(*particleCells)[i].checkParticles();
+		}
 	}
 }
 
 int ParticleContainer::countParticles()
 {
 	int numParticles = 0;
-	for (int i = 0; i < particleCells_.size(); i++)
+	for (int d = 0; d < particleDomains_.size(); d++)
 	{
-		numParticles += particleCells_[i].countParticles();
+		vector<ParticleCell>* particleCells = particleDomains_[d];
+		for (int i = 0; i < particleCells->size(); i++)
+		{
+			numParticles += (*particleCells)[i].countParticles();
+		}
 	}
+
 	return numParticles;
 }
 
@@ -283,15 +337,21 @@ ParticleCell& ParticleContainer::findCell(Vector<double, 3> position)
 
 ParticleCell& ParticleContainer::findCell(int cellX, int cellY, int cellZ)
 {
-	int cell;
+	int cell, domain;
+	domain = floor(cellX / domainSize_);
+	cellX = cellX % domainSize_;
+
 	flatten(cellX, cellY, cellZ, &cell);
 
-	return particleCells_[cell];
+	//LOG4CXX_DEBUG(containerLogger, "find cell for " << cellX << ", " << cellY << ", " << cellZ << " = " << cell << " at domain " << domain);
+	//LOG4CXX_DEBUG(containerLogger, "domain size " << particleDomains_[domain]->size());
+
+	return (*particleDomains_[domain])[cell];
 }
 
 void ParticleContainer::flatten(int cellX, int cellY, int cellZ, int* cell)
 {
-	*cell = cellX * numCells_[1] * numCells_[2] + cellY * numCells_[2]+ cellZ;
+	*cell = cellX * numCells_[1] * numCells_[2] + cellY * numCells_[2] + cellZ;
 }
 
 void ParticleContainer::expand(int* cellX, int* cellY, int* cellZ, int c)
@@ -305,48 +365,116 @@ void ParticleContainer::expand(int* cellX, int* cellY, int* cellZ, int c)
 
 void ParticleContainer::iterateParticles(ParticleHandler& handler)
 {
-	for (int i = 0; i < particleCells_.size(); i++)
+#pragma omp parallel for
+	for (int d = 0; d < particleDomains_.size(); d++)
 	{
-		particleCells_[i].iterateParticles(handler);
+		vector<ParticleCell>* particleCells = particleDomains_[d];
+		for (int i = 0; i < particleCells->size(); i++)
+		{
+			(*particleCells)[i].iterateParticles(handler);
+		}
+	}
+#pragma omp barrier
+}
+
+void ParticleContainer::iterateParticlesSingleThreaded(ParticleHandler& handler)
+{
+	for (int d = 0; d < particleDomains_.size(); d++)
+	{
+		vector<ParticleCell>* particleCells = particleDomains_[d];
+		for (int i = 0; i < particleCells->size(); i++)
+		{
+			(*particleCells)[i].iterateParticles(handler);
+		}
 	}
 }
 
 void ParticleContainer::iterateParticlePairs(ParticleHandler& handler)
 {
-	for (int i = 0; i < particleCells_.size(); i++)
+	LOG4CXX_ERROR(containerLogger, "IJ");
+	for (int d = 0; d < particleDomains_.size(); d++)
 	{
-		particleCells_[i].iterateParticlePairs(handler);
+		vector<ParticleCell>* particleCells = particleDomains_[d];
+		for (int i = 0; i < particleCells->size(); i++)
+		{
+			(*particleCells)[i].iterateParticlePairs(handler);
+		}
 	}
 }
+
+//void ParticleContainer::iterateParticlePairsSymmetric(ParticleHandler& handler)
+//{
+//	for (int d = 0; d < particleDomains_.size(); d++)
+//	{
+//		vector<ParticleCell>* particleCells = particleDomains_[d];
+//		for (int i = 0; i < particleCells->size(); i++)
+//		{
+//			(*particleCells)[i].iterateParticlePairsSymmetric(handler);
+//		}
+//	}
+//}
 
 void ParticleContainer::iterateParticlePairsSymmetric(ParticleHandler& handler)
 {
-	for (int i = 0; i < particleCells_.size(); i++)
+#pragma omp parallel for
+	for (int d = 0; d < particleDomains_.size(); d++)
 	{
-		particleCells_[i].iterateParticlePairsSymmetric(handler);
+		vector<ParticleCell>* particleCells = particleDomains_[d];
+		for (int i = 0; i < particleCells->size(); i++)
+		{
+			int x = floor((*particleCells)[i].getIndex() / (numCells_[1] * numCells_[2]));
+			if(x >= 2)
+				(*particleCells)[i].iterateParticlePairsSymmetric(handler);
+		}
 	}
+#pragma omp barrier
+
+#pragma omp parallel for
+	for (int d = 0; d < particleDomains_.size(); d++)
+	{
+		vector<ParticleCell>* particleCells = particleDomains_[d];
+		for (int i = 0; i < particleCells->size(); i++)
+		{
+			int x = floor((*particleCells)[i].getIndex() / (numCells_[1] * numCells_[2]));
+			if (x <= 1)
+				(*particleCells)[i].iterateParticlePairsSymmetric(handler);
+		}
+	}
+#pragma omp barrier
 }
+
 
 void ParticleContainer::iterateBoundaries()
 {
-	for (int i = 0; i < particleCells_.size(); i++)
+	for (int d = 0; d < particleDomains_.size(); d++)
 	{
-		particleCells_[i].applyBoundaryCondition();
+		vector<ParticleCell>* particleCells = particleDomains_[d];
+		for (int i = 0; i < particleCells->size(); i++)
+		{
+			(*particleCells)[i].applyBoundaryCondition();
+		}
 	}
 }
 
 void ParticleContainer::clearBoundaries()
 {
-	for (int i = 0; i < particleCells_.size(); i++)
+#pragma omp parallel for
+	for (int d = 0; d < particleDomains_.size(); d++)
 	{
-		particleCells_[i].clearBoundary();
-	}
+		vector<ParticleCell>* particleCells = particleDomains_[d];
+		for (int i = 0; i < particleCells->size(); i++)
+		{
+			(*particleCells)[i].clearBoundary();
+		}
 
-	for (int i = 0; i < particleCells_.size(); i++)
-	{
-		if (particleCells_[i].countParticles() != 0
-				&& particleCells_[i].getCellType() != ParticleCell::InnerCell)
-			LOG4CXX_ERROR(containerLogger, "boundary nicht leer");
+		for (int i = 0; i < particleCells->size(); i++)
+		{
+			if ((*particleCells)[i].countParticles() != 0
+					&& (*particleCells)[i].getCellType()
+							!= ParticleCell::InnerCell)
+				LOG4CXX_ERROR(containerLogger, "boundary nicht leer");
+		}
 	}
+#pragma omp barrier
 }
 

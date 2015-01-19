@@ -18,6 +18,8 @@ public:
 	/// \param simulationFile File which will be read
 	ParticleContainer(std::auto_ptr<simulation_t> simulationConfig);
 
+	void createCells();
+
 	void updateCells();
 
 	int countParticles();
@@ -26,6 +28,8 @@ public:
 
 	/// Iterates over all particles an executes particle handler
 	void iterateParticles(ParticleHandler& handler);
+
+	void iterateParticlesSingleThreaded(ParticleHandler& handler);
 
 	/// Iterates over all particle pairs (only neighboring cells are considered) and executes particle pair handler
 	void iterateParticlePairs(ParticleHandler& handler);
@@ -57,7 +61,8 @@ private:
 	void expand(int* cellX, int* cellY, int* cellZ, int cell);
 
 private:
-	std::vector<ParticleCell> particleCells_;
+	std::vector<std::vector<ParticleCell>*> particleDomains_;
+	int domainSize_;
 	utils::Vector<double, 3> domain_;
 	utils::Vector<int, 3> numCells_;
 	double rCutOff_;

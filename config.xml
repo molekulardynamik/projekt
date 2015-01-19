@@ -6,10 +6,13 @@
   	<end>10</end>
   	<output>
   		<dir>vtkOutput/</dir>
-  		<filename>RayLeigh3D_vtk</filename>
-  		<iterations>10</iterations>
+  		<filename>RayLeigh3D_Quad_vtk</filename>
+  		<iterations>50</iterations>
   	</output>
   	<simulationFile>rayleighTaylor3d.xml</simulationFile>
   	<!--<saveFile>Drop.xml</saveFile>-->
 
 </configSim>
+
+<!--single 611s-->
+<!--quad 354s-->

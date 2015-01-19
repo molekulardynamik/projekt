@@ -9,6 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include <ctime>
+#include <omp.h>
 
 #include <log4cxx/logger.h>
 #include <log4cxx/xml/domconfigurator.h>
@@ -41,6 +42,14 @@ int main(int argc, char* argsv[])
 
 	DOMConfigurator::configure("Log4cxxConfig.xml");
 	LOG4CXX_INFO(logger, "Hello from MolSim for PSE!");
+
+#ifdef _OPENMP
+
+
+    LOG4CXX_DEBUG(logger, "openMp enabled");
+
+
+#endif
 
 	// Load Configuration
 	const char* configFile = "config.xml";
@@ -134,7 +143,7 @@ int main(int argc, char* argsv[])
 		if (((iteration - thermoStart) % thermoSkip) == 0 && iteration >= thermoStart && temperature != 0)
 		{
 			kineticHandler.reset();
-			container.iterateParticles(kineticHandler);
+			container.iterateParticlesSingleThreaded(kineticHandler);
 
 			double interpolation = (iteration - thermoStart) / (double)(thermoTarget - thermoStart);
 			interpolation = max(0.0, min(1.0, interpolation));
@@ -147,7 +156,7 @@ int main(int argc, char* argsv[])
 		if (iteration % outputSkip == 0)
 		{
 			outputHandler.init(container.countParticles());
-			container.iterateParticles(outputHandler);
+			container.iterateParticlesSingleThreaded(outputHandler);
 			outputHandler.finish(out_name, iteration);
 		}
 

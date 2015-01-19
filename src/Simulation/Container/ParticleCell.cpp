@@ -19,8 +19,8 @@ void ParticleCell::moveParticle(ParticleCell& from, ParticleCell& to,
 	from.removeParticle(particle);
 }
 
-ParticleCell::ParticleCell(int index, Vector<double, 3> leftBottomFront, double size) :
-		index_(index), leftBottomFrontCorner_(leftBottomFront), size_(size), cellType_(InnerCell)
+ParticleCell::ParticleCell(int index, int domain, Vector<double, 3> leftBottomFront, double size) :
+		index_(index), domain_(domain), leftBottomFrontCorner_(leftBottomFront), size_(size), cellType_(InnerCell)
 {
 	for (int i = 0; i < 26; i++)
 	{
@@ -47,7 +47,7 @@ void ParticleCell::setNeighbor(ParticleCell* neighbor,
 
 int ParticleCell::countNeighbors()
 {
-	int count;
+	int count = 0;
 	for(int i=0; i<26; i++)
 	{
 		if(neighbors_[i])
@@ -111,7 +111,7 @@ void ParticleCell::addParticle(Particle& particle)
 	else
 	{
 		particles_.push_back(particle);
-		particles_.back().getCell() = index_;
+		particles_.back().getCell() = domain_;
 	}
 }
 

@@ -11,13 +11,13 @@ CC=g++
 
 # Compiler flags
 # -------------------------------------------------------------------------
-CFLAGS=-O3 -ip -ipo -fast
-#CFLAGS=-g -O3 -ggdb
+#CFLAGS=-O3 -ip -ipo -fast
+CFLAGS=-g -O3 -ggdb
 
 # Linker flags
 # ------------
-LDFLAGS= -lxerces-c -lcppunit -llog4cxx -lxerces-c
-INCLUDES= -I./src -I./libxsd
+LDFLAGS= -lxerces-c -lcppunit -llog4cxx -lxerces-c -lgomp
+INCLUDES= -I./src -I./libxsd -fopenmp
 
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=MolSim

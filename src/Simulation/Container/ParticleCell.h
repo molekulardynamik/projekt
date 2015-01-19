@@ -71,7 +71,7 @@ public:
 	};
 
 public:
-	ParticleCell(int index, utils::Vector<double, 3> bottomLeft, double size);
+	ParticleCell(int index, int domain, utils::Vector<double, 3> bottomLeft, double size);
 
 	void setCellType(CellType cellType);
 	CellType getCellType();
@@ -84,6 +84,10 @@ public:
 	ParticleCell* getOppositeHaloCell();
 
 	int getIndex();
+	int getDomain()
+	{
+		return domain_;
+	}
 	utils::Vector<double, 3> getLeftBottomFrontCorner();
 
 	void addParticle(Simulation::Particle& particle);
@@ -111,7 +115,7 @@ private:
 	void applyPeriodicCondition();
 
 private:
-	int index_;
+	int index_, domain_;
 	ParticleCell* neighbors_[26];
 	ParticleCell* oppositeHaloCell_;
 	utils::Vector<double, 3> leftBottomFrontCorner_;
