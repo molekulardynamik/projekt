@@ -10,7 +10,7 @@
     <iterations>1000</iterations>
     <!--<profile filename="test_profile" iterations="1000"/>-->
   </output>
-  <simulationFile>testRayleighTaylor3D.xml</simulationFile>
+  <simulationFile>rayleighTaylor3D.xml</simulationFile>
   <!--<saveFile>Drop.xml</saveFile>-->
 </configSim>
 

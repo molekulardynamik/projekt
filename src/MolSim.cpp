@@ -70,6 +70,12 @@ int main(int argc, char* argsv[])
 	double end_time = config->end();
 	double delta_time = config->delta();
 
+	double rCutOff = simulationConfig->rCutOff();
+	double rL = 0;
+	bool useSmoothedLJ = simulationConfig->smoothedLJRadius().present();
+	if(useSmoothedLJ)
+		rL = simulationConfig->smoothedLJRadius().get();
+
 	int wallType = simulationConfig->wallType();
 
 	utils::Vector<double, 3> gravity;
@@ -150,7 +156,8 @@ int main(int argc, char* argsv[])
 	VelocityHandler velocityHandler(delta_time, wallType);
 	ForceResetHandler forceResetHandler;
 	GravityHandler gravityHandler(gravity);
-	LennardJonesHandler lennardJonesHandler(container.getRCutOff());
+	LennardJonesHandler lennardJonesHandler(rCutOff);
+	SmoothedLennardJonesHandler smoothedLennardJonesHandler(rCutOff, rL);
 	HarmonicPotentialHandler harmonicDirectHandler, harmonicDiagonalHandler;
 	PickHandler pickHandler;
 	if(enableMembrane)
@@ -179,7 +186,10 @@ int main(int argc, char* argsv[])
 		container.iterateParticlePairsSymmetric(harmonicDirectHandler);
 		container.iterateParticlePairsSymmetric(harmonicDiagonalHandler);
 	}
-	container.iterateParticlePairsSymmetric(lennardJonesHandler);
+	if(useSmoothedLJ)
+		container.iterateParticlePairsSymmetric(smoothedLennardJonesHandler);
+	else
+		container.iterateParticlePairsSymmetric(lennardJonesHandler);
 
 
 	LOG4CXX_INFO(logger,
@@ -204,7 +214,10 @@ int main(int argc, char* argsv[])
 			container.iterateParticlePairsSymmetric(harmonicDirectHandler);
 			container.iterateParticlePairsSymmetric(harmonicDiagonalHandler);
 		}
-		container.iterateParticlePairsSymmetric(lennardJonesHandler);
+		if(useSmoothedLJ)
+			container.iterateParticlePairsSymmetric(smoothedLennardJonesHandler);
+		else
+			container.iterateParticlePairsSymmetric(lennardJonesHandler);
 
 		container.clearBoundaries();
 

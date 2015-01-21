@@ -1403,8 +1403,8 @@ class simulation_t: public ::xml_schema::type
 
   // rCutOff
   // 
-  typedef ::xml_schema::float_ rCutOff_type;
-  typedef ::xsd::cxx::tree::traits< rCutOff_type, char > rCutOff_traits;
+  typedef ::xml_schema::double_ rCutOff_type;
+  typedef ::xsd::cxx::tree::traits< rCutOff_type, char, ::xsd::cxx::tree::schema_type::double_ > rCutOff_traits;
 
   const rCutOff_type&
   rCutOff () const;
@@ -1414,6 +1414,24 @@ class simulation_t: public ::xml_schema::type
 
   void
   rCutOff (const rCutOff_type& x);
+
+  // smoothedLJRadius
+  // 
+  typedef ::xml_schema::double_ smoothedLJRadius_type;
+  typedef ::xsd::cxx::tree::optional< smoothedLJRadius_type > smoothedLJRadius_optional;
+  typedef ::xsd::cxx::tree::traits< smoothedLJRadius_type, char, ::xsd::cxx::tree::schema_type::double_ > smoothedLJRadius_traits;
+
+  const smoothedLJRadius_optional&
+  smoothedLJRadius () const;
+
+  smoothedLJRadius_optional&
+  smoothedLJRadius ();
+
+  void
+  smoothedLJRadius (const smoothedLJRadius_type& x);
+
+  void
+  smoothedLJRadius (const smoothedLJRadius_optional& x);
 
   // membrane
   // 
@@ -1553,6 +1571,7 @@ class simulation_t: public ::xml_schema::type
   ::xsd::cxx::tree::one< boundaries_type > boundaries_;
   ::xsd::cxx::tree::one< wallType_type > wallType_;
   ::xsd::cxx::tree::one< rCutOff_type > rCutOff_;
+  smoothedLJRadius_optional smoothedLJRadius_;
   membrane_optional membrane_;
   type_sequence type_;
   cuboid_sequence cuboid_;

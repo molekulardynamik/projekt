@@ -76,6 +76,22 @@ void ParticleContainer::createCells()
 		numThreads = omp_get_num_threads();
 	}
 
+
+	domainSize_ = ceil(numCells_[0] / (double) numThreads);
+	if(domainSize_ < 4)
+	{
+		domainSize_ = 4;
+		numThreads = floor(numCells_[0] / 4);
+	}
+
+	omp_set_num_threads(numThreads);
+
+#pragma omp parallel shared(numThreads)
+	{
+		numThreads = omp_get_num_threads();
+	}
+
+
 	particleDomains_.resize(numThreads);
 
 #pragma omp parallel for
@@ -84,8 +100,6 @@ void ParticleContainer::createCells()
 		particleDomains_[d] = new vector<ParticleCell>();
 	}
 #pragma omp barrier
-
-	domainSize_ = ceil(numCells_[0] / (double) particleDomains_.size());
 
 	LOG4CXX_DEBUG(containerLogger,
 			"threads : " << particleDomains_.size() << " domainSize " << domainSize_);

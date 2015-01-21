@@ -3,6 +3,7 @@
 #include "Simulation/Handler/VelocityHandler.h"
 #include "Simulation/Handler/ForceResetHandler.h"
 #include "Simulation/Handler/LennardJonesHandler.h"
+#include "Simulation/Handler/SmoothedLennardJonesHandler.h"
 #include "Simulation/Handler/HarmonicPotentialHandler.h"
 #include "Simulation/Handler/GravityHandler.h"
 #include "Simulation/Handler/PickHandler.h"

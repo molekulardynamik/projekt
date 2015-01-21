@@ -6,9 +6,9 @@
   	<end>10</end>
   	<output>
   		<dir>vtkOutput/</dir>
-  		<filename>RayLeigh3D_vtk</filename>
+  		<filename>NanoFlow_vtk</filename>
   		<iterations>100</iterations>
-		  <!--<profile filename="test_profile" iterations="1000"/>-->
+		<profile filename="test_profile" iterations="1000"/>
   	</output>
   	<simulationFile>rayleighTaylor3D.xml</simulationFile>
   	<!--<saveFile>Drop.xml</saveFile>-->

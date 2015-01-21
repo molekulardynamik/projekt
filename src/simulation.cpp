@@ -1091,6 +1091,30 @@ rCutOff (const rCutOff_type& x)
   this->rCutOff_.set (x);
 }
 
+const simulation_t::smoothedLJRadius_optional& simulation_t::
+smoothedLJRadius () const
+{
+  return this->smoothedLJRadius_;
+}
+
+simulation_t::smoothedLJRadius_optional& simulation_t::
+smoothedLJRadius ()
+{
+  return this->smoothedLJRadius_;
+}
+
+void simulation_t::
+smoothedLJRadius (const smoothedLJRadius_type& x)
+{
+  this->smoothedLJRadius_.set (x);
+}
+
+void simulation_t::
+smoothedLJRadius (const smoothedLJRadius_optional& x)
+{
+  this->smoothedLJRadius_ = x;
+}
+
 const simulation_t::membrane_optional& simulation_t::
 membrane () const
 {
@@ -2624,6 +2648,7 @@ simulation_t (const thermostat_type& thermostat,
   boundaries_ (boundaries, ::xml_schema::flags (), this),
   wallType_ (wallType, ::xml_schema::flags (), this),
   rCutOff_ (rCutOff, ::xml_schema::flags (), this),
+  smoothedLJRadius_ (::xml_schema::flags (), this),
   membrane_ (::xml_schema::flags (), this),
   type_ (::xml_schema::flags (), this),
   cuboid_ (::xml_schema::flags (), this),
@@ -2646,6 +2671,7 @@ simulation_t (::std::auto_ptr< thermostat_type >& thermostat,
   boundaries_ (boundaries, ::xml_schema::flags (), this),
   wallType_ (wallType, ::xml_schema::flags (), this),
   rCutOff_ (rCutOff, ::xml_schema::flags (), this),
+  smoothedLJRadius_ (::xml_schema::flags (), this),
   membrane_ (::xml_schema::flags (), this),
   type_ (::xml_schema::flags (), this),
   cuboid_ (::xml_schema::flags (), this),
@@ -2665,6 +2691,7 @@ simulation_t (const simulation_t& x,
   boundaries_ (x.boundaries_, f, this),
   wallType_ (x.wallType_, f, this),
   rCutOff_ (x.rCutOff_, f, this),
+  smoothedLJRadius_ (x.smoothedLJRadius_, f, this),
   membrane_ (x.membrane_, f, this),
   type_ (x.type_, f, this),
   cuboid_ (x.cuboid_, f, this),
@@ -2684,6 +2711,7 @@ simulation_t (const ::xercesc::DOMElement& e,
   boundaries_ (f, this),
   wallType_ (f, this),
   rCutOff_ (f, this),
+  smoothedLJRadius_ (f, this),
   membrane_ (f, this),
   type_ (f, this),
   cuboid_ (f, this),
@@ -2781,6 +2809,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       if (!rCutOff_.present ())
       {
         this->rCutOff_.set (rCutOff_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // smoothedLJRadius
+    //
+    if (n.name () == "smoothedLJRadius" && n.namespace_ ().empty ())
+    {
+      if (!this->smoothedLJRadius_)
+      {
+        this->smoothedLJRadius_.set (smoothedLJRadius_traits::create (i, f, this));
         continue;
       }
     }
@@ -3765,7 +3804,19 @@ operator<< (::xercesc::DOMElement& e, const simulation_t& i)
         "rCutOff",
         e));
 
-    s << i.rCutOff ();
+    s << ::xml_schema::as_double(i.rCutOff ());
+  }
+
+  // smoothedLJRadius
+  //
+  if (i.smoothedLJRadius ())
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "smoothedLJRadius",
+        e));
+
+    s << ::xml_schema::as_double(*i.smoothedLJRadius ());
   }
 
   // membrane

@@ -87,7 +87,8 @@
 			<xs:element name="domain" type="vec3d_t"/>
       		<xs:element name="boundaries" type="vec3i_t"/>
       		<xs:element name="wallType" type="xs:int"/>
-			<xs:element name="rCutOff" type="xs:float"/>
+			<xs:element name="rCutOff" type="xs:double"/>
+			<xs:element name="smoothedLJRadius" type="xs:double" minOccurs="0"/>
 			<xs:element name="membrane" type="membrane_t" minOccurs = "0" maxOccurs="1"/>
 			<xs:element name="type" type="type_t" maxOccurs="unbounded"/>
 			<xs:element name="cuboid" type="cuboid_t" minOccurs = "0" maxOccurs="unbounded"/>
