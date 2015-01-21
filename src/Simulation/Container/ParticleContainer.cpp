@@ -80,8 +80,8 @@ void ParticleContainer::createCells()
 	domainSize_ = ceil(numCells_[0] / (double) numThreads);
 	if(domainSize_ < 4)
 	{
-		domainSize_ = 4;
-		numThreads = floor(numCells_[0] / 4);
+		numThreads = floor(numCells_[0] / 4.0);
+		domainSize_ = ceil(numCells_[0] / (double) numThreads);
 	}
 
 	omp_set_num_threads(numThreads);
