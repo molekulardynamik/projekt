@@ -268,6 +268,82 @@ Z_default_value ()
 }
 
 
+// vec3b_t
+// 
+
+const vec3b_t::X_type& vec3b_t::
+X () const
+{
+  return this->X_.get ();
+}
+
+vec3b_t::X_type& vec3b_t::
+X ()
+{
+  return this->X_.get ();
+}
+
+void vec3b_t::
+X (const X_type& x)
+{
+  this->X_.set (x);
+}
+
+vec3b_t::X_type vec3b_t::
+X_default_value ()
+{
+  return X_type (true);
+}
+
+const vec3b_t::Y_type& vec3b_t::
+Y () const
+{
+  return this->Y_.get ();
+}
+
+vec3b_t::Y_type& vec3b_t::
+Y ()
+{
+  return this->Y_.get ();
+}
+
+void vec3b_t::
+Y (const Y_type& x)
+{
+  this->Y_.set (x);
+}
+
+vec3b_t::Y_type vec3b_t::
+Y_default_value ()
+{
+  return Y_type (true);
+}
+
+const vec3b_t::Z_type& vec3b_t::
+Z () const
+{
+  return this->Z_.get ();
+}
+
+vec3b_t::Z_type& vec3b_t::
+Z ()
+{
+  return this->Z_.get ();
+}
+
+void vec3b_t::
+Z (const Z_type& x)
+{
+  this->Z_.set (x);
+}
+
+vec3b_t::Z_type vec3b_t::
+Z_default_value ()
+{
+  return Z_type (true);
+}
+
+
 // cuboid_t
 // 
 
@@ -609,6 +685,36 @@ void thermostat_t::
 numDimensions (const numDimensions_type& x)
 {
   this->numDimensions_.set (x);
+}
+
+const thermostat_t::mask_optional& thermostat_t::
+mask () const
+{
+  return this->mask_;
+}
+
+thermostat_t::mask_optional& thermostat_t::
+mask ()
+{
+  return this->mask_;
+}
+
+void thermostat_t::
+mask (const mask_type& x)
+{
+  this->mask_.set (x);
+}
+
+void thermostat_t::
+mask (const mask_optional& x)
+{
+  this->mask_ = x;
+}
+
+void thermostat_t::
+mask (::std::auto_ptr< mask_type > x)
+{
+  this->mask_.set (x);
 }
 
 const thermostat_t::initialTemp_type& thermostat_t::
@@ -1390,6 +1496,102 @@ vec3d_t::
 {
 }
 
+// vec3b_t
+//
+
+vec3b_t::
+vec3b_t ()
+: ::xml_schema::type (),
+  X_ (X_default_value (), ::xml_schema::flags (), this),
+  Y_ (Y_default_value (), ::xml_schema::flags (), this),
+  Z_ (Z_default_value (), ::xml_schema::flags (), this)
+{
+}
+
+vec3b_t::
+vec3b_t (const vec3b_t& x,
+         ::xml_schema::flags f,
+         ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  X_ (x.X_, f, this),
+  Y_ (x.Y_, f, this),
+  Z_ (x.Z_, f, this)
+{
+}
+
+vec3b_t::
+vec3b_t (const ::xercesc::DOMElement& e,
+         ::xml_schema::flags f,
+         ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  X_ (f, this),
+  Y_ (f, this),
+  Z_ (f, this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, false, true);
+    this->parse (p, f);
+  }
+}
+
+void vec3b_t::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  while (p.more_attributes ())
+  {
+    const ::xercesc::DOMAttr& i (p.next_attribute ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    if (n.name () == "X" && n.namespace_ ().empty ())
+    {
+      this->X_.set (X_traits::create (i, f, this));
+      continue;
+    }
+
+    if (n.name () == "Y" && n.namespace_ ().empty ())
+    {
+      this->Y_.set (Y_traits::create (i, f, this));
+      continue;
+    }
+
+    if (n.name () == "Z" && n.namespace_ ().empty ())
+    {
+      this->Z_.set (Z_traits::create (i, f, this));
+      continue;
+    }
+  }
+
+  if (!X_.present ())
+  {
+    this->X_.set (X_default_value ());
+  }
+
+  if (!Y_.present ())
+  {
+    this->Y_.set (Y_default_value ());
+  }
+
+  if (!Z_.present ())
+  {
+    this->Z_.set (Z_default_value ());
+  }
+}
+
+vec3b_t* vec3b_t::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class vec3b_t (*this, f, c);
+}
+
+vec3b_t::
+~vec3b_t ()
+{
+}
+
 // cuboid_t
 //
 
@@ -1976,6 +2178,7 @@ thermostat_t (const numDimensions_type& numDimensions,
               const targetTime_type& targetTime)
 : ::xml_schema::type (),
   numDimensions_ (numDimensions, ::xml_schema::flags (), this),
+  mask_ (::xml_schema::flags (), this),
   initialTemp_ (initialTemp, ::xml_schema::flags (), this),
   targetTemp_ (targetTemp, ::xml_schema::flags (), this),
   step_ (step, ::xml_schema::flags (), this),
@@ -1990,6 +2193,7 @@ thermostat_t (const thermostat_t& x,
               ::xml_schema::container* c)
 : ::xml_schema::type (x, f, c),
   numDimensions_ (x.numDimensions_, f, this),
+  mask_ (x.mask_, f, this),
   initialTemp_ (x.initialTemp_, f, this),
   targetTemp_ (x.targetTemp_, f, this),
   step_ (x.step_, f, this),
@@ -2004,6 +2208,7 @@ thermostat_t (const ::xercesc::DOMElement& e,
               ::xml_schema::container* c)
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
   numDimensions_ (f, this),
+  mask_ (f, this),
   initialTemp_ (f, this),
   targetTemp_ (f, this),
   step_ (f, this),
@@ -2034,6 +2239,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       if (!numDimensions_.present ())
       {
         this->numDimensions_.set (numDimensions_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // mask
+    //
+    if (n.name () == "mask" && n.namespace_ ().empty ())
+    {
+      ::std::auto_ptr< mask_type > r (
+        mask_traits::create (i, f, this));
+
+      if (!this->mask_)
+      {
+        this->mask_.set (r);
         continue;
       }
     }
@@ -3091,6 +3310,45 @@ operator<< (::xercesc::DOMElement& e, const vec3d_t& i)
 }
 
 void
+operator<< (::xercesc::DOMElement& e, const vec3b_t& i)
+{
+  e << static_cast< const ::xml_schema::type& > (i);
+
+  // X
+  //
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "X",
+        e));
+
+    a << i.X ();
+  }
+
+  // Y
+  //
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "Y",
+        e));
+
+    a << i.Y ();
+  }
+
+  // Z
+  //
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "Z",
+        e));
+
+    a << i.Z ();
+  }
+}
+
+void
 operator<< (::xercesc::DOMElement& e, const cuboid_t& i)
 {
   e << static_cast< const ::xml_schema::type& > (i);
@@ -3286,6 +3544,18 @@ operator<< (::xercesc::DOMElement& e, const thermostat_t& i)
         e));
 
     s << i.numDimensions ();
+  }
+
+  // mask
+  //
+  if (i.mask ())
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "mask",
+        e));
+
+    s << *i.mask ();
   }
 
   // initialTemp

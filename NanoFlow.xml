@@ -3,6 +3,7 @@
 
   <thermostat>
     <numDimensions>3</numDimensions>
+    <mask X="true" Y="false" Z="true"/>
     <initialTemp>40</initialTemp>
     <targetTemp>40</targetTemp>
     <step>10</step>

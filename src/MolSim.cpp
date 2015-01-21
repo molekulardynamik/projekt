@@ -109,10 +109,19 @@ int main(int argc, char* argsv[])
 	int numDims = simulationConfig->thermostat().numDimensions();
 	double initialTemp = simulationConfig->thermostat().initialTemp();
 	double temperature = simulationConfig->thermostat().targetTemp();
+	utils::Vector<bool, 3> thermoMask(true);
+	if(simulationConfig->thermostat().mask().present())
+	{
+		thermoMask[0] = simulationConfig->thermostat().mask().get().X();
+		thermoMask[1] = simulationConfig->thermostat().mask().get().Y();
+		thermoMask[2] = simulationConfig->thermostat().mask().get().Z();
+
+	}
 
 	int iteration = 0;
 	int lastTrace = 0;
 	int outputSkip = config->output().iterations();
+
 
 	int thermoSkip = simulationConfig->thermostat().step();
 	int thermoStart = simulationConfig->thermostat().startTime() / delta_time;
@@ -152,12 +161,8 @@ int main(int argc, char* argsv[])
 		pickHandler = PickHandler(pickPos, pickSize, pickForce);
 	}
 	BrownianMotionHandler brownianHandler(initialTemp, wallType);
-	utils::Vector<bool, 3> mask;
-	mask[0] = true;
-	mask[1] = false;
-	mask[2] = true;
-	ThermostatHandler thermostatHandler(wallType, mask);
-	KineticEnergyHandler kineticHandler(wallType, mask);
+	ThermostatHandler thermostatHandler(wallType, thermoMask);
+	KineticEnergyHandler kineticHandler(wallType, thermoMask);
 	VelocityProfileHandler velocityProfileHandler(50, 0.7, wallType, profileName);
 	DebugHandler debugH;
 

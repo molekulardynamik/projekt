@@ -19,6 +19,12 @@
 			<xs:attribute name="Z" type="xs:double" default="0"/>
 	</xs:complexType>
 	
+	<xs:complexType name="vec3b_t">
+			<xs:attribute name="X" type="xs:boolean" default="true"/>
+			<xs:attribute name="Y" type="xs:boolean" default="true"/>
+			<xs:attribute name="Z" type="xs:boolean" default="true"/>
+	</xs:complexType>
+	
 	<xs:complexType name="cuboid_t">
 		<xs:sequence>
 			<xs:element name="position" type="vec3d_t"/>
@@ -53,6 +59,7 @@
 	<xs:complexType name="thermostat_t">
 		<xs:sequence>
 			<xs:element name="numDimensions" type="xs:int"/>
+			<xs:element name="mask" type="vec3b_t" minOccurs="0"/>
 			<xs:element name="initialTemp" type="xs:double"/>
 			<xs:element name="targetTemp" type="xs:double"/>
 			<xs:element name="step" type="xs:int"/>

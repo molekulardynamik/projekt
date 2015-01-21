@@ -60,15 +60,7 @@ namespace Simulation
 				else
 					file << 0;
 
-				file << ", ";
-			}
-
-			file << std::endl;
-
-			for (int i = 0; i < numBins; i++)
-			{
-				file << counts[i];
-				file << ", ";
+				file << "," << counts[i] << std::endl;
 			}
 
 			file.clear();

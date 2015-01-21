@@ -250,6 +250,7 @@ namespace xml_schema
 class type_t;
 class vec3i_t;
 class vec3d_t;
+class vec3b_t;
 class cuboid_t;
 class sphere_t;
 class particle_t;
@@ -515,6 +516,92 @@ class vec3d_t: public ::xml_schema::type
 
   virtual 
   ~vec3d_t ();
+
+  // Implementation.
+  //
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  ::xsd::cxx::tree::one< X_type > X_;
+  ::xsd::cxx::tree::one< Y_type > Y_;
+  ::xsd::cxx::tree::one< Z_type > Z_;
+};
+
+class vec3b_t: public ::xml_schema::type
+{
+  public:
+  // X
+  // 
+  typedef ::xml_schema::boolean X_type;
+  typedef ::xsd::cxx::tree::traits< X_type, char > X_traits;
+
+  const X_type&
+  X () const;
+
+  X_type&
+  X ();
+
+  void
+  X (const X_type& x);
+
+  static X_type
+  X_default_value ();
+
+  // Y
+  // 
+  typedef ::xml_schema::boolean Y_type;
+  typedef ::xsd::cxx::tree::traits< Y_type, char > Y_traits;
+
+  const Y_type&
+  Y () const;
+
+  Y_type&
+  Y ();
+
+  void
+  Y (const Y_type& x);
+
+  static Y_type
+  Y_default_value ();
+
+  // Z
+  // 
+  typedef ::xml_schema::boolean Z_type;
+  typedef ::xsd::cxx::tree::traits< Z_type, char > Z_traits;
+
+  const Z_type&
+  Z () const;
+
+  Z_type&
+  Z ();
+
+  void
+  Z (const Z_type& x);
+
+  static Z_type
+  Z_default_value ();
+
+  // Constructors.
+  //
+  vec3b_t ();
+
+  vec3b_t (const ::xercesc::DOMElement& e,
+           ::xml_schema::flags f = 0,
+           ::xml_schema::container* c = 0);
+
+  vec3b_t (const vec3b_t& x,
+           ::xml_schema::flags f = 0,
+           ::xml_schema::container* c = 0);
+
+  virtual vec3b_t*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  virtual 
+  ~vec3b_t ();
 
   // Implementation.
   //
@@ -937,6 +1024,27 @@ class thermostat_t: public ::xml_schema::type
   void
   numDimensions (const numDimensions_type& x);
 
+  // mask
+  // 
+  typedef ::vec3b_t mask_type;
+  typedef ::xsd::cxx::tree::optional< mask_type > mask_optional;
+  typedef ::xsd::cxx::tree::traits< mask_type, char > mask_traits;
+
+  const mask_optional&
+  mask () const;
+
+  mask_optional&
+  mask ();
+
+  void
+  mask (const mask_type& x);
+
+  void
+  mask (const mask_optional& x);
+
+  void
+  mask (::std::auto_ptr< mask_type > p);
+
   // initialTemp
   // 
   typedef ::xml_schema::double_ initialTemp_type;
@@ -1040,6 +1148,7 @@ class thermostat_t: public ::xml_schema::type
 
   protected:
   ::xsd::cxx::tree::one< numDimensions_type > numDimensions_;
+  mask_optional mask_;
   ::xsd::cxx::tree::one< initialTemp_type > initialTemp_;
   ::xsd::cxx::tree::one< targetTemp_type > targetTemp_;
   ::xsd::cxx::tree::one< step_type > step_;
@@ -1566,6 +1675,9 @@ operator<< (::xercesc::DOMElement&, const vec3i_t&);
 
 void
 operator<< (::xercesc::DOMElement&, const vec3d_t&);
+
+void
+operator<< (::xercesc::DOMElement&, const vec3b_t&);
 
 void
 operator<< (::xercesc::DOMElement&, const cuboid_t&);
