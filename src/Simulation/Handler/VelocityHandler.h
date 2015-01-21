@@ -8,19 +8,25 @@ namespace Simulation
 class VelocityHandler: public ParticleHandlerTimeAware
 {
 public:
-	VelocityHandler(double dt) :
-			ParticleHandlerTimeAware(dt)
+	VelocityHandler(double dt, int wallT) :
+			ParticleHandlerTimeAware(dt), wallType(wallT)
 	{
 	}
 
 	void compute(Particle& p)
 	{
+		if(p.getType() == wallType)
+			return;
 		utils::Vector<double, 3> term1 = p.getV();
 		utils::Vector<double, 3> term2 = delta_t * (p.getOldF() + p.getF())
 				* (1 / (2 * p.getM()));
 
 		p.getV() = term1 + term2;
 	}
+
+private:
+	int wallType;
+
 };
 
 }

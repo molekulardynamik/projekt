@@ -3,35 +3,31 @@
        xsi:noNamespaceSchemaLocation="simulation.xsd">
 	<thermostat>
 		<numDimensions>2</numDimensions>
-  		<initialTemp>20</initialTemp>
-  		<targetTemp>20</targetTemp>
+  		<initialTemp>2</initialTemp>
+  		<targetTemp>2</targetTemp>
   		<step>500</step>
   		<startTime>0</startTime>
       <targetTime>0</targetTime>
   	</thermostat>
+  	
   	<gravity>-12.5</gravity>
-	<domain X="111" Y="63" Z="1"/>
-  	<boundaries Horizontal="3" Vertical="2"/>  	
+  	
+	<domain X="16" Y="12" Z="8"/>
+  	<boundaries X="3" Y="2" Z="3"/>
   	<wallType>1</wallType>
-	<rCutOff>3</rCutOff>
+	<rCutOff>4</rCutOff>
 	<type sigma="1" epsilon="5" mass="1"/>
 	<type sigma="1" epsilon="5" mass="100"/>
 	<cuboid type="0">
-		<position X="10.0" Y="5.0" Z="0"/>
+		<position X="1.0" Y="1.0" Z="1.0"/>
 		<initialVelocity X="0.0" Y="0.0" Z="0.0"/>
-		<particleCount X="80" Y="20" Z="1"/>
-		<spacing>1.125</spacing>
+		<particleCount X="3" Y="3" Z="3"/>
+		<spacing>1.2</spacing>
 	</cuboid>
 	<cuboid type="0">
-		<position X="60" Y="35" Z="0"/>
-		<initialVelocity X="0.0" Y="0.0" Z="0.0"/>
-		<particleCount X="20" Y="20" Z="1"/>
-		<spacing>1.125</spacing>
+		<position X="10" Y="1" Z="1"/>
+		<initialVelocity X="-50.0" Y="0.0" Z="0.0"/>
+		<particleCount X="3" Y="3" Z="3"/>
+		<spacing>1.2</spacing>
 	</cuboid>
-	<particles>
-		<particle type="1">
-			<position X="30.5" Y="50" Z="0"/>
-			<velocity X="0.0" Y="-1.0" Z="0.0"/>
-		</particle>
-	</particles>
 </simulation>

@@ -40,6 +40,64 @@
 
 #include "config.h"
 
+// profile_t
+// 
+
+const profile_t::filename_type& profile_t::
+filename () const
+{
+  return this->filename_.get ();
+}
+
+profile_t::filename_type& profile_t::
+filename ()
+{
+  return this->filename_.get ();
+}
+
+void profile_t::
+filename (const filename_type& x)
+{
+  this->filename_.set (x);
+}
+
+void profile_t::
+filename (::std::auto_ptr< filename_type > x)
+{
+  this->filename_.set (x);
+}
+
+const profile_t::filename_type& profile_t::
+filename_default_value ()
+{
+  return filename_default_value_;
+}
+
+const profile_t::iterations_type& profile_t::
+iterations () const
+{
+  return this->iterations_.get ();
+}
+
+profile_t::iterations_type& profile_t::
+iterations ()
+{
+  return this->iterations_.get ();
+}
+
+void profile_t::
+iterations (const iterations_type& x)
+{
+  this->iterations_.set (x);
+}
+
+profile_t::iterations_type profile_t::
+iterations_default_value ()
+{
+  return iterations_type (100000);
+}
+
+
 // output_t
 // 
 
@@ -107,6 +165,36 @@ void output_t::
 iterations (const iterations_type& x)
 {
   this->iterations_.set (x);
+}
+
+const output_t::profile_optional& output_t::
+profile () const
+{
+  return this->profile_;
+}
+
+output_t::profile_optional& output_t::
+profile ()
+{
+  return this->profile_;
+}
+
+void output_t::
+profile (const profile_type& x)
+{
+  this->profile_.set (x);
+}
+
+void output_t::
+profile (const profile_optional& x)
+{
+  this->profile_ = x;
+}
+
+void output_t::
+profile (::std::auto_ptr< profile_type > x)
+{
+  this->profile_.set (x);
 }
 
 
@@ -230,6 +318,94 @@ saveFile (::std::auto_ptr< saveFile_type > x)
 
 #include <xsd/cxx/xml/dom/parsing-source.hxx>
 
+// profile_t
+//
+
+const profile_t::filename_type profile_t::filename_default_value_ (
+  "profile");
+
+profile_t::
+profile_t ()
+: ::xml_schema::type (),
+  filename_ (filename_default_value (), ::xml_schema::flags (), this),
+  iterations_ (iterations_default_value (), ::xml_schema::flags (), this)
+{
+}
+
+profile_t::
+profile_t (const profile_t& x,
+           ::xml_schema::flags f,
+           ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  filename_ (x.filename_, f, this),
+  iterations_ (x.iterations_, f, this)
+{
+}
+
+profile_t::
+profile_t (const ::xercesc::DOMElement& e,
+           ::xml_schema::flags f,
+           ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  filename_ (f, this),
+  iterations_ (f, this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, false, true);
+    this->parse (p, f);
+  }
+}
+
+void profile_t::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  while (p.more_attributes ())
+  {
+    const ::xercesc::DOMAttr& i (p.next_attribute ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    if (n.name () == "filename" && n.namespace_ ().empty ())
+    {
+      ::std::auto_ptr< filename_type > r (
+        filename_traits::create (i, f, this));
+
+      this->filename_.set (r);
+      continue;
+    }
+
+    if (n.name () == "iterations" && n.namespace_ ().empty ())
+    {
+      this->iterations_.set (iterations_traits::create (i, f, this));
+      continue;
+    }
+  }
+
+  if (!filename_.present ())
+  {
+    this->filename_.set (filename_default_value ());
+  }
+
+  if (!iterations_.present ())
+  {
+    this->iterations_.set (iterations_default_value ());
+  }
+}
+
+profile_t* profile_t::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class profile_t (*this, f, c);
+}
+
+profile_t::
+~profile_t ()
+{
+}
+
 // output_t
 //
 
@@ -240,7 +416,8 @@ output_t (const dir_type& dir,
 : ::xml_schema::type (),
   dir_ (dir, ::xml_schema::flags (), this),
   filename_ (filename, ::xml_schema::flags (), this),
-  iterations_ (iterations, ::xml_schema::flags (), this)
+  iterations_ (iterations, ::xml_schema::flags (), this),
+  profile_ (::xml_schema::flags (), this)
 {
 }
 
@@ -251,7 +428,8 @@ output_t (const output_t& x,
 : ::xml_schema::type (x, f, c),
   dir_ (x.dir_, f, this),
   filename_ (x.filename_, f, this),
-  iterations_ (x.iterations_, f, this)
+  iterations_ (x.iterations_, f, this),
+  profile_ (x.profile_, f, this)
 {
 }
 
@@ -262,7 +440,8 @@ output_t (const ::xercesc::DOMElement& e,
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
   dir_ (f, this),
   filename_ (f, this),
-  iterations_ (f, this)
+  iterations_ (f, this),
+  profile_ (f, this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -316,6 +495,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       if (!iterations_.present ())
       {
         this->iterations_.set (iterations_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // profile
+    //
+    if (n.name () == "profile" && n.namespace_ ().empty ())
+    {
+      ::std::auto_ptr< profile_type > r (
+        profile_traits::create (i, f, this));
+
+      if (!this->profile_)
+      {
+        this->profile_.set (r);
         continue;
       }
     }

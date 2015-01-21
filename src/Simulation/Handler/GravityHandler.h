@@ -8,17 +8,17 @@ namespace Simulation
 class GravityHandler: public ParticleHandler
 {
 public:
-	GravityHandler(double grav) :
+	GravityHandler(utils::Vector<double, 3> grav) :
 			g(grav)
 	{
 	}
 
 	void compute(Particle& p)
 	{
-		p.getF()[1] = p.getF()[1] + p.getM() * g;
+		p.getF() = p.getF() + g * p.getM();
 	}
 
 private:
-	double g;
+	utils::Vector<double, 3> g;
 };
 }

@@ -107,6 +107,46 @@ public:
 		return result;
 	}
 
+	bool operator<(const Vector& rhs) const{
+		bool result = true;
+		for (int i = 0; i < length; i++) {
+			result &= this->content[i] < rhs.content[i];
+		}
+		return result;
+	}
+
+	bool operator<=(const Vector& rhs) const{
+		bool result = true;
+		for (int i = 0; i < length; i++) {
+			result &= this->content[i] <= rhs.content[i];
+		}
+		return result;
+	}
+
+	bool operator>(const Vector& rhs) const{
+		bool result = true;
+		for (int i = 0; i < length; i++) {
+			result &= this->content[i] > rhs.content[i];
+		}
+		return result;
+	}
+
+	bool operator>=(const Vector& rhs) const{
+		bool result = true;
+		for (int i = 0; i < length; i++) {
+			result &= this->content[i] >= rhs.content[i];
+		}
+		return result;
+	}
+
+	double SquareL2Norm() const {
+		double square_sum = 0;
+		for (int i = 0; i < length; i++) {
+			square_sum += (this->content[i] * this->content[i]);
+		}
+		return square_sum;
+	}
+
 	double L2Norm() const {
 		double square_sum = 0;
 		for (int i = 0; i < length; i++) {

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<configSim xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="config.xsd">
+
+  <delta>0.0005</delta>
+  <end>0.1</end>
+  <output>
+    <dir>vtkOutput/</dir>
+    <filename>profiling_vtk_</filename>
+    <iterations>1000</iterations>
+    <!--<profile filename="test_profile" iterations="1000"/>-->
+  </output>
+  <simulationFile>testRayleighTaylor3D.xml</simulationFile>
+  <!--<saveFile>Drop.xml</saveFile>-->
+</configSim>
+
+<!--single 611s-->
+<!--quad 354s-->

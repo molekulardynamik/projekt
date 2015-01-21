@@ -10,9 +10,9 @@
     <targetTime>0</targetTime>
   </thermostat>
 
-  <gravity>-12.44</gravity>
+  <gravity X="0" Y="-12.44" Z="0"/>
 
-  <domain X="56" Y="24" Z="14"/>
+  <domain X="60" Y="24" Z="24"/>
 
   <boundaries X="3" Y="2" Z="3"/>
 
@@ -27,13 +27,13 @@
   <cuboid type="0">
   	<position X="0.6" Y="1" Z="0.6"/>
 	<initialVelocity X="0.0" Y="0.0" Z="0.0"/>
-	<particleCount X="40" Y="5" Z="10"/>
+	<particleCount X="49" Y="5" Z="19"/>
 	<spacing>1.2</spacing>
   </cuboid>
   <cuboid type="1">
   	<position X="0.6" Y="8.2" Z="0.6"/>
 	<initialVelocity X="0.0" Y="0.0" Z="0.0"/>
-	<particleCount X="40" Y="5" Z="10"/>
+	<particleCount X="49" Y="5" Z="19"/>
 	<spacing>1.2</spacing>
   </cuboid>
 

@@ -221,6 +221,7 @@ namespace xml_schema
 
 // Forward declarations.
 //
+class profile_t;
 class output_t;
 class config_t;
 
@@ -236,6 +237,78 @@ class config_t;
 #include <xsd/cxx/tree/list.hxx>
 
 #include <xsd/cxx/xml/dom/parsing-header.hxx>
+
+class profile_t: public ::xml_schema::type
+{
+  public:
+  // filename
+  // 
+  typedef ::xml_schema::string filename_type;
+  typedef ::xsd::cxx::tree::traits< filename_type, char > filename_traits;
+
+  const filename_type&
+  filename () const;
+
+  filename_type&
+  filename ();
+
+  void
+  filename (const filename_type& x);
+
+  void
+  filename (::std::auto_ptr< filename_type > p);
+
+  static const filename_type&
+  filename_default_value ();
+
+  // iterations
+  // 
+  typedef ::xml_schema::int_ iterations_type;
+  typedef ::xsd::cxx::tree::traits< iterations_type, char > iterations_traits;
+
+  const iterations_type&
+  iterations () const;
+
+  iterations_type&
+  iterations ();
+
+  void
+  iterations (const iterations_type& x);
+
+  static iterations_type
+  iterations_default_value ();
+
+  // Constructors.
+  //
+  profile_t ();
+
+  profile_t (const ::xercesc::DOMElement& e,
+             ::xml_schema::flags f = 0,
+             ::xml_schema::container* c = 0);
+
+  profile_t (const profile_t& x,
+             ::xml_schema::flags f = 0,
+             ::xml_schema::container* c = 0);
+
+  virtual profile_t*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  virtual 
+  ~profile_t ();
+
+  // Implementation.
+  //
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  ::xsd::cxx::tree::one< filename_type > filename_;
+  static const filename_type filename_default_value_;
+  ::xsd::cxx::tree::one< iterations_type > iterations_;
+};
 
 class output_t: public ::xml_schema::type
 {
@@ -288,6 +361,27 @@ class output_t: public ::xml_schema::type
   void
   iterations (const iterations_type& x);
 
+  // profile
+  // 
+  typedef ::profile_t profile_type;
+  typedef ::xsd::cxx::tree::optional< profile_type > profile_optional;
+  typedef ::xsd::cxx::tree::traits< profile_type, char > profile_traits;
+
+  const profile_optional&
+  profile () const;
+
+  profile_optional&
+  profile ();
+
+  void
+  profile (const profile_type& x);
+
+  void
+  profile (const profile_optional& x);
+
+  void
+  profile (::std::auto_ptr< profile_type > p);
+
   // Constructors.
   //
   output_t (const dir_type&,
@@ -320,6 +414,7 @@ class output_t: public ::xml_schema::type
   ::xsd::cxx::tree::one< dir_type > dir_;
   ::xsd::cxx::tree::one< filename_type > filename_;
   ::xsd::cxx::tree::one< iterations_type > iterations_;
+  profile_optional profile_;
 };
 
 class config_t: public ::xml_schema::type

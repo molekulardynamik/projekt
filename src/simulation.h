@@ -255,6 +255,7 @@ class sphere_t;
 class particle_t;
 class particleArray_t;
 class thermostat_t;
+class membrane_t;
 class simulation_t;
 
 #include <memory>    // std::auto_ptr
@@ -1046,6 +1047,166 @@ class thermostat_t: public ::xml_schema::type
   ::xsd::cxx::tree::one< targetTime_type > targetTime_;
 };
 
+class membrane_t: public ::xml_schema::type
+{
+  public:
+  // r0
+  // 
+  typedef ::xml_schema::double_ r0_type;
+  typedef ::xsd::cxx::tree::traits< r0_type, char, ::xsd::cxx::tree::schema_type::double_ > r0_traits;
+
+  const r0_type&
+  r0 () const;
+
+  r0_type&
+  r0 ();
+
+  void
+  r0 (const r0_type& x);
+
+  // k
+  // 
+  typedef ::xml_schema::double_ k_type;
+  typedef ::xsd::cxx::tree::traits< k_type, char, ::xsd::cxx::tree::schema_type::double_ > k_traits;
+
+  const k_type&
+  k () const;
+
+  k_type&
+  k ();
+
+  void
+  k (const k_type& x);
+
+  // ljTruncation
+  // 
+  typedef ::xml_schema::double_ ljTruncation_type;
+  typedef ::xsd::cxx::tree::traits< ljTruncation_type, char, ::xsd::cxx::tree::schema_type::double_ > ljTruncation_traits;
+
+  const ljTruncation_type&
+  ljTruncation () const;
+
+  ljTruncation_type&
+  ljTruncation ();
+
+  void
+  ljTruncation (const ljTruncation_type& x);
+
+  // pickIndex
+  // 
+  typedef ::vec3i_t pickIndex_type;
+  typedef ::xsd::cxx::tree::traits< pickIndex_type, char > pickIndex_traits;
+
+  const pickIndex_type&
+  pickIndex () const;
+
+  pickIndex_type&
+  pickIndex ();
+
+  void
+  pickIndex (const pickIndex_type& x);
+
+  void
+  pickIndex (::std::auto_ptr< pickIndex_type > p);
+
+  // pickSize
+  // 
+  typedef ::vec3i_t pickSize_type;
+  typedef ::xsd::cxx::tree::traits< pickSize_type, char > pickSize_traits;
+
+  const pickSize_type&
+  pickSize () const;
+
+  pickSize_type&
+  pickSize ();
+
+  void
+  pickSize (const pickSize_type& x);
+
+  void
+  pickSize (::std::auto_ptr< pickSize_type > p);
+
+  // pickForce
+  // 
+  typedef ::vec3d_t pickForce_type;
+  typedef ::xsd::cxx::tree::traits< pickForce_type, char > pickForce_traits;
+
+  const pickForce_type&
+  pickForce () const;
+
+  pickForce_type&
+  pickForce ();
+
+  void
+  pickForce (const pickForce_type& x);
+
+  void
+  pickForce (::std::auto_ptr< pickForce_type > p);
+
+  // pickDuration
+  // 
+  typedef ::xml_schema::double_ pickDuration_type;
+  typedef ::xsd::cxx::tree::traits< pickDuration_type, char, ::xsd::cxx::tree::schema_type::double_ > pickDuration_traits;
+
+  const pickDuration_type&
+  pickDuration () const;
+
+  pickDuration_type&
+  pickDuration ();
+
+  void
+  pickDuration (const pickDuration_type& x);
+
+  // Constructors.
+  //
+  membrane_t (const r0_type&,
+              const k_type&,
+              const ljTruncation_type&,
+              const pickIndex_type&,
+              const pickSize_type&,
+              const pickForce_type&,
+              const pickDuration_type&);
+
+  membrane_t (const r0_type&,
+              const k_type&,
+              const ljTruncation_type&,
+              ::std::auto_ptr< pickIndex_type >&,
+              ::std::auto_ptr< pickSize_type >&,
+              ::std::auto_ptr< pickForce_type >&,
+              const pickDuration_type&);
+
+  membrane_t (const ::xercesc::DOMElement& e,
+              ::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0);
+
+  membrane_t (const membrane_t& x,
+              ::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0);
+
+  virtual membrane_t*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  virtual 
+  ~membrane_t ();
+
+  // Implementation.
+  //
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  ::xsd::cxx::tree::one< r0_type > r0_;
+  ::xsd::cxx::tree::one< k_type > k_;
+  ::xsd::cxx::tree::one< ljTruncation_type > ljTruncation_;
+  ::xsd::cxx::tree::one< pickIndex_type > pickIndex_;
+  ::xsd::cxx::tree::one< pickSize_type > pickSize_;
+  ::xsd::cxx::tree::one< pickForce_type > pickForce_;
+  ::xsd::cxx::tree::one< pickDuration_type > pickDuration_;
+};
+
 class simulation_t: public ::xml_schema::type
 {
   public:
@@ -1068,8 +1229,8 @@ class simulation_t: public ::xml_schema::type
 
   // gravity
   // 
-  typedef ::xml_schema::double_ gravity_type;
-  typedef ::xsd::cxx::tree::traits< gravity_type, char, ::xsd::cxx::tree::schema_type::double_ > gravity_traits;
+  typedef ::vec3d_t gravity_type;
+  typedef ::xsd::cxx::tree::traits< gravity_type, char > gravity_traits;
 
   const gravity_type&
   gravity () const;
@@ -1079,6 +1240,9 @@ class simulation_t: public ::xml_schema::type
 
   void
   gravity (const gravity_type& x);
+
+  void
+  gravity (::std::auto_ptr< gravity_type > p);
 
   // domain
   // 
@@ -1141,6 +1305,27 @@ class simulation_t: public ::xml_schema::type
 
   void
   rCutOff (const rCutOff_type& x);
+
+  // membrane
+  // 
+  typedef ::membrane_t membrane_type;
+  typedef ::xsd::cxx::tree::optional< membrane_type > membrane_optional;
+  typedef ::xsd::cxx::tree::traits< membrane_type, char > membrane_traits;
+
+  const membrane_optional&
+  membrane () const;
+
+  membrane_optional&
+  membrane ();
+
+  void
+  membrane (const membrane_type& x);
+
+  void
+  membrane (const membrane_optional& x);
+
+  void
+  membrane (::std::auto_ptr< membrane_type > p);
 
   // type
   // 
@@ -1224,7 +1409,7 @@ class simulation_t: public ::xml_schema::type
                 const rCutOff_type&);
 
   simulation_t (::std::auto_ptr< thermostat_type >&,
-                const gravity_type&,
+                ::std::auto_ptr< gravity_type >&,
                 ::std::auto_ptr< domain_type >&,
                 ::std::auto_ptr< boundaries_type >&,
                 const wallType_type&,
@@ -1259,6 +1444,7 @@ class simulation_t: public ::xml_schema::type
   ::xsd::cxx::tree::one< boundaries_type > boundaries_;
   ::xsd::cxx::tree::one< wallType_type > wallType_;
   ::xsd::cxx::tree::one< rCutOff_type > rCutOff_;
+  membrane_optional membrane_;
   type_sequence type_;
   cuboid_sequence cuboid_;
   sphere_sequence sphere_;
@@ -1395,6 +1581,9 @@ operator<< (::xercesc::DOMElement&, const particleArray_t&);
 
 void
 operator<< (::xercesc::DOMElement&, const thermostat_t&);
+
+void
+operator<< (::xercesc::DOMElement&, const membrane_t&);
 
 void
 operator<< (::xercesc::DOMElement&, const simulation_t&);

@@ -11,9 +11,7 @@ public:
 	void compute(Particle& p)
 	{
 		p.getOldF() = p.getF();
-		double zeros[3] =
-		{ 0, 0, 0 };
-		p.getF() = utils::Vector<double, 3>(zeros);
+		p.getF() = utils::Vector<double, 3>(0.0);
 	}
 };
 }

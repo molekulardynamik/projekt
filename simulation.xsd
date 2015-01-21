@@ -60,15 +60,28 @@
       		<xs:element name="targetTime" type="xs:int"/>
 		</xs:sequence>
 	</xs:complexType>
+	
+	<xs:complexType name="membrane_t">
+		<xs:sequence>
+			<xs:element name="r0" type="xs:double"/>
+			<xs:element name="k" type="xs:double"/>
+			<xs:element name="ljTruncation" type="xs:double"/>
+			<xs:element name="pickIndex" type="vec3i_t"/>
+			<xs:element name="pickSize" type="vec3i_t"/>
+			<xs:element name="pickForce" type="vec3d_t"/>
+			<xs:element name="pickDuration" type="xs:double"/>
+		</xs:sequence>
+	</xs:complexType>
   
 	<xs:complexType name="simulation_t">
 		<xs:sequence>
 			<xs:element name="thermostat" type="thermostat_t"/>
-			<xs:element name="gravity" type="xs:double"/>
+			<xs:element name="gravity" type="vec3d_t"/>
 			<xs:element name="domain" type="vec3d_t"/>
       		<xs:element name="boundaries" type="vec3i_t"/>
       		<xs:element name="wallType" type="xs:int"/>
 			<xs:element name="rCutOff" type="xs:float"/>
+			<xs:element name="membrane" type="membrane_t" minOccurs = "0" maxOccurs="1"/>
 			<xs:element name="type" type="type_t" maxOccurs="unbounded"/>
 			<xs:element name="cuboid" type="cuboid_t" minOccurs = "0" maxOccurs="unbounded"/>
 			<xs:element name="sphere" type="sphere_t" minOccurs = "0" maxOccurs="unbounded"/>

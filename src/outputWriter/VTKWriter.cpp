@@ -93,7 +93,7 @@ void VTKWriter::plotParticle(Particle& p) {
 	//cout << "Appended force data in: " << dataIterator->Name();
 
 	dataIterator++;
-	dataIterator->push_back(p.getCell());
+	dataIterator->push_back(p.getType());
 
 	Points::DataArray_sequence& pointsSequence = vtkFile->UnstructuredGrid()->Piece().Points().DataArray();
 	Points::DataArray_iterator pointsIterator = pointsSequence.begin();

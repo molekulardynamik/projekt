@@ -702,6 +702,154 @@ targetTime (const targetTime_type& x)
 }
 
 
+// membrane_t
+// 
+
+const membrane_t::r0_type& membrane_t::
+r0 () const
+{
+  return this->r0_.get ();
+}
+
+membrane_t::r0_type& membrane_t::
+r0 ()
+{
+  return this->r0_.get ();
+}
+
+void membrane_t::
+r0 (const r0_type& x)
+{
+  this->r0_.set (x);
+}
+
+const membrane_t::k_type& membrane_t::
+k () const
+{
+  return this->k_.get ();
+}
+
+membrane_t::k_type& membrane_t::
+k ()
+{
+  return this->k_.get ();
+}
+
+void membrane_t::
+k (const k_type& x)
+{
+  this->k_.set (x);
+}
+
+const membrane_t::ljTruncation_type& membrane_t::
+ljTruncation () const
+{
+  return this->ljTruncation_.get ();
+}
+
+membrane_t::ljTruncation_type& membrane_t::
+ljTruncation ()
+{
+  return this->ljTruncation_.get ();
+}
+
+void membrane_t::
+ljTruncation (const ljTruncation_type& x)
+{
+  this->ljTruncation_.set (x);
+}
+
+const membrane_t::pickIndex_type& membrane_t::
+pickIndex () const
+{
+  return this->pickIndex_.get ();
+}
+
+membrane_t::pickIndex_type& membrane_t::
+pickIndex ()
+{
+  return this->pickIndex_.get ();
+}
+
+void membrane_t::
+pickIndex (const pickIndex_type& x)
+{
+  this->pickIndex_.set (x);
+}
+
+void membrane_t::
+pickIndex (::std::auto_ptr< pickIndex_type > x)
+{
+  this->pickIndex_.set (x);
+}
+
+const membrane_t::pickSize_type& membrane_t::
+pickSize () const
+{
+  return this->pickSize_.get ();
+}
+
+membrane_t::pickSize_type& membrane_t::
+pickSize ()
+{
+  return this->pickSize_.get ();
+}
+
+void membrane_t::
+pickSize (const pickSize_type& x)
+{
+  this->pickSize_.set (x);
+}
+
+void membrane_t::
+pickSize (::std::auto_ptr< pickSize_type > x)
+{
+  this->pickSize_.set (x);
+}
+
+const membrane_t::pickForce_type& membrane_t::
+pickForce () const
+{
+  return this->pickForce_.get ();
+}
+
+membrane_t::pickForce_type& membrane_t::
+pickForce ()
+{
+  return this->pickForce_.get ();
+}
+
+void membrane_t::
+pickForce (const pickForce_type& x)
+{
+  this->pickForce_.set (x);
+}
+
+void membrane_t::
+pickForce (::std::auto_ptr< pickForce_type > x)
+{
+  this->pickForce_.set (x);
+}
+
+const membrane_t::pickDuration_type& membrane_t::
+pickDuration () const
+{
+  return this->pickDuration_.get ();
+}
+
+membrane_t::pickDuration_type& membrane_t::
+pickDuration ()
+{
+  return this->pickDuration_.get ();
+}
+
+void membrane_t::
+pickDuration (const pickDuration_type& x)
+{
+  this->pickDuration_.set (x);
+}
+
+
 // simulation_t
 // 
 
@@ -743,6 +891,12 @@ gravity ()
 
 void simulation_t::
 gravity (const gravity_type& x)
+{
+  this->gravity_.set (x);
+}
+
+void simulation_t::
+gravity (::std::auto_ptr< gravity_type > x)
 {
   this->gravity_.set (x);
 }
@@ -829,6 +983,36 @@ void simulation_t::
 rCutOff (const rCutOff_type& x)
 {
   this->rCutOff_.set (x);
+}
+
+const simulation_t::membrane_optional& simulation_t::
+membrane () const
+{
+  return this->membrane_;
+}
+
+simulation_t::membrane_optional& simulation_t::
+membrane ()
+{
+  return this->membrane_;
+}
+
+void simulation_t::
+membrane (const membrane_type& x)
+{
+  this->membrane_.set (x);
+}
+
+void simulation_t::
+membrane (const membrane_optional& x)
+{
+  this->membrane_ = x;
+}
+
+void simulation_t::
+membrane (::std::auto_ptr< membrane_type > x)
+{
+  this->membrane_.set (x);
 }
 
 const simulation_t::type_sequence& simulation_t::
@@ -1967,6 +2151,243 @@ thermostat_t::
 {
 }
 
+// membrane_t
+//
+
+membrane_t::
+membrane_t (const r0_type& r0,
+            const k_type& k,
+            const ljTruncation_type& ljTruncation,
+            const pickIndex_type& pickIndex,
+            const pickSize_type& pickSize,
+            const pickForce_type& pickForce,
+            const pickDuration_type& pickDuration)
+: ::xml_schema::type (),
+  r0_ (r0, ::xml_schema::flags (), this),
+  k_ (k, ::xml_schema::flags (), this),
+  ljTruncation_ (ljTruncation, ::xml_schema::flags (), this),
+  pickIndex_ (pickIndex, ::xml_schema::flags (), this),
+  pickSize_ (pickSize, ::xml_schema::flags (), this),
+  pickForce_ (pickForce, ::xml_schema::flags (), this),
+  pickDuration_ (pickDuration, ::xml_schema::flags (), this)
+{
+}
+
+membrane_t::
+membrane_t (const r0_type& r0,
+            const k_type& k,
+            const ljTruncation_type& ljTruncation,
+            ::std::auto_ptr< pickIndex_type >& pickIndex,
+            ::std::auto_ptr< pickSize_type >& pickSize,
+            ::std::auto_ptr< pickForce_type >& pickForce,
+            const pickDuration_type& pickDuration)
+: ::xml_schema::type (),
+  r0_ (r0, ::xml_schema::flags (), this),
+  k_ (k, ::xml_schema::flags (), this),
+  ljTruncation_ (ljTruncation, ::xml_schema::flags (), this),
+  pickIndex_ (pickIndex, ::xml_schema::flags (), this),
+  pickSize_ (pickSize, ::xml_schema::flags (), this),
+  pickForce_ (pickForce, ::xml_schema::flags (), this),
+  pickDuration_ (pickDuration, ::xml_schema::flags (), this)
+{
+}
+
+membrane_t::
+membrane_t (const membrane_t& x,
+            ::xml_schema::flags f,
+            ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  r0_ (x.r0_, f, this),
+  k_ (x.k_, f, this),
+  ljTruncation_ (x.ljTruncation_, f, this),
+  pickIndex_ (x.pickIndex_, f, this),
+  pickSize_ (x.pickSize_, f, this),
+  pickForce_ (x.pickForce_, f, this),
+  pickDuration_ (x.pickDuration_, f, this)
+{
+}
+
+membrane_t::
+membrane_t (const ::xercesc::DOMElement& e,
+            ::xml_schema::flags f,
+            ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  r0_ (f, this),
+  k_ (f, this),
+  ljTruncation_ (f, this),
+  pickIndex_ (f, this),
+  pickSize_ (f, this),
+  pickForce_ (f, this),
+  pickDuration_ (f, this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false);
+    this->parse (p, f);
+  }
+}
+
+void membrane_t::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_elements (); p.next_element ())
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // r0
+    //
+    if (n.name () == "r0" && n.namespace_ ().empty ())
+    {
+      if (!r0_.present ())
+      {
+        this->r0_.set (r0_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // k
+    //
+    if (n.name () == "k" && n.namespace_ ().empty ())
+    {
+      if (!k_.present ())
+      {
+        this->k_.set (k_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // ljTruncation
+    //
+    if (n.name () == "ljTruncation" && n.namespace_ ().empty ())
+    {
+      if (!ljTruncation_.present ())
+      {
+        this->ljTruncation_.set (ljTruncation_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // pickIndex
+    //
+    if (n.name () == "pickIndex" && n.namespace_ ().empty ())
+    {
+      ::std::auto_ptr< pickIndex_type > r (
+        pickIndex_traits::create (i, f, this));
+
+      if (!pickIndex_.present ())
+      {
+        this->pickIndex_.set (r);
+        continue;
+      }
+    }
+
+    // pickSize
+    //
+    if (n.name () == "pickSize" && n.namespace_ ().empty ())
+    {
+      ::std::auto_ptr< pickSize_type > r (
+        pickSize_traits::create (i, f, this));
+
+      if (!pickSize_.present ())
+      {
+        this->pickSize_.set (r);
+        continue;
+      }
+    }
+
+    // pickForce
+    //
+    if (n.name () == "pickForce" && n.namespace_ ().empty ())
+    {
+      ::std::auto_ptr< pickForce_type > r (
+        pickForce_traits::create (i, f, this));
+
+      if (!pickForce_.present ())
+      {
+        this->pickForce_.set (r);
+        continue;
+      }
+    }
+
+    // pickDuration
+    //
+    if (n.name () == "pickDuration" && n.namespace_ ().empty ())
+    {
+      if (!pickDuration_.present ())
+      {
+        this->pickDuration_.set (pickDuration_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    break;
+  }
+
+  if (!r0_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "r0",
+      "");
+  }
+
+  if (!k_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "k",
+      "");
+  }
+
+  if (!ljTruncation_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "ljTruncation",
+      "");
+  }
+
+  if (!pickIndex_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "pickIndex",
+      "");
+  }
+
+  if (!pickSize_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "pickSize",
+      "");
+  }
+
+  if (!pickForce_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "pickForce",
+      "");
+  }
+
+  if (!pickDuration_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "pickDuration",
+      "");
+  }
+}
+
+membrane_t* membrane_t::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class membrane_t (*this, f, c);
+}
+
+membrane_t::
+~membrane_t ()
+{
+}
+
 // simulation_t
 //
 
@@ -1984,6 +2405,7 @@ simulation_t (const thermostat_type& thermostat,
   boundaries_ (boundaries, ::xml_schema::flags (), this),
   wallType_ (wallType, ::xml_schema::flags (), this),
   rCutOff_ (rCutOff, ::xml_schema::flags (), this),
+  membrane_ (::xml_schema::flags (), this),
   type_ (::xml_schema::flags (), this),
   cuboid_ (::xml_schema::flags (), this),
   sphere_ (::xml_schema::flags (), this),
@@ -1993,7 +2415,7 @@ simulation_t (const thermostat_type& thermostat,
 
 simulation_t::
 simulation_t (::std::auto_ptr< thermostat_type >& thermostat,
-              const gravity_type& gravity,
+              ::std::auto_ptr< gravity_type >& gravity,
               ::std::auto_ptr< domain_type >& domain,
               ::std::auto_ptr< boundaries_type >& boundaries,
               const wallType_type& wallType,
@@ -2005,6 +2427,7 @@ simulation_t (::std::auto_ptr< thermostat_type >& thermostat,
   boundaries_ (boundaries, ::xml_schema::flags (), this),
   wallType_ (wallType, ::xml_schema::flags (), this),
   rCutOff_ (rCutOff, ::xml_schema::flags (), this),
+  membrane_ (::xml_schema::flags (), this),
   type_ (::xml_schema::flags (), this),
   cuboid_ (::xml_schema::flags (), this),
   sphere_ (::xml_schema::flags (), this),
@@ -2023,6 +2446,7 @@ simulation_t (const simulation_t& x,
   boundaries_ (x.boundaries_, f, this),
   wallType_ (x.wallType_, f, this),
   rCutOff_ (x.rCutOff_, f, this),
+  membrane_ (x.membrane_, f, this),
   type_ (x.type_, f, this),
   cuboid_ (x.cuboid_, f, this),
   sphere_ (x.sphere_, f, this),
@@ -2041,6 +2465,7 @@ simulation_t (const ::xercesc::DOMElement& e,
   boundaries_ (f, this),
   wallType_ (f, this),
   rCutOff_ (f, this),
+  membrane_ (f, this),
   type_ (f, this),
   cuboid_ (f, this),
   sphere_ (f, this),
@@ -2081,9 +2506,12 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     //
     if (n.name () == "gravity" && n.namespace_ ().empty ())
     {
+      ::std::auto_ptr< gravity_type > r (
+        gravity_traits::create (i, f, this));
+
       if (!gravity_.present ())
       {
-        this->gravity_.set (gravity_traits::create (i, f, this));
+        this->gravity_.set (r);
         continue;
       }
     }
@@ -2134,6 +2562,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       if (!rCutOff_.present ())
       {
         this->rCutOff_.set (rCutOff_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // membrane
+    //
+    if (n.name () == "membrane" && n.namespace_ ().empty ())
+    {
+      ::std::auto_ptr< membrane_type > r (
+        membrane_traits::create (i, f, this));
+
+      if (!this->membrane_)
+      {
+        this->membrane_.set (r);
         continue;
       }
     }
@@ -2903,6 +3345,89 @@ operator<< (::xercesc::DOMElement& e, const thermostat_t& i)
 }
 
 void
+operator<< (::xercesc::DOMElement& e, const membrane_t& i)
+{
+  e << static_cast< const ::xml_schema::type& > (i);
+
+  // r0
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "r0",
+        e));
+
+    s << ::xml_schema::as_double(i.r0 ());
+  }
+
+  // k
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "k",
+        e));
+
+    s << ::xml_schema::as_double(i.k ());
+  }
+
+  // ljTruncation
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "ljTruncation",
+        e));
+
+    s << ::xml_schema::as_double(i.ljTruncation ());
+  }
+
+  // pickIndex
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "pickIndex",
+        e));
+
+    s << i.pickIndex ();
+  }
+
+  // pickSize
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "pickSize",
+        e));
+
+    s << i.pickSize ();
+  }
+
+  // pickForce
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "pickForce",
+        e));
+
+    s << i.pickForce ();
+  }
+
+  // pickDuration
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "pickDuration",
+        e));
+
+    s << ::xml_schema::as_double(i.pickDuration ());
+  }
+}
+
+void
 operator<< (::xercesc::DOMElement& e, const simulation_t& i)
 {
   e << static_cast< const ::xml_schema::type& > (i);
@@ -2926,7 +3451,7 @@ operator<< (::xercesc::DOMElement& e, const simulation_t& i)
         "gravity",
         e));
 
-    s << ::xml_schema::as_double(i.gravity ());
+    s << i.gravity ();
   }
 
   // domain
@@ -2971,6 +3496,18 @@ operator<< (::xercesc::DOMElement& e, const simulation_t& i)
         e));
 
     s << i.rCutOff ();
+  }
+
+  // membrane
+  //
+  if (i.membrane ())
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "membrane",
+        e));
+
+    s << *i.membrane ();
   }
 
   // type

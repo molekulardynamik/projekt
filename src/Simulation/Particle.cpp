@@ -62,13 +62,13 @@ int& ParticleProperty::wallType()
 
 
 Particle::Particle(int type_arg)
-	: x(0.0), v(0.0), f(0.0), old_f(0.0), type(type_arg), cell(-1)
+	: x(0.0), v(0.0), f(0.0), old_f(0.0), type(type_arg), cell(-1), cuboidIndex(-3)
 {
 
 }
 
 Particle::Particle(const Particle& other) 
-	:x(other.x), v(other.v), f(other.f), old_f(other.old_f), type(other.type), cell(other.cell)
+	:x(other.x), v(other.v), f(other.f), old_f(other.old_f), type(other.type), cell(other.cell), cuboidIndex(other.cuboidIndex)
 
 {
 
@@ -79,9 +79,19 @@ Particle::Particle(
 	utils::Vector<double, 3> x_arg,
 	utils::Vector<double, 3> v_arg,
 	int type_arg)
-	: x(x_arg), v(v_arg), f(0.0), old_f(0.0), type(type_arg), cell(-1)
+	: x(x_arg), v(v_arg), f(0.0), old_f(0.0), type(type_arg), cell(-1), cuboidIndex(-3)
 {
 }
+
+Particle::Particle(
+	utils::Vector<double, 3> x_arg,
+	utils::Vector<double, 3> v_arg,
+	int type_arg,
+	utils::Vector<int, 3> index)
+	: x(x_arg), v(v_arg), f(0.0), old_f(0.0), type(type_arg), cell(-1), cuboidIndex(index)
+{
+}
+
 
 Particle::~Particle() {
 }
@@ -123,6 +133,21 @@ double Particle::getE()
 double Particle::getO()
 {
 	return ParticleProperty::get(type).o;
+}
+
+utils::Vector<int, 3> Particle::getCuboidIndex()
+{
+	return cuboidIndex;
+}
+
+bool Particle::isDirectNeighbor(Particle& other)
+{
+	return (cuboidIndex - other.cuboidIndex).SquareL2Norm() == 1;
+}
+
+bool Particle::isDiagonalNeighbor(Particle& other)
+{
+	return (cuboidIndex - other.cuboidIndex).SquareL2Norm() == 2;
 }
 
 std::string Particle::toString() {

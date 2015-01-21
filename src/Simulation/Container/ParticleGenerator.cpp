@@ -130,7 +130,12 @@ void ParticleGenerator::generateCuboid(Vector<double, 3> bottomLeftFront,
 				pos[1] += y * h;
 				pos[2] += z * h;
 
-				Particle p(pos, initialVelocity, type);
+				Vector<int, 3> index;
+				index[0] = x;
+				index[1] = y;
+				index[2] = z;
+
+				Particle p(pos, initialVelocity, type, index);
 
 				particles.push_back(p);
 			}
@@ -142,6 +147,8 @@ void ParticleGenerator::generateSphere(Vector<double, 3> center,
 		Vector<double, 3> initialVelocity, int numParticles, double h, int type,
 		vector<Particle>& particles)
 {
+	assert(false);
+
 	for (int x = -numParticles; x < numParticles + 1; x++)
 	{
 		for (int y = -numParticles; y < numParticles + 1; y++)

@@ -5,11 +5,11 @@ namespace Simulation
 {
 /// \class LennardJonesHandler
 /// \brief Computes force  applied by Lennard-Jones potential
-class LennardJonesHandler: public ParticleHandlerTimeAware
+class LennardJonesHandler: public ParticleHandler
 {
 public:
-	LennardJonesHandler(double dt, double r) :
-			ParticleHandlerTimeAware(dt), rCutOff(r)
+	LennardJonesHandler( double r) :
+		rCutOff(r)
 	{
 	}
 

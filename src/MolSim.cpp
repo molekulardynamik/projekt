@@ -1,6 +1,3 @@
-#include <cppunit/ui/text/TestRunner.h>
-#include "UnitTests.h"
-
 #include "outputWriter/XYZWriter.h"
 #include "outputWriter/VTKWriter.h"
 #include "Simulation/Handler/Handler.h"
@@ -73,7 +70,42 @@ int main(int argc, char* argsv[])
 	double end_time = config->end();
 	double delta_time = config->delta();
 
-	double gravity = simulationConfig->gravity();
+	int wallType = simulationConfig->wallType();
+
+	utils::Vector<double, 3> gravity;
+	gravity[0] = simulationConfig->gravity().X();
+	gravity[1] = simulationConfig->gravity().Y();
+	gravity[2] = simulationConfig->gravity().Z();
+	bool enableGravity = gravity[0] != 0 || gravity[1] != 0 || gravity[2] != 0;
+
+	bool enableMembrane = simulationConfig->membrane().present();
+	double r0, k, ljTruncation;
+	utils::Vector<int, 3> pickPos, pickSize;
+	utils::Vector<double, 3> pickForce;
+	int pickDuration;
+	if(enableMembrane)
+	{
+		r0 = simulationConfig->membrane().get().r0();
+		k = simulationConfig->membrane().get().k();
+		ljTruncation = simulationConfig->membrane().get().ljTruncation();
+
+		pickPos[0] = simulationConfig->membrane().get().pickIndex().X();
+		pickPos[1] = simulationConfig->membrane().get().pickIndex().Y();
+		pickPos[2] = simulationConfig->membrane().get().pickIndex().Z();
+
+		pickSize[0] = simulationConfig->membrane().get().pickSize().X();
+		pickSize[1] = simulationConfig->membrane().get().pickSize().Y();
+		pickSize[2] = simulationConfig->membrane().get().pickSize().Z();
+
+		pickForce[0] = simulationConfig->membrane().get().pickForce().X();
+		pickForce[1] = simulationConfig->membrane().get().pickForce().Y();
+		pickForce[2] = simulationConfig->membrane().get().pickForce().Z();
+
+		pickDuration = simulationConfig->membrane().get().pickDuration() / delta_time;
+
+	}
+
+
 	int numDims = simulationConfig->thermostat().numDimensions();
 	double initialTemp = simulationConfig->thermostat().initialTemp();
 	double temperature = simulationConfig->thermostat().targetTemp();
@@ -89,32 +121,59 @@ int main(int argc, char* argsv[])
 	string out_name = config->output().dir() + config->output().filename();
 	int thermostatStep = simulationConfig->thermostat().step();
 
-	LOG4CXX_DEBUG(logger, "grav " << gravity << " temp " << temperature);
+	bool enableProfiling = config->output().profile().present();
+	string profileName;
+	int profileIterations;
+	if (enableProfiling)
+	{
+		profileName = config->output().profile().get().filename();
+		profileIterations = config->output().profile().get().iterations();
+	}
+
+	LOG4CXX_DEBUG(logger, "grav " << gravity.toString() << " temp " << temperature);
 
 	// initialize container
 	ParticleContainer container(simulationConfig);
 
-
 	// initialize handler
 	OutputHandler outputHandler;
-	PositionHandler positionHandler(delta_time);
-	VelocityHandler velocityHandler(delta_time);
+	PositionHandler positionHandler(delta_time, wallType);
+	VelocityHandler velocityHandler(delta_time, wallType);
 	ForceResetHandler forceResetHandler;
 	GravityHandler gravityHandler(gravity);
-	LennardJonesHandler lennardJonesHandler(delta_time, container.getRCutOff());
-	BrownianMotionHandler brownianHandler(initialTemp);
-	ThermostatHandler thermostatHandler;
-	KineticEnergyHandler kineticHandler;
+	LennardJonesHandler lennardJonesHandler(container.getRCutOff());
+	HarmonicPotentialHandler harmonicDirectHandler, harmonicDiagonalHandler;
+	PickHandler pickHandler;
+	if(enableMembrane)
+	{
+		lennardJonesHandler = LennardJonesHandler(ljTruncation);
+		harmonicDirectHandler = HarmonicPotentialHandler(r0, k, true);
+		harmonicDiagonalHandler = HarmonicPotentialHandler(sqrt(2)*r0, k, false);
+		pickHandler = PickHandler(pickPos, pickSize, pickForce);
+	}
+	BrownianMotionHandler brownianHandler(initialTemp, wallType);
+	utils::Vector<bool, 3> mask;
+	mask[0] = true;
+	mask[1] = false;
+	mask[2] = true;
+	ThermostatHandler thermostatHandler(wallType, mask);
+	KineticEnergyHandler kineticHandler(wallType, mask);
+	VelocityProfileHandler velocityProfileHandler(50, 0.7, wallType, profileName);
 	DebugHandler debugH;
 
 	// initial setup
 	Thermostat::numDimensions() = numDims;
-
 	if(initialTemp != 0)
 		container.iterateParticles(brownianHandler);
 	container.iterateParticles(forceResetHandler);
-	if(gravity != 0)
+	if(enableGravity)
 		container.iterateParticles(gravityHandler);
+	if(enableMembrane)
+	{
+		container.iterateParticles(pickHandler);
+		container.iterateParticlePairsSymmetric(harmonicDirectHandler);
+		container.iterateParticlePairsSymmetric(harmonicDiagonalHandler);
+	}
 	container.iterateParticlePairsSymmetric(lennardJonesHandler);
 
 
@@ -131,10 +190,16 @@ int main(int argc, char* argsv[])
 		container.iterateParticles(positionHandler);
 
 		container.iterateParticles(forceResetHandler);
-		if(gravity != 0)
+		if(enableGravity)
 			container.iterateParticles(gravityHandler);
+		if(enableMembrane)
+		{
+			if(iteration < pickDuration)
+				container.iterateParticles(pickHandler);
+			container.iterateParticlePairsSymmetric(harmonicDirectHandler);
+			container.iterateParticlePairsSymmetric(harmonicDiagonalHandler);
+		}
 		container.iterateParticlePairsSymmetric(lennardJonesHandler);
-
 
 		container.clearBoundaries();
 
@@ -145,8 +210,12 @@ int main(int argc, char* argsv[])
 			kineticHandler.reset();
 			container.iterateParticlesSingleThreaded(kineticHandler);
 
-			double interpolation = (iteration - thermoStart) / (double)(thermoTarget - thermoStart);
-			interpolation = max(0.0, min(1.0, interpolation));
+			double interpolation = 1;
+			if((thermoTarget - thermoStart) > 0)
+			{
+				interpolation = (iteration - thermoStart) / (double)(thermoTarget - thermoStart);
+				interpolation = max(0.0, min(1.0, interpolation));
+			}
 
 			thermostatHandler.setTargetTemp(temperature, interpolation, container.countParticles());
 			container.iterateParticles(thermostatHandler);
@@ -158,6 +227,13 @@ int main(int argc, char* argsv[])
 			outputHandler.init(container.countParticles());
 			container.iterateParticlesSingleThreaded(outputHandler);
 			outputHandler.finish(out_name, iteration);
+		}
+
+		if (enableProfiling && iteration % profileIterations == 0)
+		{
+			velocityProfileHandler.reset();
+			container.iterateParticlesSingleThreaded(velocityProfileHandler);
+			velocityProfileHandler.analize(iteration);
 		}
 
 		iteration++;

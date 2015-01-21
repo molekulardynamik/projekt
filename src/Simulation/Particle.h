@@ -64,6 +64,8 @@ namespace Simulation
 
 		utils::Vector<double, 3> old_f;		///< The force wich was effective on this particle
 
+		utils::Vector<int, 3> cuboidIndex;
+
 		int type;							///< Type, defines properties of particle
 
 		int cell;							///< Cell which holds particle
@@ -77,6 +79,13 @@ namespace Simulation
 			utils::Vector<double, 3> x_arg,
 			utils::Vector<double, 3> v_arg,
 			int type
+		);
+
+		Particle(
+			utils::Vector<double, 3> x_arg,
+			utils::Vector<double, 3> v_arg,
+			int type,
+			utils::Vector<int, 3> cuboidIndex
 		);
 
 		virtual ~Particle();
@@ -102,6 +111,11 @@ namespace Simulation
 		{
 			return cell;
 		}
+
+		utils::Vector<int, 3> getCuboidIndex();
+
+		bool isDirectNeighbor(Particle& other);
+		bool isDiagonalNeighbor(Particle& other);
 
 		bool operator==(Particle& other);
 		bool operator==(const Particle& other);
