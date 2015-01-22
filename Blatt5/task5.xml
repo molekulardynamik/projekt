@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<configSim xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../config.xsd">
+       
+	<delta>0.001</delta>
+  	<end>150</end>
+  	<output>
+  		<dir>Blatt5/vtkOutput/</dir>
+  		<filename>equilibrated_fluid_vtk_</filename>
+  		<iterations>50</iterations>
+  	</output>
+  	<simulationFile>nanoFlow.xml</simulationFile>
+	<saveFile>Blatt5/equilibrated_fluid.xml</saveFile>
+</configSim>

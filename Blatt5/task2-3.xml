@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<configSim xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../config.xsd">
+       
+	<delta>0.0005</delta>
+  	<end>100</end>
+  	<output>
+  		<dir>Blatt5/vtkOutput/</dir>
+  		<filename>rayleighTaylor3D_vtk_</filename>
+  		<iterations>100</iterations>
+  	</output>
+  	<simulationFile>rayleighTaylor3D.xml</simulationFile>
+</configSim>

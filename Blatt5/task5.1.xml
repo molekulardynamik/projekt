@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<configSim xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../config.xsd">
+       
+	<delta>0.001</delta>
+  	<end>250</end>
+  	<output>
+  		<dir>Blatt5/vtkOutput/</dir>
+  		<filename>cooling_vtk_</filename>
+  		<iterations>50</iterations>
+		<diffusion filename="Blatt5/Diffusion/diffusionCooling" iterations="1000"/>
+		<rdf filename="Blatt5/RDF/rdfCooling_" iterations="10000" />
+  	</output>
+  	<simulationFile>Blatt5/cooling.xml</simulationFile>
+</configSim>

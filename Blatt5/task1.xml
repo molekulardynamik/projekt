@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<configSim xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../config.xsd">
+       
+	<delta>0.01</delta>
+  	<end>500</end>
+  	<output>
+  		<dir>Blatt5/vtkOutput/</dir>
+  		<filename>membrane_vtk_</filename>
+  		<iterations>5</iterations>
+  	</output>
+  	<simulationFile>membrane.xml</simulationFile>
+</configSim>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<configSim xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../config.xsd">
+       
+	<delta>0.0005</delta>
+  	<end>500</end>
+  	<output>
+  		<dir>Blatt5/vtkOutput/</dir>
+  		<filename>nanoFlow_vtk_</filename>
+  		<iterations>100</iterations>
+		<velocityProfile filename="Blatt5/VelocityProfile/nanoFlow_" iterations="10000"/>
+  	</output>
+  	<simulationFile>nanoFlow.xml</simulationFile>
+</configSim>
