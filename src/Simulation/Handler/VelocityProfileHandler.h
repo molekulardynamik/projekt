@@ -4,6 +4,8 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <vector>
+#include <stdio.h>
 
 namespace Simulation
 {
@@ -15,17 +17,8 @@ namespace Simulation
 		VelocityProfileHandler(int numB, double binS, int wallT, std::string filename) :
 			numBins(numB), binSize(binS), wallType(wallT), profileName(filename)
 		{
-			velocities = new double[numBins];
-			counts = new int[numBins];
-		}
-
-		~VelocityProfileHandler()
-		{
-			delete velocities;
-			delete counts;
-
-			velocities = 0;
-			counts = 0;
+			velocities.resize(numBins);
+			counts.resize(numBins);
 		}
 
 		void reset()
@@ -49,7 +42,7 @@ namespace Simulation
 
 		void analize(int iteration)
 		{
-			std::stringstream filename;;
+			std::stringstream filename;
 			filename << profileName << iteration << ".csv";
 			std::ofstream file(filename.str().c_str());
 
@@ -63,14 +56,14 @@ namespace Simulation
 				file << "," << counts[i] << std::endl;
 			}
 
-			file.clear();
+			file.close();
 		}
 	private:
 		int wallType;
 		int numBins;
 		double binSize;
-		double* velocities;
-		int* counts;
+		std::vector<double> velocities;
+		std::vector<int> counts;
 
 		std::string profileName;
 

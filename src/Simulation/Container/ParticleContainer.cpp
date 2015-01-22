@@ -80,7 +80,7 @@ void ParticleContainer::createCells()
 	domainSize_ = ceil(numCells_[0] / (double) numThreads);
 	if(domainSize_ < 3)
 	{
-		numThreads = floor(numCells_[0] / 3.0);
+		numThreads = ceil(numCells_[0] / 3.0);
 		domainSize_ = ceil(numCells_[0] / (double) numThreads);
 	}
 
@@ -437,7 +437,6 @@ void ParticleContainer::iterateParticlesSingleThreaded(ParticleHandler& handler)
 
 void ParticleContainer::iterateParticlePairs(ParticleHandler& handler)
 {
-	LOG4CXX_ERROR(containerLogger, "IJ");
 	for (int d = 0; d < particleDomains_.size(); d++)
 	{
 		vector<ParticleCell>* particleCells = particleDomains_[d];

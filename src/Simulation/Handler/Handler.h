@@ -11,4 +11,6 @@
 #include "Simulation/Handler/OutputHandler.h"
 #include "Simulation/Handler/SaveStateHandler.h"
 #include "Simulation/Handler/VelocityProfileHandler.h"
+#include "Simulation/Handler/DiffusionHandler.h"
+#include "Simulation/Handler/RDFHandler.h"
 #include "Simulation/Handler/DebugHandler.h"

@@ -171,6 +171,8 @@ int main(int argc, char* argsv[])
 	ThermostatHandler thermostatHandler(wallType, thermoMask);
 	KineticEnergyHandler kineticHandler(wallType, thermoMask);
 	VelocityProfileHandler velocityProfileHandler(50, 0.7, wallType, profileName);
+	DiffusionHandler diffusionHandler(wallType, "diffusion");
+	RDFHandler rdfHandler(rCutOff / 100.0 , rCutOff, wallType, "RDF");
 	DebugHandler debugH;
 
 	// initial setup
@@ -229,7 +231,7 @@ int main(int argc, char* argsv[])
 			container.iterateParticlesSingleThreaded(kineticHandler);
 
 			double interpolation = 1;
-			if((thermoTarget - thermoStart) > 0)
+			if((thermoTarget - thermoStart) != 0)
 			{
 				interpolation = (iteration - thermoStart) / (double)(thermoTarget - thermoStart);
 				interpolation = max(0.0, min(1.0, interpolation));
@@ -254,9 +256,25 @@ int main(int argc, char* argsv[])
 			velocityProfileHandler.analize(iteration);
 		}
 
-		iteration++;
+		if(true && iteration % 1000 < 10)
+		{
+			if(iteration % 1000 == 0)
+				diffusionHandler.reset();
+			diffusionHandler.newSet();
+			container.iterateParticlesSingleThreaded(diffusionHandler);
+			if(iteration % 1000 == 9)
+				diffusionHandler.analize(iteration - 9);
+		}
+		if(true && iteration % 10000 == 0)
+		{
+			rdfHandler.reset();
+			container.iterateParticlePairs(rdfHandler);
+			rdfHandler.analize(iteration);
+		}
 
+		iteration++;
 		lastTrace++;
+
 		// print simulation status
 		if (lastTrace >= (end_time / delta_time / 100.0))
 		{
@@ -272,18 +290,21 @@ int main(int argc, char* argsv[])
 	time(&end);
 	LOG4CXX_INFO(logger, "Simulation took " << end - start << " seconds");
 
+	diffusionHandler.close();
+
 	if(config->saveFile().present())
 	{
 		string saveFilename = config->saveFile().get();
 		simulationConfig = simulation(config->simulationFile());
 
-		simulation_t saveSim(
-				simulationConfig->thermostat(),
-				simulationConfig->gravity(),
-				simulationConfig->domain(),
-				simulationConfig->boundaries(),
-				simulationConfig->wallType(),
-				simulationConfig->rCutOff());
+
+		simulation_t saveSim(simulationConfig->thermostat(),
+								simulationConfig->gravity(),
+								simulationConfig->domain(),
+								simulationConfig->boundaries(),
+								simulationConfig->wallType(),
+								simulationConfig->rCutOff());
+
 
 		saveSim.thermostat().initialTemp() = 0;
 		saveSim.thermostat().startTime() -= end_time;
@@ -291,11 +312,13 @@ int main(int argc, char* argsv[])
 		saveSim.thermostat().startTime() = max(saveSim.thermostat().startTime(), 0);
 		saveSim.thermostat().targetTime() = max(saveSim.thermostat().targetTime(), 0);
 
+		saveSim.smoothedLJRadius() = simulationConfig->smoothedLJRadius();
+		saveSim.membrane() = simulationConfig->membrane();
 		saveSim.type() = simulationConfig->type();
 
 		particleArray_t saveParticles;
 		SaveStateHandler saveStateHandler(saveParticles);
-		container.iterateParticles(saveStateHandler);
+		container.iterateParticlesSingleThreaded(saveStateHandler);
 
 		saveSim.particles(saveParticles);
 
@@ -303,11 +326,13 @@ int main(int argc, char* argsv[])
 		map[""].name = "";
 		map[""].schema = "simulation.xsd";
 
-
 		std::ofstream ofs (saveFilename.c_str());
 		simulation(ofs, saveSim, map);
 
-		LOG4CXX_INFO(logger, "wrote simulation to " << saveFilename);
+		ofs.close();
+
+		LOG4CXX_INFO(logger, "wrote simulation to " << saveFilename.c_str());
+
 	}
 
 	LOG4CXX_INFO(logger, "Terminating now...");

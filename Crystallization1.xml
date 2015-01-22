@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<simulation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="simulation.xsd">
+
+  <thermostat>
+    <numDimensions>3</numDimensions>
+    <initialTemp>0.01</initialTemp>
+    <targetTemp>3.0</targetTemp>
+    <step>1</step>
+    <startTime>40</startTime>
+    <targetTime>80</targetTime>
+  </thermostat>
+
+  <gravity X="0" Y="0" Z="0"/>
+
+  <domain X="9.2" Y="9.2" Z="9.2"/>
+
+  <boundaries X="3" Y="3" Z="3"/>
+
+  <wallType>2</wallType>
+
+  <rCutOff>2.3</rCutOff>
+  <smoothedLJRadius>1.9</smoothedLJRadius>
+
+  <type mass="1" epsilon="1" sigma="1"/>
+  <type mass="300" epsilon="1" sigma="1"/>
+
+  <cuboid type="0">
+    <position X="0.575" Y="0.575" Z="0.575"/>
+    <initialVelocity X="0.0" Y="0.0" Z="0.0"/>
+    <particleCount X="8" Y="8" Z="8"/>
+    <spacing>1.15</spacing>
+  </cuboid>
+
+</simulation>
