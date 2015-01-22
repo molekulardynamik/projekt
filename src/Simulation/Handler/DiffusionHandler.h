@@ -9,8 +9,8 @@
 
 namespace Simulation
 {
-	/// \class SmoothedLennardJonesHandler
-	/// \brief Computes force  applied by Lennard-Jones potential
+	/// \class DiffusionHandler
+	/// \brief Computes diffusion value and writes them to a .csv file
 	class DiffusionHandler : public ParticleHandler
 	{
 	public:
@@ -21,17 +21,20 @@ namespace Simulation
 			name << filename << ".csv";
 			file.open(name.str().c_str());
 		}
-
+		
+		/// resets gathered data
 		void reset()
 		{
 			positionSets.clear();
 		}
 
+		/// Adds a new set of positions
 		void newSet()
 		{
 			positionSets.push_back(std::vector<utils::Vector<double, 3> >());
 		}
 
+		/// Gathers positions and stores them in the current set
 		void compute(Particle& p)
 		{
 			if (p.getType() == wallType)
@@ -40,6 +43,7 @@ namespace Simulation
 			positionSets.back().push_back(p.getX());
 		}
 
+		/// Analizes all sets and write value for current iteration into the output file
 		void analize(int iteration)
 		{
 			double avgVar = 0;
@@ -58,16 +62,17 @@ namespace Simulation
 			file << iteration << "," << avgVar << std::endl;
 		}
 
+		/// Closes output file
 		void close()
 		{
 			file.close();
 		}
 
 	private:
-		int wallType;
-		std::vector<std::vector<utils::Vector<double, 3> > > positionSets;
+		int wallType;			/// < this particle type should be ignored
+		std::vector<std::vector<utils::Vector<double, 3> > > positionSets;	/// < position sets in which data is store 
 
-		std::ofstream file;
+		std::ofstream file;		/// < output file
 	};
 
 }

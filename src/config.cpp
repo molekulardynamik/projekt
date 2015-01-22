@@ -40,58 +40,58 @@
 
 #include "config.h"
 
-// profile_t
+// statistics_t
 // 
 
-const profile_t::filename_type& profile_t::
+const statistics_t::filename_type& statistics_t::
 filename () const
 {
   return this->filename_.get ();
 }
 
-profile_t::filename_type& profile_t::
+statistics_t::filename_type& statistics_t::
 filename ()
 {
   return this->filename_.get ();
 }
 
-void profile_t::
+void statistics_t::
 filename (const filename_type& x)
 {
   this->filename_.set (x);
 }
 
-void profile_t::
+void statistics_t::
 filename (::std::auto_ptr< filename_type > x)
 {
   this->filename_.set (x);
 }
 
-const profile_t::filename_type& profile_t::
+const statistics_t::filename_type& statistics_t::
 filename_default_value ()
 {
   return filename_default_value_;
 }
 
-const profile_t::iterations_type& profile_t::
+const statistics_t::iterations_type& statistics_t::
 iterations () const
 {
   return this->iterations_.get ();
 }
 
-profile_t::iterations_type& profile_t::
+statistics_t::iterations_type& statistics_t::
 iterations ()
 {
   return this->iterations_.get ();
 }
 
-void profile_t::
+void statistics_t::
 iterations (const iterations_type& x)
 {
   this->iterations_.set (x);
 }
 
-profile_t::iterations_type profile_t::
+statistics_t::iterations_type statistics_t::
 iterations_default_value ()
 {
   return iterations_type (100000);
@@ -167,34 +167,94 @@ iterations (const iterations_type& x)
   this->iterations_.set (x);
 }
 
-const output_t::profile_optional& output_t::
-profile () const
+const output_t::velocityProfile_optional& output_t::
+velocityProfile () const
 {
-  return this->profile_;
+  return this->velocityProfile_;
 }
 
-output_t::profile_optional& output_t::
-profile ()
+output_t::velocityProfile_optional& output_t::
+velocityProfile ()
 {
-  return this->profile_;
-}
-
-void output_t::
-profile (const profile_type& x)
-{
-  this->profile_.set (x);
+  return this->velocityProfile_;
 }
 
 void output_t::
-profile (const profile_optional& x)
+velocityProfile (const velocityProfile_type& x)
 {
-  this->profile_ = x;
+  this->velocityProfile_.set (x);
 }
 
 void output_t::
-profile (::std::auto_ptr< profile_type > x)
+velocityProfile (const velocityProfile_optional& x)
 {
-  this->profile_.set (x);
+  this->velocityProfile_ = x;
+}
+
+void output_t::
+velocityProfile (::std::auto_ptr< velocityProfile_type > x)
+{
+  this->velocityProfile_.set (x);
+}
+
+const output_t::diffusion_optional& output_t::
+diffusion () const
+{
+  return this->diffusion_;
+}
+
+output_t::diffusion_optional& output_t::
+diffusion ()
+{
+  return this->diffusion_;
+}
+
+void output_t::
+diffusion (const diffusion_type& x)
+{
+  this->diffusion_.set (x);
+}
+
+void output_t::
+diffusion (const diffusion_optional& x)
+{
+  this->diffusion_ = x;
+}
+
+void output_t::
+diffusion (::std::auto_ptr< diffusion_type > x)
+{
+  this->diffusion_.set (x);
+}
+
+const output_t::rdf_optional& output_t::
+rdf () const
+{
+  return this->rdf_;
+}
+
+output_t::rdf_optional& output_t::
+rdf ()
+{
+  return this->rdf_;
+}
+
+void output_t::
+rdf (const rdf_type& x)
+{
+  this->rdf_.set (x);
+}
+
+void output_t::
+rdf (const rdf_optional& x)
+{
+  this->rdf_ = x;
+}
+
+void output_t::
+rdf (::std::auto_ptr< rdf_type > x)
+{
+  this->rdf_.set (x);
 }
 
 
@@ -318,34 +378,34 @@ saveFile (::std::auto_ptr< saveFile_type > x)
 
 #include <xsd/cxx/xml/dom/parsing-source.hxx>
 
-// profile_t
+// statistics_t
 //
 
-const profile_t::filename_type profile_t::filename_default_value_ (
+const statistics_t::filename_type statistics_t::filename_default_value_ (
   "profile");
 
-profile_t::
-profile_t ()
+statistics_t::
+statistics_t ()
 : ::xml_schema::type (),
   filename_ (filename_default_value (), ::xml_schema::flags (), this),
   iterations_ (iterations_default_value (), ::xml_schema::flags (), this)
 {
 }
 
-profile_t::
-profile_t (const profile_t& x,
-           ::xml_schema::flags f,
-           ::xml_schema::container* c)
+statistics_t::
+statistics_t (const statistics_t& x,
+              ::xml_schema::flags f,
+              ::xml_schema::container* c)
 : ::xml_schema::type (x, f, c),
   filename_ (x.filename_, f, this),
   iterations_ (x.iterations_, f, this)
 {
 }
 
-profile_t::
-profile_t (const ::xercesc::DOMElement& e,
-           ::xml_schema::flags f,
-           ::xml_schema::container* c)
+statistics_t::
+statistics_t (const ::xercesc::DOMElement& e,
+              ::xml_schema::flags f,
+              ::xml_schema::container* c)
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
   filename_ (f, this),
   iterations_ (f, this)
@@ -357,7 +417,7 @@ profile_t (const ::xercesc::DOMElement& e,
   }
 }
 
-void profile_t::
+void statistics_t::
 parse (::xsd::cxx::xml::dom::parser< char >& p,
        ::xml_schema::flags f)
 {
@@ -394,15 +454,15 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
   }
 }
 
-profile_t* profile_t::
+statistics_t* statistics_t::
 _clone (::xml_schema::flags f,
         ::xml_schema::container* c) const
 {
-  return new class profile_t (*this, f, c);
+  return new class statistics_t (*this, f, c);
 }
 
-profile_t::
-~profile_t ()
+statistics_t::
+~statistics_t ()
 {
 }
 
@@ -417,7 +477,9 @@ output_t (const dir_type& dir,
   dir_ (dir, ::xml_schema::flags (), this),
   filename_ (filename, ::xml_schema::flags (), this),
   iterations_ (iterations, ::xml_schema::flags (), this),
-  profile_ (::xml_schema::flags (), this)
+  velocityProfile_ (::xml_schema::flags (), this),
+  diffusion_ (::xml_schema::flags (), this),
+  rdf_ (::xml_schema::flags (), this)
 {
 }
 
@@ -429,7 +491,9 @@ output_t (const output_t& x,
   dir_ (x.dir_, f, this),
   filename_ (x.filename_, f, this),
   iterations_ (x.iterations_, f, this),
-  profile_ (x.profile_, f, this)
+  velocityProfile_ (x.velocityProfile_, f, this),
+  diffusion_ (x.diffusion_, f, this),
+  rdf_ (x.rdf_, f, this)
 {
 }
 
@@ -441,7 +505,9 @@ output_t (const ::xercesc::DOMElement& e,
   dir_ (f, this),
   filename_ (f, this),
   iterations_ (f, this),
-  profile_ (f, this)
+  velocityProfile_ (f, this),
+  diffusion_ (f, this),
+  rdf_ (f, this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -499,16 +565,44 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
-    // profile
+    // velocityProfile
     //
-    if (n.name () == "profile" && n.namespace_ ().empty ())
+    if (n.name () == "velocityProfile" && n.namespace_ ().empty ())
     {
-      ::std::auto_ptr< profile_type > r (
-        profile_traits::create (i, f, this));
+      ::std::auto_ptr< velocityProfile_type > r (
+        velocityProfile_traits::create (i, f, this));
 
-      if (!this->profile_)
+      if (!this->velocityProfile_)
       {
-        this->profile_.set (r);
+        this->velocityProfile_.set (r);
+        continue;
+      }
+    }
+
+    // diffusion
+    //
+    if (n.name () == "diffusion" && n.namespace_ ().empty ())
+    {
+      ::std::auto_ptr< diffusion_type > r (
+        diffusion_traits::create (i, f, this));
+
+      if (!this->diffusion_)
+      {
+        this->diffusion_.set (r);
+        continue;
+      }
+    }
+
+    // rdf
+    //
+    if (n.name () == "rdf" && n.namespace_ ().empty ())
+    {
+      ::std::auto_ptr< rdf_type > r (
+        rdf_traits::create (i, f, this));
+
+      if (!this->rdf_)
+      {
+        this->rdf_.set (r);
         continue;
       }
     }

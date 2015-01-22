@@ -4,6 +4,7 @@
 namespace Simulation
 {
 /// \class HarmonicPotentialDirectHandler
+/// \brief calculates harmonnic potential between neighboring particles
 class HarmonicPotentialHandler: public ParticleHandler
 {
 public:
@@ -63,7 +64,7 @@ public:
 	}
 
 private:
-	bool direct;
+	bool direct;	/// < true if potential should be applied to direct neighbors, false for diagonal neighbors
 	double r0;
 	double k;
 

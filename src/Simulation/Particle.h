@@ -62,9 +62,9 @@ namespace Simulation
 
 		utils::Vector<double, 3> f;			///< The force effective on this particle
 
-		utils::Vector<double, 3> old_f;		///< The force wich was effective on this particle
+		utils::Vector<double, 3> old_f;			///< The force wich was effective on this particle
 
-		utils::Vector<int, 3> cuboidIndex;
+		utils::Vector<int, 3> cuboidIndex;		///< The index of its position in a cuboid
 
 		int type;							///< Type, defines properties of particle
 
@@ -114,7 +114,9 @@ namespace Simulation
 
 		utils::Vector<int, 3> getCuboidIndex();
 
+		/// Checks if particle is a direct Neighbor in a cuboid
 		bool isDirectNeighbor(Particle& other);
+		/// Checks if particle is a diagonal Neighbor in a cuboid
 		bool isDiagonalNeighbor(Particle& other);
 
 		bool operator==(Particle& other);

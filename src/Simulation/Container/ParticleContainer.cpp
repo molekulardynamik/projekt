@@ -435,7 +435,7 @@ void ParticleContainer::iterateParticlesSingleThreaded(ParticleHandler& handler)
 	}
 }
 
-void ParticleContainer::iterateParticlePairs(ParticleHandler& handler)
+void ParticleContainer::iterateParticlePairsSingleThreaded(ParticleHandler& handler)
 {
 	for (int d = 0; d < particleDomains_.size(); d++)
 	{

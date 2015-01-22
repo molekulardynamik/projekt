@@ -18,10 +18,11 @@ public:
 
 	/// Generates Cuboid
 	/// \param bottomLeftFront Position of cuboid
-	/// \param numParticles Number of particles in each axis
 	/// \param initialVelocity
+	/// \param numParticles Number of particles in each axis
 	/// \param type Type which defines properties of particles
 	/// \param h Distance between particles
+	/// \param t type of the particles
 	/// \param particles List of particles at which cuboid will be apended
 	static void generateCuboid(utils::Vector<double, 3> bottomLeftFront,
 			utils::Vector<double, 3> initialVelocity,

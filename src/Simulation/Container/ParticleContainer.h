@@ -15,31 +15,39 @@ class ParticleContainer
 {
 public:
 	/// Initializes particle container with data from file
-	/// \param simulationFile File which will be read
+	/// \param simulationConfig which will be read
 	ParticleContainer(std::auto_ptr<simulation_t> simulationConfig);
 
+	/// Creates particle cells and seperates them into domain
 	void createCells();
 
+	/// Updates all particle cells
 	void updateCells();
 
+	/// \return number of particles oin simulation
 	int countParticles();
 
+	/// \return cutOff radius
 	double getRCutOff();
 
 	/// Iterates over all particles an executes particle handler
 	void iterateParticles(ParticleHandler& handler);
 
+	/// Iterates over all particles in only one thread
+	/// \note usefull to avoid syncronisation conflicts
 	void iterateParticlesSingleThreaded(ParticleHandler& handler);
 
-	/// Iterates over all particle pairs (only neighboring cells are considered) and executes particle pair handler
-	void iterateParticlePairs(ParticleHandler& handler);
+	/// Iterates over all particle pairs (only neighboring cells are considered) and executes particle pair handler in only one thread
+	/// \note usefull to avoid syncronisation conflicts
+	void iterateParticlePairsSingleThreaded(ParticleHandler& handler);
 
 	/// Iterates over all particle pairs (only neighboring cells are considered) and executes exclusive particle pair handler.
 	/// \note Every particle will be handled only once. This is faster but requires a symmetrical computation.
 	void iterateParticlePairsSymmetric(ParticleHandler& handler);
 
-
+	/// Iterates over all boundary cells and applies boundary condition
 	void iterateBoundaries();
+	/// Clears all boundary cells
 	void clearBoundaries();
 
 private:

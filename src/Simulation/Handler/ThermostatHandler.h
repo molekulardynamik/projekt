@@ -4,6 +4,8 @@
 
 namespace Simulation
 {
+/// \class Thermostat
+/// \brief stores global data for temperature calculations
 class Thermostat
 {
 public:
@@ -21,6 +23,7 @@ public:
 };
 
 /// \class ThermostatHandler
+/// \brief applies temperature scaling to all particles
 class ThermostatHandler: public ParticleHandler
 {
 public:
@@ -42,6 +45,10 @@ public:
 			p.getV()[2] *= tempScale_;
 	}
 
+	/// sets the target temperature
+	/// \param temp target tempertaure
+	/// \param interpolation value between 0 and 1 and scales the how much the thermostat effect the particles
+	/// \param numParticles number of particles
 	void setTargetTemp(double temp, double interpolation, int numParticles)
 	{
 		double desiredEnergy = numParticles * Thermostat::numDimensions() * 0.5 * temp;
@@ -53,10 +60,12 @@ public:
 
 private:
 	double tempScale_;
-	utils::Vector<bool, 3> mask;
-	int wallType;
+	utils::Vector<bool, 3> mask;	/// < mask for which axis should be affected
+	int wallType;		/// < particles of this type should be ignored
 };
 
+/// \class BrownianMotionHandler
+/// \brief applies initail velocity based on temperature 
 class BrownianMotionHandler : public ParticleHandler
 {
 public:
@@ -75,9 +84,11 @@ public:
 
 private:
 	double initialTemp_;
-	int wallType;
+	int wallType;		/// < particles of this type should be ignored
 };
 
+/// \class KineticEnergyHandler
+/// \brief calculates kinetic energy in the simulation
 class KineticEnergyHandler : public ParticleHandler
 {
 public:
@@ -107,8 +118,8 @@ public:
 	}
 
 private:
-	int wallType;
-	utils::Vector<bool, 3> mask;
+	int wallType;		/// < particles of this type should be ignored
+	utils::Vector<bool, 3> mask;	/// < mask for which axis should be affected
 };
 
 }

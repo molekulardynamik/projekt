@@ -3,8 +3,8 @@
 
 namespace Simulation
 {
-/// \class ForceResetHandler
-/// \brief resets force of zarticle to zero
+/// \class PickHandler
+/// \brief Applies force to specific particles
 class PickHandler: public ParticleHandler
 {
 public:
@@ -27,8 +27,8 @@ public:
 			p.getF() = p.getF() + pickForce;
 	}
 private:
-	utils::Vector<int, 3> pickStart;
-	utils::Vector<int, 3> pickEnd;
-	utils::Vector<double, 3> pickForce;
+	utils::Vector<int, 3> pickStart; 	///< index of the lower left particles
+	utils::Vector<int, 3> pickEnd;		///< index of the upper right partcles
+	utils::Vector<double, 3> pickForce;	///< force with wich the particles are dragged
 };
 }

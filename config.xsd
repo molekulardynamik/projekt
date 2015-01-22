@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-	<xs:complexType name="profile_t">
+	<xs:complexType name="statistics_t">
 		<xs:attribute name="filename" type="xs:string" default="profile"/>
 		<xs:attribute name="iterations" type="xs:int" default="100000"/>
 	</xs:complexType>
@@ -10,7 +10,9 @@
 			<xs:element name="dir" type="xs:string"/>
 			<xs:element name="filename" type="xs:string"/>
 			<xs:element name="iterations" type="xs:int"/>
-			<xs:element name="profile" type="profile_t" minOccurs="0"/>
+			<xs:element name="velocityProfile" type="statistics_t" minOccurs="0"/>
+			<xs:element name="diffusion" type="statistics_t" minOccurs="0"/>
+			<xs:element name="rdf" type="statistics_t" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 

@@ -153,15 +153,19 @@ void ParticleGenerator::generateSphere(Vector<double, 3> center,
 	{
 		for (int y = -numParticles; y < numParticles + 1; y++)
 		{
-			if (sqrt(x * x + y * y) <= numParticles)
+			for (int z = -numParticles; z < numParticles + 1; z++)
 			{
-				Vector<double, 3> pos = center;
-				pos[0] += x * h;
-				pos[1] += y * h;
+				if (sqrt(x * x + y * y + z * z) <= numParticles)
+				{
+					Vector<double, 3> pos = center;
+					pos[0] += x * h;
+					pos[1] += y * h;
+					pos[2] += y * h;
 
-				Particle p(pos, initialVelocity, type);
+					Particle p(pos, initialVelocity, type);
 
-				particles.push_back(p);
+					particles.push_back(p);
+				}
 			}
 		}
 	}

@@ -221,7 +221,7 @@ namespace xml_schema
 
 // Forward declarations.
 //
-class profile_t;
+class statistics_t;
 class output_t;
 class config_t;
 
@@ -238,7 +238,7 @@ class config_t;
 
 #include <xsd/cxx/xml/dom/parsing-header.hxx>
 
-class profile_t: public ::xml_schema::type
+class statistics_t: public ::xml_schema::type
 {
   public:
   // filename
@@ -280,22 +280,22 @@ class profile_t: public ::xml_schema::type
 
   // Constructors.
   //
-  profile_t ();
+  statistics_t ();
 
-  profile_t (const ::xercesc::DOMElement& e,
-             ::xml_schema::flags f = 0,
-             ::xml_schema::container* c = 0);
+  statistics_t (const ::xercesc::DOMElement& e,
+                ::xml_schema::flags f = 0,
+                ::xml_schema::container* c = 0);
 
-  profile_t (const profile_t& x,
-             ::xml_schema::flags f = 0,
-             ::xml_schema::container* c = 0);
+  statistics_t (const statistics_t& x,
+                ::xml_schema::flags f = 0,
+                ::xml_schema::container* c = 0);
 
-  virtual profile_t*
+  virtual statistics_t*
   _clone (::xml_schema::flags f = 0,
           ::xml_schema::container* c = 0) const;
 
   virtual 
-  ~profile_t ();
+  ~statistics_t ();
 
   // Implementation.
   //
@@ -361,26 +361,68 @@ class output_t: public ::xml_schema::type
   void
   iterations (const iterations_type& x);
 
-  // profile
+  // velocityProfile
   // 
-  typedef ::profile_t profile_type;
-  typedef ::xsd::cxx::tree::optional< profile_type > profile_optional;
-  typedef ::xsd::cxx::tree::traits< profile_type, char > profile_traits;
+  typedef ::statistics_t velocityProfile_type;
+  typedef ::xsd::cxx::tree::optional< velocityProfile_type > velocityProfile_optional;
+  typedef ::xsd::cxx::tree::traits< velocityProfile_type, char > velocityProfile_traits;
 
-  const profile_optional&
-  profile () const;
+  const velocityProfile_optional&
+  velocityProfile () const;
 
-  profile_optional&
-  profile ();
-
-  void
-  profile (const profile_type& x);
+  velocityProfile_optional&
+  velocityProfile ();
 
   void
-  profile (const profile_optional& x);
+  velocityProfile (const velocityProfile_type& x);
 
   void
-  profile (::std::auto_ptr< profile_type > p);
+  velocityProfile (const velocityProfile_optional& x);
+
+  void
+  velocityProfile (::std::auto_ptr< velocityProfile_type > p);
+
+  // diffusion
+  // 
+  typedef ::statistics_t diffusion_type;
+  typedef ::xsd::cxx::tree::optional< diffusion_type > diffusion_optional;
+  typedef ::xsd::cxx::tree::traits< diffusion_type, char > diffusion_traits;
+
+  const diffusion_optional&
+  diffusion () const;
+
+  diffusion_optional&
+  diffusion ();
+
+  void
+  diffusion (const diffusion_type& x);
+
+  void
+  diffusion (const diffusion_optional& x);
+
+  void
+  diffusion (::std::auto_ptr< diffusion_type > p);
+
+  // rdf
+  // 
+  typedef ::statistics_t rdf_type;
+  typedef ::xsd::cxx::tree::optional< rdf_type > rdf_optional;
+  typedef ::xsd::cxx::tree::traits< rdf_type, char > rdf_traits;
+
+  const rdf_optional&
+  rdf () const;
+
+  rdf_optional&
+  rdf ();
+
+  void
+  rdf (const rdf_type& x);
+
+  void
+  rdf (const rdf_optional& x);
+
+  void
+  rdf (::std::auto_ptr< rdf_type > p);
 
   // Constructors.
   //
@@ -414,7 +456,9 @@ class output_t: public ::xml_schema::type
   ::xsd::cxx::tree::one< dir_type > dir_;
   ::xsd::cxx::tree::one< filename_type > filename_;
   ::xsd::cxx::tree::one< iterations_type > iterations_;
-  profile_optional profile_;
+  velocityProfile_optional velocityProfile_;
+  diffusion_optional diffusion_;
+  rdf_optional rdf_;
 };
 
 class config_t: public ::xml_schema::type

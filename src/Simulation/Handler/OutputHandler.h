@@ -5,7 +5,7 @@
 namespace Simulation
 {
 /// \class OutputHandler
-/// \brief writes output
+/// \brief writes output into vtu files
 class OutputHandler: public ParticleHandler
 {
 public:

@@ -21,8 +21,8 @@
 
   <rCutOff>2.5</rCutOff>
 
-  <type mass="1" epsilon="2" sigma="1.1"/>
   <type mass="1" epsilon="1" sigma="1"/>
+  <type mass="1" epsilon="2" sigma="1.1"/>
   
   <cuboid type="1">
   	<position X="1" Y="0.6" Z="0.6"/>

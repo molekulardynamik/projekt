@@ -22,3 +22,4 @@ void MaxwellBoltzmannDistribution(Simulation::Particle& p, double meanVelocity, 
 
 
 #endif /* MAXWELLBOLTZMANNDISTRIBUTION_H_ */
+

@@ -9,6 +9,8 @@
 namespace Simulation
 {
 
+/// \class ParticleCell
+/// \brief Stores multiple particles and allows iterating through them
 class ParticleCell
 {
 public:
@@ -16,6 +18,8 @@ public:
 
 
 public:
+	/// \enum Neighborhood
+	/// Defines neighbor ids 
 	enum Neighborhood
 	{
 		LeftBottomFront = 0,
@@ -62,6 +66,8 @@ public:
 		BackBoundary,
 	};
 
+	/// \enum BoundaryCondition
+	// Defines which boundaryCondition should be applied 
 	enum BoundaryCondition
 	{
 		None,
@@ -73,27 +79,46 @@ public:
 public:
 	ParticleCell(int index, int domain, utils::Vector<double, 3> bottomLeft, double size);
 
+	/// Sets the celltype for the particle cell
 	void setCellType(CellType cellType);
+	/// \return cellType of the particle cell
 	CellType getCellType();
 
+	/// Sets the a neighbor of the particle cell 
 	void setNeighbor(ParticleCell* neighbor, Neighborhood neighborhood);
+
+	/// \return number of valid neighbors 	
 	int countNeighbors();
+	/// prints neighbors
 	void printNeighbors();
 
+	/// Sets opposite halo cell for the particle cell
+	/// \note only affects periodic boundaries 
 	void setOppositeHaloCell(ParticleCell* haloCell);
+	/// \return opposite particleCell
+	/// \note only valid for periodic boundaries 	
 	ParticleCell* getOppositeHaloCell();
 
+	/// \return index in the whole simulation of the particle cell
 	int getIndex();
+	/// \return index of subdomain
 	int getDomain()
 	{
 		return domain_;
 	}
+	/// \return position of the bottom left front corner of the particle cell
 	utils::Vector<double, 3> getLeftBottomFrontCorner();
 
+	/// Adds a particle to the cell
+	/// \note if the particle does not fit in this cell, it is propagated to the neighbor cells  
 	void addParticle(Simulation::Particle& particle);
+	/// Removes particle from cell
 	void removeParticle(Simulation::Particle& particle);
+	/// Checks whether all particles shoulb be in this cell
+	/// \note if not, the particle is propagated to the neighbor cells
 	void checkParticles();
 
+	/// \return number of particles in cell
 	int countParticles();
 
 	/// Iterates over all particles in cell an executes particle handler
@@ -102,16 +127,22 @@ public:
 	/// Iterates over all particles pairs in cell an executes particle handler
 	void iterateParticlePairs(ParticleHandler& handler);
 
-	/// Iterates over all particles pairs in cell an executes particle handler
+	/// Iterates symmetricaly over all particles pairs in cell an executes particle handler
 	void iterateParticlePairsSymmetric(ParticleHandler& handler);
 
+	/// Applies boudariecondition of the particle cell
 	void applyBoundaryCondition();
+	/// removes all particles in the cell
 	void clearBoundary();
 
 private:
+	/// Checks whether the particles shoulb be in this cell
+	/// \note if not, the particle is propagated to the neighbor cells
 	bool checkParticle(Simulation::Particle& particle);
 
+	/// Applies reflective boundary condition
 	void applyReflectionCondition();
+	/// Applies periodic boundary condition
 	void applyPeriodicCondition();
 
 private:
@@ -119,14 +150,14 @@ private:
 	ParticleCell* neighbors_[26];
 	ParticleCell* oppositeHaloCell_;
 	utils::Vector<double, 3> leftBottomFrontCorner_;
-	double size_;
+	double size_;						/// < size of the particle cell in one dimension
 	CellType cellType_;
 
 
 	std::list<Simulation::Particle> particles_;
 
 public:
-	static std::map<CellType,BoundaryCondition> boundaryConditions;
+	static std::map<CellType,BoundaryCondition> boundaryConditions;		/// < map between cellType and boundary condition
 };
 
 }

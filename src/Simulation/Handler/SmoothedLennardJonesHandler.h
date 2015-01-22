@@ -4,7 +4,7 @@
 namespace Simulation
 {
 	/// \class SmoothedLennardJonesHandler
-	/// \brief Computes force  applied by Lennard-Jones potential
+	/// \brief Computes force  applied by smoothed Lennard-Jones potential
 	class SmoothedLennardJonesHandler : public ParticleHandler
 	{
 	public:

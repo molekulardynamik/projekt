@@ -5,7 +5,7 @@
     <numDimensions>3</numDimensions>
     <initialTemp>40</initialTemp>
     <targetTemp>40</targetTemp>
-    <step>100</step>
+    <step>1000</step>
     <startTime>0</startTime>
     <targetTime>0</targetTime>
   </thermostat>
@@ -25,7 +25,7 @@
   <type mass="300" epsilon="2" sigma="1.15"/>
   
   <cuboid type="0">
-  	<position X="0.6" Y="1" Z="0.6"/>
+  	<position X="0.6" Y="1.0" Z="0.6"/>
 	<initialVelocity X="0.0" Y="0.0" Z="0.0"/>
 	<particleCount X="48" Y="9" Z="42"/>
 	<spacing>1.2</spacing>

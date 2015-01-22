@@ -9,8 +9,8 @@
 
 namespace Simulation
 {
-	/// \class SmoothedLennardJonesHandler
-	/// \brief Computes force  applied by Lennard-Jones potential
+	/// \class VelocityProfileHandler
+	/// \brief Calculates velocity profile along y axis
 	class VelocityProfileHandler : public ParticleHandler
 	{
 	public:
@@ -21,6 +21,7 @@ namespace Simulation
 			counts.resize(numBins);
 		}
 
+		/// Resets data
 		void reset()
 		{
 			for (int i = 0; i < numBins; i++)
@@ -40,6 +41,7 @@ namespace Simulation
 			counts[bin] += 1;
 		}
 
+		/// Analizes velocities and writes result to the output file
 		void analize(int iteration)
 		{
 			std::stringstream filename;
@@ -59,13 +61,13 @@ namespace Simulation
 			file.close();
 		}
 	private:
-		int wallType;
-		int numBins;
-		double binSize;
+		int wallType;	/// < particles of this type should be ignored
+		int numBins;	/// < number of bins in which x axis in split
+		double binSize;	/// < size of a bin
 		std::vector<double> velocities;
 		std::vector<int> counts;
 
-		std::string profileName;
+		std::string profileName;	/// < output filename
 
 	};
 

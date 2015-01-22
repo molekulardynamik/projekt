@@ -12,8 +12,6 @@
 #include <log4cxx/xml/domconfigurator.h>
 
 #include "config.h"
-#include "Simulation/StateWriter.h_old"
-#include "Simulation/Thermostat.h_old"
 
 using namespace std;
 using namespace Simulation;
@@ -136,13 +134,31 @@ int main(int argc, char* argsv[])
 	string out_name = config->output().dir() + config->output().filename();
 	int thermostatStep = simulationConfig->thermostat().step();
 
-	bool enableProfiling = config->output().profile().present();
-	string profileName;
-	int profileIterations;
-	if (enableProfiling)
+	bool enableVelocityProfile = config->output().velocityProfile().present();
+	string velocityProfileName;
+	int velocityProfileIterations;
+	if (enableVelocityProfile)
 	{
-		profileName = config->output().profile().get().filename();
-		profileIterations = config->output().profile().get().iterations();
+		velocityProfileName = config->output().velocityProfile().get().filename();
+		velocityProfileIterations = config->output().velocityProfile().get().iterations();
+	}
+
+	bool enableDiffusion = config->output().diffusion().present();
+	string diffusionName;
+	int diffusionIterations;
+	if (enableDiffusion)
+	{
+		diffusionName = config->output().diffusion().get().filename();
+		diffusionIterations = config->output().diffusion().get().iterations();
+	}
+
+	bool enableRDF = config->output().rdf().present();
+	string rdfName;
+	int rdfIterations;
+	if (enableRDF)
+	{
+		rdfName = config->output().rdf().get().filename();
+		rdfIterations = config->output().rdf().get().iterations();
 	}
 
 	LOG4CXX_DEBUG(logger, "grav " << gravity.toString() << " temp " << temperature);
@@ -170,9 +186,9 @@ int main(int argc, char* argsv[])
 	BrownianMotionHandler brownianHandler(initialTemp, wallType);
 	ThermostatHandler thermostatHandler(wallType, thermoMask);
 	KineticEnergyHandler kineticHandler(wallType, thermoMask);
-	VelocityProfileHandler velocityProfileHandler(50, 0.7, wallType, profileName);
-	DiffusionHandler diffusionHandler(wallType, "diffusion");
-	RDFHandler rdfHandler(rCutOff / 100.0 , rCutOff, wallType, "RDF");
+	VelocityProfileHandler velocityProfileHandler(50, 0.7, wallType, velocityProfileName);
+	DiffusionHandler diffusionHandler(wallType, diffusionName);
+	RDFHandler rdfHandler(rCutOff / 100.0 , rCutOff, wallType, rdfName);
 	DebugHandler debugH;
 
 	// initial setup
@@ -249,14 +265,14 @@ int main(int argc, char* argsv[])
 			outputHandler.finish(out_name, iteration);
 		}
 
-		if (enableProfiling && iteration % profileIterations == 0)
+		if (enableVelocityProfile && iteration % velocityProfileIterations == 0)
 		{
 			velocityProfileHandler.reset();
 			container.iterateParticlesSingleThreaded(velocityProfileHandler);
 			velocityProfileHandler.analize(iteration);
 		}
 
-		if(true && iteration % 1000 < 10)
+		if(enableDiffusion && iteration % diffusionIterations < 10)
 		{
 			if(iteration % 1000 == 0)
 				diffusionHandler.reset();
@@ -265,10 +281,10 @@ int main(int argc, char* argsv[])
 			if(iteration % 1000 == 9)
 				diffusionHandler.analize(iteration - 9);
 		}
-		if(true && iteration % 10000 == 0)
+		if(enableRDF && iteration % rdfIterations == 0)
 		{
 			rdfHandler.reset();
-			container.iterateParticlePairs(rdfHandler);
+			container.iterateParticlePairsSingleThreaded(rdfHandler);
 			rdfHandler.analize(iteration);
 		}
 

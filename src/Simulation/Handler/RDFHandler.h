@@ -10,8 +10,7 @@
 
 namespace Simulation
 {
-	/// \class SmoothedLennardJonesHandler
-	/// \brief Computes force  applied by Lennard-Jones potential
+	/// \class RDFHandler
 	class RDFHandler : public ParticleHandler
 	{
 	public:
