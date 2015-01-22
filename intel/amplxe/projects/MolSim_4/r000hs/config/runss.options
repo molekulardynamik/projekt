@@ -1,0 +1,13 @@
+-r
+/naslx/ptmp/22/di34muv/MolSim/intel/amplxe/projects/MolSim_4/r000hs
+--data-limit-mb=500
+--stack-stitching
+--follow-child
+--type=frame:counters
+--stackwalk=offline
+--type=cpu:counters
+--type=cpu:stack
+--interval=10
+--
+/naslx/ptmp/22/di34muv/MolSim/MolSim
+profileConfig.xml
