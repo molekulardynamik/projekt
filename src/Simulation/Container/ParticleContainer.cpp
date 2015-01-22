@@ -78,9 +78,9 @@ void ParticleContainer::createCells()
 
 
 	domainSize_ = ceil(numCells_[0] / (double) numThreads);
-	if(domainSize_ < 4)
+	if(domainSize_ < 3)
 	{
-		numThreads = floor(numCells_[0] / 4.0);
+		numThreads = floor(numCells_[0] / 3.0);
 		domainSize_ = ceil(numCells_[0] / (double) numThreads);
 	}
 
@@ -468,7 +468,7 @@ void ParticleContainer::iterateParticlePairsSymmetric(ParticleHandler& handler)
 		vector<ParticleCell>* particleCells = particleDomains_[d];
 		for (int i = 0; i < particleCells->size(); i++)
 		{
-			int x = floor((*particleCells)[i].getIndex() / (numCells_[1] * numCells_[2]));
+			int x = floor(i / (numCells_[1] * numCells_[2]));
 			if(x >= 2)
 				(*particleCells)[i].iterateParticlePairsSymmetric(handler);
 		}
@@ -481,7 +481,7 @@ void ParticleContainer::iterateParticlePairsSymmetric(ParticleHandler& handler)
 		vector<ParticleCell>* particleCells = particleDomains_[d];
 		for (int i = 0; i < particleCells->size(); i++)
 		{
-			int x = floor((*particleCells)[i].getIndex() / (numCells_[1] * numCells_[2]));
+			int x = floor(i / (numCells_[1] * numCells_[2]));
 			if (x <= 1)
 				(*particleCells)[i].iterateParticlePairsSymmetric(handler);
 		}
