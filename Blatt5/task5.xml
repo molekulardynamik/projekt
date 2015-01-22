@@ -9,6 +9,6 @@
   		<filename>equilibrated_fluid_vtk_</filename>
   		<iterations>50</iterations>
   	</output>
-  	<simulationFile>nanoFlow.xml</simulationFile>
+  	<simulationFile>Crystallization1.xml</simulationFile>
 	<saveFile>Blatt5/equilibrated_fluid.xml</saveFile>
 </configSim>
