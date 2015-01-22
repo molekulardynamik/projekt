@@ -3,16 +3,26 @@ PSE Molekulardynamik WS14 - Implementation
 
 How to use:
 
-call ./MolSim Blatt5/<config>:
+call ./MolSim Blatt5/\<config\>:
+
 	for task 1 : ./MolSim Blatt5/task1.xml
+	
 	for task 2 and 3: ./MolSim Blatt5/task2-3.xml
+	
 	for task 4: ./MolSim Blatt5/task4.xml
+	
 	for task 5:
+	
 		- first call ./MolSim Baltt5/task5.xml
+		- 
 		- this creates a file called "equilibrated_fluid.xml"
+		- 
 		- copy this file twice and name it cooling.xml and superCooling.xml
+		- 
 		- adjust thermostat parameters in these files
+		- 
 		- run ./MolSim Blatt5/task5.1.xml and ./MolSim Blatt5/task5.2.xml
+		- 
 	
 
 How to set up the environment (contents of envMolSim.sh):
