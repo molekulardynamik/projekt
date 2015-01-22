@@ -1,5 +1,4 @@
 SOURCES=\
-src/UnitTests.cpp\
 src/MolSim.cpp\
 src/config.cpp\
 src/simulation.cpp\
